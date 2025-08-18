@@ -18,4 +18,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build
-        run: pnpm run build:prod
+        run: pnpm run build
