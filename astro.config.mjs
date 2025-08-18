@@ -24,7 +24,7 @@ async function config() {
             service: passthroughImageService(),
         },
         site: 'https://bdenham.github.io/sanity-check',
-        base: '',
+        base: process.env.VITE_GITHUB_BASE_PATH || '',
         markdown: {
             remarkPlugins: [remarkBasePathLinks],
             syntaxHighlight: { type: 'shiki', excludeLangs: ['mermaid'] },
