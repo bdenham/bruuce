@@ -10,6 +10,7 @@
     "dev": "astro dev --open",
     "start": "pnpm run build && pnpm run preview",
     "build": "NODE_ENV=production astro build",
+    "build:prod": "NODE_ENV=production astro build",
     "preview": "NODE_ENV=production astro preview --open",
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
     "clean": "rm -rf dist && rm -rf .astro && rm -rf node_modules && pnpm install",
@@ -57,10 +58,10 @@
   "engine-strict": true,
   "private": true,
   "sideEffects": false,
-  "homepage": "https://github.com/yourusername/your-repo",
+  "homepage": "https://github.com/bdenham/sanity-check",
   "repository": {
     "type": "git",
-    "url": "git@github.com:yourusername/your-repo.git"
+    "url": "git@github.com:bdenham/sanity-check.git"
   },
-  "bugs": "https://github.com/yourusername/your-repo/issues"
+  "bugs": "https://github.com/bdenham/sanity-check/issues"
 }

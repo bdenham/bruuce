@@ -23,7 +23,7 @@ async function config() {
         image: {
             service: passthroughImageService(),
         },
-        site: 'https://your-domain.com',
+        site: 'https://bdenham.github.io/sanity-check',
         base: '',
         markdown: {
             remarkPlugins: [remarkBasePathLinks],
@@ -35,7 +35,7 @@ async function config() {
         integrations: [
             starlight({
                 editLink: {
-                    baseUrl: 'https://github.com/yourusername/your-repo/edit/main/'
+                    baseUrl: 'https://github.com/bdenham/sanity-check/edit/main/'
                 },
                 expressiveCode: {
                     themes: ['github-light', 'github-dark'],
@@ -110,8 +110,7 @@ async function config() {
                     replacesTitle: false
                 },
                 social: [
-                    { icon: 'github', label: 'GitHub', href: 'https://github.com/yourusername' },
-                    { icon: 'twitter', label: 'Twitter', href: 'https://twitter.com/yourusername' },
+                    { icon: 'github', label: 'GitHub', href: 'https://github.com/bdenham' },
                 ],
                 head: [
                     // Search Highlighting Scripts (external files)

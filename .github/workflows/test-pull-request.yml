@@ -8,14 +8,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
+        uses: pnpm/action-setup@v4
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
       - name: Install dependencies
         run: pnpm install
       - name: Build
