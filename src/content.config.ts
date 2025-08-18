@@ -2,7 +2,7 @@ import { z as zod } from 'astro/zod';
 import { defineCollection } from 'astro:content';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 import { docsLoader, i18nLoader } from "@astrojs/starlight/loaders";
-import { topicSchema } from 'starlight-sidebar-topics/schema'
+
 
 
 const prerequisiteSchema = zod
@@ -55,7 +55,7 @@ const docs = defineCollection({
           prerequisites: prerequisiteSchema.optional(),
           time: zod.string().optional(),
         }
-      ).merge(topicSchema),
+      ),
     }
   ),
 });

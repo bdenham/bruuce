@@ -1,61 +1,25 @@
 ---
-title: Adobe Commerce Storefront
-description: Edge Delivery Services, Commerce blocks, and Content blocks define the new Adobe Commerce Storefront.
-template: splash
+title: Welcome to My Blog
+description: A personal blog built with Astro and Starlight
 hero:
-  title: <span>Create the fastest<br>storefronts on the web.</span>
-  subtitle: ''
-  tagline: Our new Edge Delivery Services, Commerce drop-in components, and Content blocks are now combined to create the fastest shops on the web. Find out how they can work for you.
-  image:
-    dark: ../../assets/widgets-dark.webp
-    light: ../../assets/widgets-light.webp
-    alt: Adobe Commerce Storefront
+  subtitle: "Share thoughts, ideas, and projects"
   actions:
-    - text: Storefront DEVELOPERS
-      link: /get-started/
-      aria-label: Storefront Developers
+    - text: Read Blog Posts
+      link: /blog/
       variant: primary
-    - text: Storefront AUTHORS
-      link: /merchants/storefront-builder/
-      aria-label: Storefront Authors
-      variant: minimal
-# banner:
-#   content: |
-#     Currently in alpha status under active development. If you have any questions, please visit our href="https://discord.gg/xxVR2R3rRn"> Edge Delivery Discord server</a>.
+    - text: About Me
+      link: /about/
+      variant: secondary
 ---
 
-import { CardGrid } from '@astrojs/starlight/components';
-import LinkCard from '@components/LinkCard.astro';
-import Summary from '@components/Summary.astro';
-import Callouts from '@components/Callouts.astro';
+Welcome to my personal blog! This site is built using Astro and Starlight, providing a fast and modern platform for sharing content.
 
-<CardGrid>
-  <LinkCard
-    icon="seti:json"
-    title="Storefront Developers"
-    description="Learn how to develop and configure Commerce Storefronts powered by Edge Delivery Services."
-    link="/get-started/"
-    aria-label="Storefront Developers"
-  />
-  <LinkCard
-    icon="seti:svg"
-    title="Storefront Authors"
-    description="Learn how to create content and campaigns in Commerce Storefronts powered by Edge Delivery Services."
-    link="/merchants/storefront-builder/"
-    aria-label="Storefront Authors"
-  />
-  <LinkCard
-    icon="seti:video"
-    title="Videos"
-    description="Watch and learn how to build your storefront with drop-in components and customizations"
-    link="/videos/"
-    aria-label="Videos"
-  />
-  <LinkCard
-    icon="laptop"
-    title="Playgrounds"
-    description="Get hands-on experience for developing Commerce Storefronts"
-    link="/playgrounds/"
-    aria-label="Playgrounds"
-  />
-</CardGrid>
+## Getting Started
+
+This starter template includes:
+- **Blog Section**: Share your thoughts and experiences
+- **About Section**: Tell your story
+- **Projects Section**: Showcase your work
+- **All Starlight Components**: Full access to the powerful component library
+
+Start by adding your content to the respective folders in `src/content/docs/`.

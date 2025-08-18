@@ -267,10 +267,7 @@ body {
   overflow-y: scroll;
 }
 
-.expressive-code.expressive-code {
-  margin-top: 0;
-  margin-bottom: 0;
-}
+/* Removed conflicting expressive-code margin override */
 
 .sl-markdown-content details:not(:where(.not-content *)) {
   --sl-details-border-color: var(--sl-color-gray-5);
@@ -691,10 +688,119 @@ main {
     gap: 1rem;
     padding: 1rem;
   }
+
   .changelog-filter select {
     width: 100%;
   }
+
   .changelog-entry {
     padding: 1rem;
+  }
+}
+
+/*******************************/
+/* Search Highlight Styles    */
+/*******************************/
+
+.search-highlight {
+  background-color: var(--sl-color-accent-high);
+  color: var(--sl-color-white);
+  padding: 0.1rem 0.2rem;
+  border-radius: 2px;
+  font-weight: 600;
+  animation: highlightFade 0.3s ease-in;
+}
+
+@keyframes highlightFade {
+  0% {
+    background-color: var(--sl-color-accent);
+    transform: scale(1.05);
+  }
+
+  100% {
+    background-color: var(--sl-color-accent-high);
+    transform: scale(1);
+  }
+}
+
+/* Clear highlights button */
+.search-highlight-clear {
+  position: fixed;
+  top: calc(var(--sl-nav-height) + 1rem);
+  right: 1rem;
+  z-index: 1000;
+  background-color: var(--sl-color-bg-accent);
+  color: var(--sl-color-white);
+  border: 1px solid var(--sl-color-accent);
+  border-radius: var(--sl-border-radius);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--sl-shadow-md);
+  transition: all 0.2s ease;
+}
+
+.search-highlight-clear:hover {
+  background-color: var(--sl-color-accent);
+  transform: translateY(-1px);
+  box-shadow: var(--sl-shadow-lg);
+}
+
+.search-highlight-clear:active {
+  transform: translateY(0);
+}
+
+/* Highlight counter */
+.search-highlight-counter {
+  position: fixed;
+  top: calc(var(--sl-nav-height) + 4rem);
+  right: 1rem;
+  z-index: 999;
+  background-color: var(--sl-color-bg-nav);
+  color: var(--sl-color-text);
+  border: 1px solid var(--sl-color-hairline-light);
+  border-radius: var(--sl-border-radius);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  box-shadow: var(--sl-shadow-sm);
+  opacity: 0.9;
+}
+
+/* Show highlights indicator on body */
+body.search-highlights-active {
+  --search-highlights-active: true;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+  .search-highlight-clear,
+  .search-highlight-counter {
+    right: 0.5rem;
+    font-size: 0.75rem;
+    padding: 0.375rem 0.5rem;
+  }
+
+  .search-highlight-clear {
+    top: calc(var(--sl-nav-height) + 0.5rem);
+  }
+
+  .search-highlight-counter {
+    top: calc(var(--sl-nav-height) + 3rem);
+  }
+}
+
+/* Print styles - hide highlights in print */
+@media print {
+  .search-highlight {
+    background-color: transparent !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+  }
+
+  .search-highlight-clear,
+  .search-highlight-counter {
+    display: none !important;
   }
 }
