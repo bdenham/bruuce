@@ -116,11 +116,11 @@ async function config() {
                     // Search Highlighting Scripts (external files)
                     {
                         tag: 'script',
-                        attrs: { src: '/scripts/search-highlighter.js' }
+                        attrs: { src: `${process.env.VITE_GITHUB_BASE_PATH || ''}/scripts/search-highlighter.js` }
                     },
                     {
                         tag: 'script',
-                        attrs: { src: '/scripts/search-click-handler.js' }
+                        attrs: { src: `${process.env.VITE_GITHUB_BASE_PATH || ''}/scripts/search-click-handler.js` }
                     },
                 ],
             }),
