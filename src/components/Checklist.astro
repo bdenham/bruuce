@@ -139,7 +139,7 @@ const { checklistKey, title } = Astro.props;
     connectedCallback() {
       this.key = this.dataset['checklistKey']!;
       ProgressStore.initialiseList(this.key);
-      
+
       // Create progress bar
       this.progressBar = document.createElement('div');
       this.progressBar.className = 'progress-bar';
@@ -179,8 +179,8 @@ const { checklistKey, title } = Astro.props;
       span.className = 'task-text';
       // Remove the markdown checkbox syntax and any leftover whitespace
       span.innerHTML = originalHtml
-        .replace(/^\*?\s*\[\s*[xX ]?\s*\]\s*/, '')  // Remove markdown checkbox syntax
-        .replace(/^\s+/, '');  // Remove leading whitespace
+        .replace(/^\*?\s*\[\s*[xX ]?\s*\]\s*/, '') // Remove markdown checkbox syntax
+        .replace(/^\s+/, ''); // Remove leading whitespace
 
       label.appendChild(checkbox);
       label.appendChild(span);

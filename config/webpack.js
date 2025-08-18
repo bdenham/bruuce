@@ -5,8 +5,7 @@ const glob = require('glob');
 
 const PORT = process.env.PORT || 3002;
 
-const BundleAnalyzerPlugin =
-  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // Get paths from .elsie.js
 const { api, containers } = require(path.resolve(process.cwd(), './.elsie.js'));
@@ -14,9 +13,7 @@ const { api, containers } = require(path.resolve(process.cwd(), './.elsie.js'));
 const elsiePaths = {
   api: api ? path.resolve(process.cwd(), api.root) : undefined,
 
-  containers: containers
-    ? path.resolve(process.cwd(), containers.root)
-    : undefined,
+  containers: containers ? path.resolve(process.cwd(), containers.root) : undefined,
 };
 
 module.exports = (env, argv) => {
@@ -27,8 +24,7 @@ module.exports = (env, argv) => {
 
     context: path.resolve(process.cwd(), './src'),
 
-    devtool:
-      argv.mode === 'development' ? 'cheap-module-source-map' : undefined,
+    devtool: argv.mode === 'development' ? 'cheap-module-source-map' : undefined,
 
     experiments: {
       outputModule: true,
@@ -43,9 +39,7 @@ module.exports = (env, argv) => {
       // API
       api: {
         // get path to api root from .elsie.js
-        import: elsiePaths.api
-          ? path.resolve(elsiePaths.api, 'index.ts')
-          : undefined,
+        import: elsiePaths.api ? path.resolve(elsiePaths.api, 'index.ts') : undefined,
       },
 
       // Containers
@@ -53,9 +47,7 @@ module.exports = (env, argv) => {
         ? glob
             .sync(path.resolve(elsiePaths.containers, '**/*/index.ts'))
             .reduce((entries, entry) => {
-              const containerRegEx = new RegExp(
-                `${elsiePaths.containers}/(.*)/index.ts`
-              );
+              const containerRegEx = new RegExp(`${elsiePaths.containers}/(.*)/index.ts`);
               const key = entry.match(containerRegEx)[1];
 
               return {
@@ -111,10 +103,8 @@ module.exports = (env, argv) => {
       },
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods':
-          'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-        'Access-Control-Allow-Headers':
-          'X-Requested-With, content-type, Authorization',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+        'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
       },
     },
 

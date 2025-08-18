@@ -1,0 +1,11 @@
+# Ignore files with complex Astro scripting that prettier can't handle
+src/components/Diagram.astro
+
+# Build outputs
+dist/
+.astro/
+node_modules/
+
+# Cache and logs
+*.log
+.DS_Store

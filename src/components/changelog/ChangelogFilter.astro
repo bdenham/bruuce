@@ -12,7 +12,7 @@ const allComponents = [
   'Storefront Compatibility Package',
   'User account',
   'User authentication',
-  'Wishlist'
+  'Wishlist',
 ];
 ---
 
@@ -21,9 +21,7 @@ const allComponents = [
     <label for="component-filter">Filter by component:</label>
     <select id="component-filter" class="filter-select">
       <option value="">All components</option>
-      {allComponents.map(component => (
-        <option value={component}>{component}</option>
-      ))}
+      {allComponents.map((component) => <option value={component}>{component}</option>)}
     </select>
   </div>
 </div>
@@ -43,7 +41,7 @@ const allComponents = [
     const selectedComponent = componentFilter.value;
     let visibleEntries = 0;
 
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       const components = entry.getAttribute('data-components')?.split(',') || [];
       const componentMatch = !selectedComponent || components.includes(selectedComponent);
 

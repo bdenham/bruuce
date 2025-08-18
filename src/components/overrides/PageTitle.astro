@@ -1,16 +1,15 @@
 ---
-import { PAGE_TITLE_ID } from "../constants";
-import Icon from "./Icon.astro";
+import { PAGE_TITLE_ID } from '../constants';
+import Icon from './Icon.astro';
 
 let currentUrl = new URL(Astro.request.url);
-let currentLink = currentUrl.pathname.endsWith("/")
+let currentLink = currentUrl.pathname.endsWith('/')
   ? currentUrl.pathname
   : `${currentUrl.pathname}/`;
 
 let selectedSidebarGroup = Astro.locals.starlightRoute.sidebar.find(
   (group: any) =>
-    Array.isArray(group.entries) &&
-    group.entries.some((entry: any) => entry.href === currentLink),
+    Array.isArray(group.entries) && group.entries.some((entry: any) => entry.href === currentLink)
 );
 
 const { time } = Astro.locals.starlightRoute.entry.data;
@@ -18,19 +17,14 @@ const { time } = Astro.locals.starlightRoute.entry.data;
 
 <div>
   <div class="group">
-    {selectedSidebarGroup ? selectedSidebarGroup.label : ""}
+    {selectedSidebarGroup ? selectedSidebarGroup.label : ''}
   </div>
   <div class="title">
     <h1 id={PAGE_TITLE_ID}>{Astro.locals.starlightRoute.entry.data.title}</h1>
     {
       time && (
         <div class="time-wrapper">
-          <Icon
-            name="time"
-            size="1.65rem"
-            label="time to complete"
-            title="time to complete"
-          />
+          <Icon name="time" size="1.65rem" label="time to complete" title="time to complete" />
           <div class="time">{time}</div>
         </div>
       )

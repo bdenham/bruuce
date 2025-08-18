@@ -1,4 +1,3 @@
-
 export default function convertDtsToJson(inputCode: string) {
   try {
     // Remove the TypeScript-specific syntax

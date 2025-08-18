@@ -6,11 +6,9 @@ This pull request (PR) ...
 
 <!--OPTIONAL Add link to JIRA ticket associated with update.-->
 
-
 ### Staging preview
 
 <!--OPTIONAL Link to staging preview if available-->
-
 
 ## Affected pages
 
@@ -21,4 +19,3 @@ This pull request (PR) ...
 ## Links to source code
 
 <!--OPTIONAL Link to any associated source code PRs related to update-->
-

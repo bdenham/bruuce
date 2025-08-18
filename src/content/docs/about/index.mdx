@@ -13,6 +13,7 @@ import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 In this section, you'll learn how Commerce blocks in your storefront connect to a Commerce backend using values from either your site's [public config](https://www.aem.live/docs/admin.html#schema/PublicConfig) or a [config.json](https://github.com/hlxsites/aem-boilerplate-commerce/blob/main/demo-config.json) file in your code repo.
 
 When implementing your own project, you must update the configuration values with:
+
 - The header values specific to your Adobe Commerce Catalog Services environment.
 - The Adobe Commerce and Catalog Service GraphQL endpoint that you configured as part of the content delivery network (CDN) setup.
 
@@ -23,6 +24,7 @@ If you set up your site using the [Site Creator Tool](https://da.live/app/adobe-
 ## Vocabulary
 
 <Vocabulary>
+
 ### Storefront configuration
 
 A JSON object that maps properties and values used by the Commerce boilerplate.
@@ -248,14 +250,13 @@ Each `key` is described below with links to more details. The `value` for each k
 
 1. **headers.cs.AC-Price-Book-Id:** (Optional) Price book ID for custom pricing calculations. See [Price Books](https://developer.adobe.com/commerce/services/optimizer/data-ingestion/#price-books-and-prices) for details.
 
-1. **headers.cs.AC-Policy-*:** (Optional) Policy trigger for filtering products by attribute, for example, `AC-Policy-Brand:Cruz`. See [Policies](https://experienceleague.adobe.com/en/docs/commerce/optimizer/setup/policies) for details.
+1. **headers.cs.AC-Policy-\*:** (Optional) Policy trigger for filtering products by attribute, for example, `AC-Policy-Brand:Cruz`. See [Policies](https://experienceleague.adobe.com/en/docs/commerce/optimizer/setup/policies) for details.
 
 </Callouts>
 
 </TabItem>
 
 </Tabs>
-
 
 All of the initializer blocks now automatically use any headers for the corresponding block if they are in the config. For example `commerce.headers.cart.Foo` will add a `Foo` header to graphql requests made by the cart dropin. This can be useful if you need to append certain headers for specific requests.
 
@@ -284,7 +285,6 @@ import { getConfigValue } from '../../scripts/configs.js';
 Within the block's `decorate` function, use the `getConfigValue` function which takes a `string` that matches one of the keys from the `configs` file and returns the corresponding value.
 
 ```javascript
-
 export default async function decorate(block) {
   // Get the catalog service endpoint
   const endpoint = await getConfigValue('commerce-endpoint');

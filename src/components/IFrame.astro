@@ -5,16 +5,11 @@ interface Props {
 const { src } = Astro.props;
 
 if (!src) {
-  console.warn("No iframe src provided");
+  console.warn('No iframe src provided');
 }
 
-const basePath =
-  import.meta.env.VITE_PROD_BASE_PATH ||
-  import.meta.env.VITE_GITHUB_BASE_PATH ||
-  "";
-const iframeSrc = src
-  ? `${basePath}/storybook-static/iframe.html?id=${src}`
-  : "#";
+const basePath = import.meta.env.VITE_PROD_BASE_PATH || import.meta.env.VITE_GITHUB_BASE_PATH || '';
+const iframeSrc = src ? `${basePath}/storybook-static/iframe.html?id=${src}` : '#';
 ---
 
 <div class="iframe-container">
@@ -30,8 +25,8 @@ const iframeSrc = src
   {
     !src && (
       <div class="error-message">
-        Storybook component not found. Please ensure Storybook is built and the
-        iframe.html file exists in the public/storybook-static directory.
+        Storybook component not found. Please ensure Storybook is built and the iframe.html file
+        exists in the public/storybook-static directory.
       </div>
     )
   }
@@ -62,15 +57,15 @@ const iframeSrc = src
 </style>
 
 <script>
-  window.addEventListener("message", (event) => {
+  window.addEventListener('message', (event) => {
     if (event.data.height) {
-      const iframe = document.getElementById("story");
+      const iframe = document.getElementById('story');
       if (iframe) {
         const iframeDocument =
           (iframe as HTMLIFrameElement).contentDocument ||
           (iframe as HTMLIFrameElement).contentWindow?.document;
         if (iframeDocument) {
-          iframeDocument.documentElement.style.overflow = "hidden";
+          iframeDocument.documentElement.style.overflow = 'hidden';
 
           // Get the actual content height including margins
           const contentHeight = Math.max(
@@ -80,7 +75,7 @@ const iframeSrc = src
           );
 
           // Set the iframe height to the maximum content height
-          iframe.style.height = contentHeight + "px";
+          iframe.style.height = contentHeight + 'px';
         }
       }
     }
@@ -90,12 +85,11 @@ const iframeSrc = src
   function injectStyles(iframe) {
     if (!iframe) return;
 
-    const iframeDocument =
-      iframe.contentDocument || iframe.contentWindow?.document;
+    const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
     if (!iframeDocument) return;
 
     // Create a style element
-    const style = iframeDocument.createElement("style");
+    const style = iframeDocument.createElement('style');
     style.textContent = `
       .sbdocs.sbdocs-wrapper {
         margin: 0 !important;
@@ -132,9 +126,9 @@ const iframeSrc = src
   }
 
   // Wait for iframe to load before injecting styles
-  const iframe = document.getElementById("story");
+  const iframe = document.getElementById('story');
   if (iframe) {
-    iframe.addEventListener("load", () => {
+    iframe.addEventListener('load', () => {
       injectStyles(iframe);
     });
   }

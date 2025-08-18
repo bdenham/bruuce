@@ -1,14 +1,12 @@
 ---
-import type { Props } from "@astrojs/starlight/props";
+import type { Props } from '@astrojs/starlight/props';
 
 // Check if we're on the commerce-services page or the commerce-optimizer page
-const isPlaygroundPage = Astro.url.pathname.includes("/playgrounds/");
+const isPlaygroundPage = Astro.url.pathname.includes('/playgrounds/');
 ---
 
 <div class="content-panel">
-  <div
-    class={`sl-container ${isPlaygroundPage ? "full-width-container" : ""}`}
-  >
+  <div class={`sl-container ${isPlaygroundPage ? 'full-width-container' : ''}`}>
     <slot />
   </div>
 </div>

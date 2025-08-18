@@ -22,8 +22,6 @@ const gap = '1rem';
   }
 
   div.flex-items > :global(*) {
-    flex-basis: calc(
-      (100% / var(--columns)) - (var(--gaps) * var(--gap)) / var(--columns)
-    );
+    flex-basis: calc((100% / var(--columns)) - (var(--gaps) * var(--gap)) / var(--columns));
   }
 </style>

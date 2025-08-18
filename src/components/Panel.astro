@@ -8,10 +8,7 @@ interface Props {
 
 let { header, footer } = Astro.props;
 
-function manageSlotContent(
-  slotContent: HTMLElement,
-  options: { header: any; footer: any }
-) {
+function manageSlotContent(slotContent: HTMLElement, options: { header: any; footer: any }) {
   const managedContent = {
     header: null,
     main: slotContent,

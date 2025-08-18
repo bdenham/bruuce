@@ -21,11 +21,13 @@ A beautiful and modern personal blog built with [Astro](https://astro.build/) an
 ### Installation
 
 1. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 2. Start the development server:
+
    ```bash
    pnpm dev
    ```
@@ -76,6 +78,7 @@ Your content here...
 ### Site Configuration
 
 Update `astro.config.mjs` to customize:
+
 - Site title and description
 - Social links
 - Edit links to your repository
@@ -90,6 +93,7 @@ Update `astro.config.mjs` to customize:
 ### Styling
 
 The project uses Starlight's built-in styling with custom CSS in:
+
 - `src/styles/` - Custom styles
 - `src/components/overrides/` - Component overrides
 

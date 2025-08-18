@@ -31,13 +31,13 @@ const iconSize = noborder ? '1.5rem' : '2rem';
   }
   {icon && <Icon name={icon} class={iconClass} size={iconSize} />}
   <div class="sl-flex stack">
-    <a href={link?.toString().startsWith('https://') ? link : setBasePath(link)} {...attributes}></a>
-      <span class="title" set:html={title} />
-    </a>
-    {description && <span class="description" set:html={description} />}
+    <a href={link?.toString().startsWith('https://') ? link : setBasePath(link)} {...attributes}
+    ></a>
+    <span class="title" set:html={title} />
   </div>
-  <Icon name={rightIcon} size="1.5rem" />
+  {description && <span class="description" set:html={description} />}
 </div>
+<Icon name={rightIcon} size="1.5rem" />
 
 <style>
   .sl-link-card.sl-link-card {
