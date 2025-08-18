@@ -5,6 +5,7 @@
   "description": "A personal blog built with Astro and Starlight.",
   "author": "Your Name",
   "type": "module",
+  "packageManager": "pnpm@10.12.1",
   "scripts": {
     "astro": "astro",
     "dev": "astro dev --open",
