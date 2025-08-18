@@ -1,9 +1,9 @@
 {
-  "name": "my-personal-blog",
+  "name": "sanity-check",
   "version": "0.1.0",
   "license": "MIT",
   "description": "A personal blog built with Astro and Starlight.",
-  "author": "Your Name",
+  "author": "Bruce Denham",
   "type": "module",
   "packageManager": "pnpm@10.12.1",
   "scripts": {
