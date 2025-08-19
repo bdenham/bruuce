@@ -14,16 +14,24 @@ const isPlaygroundPage = Astro.url.pathname.includes('/playgrounds/');
 <style>
   .content-panel {
     padding: 1.25rem var(--sl-content-pad-x);
+    /* Allow child elements like Hero to break out */
+    overflow: visible;
   }
+
   .sl-container {
     max-width: var(--sl-content-width);
+    /* Allow Hero to break out of container constraints */
+    overflow: visible;
   }
+
   .full-width-container {
     max-width: none !important;
   }
+
   .sl-container > :global(* + *) {
     margin-top: 0;
   }
+
   .home-page-container {
     max-width: none !important;
   }

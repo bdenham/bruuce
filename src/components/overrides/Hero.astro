@@ -33,7 +33,10 @@ const { title = data.title, subtitle, tagline, actions = [] } = data.hero || {};
     min-height: 60vh;
     background: #000;
     overflow: hidden;
-    margin: -1.5rem -2rem 2rem -2rem;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: -1.5rem 0 2rem 0;
   }
 
   /* Animated Matrix-style background */
@@ -188,7 +191,7 @@ const { title = data.title, subtitle, tagline, actions = [] } = data.hero || {};
   @media (max-width: 768px) {
     .hero {
       min-height: 50vh;
-      margin: -1rem -1rem 1rem -1rem;
+      margin: -1rem 0 1rem 0;
     }
 
     .content {
