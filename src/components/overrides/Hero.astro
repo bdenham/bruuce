@@ -2,8 +2,15 @@
 import { PAGE_TITLE_ID } from '../constants';
 import CallToAction from './CallToAction.astro';
 
-const { data } = Astro.locals.starlightRoute.entry;
-const { title = data.title, subtitle, tagline, actions = [] } = data.hero || {};
+// Safe access to Starlight route data with fallbacks
+const starlightRoute = (Astro.locals as any).starlightRoute;
+const data = starlightRoute?.entry?.data || {};
+const {
+  title = data.title || 'Welcome to My Blog',
+  subtitle,
+  tagline,
+  actions = [],
+} = data.hero || {};
 ---
 
 <div class="hero">
@@ -16,7 +23,9 @@ const { title = data.title, subtitle, tagline, actions = [] } = data.hero || {};
       actions.length > 0 && (
         <div class="actions">
           {actions.map(({ text, ...attrs }: { text: string; [key: string]: any }) => (
-            <CallToAction {...attrs} variant={attrs.variant} link={attrs.link} set:html={text} />
+            <CallToAction {...attrs} variant={attrs.variant} link={attrs.link}>
+              {text}
+            </CallToAction>
           ))}
         </div>
       )

@@ -2,6 +2,20 @@
 /* props.css overrides */
 /**************************/
 
+.site-title {
+  align-items: center;
+  gap: 1.5rem;
+  font-weight: 900;
+  font-family: var(--sl-font-system);
+  color: var(--sl-color-white);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-left: 1.5rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  min-height: 32px;
+}
+
 /********************************/
 /* Banner overrides             */
 /********************************/
@@ -10,45 +24,25 @@
   font-size: 18px;
 }
 
+
 /********************************/
 /* Sidebar navigation overrides */
 /********************************/
 
-/* .sidebar-content>ul {
-  list-style: none;
-  padding: 0;
-  border: none;
-  border-radius: 8px;
-  background-color: var(--sl-color-gray-8);
-  padding-bottom: 0;
-  line-height: 0;
-  margin-bottom: 0;
-  height: 85px;
-} */
-
-/* Adds padding to page TOCs */
-/* .right-sidebar-panel {padding: 2rem var(--sl-sidebar-pad-x);} */
-/* Removes indent from group topics */
-/* #starlight__sidebar ul ul li { margin-inline-start: -1rem;} */
-
-/* .sidebar-content {
-  height: 100%;
-  min-height: -moz-max-content;
-  min-height: max-content;
-  padding: 1.5rem 0 1rem 0.5rem;
-  flex-direction: column;
-  padding-bottom: 4rem;
-  gap: 3rem;
+.sidebar-content {
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  gap: 1rem;
+  padding-left: 2rem;
 }
-*/
 
 /* Spacing for Navigation Summary/Groups  */
-/*
+
 ul li details ul:last-child {
   padding-top: 0;
-  padding-bottom: 0.25rem;
+  padding-bottom: 1rem;
 }
-*/
+
 
 /**************************/
 /* markdown.css overrides */
@@ -484,6 +478,8 @@ ol.sl-steps li {
 .large.large {
   font-size: var(--sl-text-base);
   padding: 0.225rem 0;
+  font-weight: 400;
+
 }
 
 ul {

@@ -39,8 +39,8 @@ async function config() {
                         frame: 'none',
                     },
                 },
-                title: 'My Blog',
-                favicon: 'favicon.ico',
+                title: 'Sanity Check',
+                favicon: 'favicon.svg',
                 lastUpdated: true,
                 sidebar: [
                     {
@@ -73,13 +73,13 @@ async function config() {
                 // Component overrides
                 components: {
                     CallToAction: './src/components/overrides/CallToAction.astro',
-                    Footer: './src/components/overrides/Footer.astro',
+                    // Footer: './src/components/overrides/Footer.astro',
                     Icon: './src/components/overrides/Icon.astro',
-                    Header: './src/components/overrides/Header.astro',
-                    Hero: './src/components/overrides/Hero.astro',
-                    PageTitle: './src/components/overrides/PageTitle.astro',
-                    SiteTitle: './src/components/overrides/SiteTitle.astro',
-                    SocialIcons: './src/components/overrides/SocialIcons.astro',
+                    // Header: './src/components/overrides/Header.astro',
+                    // Hero: './src/components/overrides/Hero.astro',
+                    // PageTitle: './src/components/overrides/PageTitle.astro',
+                    // SiteTitle: './src/components/overrides/SiteTitle.astro',
+                    // SocialIcons: './src/components/overrides/SocialIcons.astro',
                     LinkCard: './src/components/LinkCard.astro',
                     ContentPanel: './src/components/overrides/ContentPanel.astro',
                     CardGrid: './src/components/CardGrid.astro',
@@ -95,10 +95,10 @@ async function config() {
                     './src/styles/text.css',
                     './src/styles/custom.css',
                 ],
-                logo: {
-                    src: './src/assets/sitelogo.svg',
-                    replacesTitle: false
-                },
+                // logo: {
+                //     src: './src/assets/sitelogo.svg',
+                //     replacesTitle: false
+                // },
                 social: [
                     { icon: 'github', label: 'GitHub', href: 'https://github.com/bdenham' },
                 ],

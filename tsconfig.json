@@ -12,9 +12,7 @@
       "@images/*": ["./public/images/*"],
       "@storybook/*": ["./public/storybook-static/*"],
     },
-    "noImplicitAny": false,
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "noImplicitAny": false
   },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]
