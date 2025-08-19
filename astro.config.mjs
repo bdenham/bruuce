@@ -105,6 +105,27 @@ async function config() {
                     { icon: 'github', label: 'GitHub', href: 'https://github.com/bdenham' },
                 ],
                 head: [
+                    // Font preloads for better accessibility (static paths)
+                    {
+                        tag: 'link',
+                        attrs: {
+                            rel: 'preload',
+                            href: '/fonts/adobe-clean-400.woff2',
+                            as: 'font',
+                            type: 'font/woff2',
+                            crossorigin: ''
+                        }
+                    },
+                    {
+                        tag: 'link',
+                        attrs: {
+                            rel: 'preload',
+                            href: '/fonts/adobe-clean-700.woff2',
+                            as: 'font',
+                            type: 'font/woff2',
+                            crossorigin: ''
+                        }
+                    },
                     // Search Highlighting Scripts (external files)
                     {
                         tag: 'script',
