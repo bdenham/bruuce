@@ -5,20 +5,10 @@ import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import starlightImageZoom from 'starlight-image-zoom';
 import { remarkBasePathLinks } from './src/plugins/remarkBasePathLinks';
-
 import starlightHeadingBadges from 'starlight-heading-badges';
-
 
 // https://astro.build/config
 async function config() {
-    const compress = (await import("@playform/compress")).default({
-        CSS: true,
-        HTML: false, // Disable HTML compression to preserve Expressive Code attributes
-        Image: true,
-        JavaScript: true,
-        SVG: true
-    });
-
     return defineConfig({
         image: {
             service: passthroughImageService(),
@@ -123,8 +113,7 @@ async function config() {
                         attrs: { src: `${process.env.VITE_GITHUB_BASE_PATH || ''}/scripts/search-click-handler.js` }
                     },
                 ],
-            }),
-            compress
+            })
         ]
     });
 }
