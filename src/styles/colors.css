@@ -68,6 +68,7 @@
 
   /* Colours (light mode) */
   --sl-color-white: hsl(0, 0%, 5%);
+  --sl-color-black: hsl(0, 0%, 100%);
   --sl-color-gray-1: hsl(0, 0%, 15%);
   --sl-color-gray-2: hsl(0, 0%, 25%);
   --sl-color-gray-3: hsl(0, 0%, 40%);
@@ -76,6 +77,11 @@
   --sl-color-gray-6: #edeef3;
   --sl-color-gray-7: #f7f7f7;
   --sl-color-gray-8: #fafafa;
+
+  /* Background colors for light mode */
+  --sl-color-bg: var(--sl-color-gray-8);
+  --sl-color-bg-nav: var(--sl-color-gray-7);
+  --sl-color-bg-sidebar: var(--sl-color-gray-7);
 
   --sl-hue-blue: 224;
   --sl-color-accent-high: hsla(var(--sl-hue-blue), 75%, 45%, 0.8);
