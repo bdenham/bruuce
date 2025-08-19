@@ -84,18 +84,15 @@ if (image) {
     transform: translateX(-50%);
     z-index: -1; /* Ensure the background is behind the content */
 
-    /* Background styling */
-    /* background: linear-gradient(
-      105deg,
-      hsl(59deg 100% 79%) 0%,
-      hsl(297deg 47% 85%) 34%,
-      hsl(290deg 90% 86%) 52%,
-      hsl(263deg 88% 87%) 67%,
-      hsl(213deg 99% 78%) 82%,
-      hsl(212deg 100% 74%) 100%
-    ); */
-    background: url('./colorful-bg-dark.webp') no-repeat center center;
-    background-size: cover;
+    /* Modern multicolored gradient background for better performance */
+    background: linear-gradient(
+      135deg,
+      hsl(240deg 100% 70%) 0%,
+      hsl(289deg 85% 72%) 25%,
+      hsl(315deg 90% 75%) 50%,
+      hsl(345deg 85% 78%) 75%,
+      hsl(25deg 95% 80%) 100%
+    );
 
     /* Ensure it doesn't overflow the viewport */
     overflow: hidden;
