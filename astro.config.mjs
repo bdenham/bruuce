@@ -89,7 +89,6 @@ async function config() {
                 },
                 customCss: [
                     './src/styles/reset.css',
-                    './src/fonts/font-face.css',
                     './src/styles/colors.css',
                     './src/styles/badge.css',
                     './src/styles/asides.css',
@@ -105,12 +104,12 @@ async function config() {
                     { icon: 'github', label: 'GitHub', href: 'https://github.com/bdenham' },
                 ],
                 head: [
-                    // Font preloads for better accessibility (static paths)
+                    // Font preloads for better accessibility (with GitHub base path)
                     {
                         tag: 'link',
                         attrs: {
                             rel: 'preload',
-                            href: '/fonts/adobe-clean-400.woff2',
+                            href: `${process.env.VITE_GITHUB_BASE_PATH || ''}/fonts/adobe-clean-400.woff2`,
                             as: 'font',
                             type: 'font/woff2',
                             crossorigin: ''
@@ -120,7 +119,7 @@ async function config() {
                         tag: 'link',
                         attrs: {
                             rel: 'preload',
-                            href: '/fonts/adobe-clean-700.woff2',
+                            href: `${process.env.VITE_GITHUB_BASE_PATH || ''}/fonts/adobe-clean-700.woff2`,
                             as: 'font',
                             type: 'font/woff2',
                             crossorigin: ''
