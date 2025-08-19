@@ -16,13 +16,13 @@ const calloutsProcessor = rehype()
       } else if (rootElements.length > 1) {
         throw new CalloutsError(
           'The `<Callouts>` component expects its content to be a single ordered list (`<ol>`) but found multiple child elements: ' +
-            rootElements.map((element: Element) => `\`<${element.tagName}>\``).join(', ') +
-            '.'
+          rootElements.map((element: Element) => `\`<${element.tagName}>\``).join(', ') +
+          '.'
         );
       } else if (rootElement.tagName !== 'ol') {
         throw new CalloutsError(
           'The `<Callouts>` component expects its content to be a single ordered list (`<ol>`) but found the following element: ' +
-            `\`<${rootElement.tagName}>\`.`
+          `\`<${rootElement.tagName}>\`.`
         );
       }
 
@@ -51,6 +51,6 @@ export const processCallouts = (html: string | undefined) => {
 
 class CalloutsError extends AstroError {
   constructor(message: string) {
-    super(message, 'To learn more about the `<Callouts>` component, see bdenham@adobe.com');
+    super(message, 'To learn more about the `<Callouts>` component, check the documentation.');
   }
 }

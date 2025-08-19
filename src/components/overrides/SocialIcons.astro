@@ -11,14 +11,7 @@ type SocialLink = {
 
 const links = (config.social || []) as SocialLink[];
 
-// Add Commerce link only if it doesn't already exist
-if (!links.some((link) => link.label === 'Commerce')) {
-  links.push({
-    label: 'Commerce',
-    href: 'https://experienceleague.adobe.com/en/docs/commerce-admin/start/guide-overview',
-    icon: 'commerce',
-  });
-}
+// No additional links added automatically
 ---
 
 {
