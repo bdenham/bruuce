@@ -84,6 +84,8 @@ async function config() {
                     ContentPanel: './src/components/overrides/ContentPanel.astro',
                     CardGrid: './src/components/CardGrid.astro',
                     Pagination: './src/components/overrides/Pagination.astro',
+                    PageFrame: './src/components/overrides/PageFrame.astro',
+                    PageSidebar: './src/components/overrides/PageSidebar.astro',
                 },
                 customCss: [
                     './src/styles/reset.css',
