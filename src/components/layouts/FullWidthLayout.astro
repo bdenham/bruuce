@@ -1,0 +1,88 @@
+---
+interface FullWidthLayoutProps {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'Page', description = '' } = Astro.props as FullWidthLayoutProps;
+
+// Get base path for GitHub Pages
+const basePath = process.env.VITE_GITHUB_BASE_PATH || '';
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={`${basePath}/favicon.svg`} />
+
+    <!-- Starlight core styles only -->
+    <style is:global>
+      @import '../../styles/reset.css';
+      @import '../../styles/colors.css';
+      @import '../../styles/custom.css';
+      @import '../../fonts/font-face.css';
+
+      /* Essential CSS variables */
+      :root {
+        --sl-nav-height: 3.5rem;
+        --sl-content-pad-x: 1rem;
+        --sl-z-index-navbar: 10;
+      }
+
+      /* Base page structure */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: hidden; /* Prevent horizontal scrollbar */
+      }
+
+      body {
+        font-family: var(--sl-font);
+        background: var(--sl-color-bg);
+        color: var(--sl-color-text);
+        min-height: 100vh;
+      }
+
+      .full-width-page {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        width: 100vw;
+        max-width: 100vw;
+        margin: 0;
+        padding: 0;
+        position: relative;
+      }
+
+      .full-width-main {
+        flex: 1;
+        width: 100vw;
+        max-width: 100vw;
+        margin: 0;
+        padding: 0;
+        /* Absolutely NO constraints! */
+        overflow-x: hidden;
+        position: relative;
+      }
+    </style>
+
+    <!-- Search scripts -->
+    <script is:inline src={`${basePath}/scripts/search-highlighter.js`}></script>
+    <script is:inline src={`${basePath}/scripts/search-click-handler.js`}></script>
+  </head>
+
+  <body>
+    <div class="full-width-page">
+      <!-- Main content - completely unconstrained -->
+      <main class="full-width-main">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

@@ -35,4 +35,9 @@ const isPlaygroundPage = Astro.url.pathname.includes('/playgrounds/');
   .home-page-container {
     max-width: none !important;
   }
+
+  /* Simple - just don't constrain Hero */
+  .sl-container :global(.hero) {
+    max-width: none !important;
+  }
 </style>
