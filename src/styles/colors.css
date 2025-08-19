@@ -60,17 +60,19 @@
 
 :root[data-theme='light'],
 [data-theme='light'] ::backdrop {
-  --sl-color-text: hsl(0, 0%, 10%);
-  --sl-color-gray-1: hsl(0, 0%, 10%);
-  --sl-color-gray-2: hsl(0, 0%, 25%);
+  --sl-color-text: var(--sl-color-gray-1);
   --sl-color-text-accent: var(--sl-color-accent);
-  --sl-color-text-invert: var(--sl-color-black);
+  --sl-color-text-invert: var(--sl-color-white);
   --sl-color-vocab: #fff4f4;
   --sl-color-discord: #805ad5;
 
   /* Colours (light mode) */
-  --sl-color-white: hsl(0, 0%, 100%);
-  --sl-color-gray-5: rgb(193, 195, 200);
+  --sl-color-white: hsl(0, 0%, 5%);
+  --sl-color-gray-1: hsl(0, 0%, 15%);
+  --sl-color-gray-2: hsl(0, 0%, 25%);
+  --sl-color-gray-3: hsl(0, 0%, 40%);
+  --sl-color-gray-4: hsl(0, 0%, 60%);
+  --sl-color-gray-5: hsl(0, 0%, 80%);
   --sl-color-gray-6: #edeef3;
   --sl-color-gray-7: #f7f7f7;
   --sl-color-gray-8: #fafafa;
