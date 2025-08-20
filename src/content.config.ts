@@ -2,6 +2,7 @@ import { z as zod } from 'astro/zod';
 import { defineCollection } from 'astro:content';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { blogSchema } from 'starlight-blog/schema';
 
 const prerequisiteSchema = zod
   .object({
@@ -47,12 +48,12 @@ const i18n = defineCollection({
 const docs = defineCollection({
   loader: docsLoader(),
   schema: docsSchema({
-    extend: zod.object({
+    extend: (context) => blogSchema(context).merge(zod.object({
       iframe: iframe,
       hero: heroSchema,
       prerequisites: prerequisiteSchema.optional(),
       time: zod.string().optional(),
-    }),
+    })),
   }),
 });
 

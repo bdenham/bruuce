@@ -6,6 +6,7 @@ import starlightLinksValidator from 'starlight-links-validator';
 import starlightImageZoom from 'starlight-image-zoom';
 import { remarkBasePathLinks } from './src/plugins/remarkBasePathLinks';
 import starlightHeadingBadges from 'starlight-heading-badges';
+import starlightBlog from 'starlight-blog'
 
 // https://astro.build/config
 async function config() {
@@ -61,6 +62,14 @@ async function config() {
                     },
                 ],
                 plugins: [
+                    starlightBlog({
+                        title: 'Blog',
+                        navigation: 'header-start',
+                        metrics: {
+                            readingTime: true,
+                            words: 'total',
+                        },
+                    }),
                     starlightHeadingBadges(),
                     starlightLinksValidator({
                         errorOnFallbackPages: false,
