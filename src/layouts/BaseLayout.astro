@@ -54,12 +54,15 @@ const {
     </script>
   </head>
   <body>
+    <!-- Skip link for keyboard navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <div id="root">
       <Sidebar />
       <div class="app-content">
         <Header />
-        <main class="main-container">
-          <section class="content-panel" role="region">
+        <main class="main-container" id="main-content">
+          <section class="content-panel">
             {
               showBackLink && (
                 <div class="nav-back">

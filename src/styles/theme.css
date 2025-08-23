@@ -86,6 +86,34 @@
     --button-secondary-hover-border: rgba(160, 174, 192, 0.5);
 }
 
+/* Skip link for keyboard navigation accessibility */
+.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    background: var(--accent-primary);
+    color: #ffffff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    z-index: 1000;
+    transition: all 0.2s ease;
+}
+
+.skip-link:focus {
+    position: fixed;
+    left: 16px;
+    top: 16px;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    box-shadow: 0 4px 12px var(--shadow-primary);
+}
+
 /* Global base styles */
 *,
 *::before,
