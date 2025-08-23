@@ -1,0 +1,14 @@
+---
+export interface Props {
+  text: string;
+  linkText?: string;
+  linkHref?: string;
+}
+
+const { text, linkText, linkHref } = Astro.props;
+---
+
+<footer>
+  {text}
+  {linkText && linkHref && <a href={linkHref}>{linkText}</a>}
+</footer>

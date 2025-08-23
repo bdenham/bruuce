@@ -1,4 +1,103 @@
 /**************************/
+/* Hero Component Styling */
+/**************************/
+
+/* Hero background gradient similar to the reference image */
+.hero {
+  background: radial-gradient(ellipse at center, #1e3a8a 0%, #1e2547 50%, #0f172a 100%) !important;
+  background-attachment: fixed !important;
+  margin-left: calc(-50vw + 50%) !important;
+  margin-right: calc(-50vw + 50%) !important;
+  width: 100vw !important;
+  max-width: none !important;
+  padding-bottom: 4rem !important;
+}
+
+.hero .hero-html {
+  background: transparent !important;
+}
+
+.hero .sl-flex {
+  position: relative;
+  z-index: 2;
+  max-width: none !important;
+  margin: 0 !important;
+  padding-left: max(4rem, calc((100vw - 1200px) / 2 + 4rem)) !important;
+  padding-right: max(2rem, calc((100vw - 1200px) / 2 + 2rem)) !important;
+}
+
+/* Make hero text white and off-white for contrast */
+.hero h1,
+.hero .hero-title,
+.hero [data-astro-source-file*="index.mdx"] h1 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+.hero p,
+.hero .hero-subtitle,
+.hero [data-astro-source-file*="index.mdx"] p {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.hero .hero-tagline,
+.hero .tagline {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Additional specific selectors for stubborn text */
+.hero h1,
+.hero h2,
+.hero h3,
+.hero h4,
+.hero h5,
+.hero h6,
+.hero p,
+.hero span:not(.action *) {
+  color: #ffffff !important;
+}
+
+.hero .action {
+  text-shadow: none !important;
+}
+
+/* Style the About me button specifically */
+.hero .action:nth-child(2),
+.hero .action:nth-child(2) *,
+.hero .action:nth-child(2) span,
+.hero .action:nth-child(2) a,
+.hero .actions> :nth-child(2),
+.hero .actions> :nth-child(2) *,
+.hero .actions> :nth-child(2) span,
+.hero .actions> :nth-child(2) a {
+  color: #ffffff !important;
+}
+
+.hero .action:nth-child(2):hover,
+.hero .action:nth-child(2):hover *,
+.hero .actions> :nth-child(2):hover,
+.hero .actions> :nth-child(2):hover * {
+  color: #ffffff !important;
+}
+
+/* Nuclear option for all button text in hero */
+.hero button,
+.hero button *,
+.hero a[class*="action"],
+.hero a[class*="action"] *,
+.hero [class*="action"],
+.hero [class*="action"] * {
+  color: #ffffff !important;
+}
+
+/* Style the welcome text paragraph */
+.sl-markdown-content h2+p {
+  color: #EEEEEE !important;
+}
+
+/**************************/
 /* Font faces */
 /**************************/
 

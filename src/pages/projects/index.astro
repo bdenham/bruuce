@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+title: 'Projects - Bruce Denham';
+description: 'Projects and work by Bruce Denham - software developer and technology enthusiast.';
+---
+
+<BaseLayout
+  title="Projects - Bruce Denham"
+  description="Projects and work by Bruce Denham - software developer and technology enthusiast."
+  showBackLink={true}
+  backLinkText="← Back to Home"
+  backLinkHref="/"
+  footerText="Interested in collaborating? "
+  footerLinkText="Learn more about me"
+  footerLinkHref="/about/"
+>
+  <h1 id="projects-title">My <span>Projects</span></h1>
+  <p class="subtitle">
+    A collection of things I've built, experiments I've conducted, and contributions I've made
+  </p>
+
+  <div class="project-card">
+    <h2>🚀 Personal Blog & Portfolio</h2>
+    <p>
+      This very site you're browsing! Built with Astro for optimal performance and developer
+      experience. Features a custom dark/light theme system, dynamic content collections, and a
+      focus on clean, accessible design.
+    </p>
+    <div class="tech-stack">
+      <span class="tech-tag">Astro</span>
+      <span class="tech-tag">JavaScript</span>
+      <span class="tech-tag">CSS</span>
+      <span class="tech-tag">MDX</span>
+    </div>
+    <div class="project-links">
+      <a href="/blog/" class="project-link">View Blog →</a>
+    </div>
+  </div>
+
+  <div class="coming-soon">
+    <p>🔨 More projects coming soon! I'm constantly working on new ideas and experiments.</p>
+    <p>
+      Check back regularly or <a href="/blog/" style="color: var(--accent-primary);"
+        >follow my blog</a
+      > for updates on what I'm building.
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Projects page specific styles */
+  h1 {
+    margin: 0 0 24px 0;
+  }
+
+  .subtitle {
+    margin: 0 0 32px 0;
+    font-size: 18px;
+    color: var(--text-tertiary);
+  }
+
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    transition: all 120ms ease;
+  }
+
+  .project-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--shadow-secondary);
+  }
+
+  .project-card h2 {
+    margin: 0 0 12px 0;
+    font-size: 24px;
+    color: var(--text-primary);
+  }
+
+  .project-card p {
+    margin: 0 0 16px 0;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+  }
+
+  .tech-stack {
+    margin: 16px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tech-tag {
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .project-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .project-link:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+  }
+
+  .coming-soon {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+</style>

@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+title: 'About - Bruce Denham';
+description: 'Learn more about Bruce Denham - software developer and technology enthusiast.';
+---
+
+<BaseLayout
+  title="About - Bruce Denham"
+  description="Learn more about Bruce Denham - software developer and technology enthusiast."
+  showBackLink={true}
+  backLinkText="← Back to Home"
+  backLinkHref="/"
+  footerText="Thanks for reading! "
+  footerLinkText="Check out my blog posts"
+  footerLinkHref="/blog/"
+>
+  <h1 id="about-title">About <span>Bruce</span></h1>
+
+  <p>
+    👋 Hi there! I'm Bruce Denham, a passionate software developer with a love for creating
+    efficient, user-friendly solutions and sharing knowledge with the development community.
+  </p>
+
+  <h2>What I Do</h2>
+  <p>
+    I specialize in modern web development, focusing on building scalable applications that solve
+    real-world problems. My journey through software development has led me to explore various
+    technologies and best practices, all of which I document and share through this blog.
+  </p>
+
+  <h2>My Interests</h2>
+  <ul>
+    <li>
+      <strong>Web Development:</strong> JavaScript, TypeScript, React, Astro, and modern web frameworks
+    </li>
+    <li><strong>Backend Development:</strong> Node.js, APIs, and database design</li>
+    <li>
+      <strong>Developer Experience:</strong> Tooling, automation, and workflow optimization
+    </li>
+    <li>
+      <strong>Continuous Learning:</strong> Staying current with technology trends and best practices
+    </li>
+  </ul>
+
+  <h2>Why This Blog?</h2>
+  <p>
+    This space serves as my digital notebook where I share insights, document solutions to
+    interesting problems, and reflect on my journey as a developer. I believe in learning in public
+    and contributing to the amazing developer community that has taught me so much.
+  </p>
+
+  <p>
+    Whether you're here to learn something new, find a solution to a problem, or just curious about
+    my thoughts on technology, I hope you find value in what I share.
+  </p>
+</BaseLayout>
+
+<style>
+  /* About page specific styles */
+  h1 {
+    margin: 0 0 24px 0;
+  }
+
+  ul {
+    color: var(--text-tertiary);
+    margin: 0 0 20px 0;
+    padding-left: 24px;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+</style>

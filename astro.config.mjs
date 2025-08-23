@@ -49,7 +49,7 @@ async function config() {
                         link: '/'
                     },
                     {
-                        label: 'Blog Posts',
+                        label: 'All Posts',
                         link: '/blog/'
                     },
                     {

@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+title: 'Blog - Bruce Denham';
+description: 'All blog posts by Bruce Denham on software development and technology.';
+
+// Get all blog posts and sort by date (newest first)
+const blogPosts = await getCollection('blog');
+const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout
+  title="Blog - Bruce Denham"
+  description="All blog posts by Bruce Denham on software development and technology."
+  showBackLink={true}
+  backLinkText="← Back to Home"
+  backLinkHref="/"
+  footerText="More posts coming soon! Check back regularly for new content."
+>
+  <h1 id="blog-title"><span>Blog</span> Posts</h1>
+  <p class="subtitle">Thoughts on software development, technology, and continuous learning</p>
+
+  {
+    sortedPosts.map((post) => (
+      <a href={`/blog/${post.slug}/`} class="blog-post-link">
+        <div class="blog-post">
+          <h2>🚀 {post.data.title}</h2>
+          <p class="date">
+            Published:{' '}
+            {post.data.date.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </p>
+          <p>{post.data.excerpt}</p>
+          <span class="read-more">Read full post →</span>
+        </div>
+      </a>
+    ))
+  }
+</BaseLayout>
+
+<style>
+  /* Blog listing specific styles */
+  .subtitle {
+    margin: 0 0 24px 0;
+    font-size: 18px;
+    color: var(--text-tertiary);
+  }
+
+  .blog-post {
+    padding: 24px;
+    margin: 20px 0;
+  }
+
+  .blog-post .date {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+</style>

@@ -1,0 +1,111 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/theme.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  showBackLink?: boolean;
+  backLinkText?: string;
+  backLinkHref?: string;
+  footerText?: string;
+  footerLinkText?: string;
+  footerLinkHref?: string;
+}
+
+const {
+  title,
+  description,
+  showBackLink = false,
+  backLinkText = '← Back to Home',
+  backLinkHref = '/',
+  footerText = 'Thanks for visiting!',
+  footerLinkText,
+  footerLinkHref,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <div id="root">
+      <Header />
+      <main class="main-container">
+        <section class="content-panel" role="region">
+          {
+            showBackLink && (
+              <div class="nav-back">
+                <a href={backLinkHref}>{backLinkText}</a>
+              </div>
+            )
+          }
+          <slot />
+        </section>
+        <Footer text={footerText} linkText={footerLinkText} linkHref={footerLinkHref} />
+      </main>
+    </div>
+
+    <script>
+      function updateThemeDisplay(isLight) {
+        const themeIcon = document.getElementById('theme-icon');
+        const themeText = document.getElementById('theme-text');
+
+        if (themeIcon && themeText) {
+          if (isLight) {
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light';
+          } else {
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Dark';
+          }
+        }
+      }
+
+      (window as any).toggleTheme = function () {
+        const root = document.documentElement;
+        const isCurrentlyLight = root.classList.contains('light');
+
+        if (isCurrentlyLight) {
+          // Switch to dark
+          root.classList.remove('light');
+          localStorage.setItem('theme', 'dark');
+          updateThemeDisplay(false);
+        } else {
+          // Switch to light
+          root.classList.add('light');
+          localStorage.setItem('theme', 'light');
+          updateThemeDisplay(true);
+        }
+      };
+
+      // Initialize theme on page load
+      function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const root = document.documentElement;
+        const isLight = savedTheme === 'light';
+
+        if (isLight) {
+          root.classList.add('light');
+        } else {
+          root.classList.remove('light');
+        }
+
+        updateThemeDisplay(isLight);
+      }
+
+      // Initialize theme when page loads
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTheme);
+      } else {
+        initTheme();
+      }
+    </script>
+  </body>
+</html>

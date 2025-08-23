@@ -1,0 +1,108 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+title: 'Bruce Denham';
+description: 'Personal blog by Bruce Denham - software developer and technology enthusiast.';
+
+// Get the latest blog post for the homepage
+const blogPosts = await getCollection('blog');
+const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
+---
+
+<BaseLayout
+  title="Bruce Denham - Software Developer"
+  description="Personal blog by Bruce Denham - software developer and technology enthusiast sharing insights on web development."
+  footerText="Thanks for visiting! Feel free to explore my thoughts on software development."
+>
+  <h1 id="main-title"><span>Bruce</span> Denham</h1>
+  <p class="subtitle">Software Developer & Technology Enthusiast</p>
+  <p class="lead">
+    Welcome to my corner of the web! I share insights on modern web development, coding best
+    practices, and my journey through the ever-evolving tech landscape.
+  </p>
+
+  <div class="actions">
+    <a class="button primary" href="/blog/" aria-label="Read my blog posts">Read my blog</a>
+    <a class="button secondary" href="/about/" aria-label="Learn more about me">About me</a>
+    <a class="button secondary" href="/projects/" aria-label="View my projects">My projects</a>
+  </div>
+
+  <div class="section">
+    <h2>Latest Posts</h2>
+    {
+      latestPost && (
+        <a href={`/blog/${latestPost.slug}/`} class="blog-post-link">
+          <div class="blog-post">
+            <h3>🚀 {latestPost.data.title}</h3>
+            <p>{latestPost.data.excerpt}</p>
+            <p class="date">
+              Published:{' '}
+              {latestPost.data.date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </p>
+            <span class="read-more">Read more →</span>
+          </div>
+        </a>
+      )
+    }
+  </div>
+
+  <div class="section">
+    <h2>What I'm About</h2>
+    <p>
+      I'm passionate about creating efficient, user-friendly solutions and sharing knowledge with
+      the developer community. This is where I document my journey through software development,
+      explore new technologies, and share insights from building real-world applications.
+    </p>
+  </div>
+
+  <div class="footer-links">
+    <a href="/blog/">All Posts</a>
+    <a href="/about/">About</a>
+    <a href="/projects/">Projects</a>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Homepage-specific styles */
+  .subtitle {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    color: var(--text-tertiary);
+    font-weight: 500;
+  }
+
+  .lead {
+    margin: 0 0 24px 0;
+    font-size: 18px;
+    color: var(--text-tertiary);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 24px 0 20px 0;
+  }
+
+  .footer-links {
+    margin-top: 24px;
+    text-align: center;
+  }
+
+  .footer-links a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    margin: 0 12px;
+    font-size: 14px;
+  }
+
+  .footer-links a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+  }
+</style>
