@@ -1,4 +1,9 @@
-# Example: Allow all bots to scan and index your site.
-# Full syntax: https://developers.google.com/search/docs/advanced/robots/create-robots-txt
+# Robots.txt for Bruce Denham's Portfolio
 User-agent: *
 Allow: /
+
+# Sitemap location
+Sitemap: https://bdenham.github.io/sanity-check/sitemap-index.xml
+
+# Crawl delay for politeness (optional)
+Crawl-delay: 1
