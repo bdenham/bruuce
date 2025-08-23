@@ -13,7 +13,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   footerLinkText="Let's connect on LinkedIn"
   footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
-  <PageHeader primary="About" accent="Bruce" id="about-title" />
+  <PageHeader primary="About" accent="Me" id="about-title" />
 
   <div class="intro-section">
     <p class="lead">
@@ -202,6 +202,15 @@ import PageHeader from '../../components/ui/PageHeader.astro';
         <p>
           Deep community involvement with Magento, contributing to both code and documentation that
           helps thousands of developers worldwide.
+        </p>
+      </div>
+
+      <div class="recognition-item">
+        <h3>Mentoring & Knowledge Sharing</h3>
+        <p>
+          Passionate about lifting others through shared knowledge, actively mentoring aspiring
+          technical writers and students at Southwestern University. I also love to help teams
+          establish effective documentation practices.
         </p>
       </div>
     </div>
@@ -436,6 +445,13 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 24px;
+  }
+
+  /* Match standard 2-card responsive behavior */
+  @media (min-width: 768px) {
+    .recognition-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .recognition-item {

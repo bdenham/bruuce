@@ -3,8 +3,8 @@
 /* Subtitles - used across multiple pages with slight variations */
 .subtitle {
     font-size: 18px;
-    color: var(--text-tertiary);
-    font-weight: 300;
+    color: var(--text-primary);
+    font-weight: 400;
     margin-bottom: 24px;
 }
 

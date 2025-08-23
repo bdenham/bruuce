@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig-preact.json",
+  "extends": "./tsconfig-base.json",
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
@@ -12,6 +12,8 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "allowJs": true
+    "allowJs": true,
+    "jsx": "preserve",
+    "jsxImportSource": "astro"
   }
 }

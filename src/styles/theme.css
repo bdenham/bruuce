@@ -12,25 +12,25 @@
     --bg-card-hover: rgba(15, 23, 42, 0.6);
     --text-primary: #ffffff;
     --text-secondary: #e5e7eb;
-    --text-tertiary: #cbd5e1;
+    --text-tertiary: #bbbbbb;
     --text-muted: #94a3b8;
     --text-dim: #64748b;
     --border-primary: rgba(148, 163, 184, 0.25);
     --border-secondary: rgba(148, 163, 184, 0.15);
-    --accent-primary: #a78bfa;
-    --accent-hover: #c4b5fd;
-    --gradient-1: rgba(99, 102, 241, 0.25);
-    --gradient-2: rgba(236, 72, 153, 0.2);
+    --accent-primary: #0066cc;
+    --accent-hover: #0080ff;
+    --gradient-1: rgba(0, 102, 204, 0.25);
+    --gradient-2: rgba(0, 128, 255, 0.2);
     --shadow-primary: rgba(0, 0, 0, 0.4);
     --shadow-secondary: rgba(0, 0, 0, 0.3);
 
     /* Button variables for WCAG AA compliance */
     --button-bg: #334155;
     --button-text: #ffffff;
-    --button-primary-bg: #6d28d9;
-    --button-primary-hover-bg: #7c3aed;
+    --button-primary-bg: #0066cc;
+    --button-primary-hover-bg: #0080ff;
     --button-primary-text: #ffffff;
-    --button-primary-border: rgba(109, 40, 217, 0.3);
+    --button-primary-border: rgba(0, 102, 204, 0.3);
     --button-secondary-bg: #1e293b;
     --button-secondary-hover-bg: #334155;
     --button-secondary-text: #ffffff;
@@ -65,20 +65,20 @@
     --text-dim: #718096;
     --border-primary: rgba(141, 148, 157, 0.498);
     --border-secondary: rgba(138, 143, 151, 0.25);
-    --accent-primary: #7c3aed;
-    --accent-hover: #8b5cf6;
-    --gradient-1: rgba(139, 92, 246, 0.08);
-    --gradient-2: rgba(236, 72, 153, 0.06);
+    --accent-primary: #0066cc;
+    --accent-hover: #0080ff;
+    --gradient-1: rgba(0, 102, 204, 0.08);
+    --gradient-2: rgba(0, 128, 255, 0.06);
     --shadow-primary: rgba(45, 55, 72, 0.12);
     --shadow-secondary: rgba(45, 55, 72, 0.06);
 
     /* Button variables for WCAG AA compliance in softer light mode */
     --button-bg: #e2e8f0;
     --button-text: #2d3748;
-    --button-primary-bg: #7c3aed;
-    --button-primary-hover-bg: #6d28d9;
+    --button-primary-bg: #0066cc;
+    --button-primary-hover-bg: #0052a3;
     --button-primary-text: #ffffff;
-    --button-primary-border: rgba(124, 58, 237, 0.2);
+    --button-primary-border: rgba(0, 102, 204, 0.2);
     --button-secondary-bg: rgba(255, 255, 255, 0.9);
     --button-secondary-hover-bg: rgba(248, 244, 241, 0.9);
     --button-secondary-text: #4a5568;

@@ -1,0 +1,487 @@
+---
+import { getCollection } from 'astro:content';
+
+// Get all blog posts and sort by date (newest first)
+const blogPosts = await getCollection('blog');
+const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Get current URL for active state highlighting
+const currentPath = Astro.url.pathname;
+
+// Dynamically create shorter titles for sidebar display
+function getShortenedTitle(title: string): string {
+  // Remove common articles and prepositions at the beginning
+  const cleaned = title.replace(/^(The|A|An|My|)\s*/i, '');
+
+  // Split into words
+  const words = cleaned.split(' ');
+
+  // If it's already short enough, return as is
+  if (title.length <= 35) {
+    return title;
+  }
+
+  // For very long titles, be more aggressive
+  const maxLength = 35; // Shorter limit for sidebar
+  let result = '';
+
+  for (let i = 0; i < words.length; i++) {
+    const testResult = result + (result ? ' ' : '') + words[i];
+
+    // If adding this word would exceed max length, stop
+    if (testResult.length > maxLength) {
+      break;
+    }
+
+    result = testResult;
+
+    // Always include at least 2 words for context
+    if (i >= 1 && result.length >= 8) {
+      break;
+    }
+  }
+
+  // Ensure we have something meaningful - minimum 2 words
+  if (!result || result.split(' ').length < 2) {
+    result = words.slice(0, 2).join(' ');
+  }
+
+  // Final length check
+  if (result.length > maxLength) {
+    result = words[0]; // Fallback to first word if still too long
+  }
+
+  return result || title;
+}
+---
+
+<aside class="sidebar" id="sidebar">
+  <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation">
+    <span class="toggle-icon">☰</span>
+  </button>
+
+  <nav class="sidebar-nav" id="sidebar-nav">
+    <div class="nav-header">
+      <h2>Bruce Denham</h2>
+      <button class="sidebar-close" id="sidebar-close" aria-label="Close navigation">×</button>
+    </div>
+
+    <!-- Main Pages Section -->
+    <div class="nav-section">
+      <h3>Portfolio</h3>
+      <ul>
+        <li>
+          <a href="/" class={currentPath === '/' ? 'active' : ''}>
+            <span class="nav-icon">🏠</span>
+            <span class="nav-text">Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="/about/" class={currentPath.startsWith('/about') ? 'active' : ''}>
+            <span class="nav-icon">👨‍💻</span>
+            <span class="nav-text">About Me</span>
+          </a>
+        </li>
+        <li>
+          <a href="/resume/" class={currentPath.startsWith('/resume') ? 'active' : ''}>
+            <span class="nav-icon">📋</span>
+            <span class="nav-text">Resume</span>
+          </a>
+        </li>
+        <li>
+          <a href="/work/" class={currentPath.startsWith('/work') ? 'active' : ''}>
+            <span class="nav-icon">🛠️</span>
+            <span class="nav-text">My Work</span>
+          </a>
+        </li>
+        <li>
+          <a href="/projects/" class={currentPath.startsWith('/projects') ? 'active' : ''}>
+            <span class="nav-icon">🚀</span>
+            <span class="nav-text">Projects</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Blog Section -->
+    <div class="nav-section">
+      <h3>
+        <a href="/blog/" class={currentPath === '/blog/' ? 'active' : ''}>
+          <span>Blog</span>
+          <span class="clickable-indicator">→</span>
+        </a>
+      </h3>
+      <ul class="blog-posts">
+        {
+          sortedPosts.map((post) => (
+            <li>
+              <a
+                href={`/blog/${post.slug}/`}
+                class={currentPath === `/blog/${post.slug}/` ? 'active' : ''}
+                title={post.data.excerpt}
+              >
+                <span class="post-date">
+                  {post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                </span>
+                <span class="post-title">{getShortenedTitle(post.data.title)}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Quick Links Section -->
+    <div class="nav-section">
+      <h3>Connect</h3>
+      <ul class="external-links">
+        <li>
+          <a href="https://linkedin.com/in/brucedenham/" target="_blank" rel="noopener noreferrer">
+            <span class="nav-icon">💼</span>
+            <span class="nav-text">LinkedIn</span>
+            <span class="external-icon">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/bdenham" target="_blank" rel="noopener noreferrer">
+            <span class="nav-icon">💻</span>
+            <span class="nav-text">GitHub</span>
+            <span class="external-icon">↗</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Overlay for mobile -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+</aside>
+
+<style>
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    z-index: 200;
+    font-family: inherit;
+  }
+
+  .sidebar-toggle {
+    position: fixed;
+    top: 60px;
+    left: 16px;
+    width: 36px;
+    height: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 6px;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    z-index: 201;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar-toggle:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent-primary);
+    transform: translateY(-1px);
+  }
+
+  .sidebar-nav {
+    height: 100vh;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border-secondary);
+    padding: 0;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 10px var(--shadow-secondary);
+    backdrop-filter: blur(8px);
+  }
+
+  .sidebar.open .sidebar-nav {
+    transform: translateX(0);
+  }
+
+  .nav-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-secondary);
+  }
+
+  .nav-header h2 {
+    color: var(--text-primary);
+    font-size: 18px;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .sidebar-close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar-close:hover {
+    color: var(--accent-primary);
+  }
+
+  .nav-section {
+    padding: 0;
+    border-bottom: 1px solid var(--border-secondary);
+  }
+
+  .nav-section:last-child {
+    border-bottom: none;
+  }
+
+  .nav-section h3 {
+    padding: 16px 16px 8px 16px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-section h3 a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    text-transform: inherit;
+    letter-spacing: inherit;
+  }
+
+  .nav-section h3 a:hover,
+  .nav-section h3 a.active {
+    color: var(--accent-primary);
+    background: none;
+    padding-left: 0;
+  }
+
+  .clickable-indicator {
+    font-size: 12px;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    margin-left: 8px;
+  }
+
+  .nav-section h3 a:hover .clickable-indicator {
+    opacity: 1;
+    transform: translateX(2px);
+    color: var(--accent-primary);
+  }
+
+  .nav-section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 16px 0;
+  }
+
+  .nav-section li {
+    margin: 0;
+  }
+
+  .nav-section a {
+    display: flex;
+    align-items: center;
+    padding: 8px 20px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  .nav-section a:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+    padding-left: 24px;
+  }
+
+  .nav-section a.active {
+    background: rgba(167, 139, 250, 0.1);
+    color: var(--accent-primary);
+    border-right: 2px solid var(--accent-primary);
+    font-weight: 500;
+  }
+
+  .nav-icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .nav-text {
+    flex: 1;
+  }
+
+  .external-icon {
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  /* Blog posts styling */
+  .blog-posts a {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 10px 20px;
+  }
+
+  .post-date {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .post-title {
+    font-size: 13px;
+    line-height: 1.3;
+    color: var(--text-secondary);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .blog-posts a:hover .post-title,
+  .blog-posts a.active .post-title {
+    color: var(--text-primary);
+  }
+
+  .blog-posts a.active .post-date {
+    color: var(--accent-primary);
+  }
+
+  /* Mobile overlay */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 199;
+  }
+
+  .sidebar.open .sidebar-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Desktop styles */
+  @media (min-width: 1024px) {
+    .sidebar-toggle {
+      display: none;
+    }
+
+    .sidebar-nav {
+      transform: translateX(0);
+      position: relative;
+      box-shadow: none;
+    }
+
+    .sidebar-close {
+      display: none;
+    }
+
+    .sidebar-overlay {
+      display: none;
+    }
+
+    .nav-header {
+      background: var(--bg-card);
+    }
+  }
+
+  /* Hide sidebar completely on mobile by default */
+  @media (max-width: 1023px) {
+    .sidebar-nav {
+      position: fixed;
+      width: 280px;
+      z-index: 200;
+    }
+  }
+</style>
+
+<script>
+  function initSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebarClose = document.getElementById('sidebar-close');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+    if (!sidebar || !sidebarToggle) return;
+
+    function openSidebar() {
+      sidebar?.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      sidebar?.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    sidebarToggle?.addEventListener('click', () => {
+      if (sidebar?.classList.contains('open')) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
+    });
+    sidebarClose?.addEventListener('click', closeSidebar);
+    sidebarOverlay?.addEventListener('click', closeSidebar);
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeSidebar();
+      }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024) {
+        closeSidebar();
+      }
+    });
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSidebar);
+  } else {
+    initSidebar();
+  }
+
+  // Re-initialize after View Transitions
+  document.addEventListener('astro:after-swap', initSidebar);
+</script>

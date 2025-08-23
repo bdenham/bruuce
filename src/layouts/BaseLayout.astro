@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
 import '../styles/theme.css';
 
 export interface Props {
@@ -54,20 +55,23 @@ const {
   </head>
   <body>
     <div id="root">
-      <Header />
-      <main class="main-container">
-        <section class="content-panel" role="region">
-          {
-            showBackLink && (
-              <div class="nav-back">
-                <a href={backLinkHref}>{backLinkText}</a>
-              </div>
-            )
-          }
-          <slot />
-        </section>
-        <Footer text={footerText} linkText={footerLinkText} linkHref={footerLinkHref} />
-      </main>
+      <Sidebar />
+      <div class="app-content">
+        <Header />
+        <main class="main-container">
+          <section class="content-panel" role="region">
+            {
+              showBackLink && (
+                <div class="nav-back">
+                  <a href={backLinkHref}>{backLinkText}</a>
+                </div>
+              )
+            }
+            <slot />
+          </section>
+          <Footer text={footerText} linkText={footerLinkText} linkHref={footerLinkHref} />
+        </main>
+      </div>
     </div>
 
     <script>
@@ -144,3 +148,33 @@ const {
     </script>
   </body>
 </html>
+
+<style>
+  /* Layout adjustments for sidebar */
+  #root {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .app-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: margin-left 0.3s ease;
+  }
+
+  /* Desktop: Make room for sidebar */
+  @media (min-width: 1024px) {
+    .app-content {
+      margin-left: 280px;
+    }
+  }
+
+  /* Mobile: Full width */
+  @media (max-width: 1023px) {
+    .app-content {
+      margin-left: 0;
+    }
+  }
+</style>
