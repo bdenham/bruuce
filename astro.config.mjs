@@ -10,12 +10,14 @@ import starlightBlog from 'starlight-blog'
 
 // https://astro.build/config
 async function config() {
+    const basePath = process.env.VITE_GITHUB_BASE_PATH || '';
+
     return defineConfig({
         image: {
             service: passthroughImageService(),
         },
         site: 'https://bdenham.github.io/sanity-check',
-        base: process.env.VITE_GITHUB_BASE_PATH || '',
+        base: basePath,
         markdown: {
             remarkPlugins: [remarkBasePathLinks],
             syntaxHighlight: { type: 'shiki', excludeLangs: ['mermaid'] },
@@ -46,19 +48,19 @@ async function config() {
                 sidebar: [
                     {
                         label: 'Home',
-                        link: '/'
+                        link: `${basePath}/`
                     },
                     {
                         label: 'All Posts',
-                        link: '/blog/'
+                        link: `${basePath}/blog/`
                     },
                     {
                         label: 'About Me',
-                        link: '/about/'
+                        link: `${basePath}/about/`
                     },
                     {
                         label: 'My Projects',
-                        link: '/projects/'
+                        link: `${basePath}/projects/`
                     },
                 ],
                 plugins: [
@@ -75,10 +77,10 @@ async function config() {
                         errorOnFallbackPages: false,
                         errorOnInconsistentLocale: true,
                         exclude: [
-                            '/blog/',
-                            '/about/',
-                            '/projects/',
-                            '/blog/**',
+                            `${basePath}/blog/`,
+                            `${basePath}/about/`,
+                            `${basePath}/projects/`,
+                            `${basePath}/blog/**`,
                         ]
                     }),
                     starlightImageZoom({
@@ -108,7 +110,7 @@ async function config() {
                         tag: 'link',
                         attrs: {
                             rel: 'preload',
-                            href: `${process.env.VITE_GITHUB_BASE_PATH || ''}/fonts/adobe-clean-300.woff2`,
+                            href: `${basePath}/fonts/adobe-clean-300.woff2`,
                             as: 'font',
                             type: 'font/woff2',
                             crossorigin: ''
@@ -118,7 +120,7 @@ async function config() {
                         tag: 'link',
                         attrs: {
                             rel: 'preload',
-                            href: `${process.env.VITE_GITHUB_BASE_PATH || ''}/fonts/adobe-clean-400.woff2`,
+                            href: `${basePath}/fonts/adobe-clean-400.woff2`,
                             as: 'font',
                             type: 'font/woff2',
                             crossorigin: ''
@@ -128,7 +130,7 @@ async function config() {
                         tag: 'link',
                         attrs: {
                             rel: 'preload',
-                            href: `${process.env.VITE_GITHUB_BASE_PATH || ''}/fonts/adobe-clean-700.woff2`,
+                            href: `${basePath}/fonts/adobe-clean-700.woff2`,
                             as: 'font',
                             type: 'font/woff2',
                             crossorigin: ''
@@ -137,11 +139,11 @@ async function config() {
                     // Search Highlighting Scripts (external files)
                     {
                         tag: 'script',
-                        attrs: { src: `${process.env.VITE_GITHUB_BASE_PATH || ''}/scripts/search-highlighter.js` }
+                        attrs: { src: `${basePath}/scripts/search-highlighter.js` }
                     },
                     {
                         tag: 'script',
-                        attrs: { src: `${process.env.VITE_GITHUB_BASE_PATH || ''}/scripts/search-click-handler.js` }
+                        attrs: { src: `${basePath}/scripts/search-click-handler.js` }
                     },
                 ],
             })
