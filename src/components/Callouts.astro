@@ -18,12 +18,12 @@ const { square = false, columnCount = 2 } = Astro.props;
     margin: 2rem 0;
     overflow-wrap: break-word;
   }
-  
-  .callouts[data-column-count="1"] {
+
+  .callouts[data-column-count='1'] {
     column-count: 1;
   }
-  
-  .callouts[data-column-count="3"] {
+
+  .callouts[data-column-count='3'] {
     column-count: 3;
   }
 
@@ -61,15 +61,15 @@ const { square = false, columnCount = 2 } = Astro.props;
     text-align: center;
     color: var(--text-primary);
     background-color: var(--accent-primary);
-    border-radius: var(--square, 50%) == 'true' ? 4px : 50%;
+    border-radius: 50%;
     margin-left: -2rem;
     margin-right: var(--bullet-margin);
     margin-top: 0;
     width: var(--bullet-size);
     height: var(--bullet-size);
   }
-  
-  .callouts[data-square="true"] :global(ol li::before) {
+
+  .callouts[data-square='true'] :global(ol li::before) {
     border-radius: 4px;
   }
 
