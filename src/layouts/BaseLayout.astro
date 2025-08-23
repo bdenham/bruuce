@@ -60,83 +60,6 @@ const {
       crossorigin
     />
 
-    <!-- Critical CSS inlined to eliminate request chains -->
-    <style>
-      /* Critical above-the-fold styles to eliminate render blocking */
-      body {
-        margin: 0;
-        font-family:
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          Segoe UI,
-          Roboto,
-          Helvetica,
-          Arial;
-        line-height: 1.6;
-        color: var(--text-secondary, #e5e7eb);
-        background-color: var(--bg-primary, #0b1020);
-        min-height: 100vh;
-      }
-
-      /* Critical layout to prevent CLS */
-      .main-container {
-        min-height: 100svh;
-        display: grid;
-        place-items: center;
-        padding: 100px 20px 40px 20px;
-      }
-
-      .content-panel {
-        width: 100%;
-        max-width: 880px;
-        background: var(--bg-tertiary, rgba(15, 23, 42, 0.6));
-        border: 1px solid var(--border-primary, rgba(148, 163, 184, 0.25));
-        border-radius: 16px;
-        padding: 40px 32px;
-      }
-
-      /* Critical typography for LCP element */
-      h1 {
-        margin: 0 0 12px 0;
-        font-size: 48px;
-        line-height: 1.15;
-        letter-spacing: -0.02em;
-        color: var(--text-primary, #ffffff);
-        font-weight: 400;
-        font-size-adjust: 0.5;
-        contain: layout style;
-      }
-
-      h1 span {
-        color: var(--accent-primary, #0066cc);
-      }
-
-      .subtitle {
-        color: var(--text-muted, #a1a1aa);
-        font-size: 16px;
-        margin: 0 0 20px 0;
-      }
-
-      /* Hide non-critical elements until loaded */
-      .action-cards,
-      .section {
-        opacity: 0;
-        animation: fadeIn 0.3s ease forwards;
-        animation-delay: 0.1s;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    </style>
     <!-- Prevent white flash by setting theme early -->
     <script is:inline>
       // Set theme immediately to prevent white flash
@@ -158,48 +81,6 @@ const {
   <body>
     <!-- Skip link for keyboard navigation -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <!-- Critical resource loading optimization script -->
-    <script>
-      // Preload critical resources on page interaction to break request chains
-      (function () {
-        let interacted = false;
-
-        function preloadCriticalResources() {
-          if (interacted) return;
-          interacted = true;
-
-          // Preload critical CSS and JS files
-          const criticalResources = document.querySelectorAll(
-            'link[href*="_astro"]:not([rel="preload"])'
-          );
-          criticalResources.forEach(function (link) {
-            const linkEl = link;
-            if (linkEl.getAttribute && linkEl.getAttribute('href')) {
-              const href = linkEl.getAttribute('href');
-              if (href && (href.includes('.css') || href.includes('.js'))) {
-                const preloadLink = document.createElement('link');
-                preloadLink.rel = 'preload';
-                preloadLink.href = href;
-                preloadLink.as = href.includes('.css') ? 'style' : 'script';
-                document.head.appendChild(preloadLink);
-              }
-            }
-          });
-        }
-
-        // Preload on first user interaction
-        ['mousedown', 'touchstart', 'keydown'].forEach((eventType) => {
-          document.addEventListener(eventType, preloadCriticalResources, {
-            once: true,
-            passive: true,
-          });
-        });
-
-        // Fallback: preload after 2 seconds if no interaction
-        setTimeout(preloadCriticalResources, 2000);
-      })();
-    </script>
 
     <div id="root">
       <Sidebar />

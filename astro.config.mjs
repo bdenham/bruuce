@@ -26,41 +26,14 @@ async function config() {
         outDir: './dist',
         build: {
             assets: '_astro',
-            assetsInlineLimit: 2048, // Inline small assets to reduce requests
-            cssCodeSplit: false, // Bundle CSS together to reduce critical request chains
+            assetsInlineLimit: 0, // Ensure assets are hashed and externalized
+            cssCodeSplit: true, // Enable CSS code splitting for better caching
             rollupOptions: {
                 output: {
                     // Ensure consistent hashing for better caching
                     entryFileNames: '_astro/[name].[hash].js',
                     chunkFileNames: '_astro/[name].[hash].js',
-                    assetFileNames: '_astro/[name].[hash][extname]',
-                    // Optimize chunk splitting to reduce critical chains
-                    manualChunks: {
-                        'vendor': ['astro/runtime/client/idle.js', 'astro/runtime/client/media.js'],
-                        'critical': ['astro/runtime/client/visible.js']
-                    }
-                }
-            }
-        },
-        vite: {
-            build: {
-                // Critical request optimization
-                cssCodeSplit: false, // Bundle all CSS into fewer files
-                rollupOptions: {
-                    output: {
-                        // Reduce the number of chunks to minimize critical chains
-                        chunkFileNames: '_astro/[name].[hash].js',
-                        // Inline small assets
-                        inlineDynamicImports: false
-                    }
-                }
-            },
-            // Optimize CSS processing
-            css: {
-                postcss: {
-                    plugins: [
-                        // Add critical CSS extraction if needed
-                    ]
+                    assetFileNames: '_astro/[name].[hash][extname]'
                 }
             }
         },
