@@ -14,7 +14,13 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
   description="Senior Technical Writer & Developer Experience Strategist at Adobe with 30+ years turning complex concepts into clear developer experiences."
   footerText="Thanks for visiting! Let's build better developer experiences together."
 >
-  <h1 id="main-title"><span>Bruce</span> Denham</h1>
+  <!-- LCP optimized main title with critical CSS -->
+  <h1
+    id="main-title"
+    style="font-size: 48px; line-height: 1.15; margin: 0 0 12px 0; color: var(--text-primary); font-weight: 400; opacity: 1; transform: none;"
+  >
+    <span style="color: var(--accent-primary);">Bruce</span> Denham
+  </h1>
   <p class="subtitle homepage">Senior Technical Writer & Developer Experience Strategist</p>
   <p class="lead">
     I turn complex concepts into clear, human experiences. With 30+ years in docs, dev, and design,

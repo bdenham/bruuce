@@ -104,23 +104,24 @@ async function config() {
                     { icon: 'github', label: 'GitHub', href: 'https://github.com/bdenham' },
                 ],
                 head: [
-                    // Font preloads for better performance (with GitHub base path)
-                    // Preload 300 weight first as it's used extensively for body text
+                    // Font preloads for better LCP performance (with GitHub base path)
+                    // Preload 400 weight first with high priority - used by h1 LCP element
                     {
                         tag: 'link',
                         attrs: {
                             rel: 'preload',
-                            href: `${basePath}/fonts/adobe-clean-300.woff2`,
+                            href: `${basePath}/fonts/adobe-clean-400.woff2`,
                             as: 'font',
                             type: 'font/woff2',
-                            crossorigin: ''
+                            crossorigin: '',
+                            fetchpriority: 'high'
                         }
                     },
                     {
                         tag: 'link',
                         attrs: {
                             rel: 'preload',
-                            href: `${basePath}/fonts/adobe-clean-400.woff2`,
+                            href: `${basePath}/fonts/adobe-clean-300.woff2`,
                             as: 'font',
                             type: 'font/woff2',
                             crossorigin: ''
