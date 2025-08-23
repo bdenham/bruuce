@@ -1,11 +1,13 @@
 ---
 interface Props {
-  src: string | {
-    src: string;
-    width: number;
-    height: number;
-    format: string;
-  };
+  src:
+    | string
+    | {
+        src: string;
+        width: number;
+        height: number;
+        format: string;
+      };
   alt: string;
   caption?: string;
   width?: string;
@@ -24,38 +26,39 @@ const screenshotId = `screenshot-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
 <figure class="screenshot-figure">
-  <div 
-    class="screenshot" 
-    class:list={[{ 'clickable': clickToZoom }]}
+  <div
+    class="screenshot"
+    class:list={[{ clickable: clickToZoom }]}
     data-screenshot-id={screenshotId}
   >
-    <img 
-      src={imageSrc} 
-      alt={alt} 
+    <img
+      src={imageSrc}
+      alt={alt}
       width={imageWidth}
       height={imageHeight}
       style={`width: ${width}; height: ${height};`}
       class="screenshot-image"
       loading="lazy"
     />
-    {clickToZoom && (
-      <div class="zoom-hint">
-        <span class="zoom-icon">🔍</span>
-        Click to zoom
-      </div>
-    )}
+    {
+      clickToZoom && (
+        <div class="zoom-hint">
+          <span class="zoom-icon">🔍</span>
+          Click to zoom
+        </div>
+      )
+    }
   </div>
-  {caption && (
-    <figcaption class="screenshot-caption">
-      {caption}
-    </figcaption>
-  )}
+  {caption && <figcaption class="screenshot-caption">{caption}</figcaption>}
 </figure>
 
-{clickToZoom && (
-  <script define:vars={{ screenshotId }}>
+{
+  clickToZoom && (
+    <script
+      is:inline
+      set:html={`
     document.addEventListener('DOMContentLoaded', () => {
-      const screenshot = document.querySelector('[data-screenshot-id="' + screenshotId + '"]');
+      const screenshot = document.querySelector('[data-screenshot-id="${screenshotId}"]');
       const img = screenshot?.querySelector('.screenshot-image');
       
       if (!screenshot || !img) return;
@@ -64,16 +67,17 @@ const screenshotId = `screenshot-${Math.random().toString(36).substr(2, 9)}`;
         // Create modal
         const modal = document.createElement('div');
         modal.className = 'screenshot-modal';
-        modal.innerHTML = 
-          '<div class="screenshot-modal-backdrop">' +
-            '<div class="screenshot-modal-content">' +
-              '<button class="screenshot-modal-close" aria-label="Close">×</button>' +
-              '<img src="' + img.src + '" alt="' + img.alt + '" class="screenshot-modal-image" />' +
-            '</div>' +
-          '</div>';
+        modal.innerHTML = \`
+          <div class="screenshot-modal-backdrop">
+            <div class="screenshot-modal-content">
+              <button class="screenshot-modal-close" aria-label="Close">×</button>
+              <img src="\${img.src}" alt="\${img.alt}" class="screenshot-modal-image" />
+            </div>
+          </div>
+        \`;
         
         // Add modal styles
-        modal.style.cssText = `
+        modal.style.cssText = \`
           position: fixed;
           top: 0;
           left: 0;
@@ -85,20 +89,20 @@ const screenshotId = `screenshot-${Math.random().toString(36).substr(2, 9)}`;
           justify-content: center;
           background: rgba(0, 0, 0, 0);
           transition: background 0.3s ease;
-        `;
+        \`;
         
         const backdrop = modal.querySelector('.screenshot-modal-backdrop');
-        backdrop.style.cssText = `
+        backdrop.style.cssText = \`
           width: 100%;
           height: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: zoom-out;
-        `;
+        \`;
         
         const content = modal.querySelector('.screenshot-modal-content');
-        content.style.cssText = `
+        content.style.cssText = \`
           position: relative;
           max-width: 95vw;
           max-height: 95vh;
@@ -107,18 +111,18 @@ const screenshotId = `screenshot-${Math.random().toString(36).substr(2, 9)}`;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
           transform: scale(0.8);
           transition: transform 0.3s ease;
-        `;
+        \`;
         
         const modalImg = modal.querySelector('.screenshot-modal-image');
-        modalImg.style.cssText = `
+        modalImg.style.cssText = \`
           width: 100%;
           height: 100%;
           object-fit: contain;
           display: block;
-        `;
+        \`;
         
         const closeBtn = modal.querySelector('.screenshot-modal-close');
-        closeBtn.style.cssText = `
+        closeBtn.style.cssText = \`
           position: absolute;
           top: 16px;
           right: 16px;
@@ -135,7 +139,7 @@ const screenshotId = `screenshot-${Math.random().toString(36).substr(2, 9)}`;
           justify-content: center;
           z-index: 1;
           transition: background 0.2s ease;
-        `;
+        \`;
         
         // Event handlers
         const closeModal = () => {
@@ -172,8 +176,10 @@ const screenshotId = `screenshot-${Math.random().toString(36).substr(2, 9)}`;
         });
       });
     });
-  </script>
-)}
+  `}
+    />
+  )
+}
 
 <style>
   .screenshot-figure {
@@ -193,11 +199,11 @@ const screenshotId = `screenshot-${Math.random().toString(36).substr(2, 9)}`;
     box-shadow: 0 4px 12px var(--shadow-secondary);
     transition: all 0.2s ease;
   }
-  
+
   .screenshot.clickable {
     cursor: zoom-in;
   }
-  
+
   .screenshot.clickable:hover {
     border-color: var(--border-primary);
     box-shadow: 0 6px 20px var(--shadow-primary);
@@ -211,7 +217,7 @@ const screenshotId = `screenshot-${Math.random().toString(36).substr(2, 9)}`;
     height: auto;
     display: block;
   }
-  
+
   .zoom-hint {
     position: absolute;
     top: 12px;
@@ -231,12 +237,12 @@ const screenshotId = `screenshot-${Math.random().toString(36).substr(2, 9)}`;
     pointer-events: none;
     backdrop-filter: blur(4px);
   }
-  
+
   .screenshot.clickable:hover .zoom-hint {
     opacity: 1;
     transform: translateY(0);
   }
-  
+
   .zoom-icon {
     font-size: 0.875rem;
   }
@@ -255,7 +261,7 @@ const screenshotId = `screenshot-${Math.random().toString(36).substr(2, 9)}`;
     .screenshot {
       border-radius: 6px;
     }
-    
+
     .zoom-hint {
       font-size: 0.7rem;
       padding: 4px 8px;
