@@ -8,9 +8,15 @@ interface Props {
 const { text = 'Default tooltip text', position = 'bottom', maxWidth = '200px' } = Astro.props;
 ---
 
-<div class="tooltip-container" tabindex="0" data-position={position}>
+<div
+  class="tooltip-container"
+  tabindex="0"
+  role="button"
+  aria-label={`Show tooltip: ${text}`}
+  data-position={position}
+>
   <slot />
-  <div class="tooltip-text" style={`max-width: ${maxWidth}`}>
+  <div class="tooltip-text" role="tooltip" style={`max-width: ${maxWidth}`} aria-hidden="true">
     <span class="tooltip-text-content">{text}</span>
   </div>
 </div>
@@ -153,3 +159,45 @@ const { text = 'Default tooltip text', position = 'bottom', maxWidth = '200px' }
     }
   }
 </style>
+
+<script>
+  // Handle proper ARIA states for tooltip
+  document.addEventListener('DOMContentLoaded', () => {
+    const tooltips = document.querySelectorAll('.tooltip-container');
+
+    tooltips.forEach((container) => {
+      const tooltipText = container.querySelector('.tooltip-text');
+
+      if (!tooltipText) return;
+
+      // Show tooltip on hover/focus
+      const showTooltip = () => {
+        tooltipText.setAttribute('aria-hidden', 'false');
+      };
+
+      // Hide tooltip
+      const hideTooltip = () => {
+        tooltipText.setAttribute('aria-hidden', 'true');
+      };
+
+      // Add event listeners
+      container.addEventListener('mouseenter', showTooltip);
+      container.addEventListener('focus', showTooltip);
+      container.addEventListener('mouseleave', hideTooltip);
+      container.addEventListener('blur', hideTooltip);
+
+      // Handle Enter/Space key activation
+      container.addEventListener('keydown', (e) => {
+        const keyEvent = e as KeyboardEvent;
+        if (keyEvent.key === 'Enter' || keyEvent.key === ' ') {
+          e.preventDefault();
+          if (tooltipText.getAttribute('aria-hidden') === 'true') {
+            showTooltip();
+          } else {
+            hideTooltip();
+          }
+        }
+      });
+    });
+  });
+</script>

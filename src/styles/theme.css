@@ -12,9 +12,9 @@
     --bg-card-hover: rgba(15, 23, 42, 0.6);
     --text-primary: #ffffff;
     --text-secondary: #e5e7eb;
-    --text-tertiary: #bbbbbb;
-    --text-muted: #94a3b8;
-    --text-dim: #64748b;
+    --text-tertiary: #d1d5db;
+    --text-muted: #a1a1aa;
+    --text-dim: #71717a;
     --border-primary: rgba(148, 163, 184, 0.25);
     --border-secondary: rgba(148, 163, 184, 0.15);
     --accent-primary: #0066cc;
@@ -60,9 +60,9 @@
     --bg-card-hover: rgba(248, 244, 241, 0.95);
     --text-primary: #2d3748;
     --text-secondary: #4a5568;
-    --text-tertiary: #718096;
-    --text-muted: #4a5568;
-    --text-dim: #718096;
+    --text-tertiary: #4a5568;
+    --text-muted: #374151;
+    --text-dim: #6b7280;
     --border-primary: rgba(141, 148, 157, 0.498);
     --border-secondary: rgba(138, 143, 151, 0.25);
     --accent-primary: #0066cc;
@@ -73,15 +73,15 @@
     --shadow-secondary: rgba(45, 55, 72, 0.06);
 
     /* Button variables for WCAG AA compliance in softer light mode */
-    --button-bg: #e2e8f0;
-    --button-text: #2d3748;
+    --button-bg: #d1d5db;
+    --button-text: #1f2937;
     --button-primary-bg: #0066cc;
     --button-primary-hover-bg: #0052a3;
     --button-primary-text: #ffffff;
     --button-primary-border: rgba(0, 102, 204, 0.2);
     --button-secondary-bg: rgba(255, 255, 255, 0.9);
     --button-secondary-hover-bg: rgba(248, 244, 241, 0.9);
-    --button-secondary-text: #4a5568;
+    --button-secondary-text: #374151;
     --button-secondary-border: rgba(160, 174, 192, 0.3);
     --button-secondary-hover-border: rgba(160, 174, 192, 0.5);
 }
