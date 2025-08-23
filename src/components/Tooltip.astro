@@ -1,10 +1,16 @@
 ---
-const { text = 'Default tooltip text' } = Astro.props;
+interface Props {
+  text?: string;
+  position?: 'top' | 'bottom' | 'left' | 'right';
+  maxWidth?: string;
+}
+
+const { text = 'Default tooltip text', position = 'bottom', maxWidth = '200px' } = Astro.props;
 ---
 
-<div class="tooltip-container" tabindex="0">
+<div class="tooltip-container" tabindex="0" data-position={position}>
   <slot />
-  <div class="tooltip-text">
+  <div class="tooltip-text" style={`max-width: ${maxWidth}`}>
     <span class="tooltip-text-content">{text}</span>
   </div>
 </div>
@@ -13,52 +19,137 @@ const { text = 'Default tooltip text' } = Astro.props;
   .tooltip-container {
     position: relative;
     display: inline-block;
-    cursor: pointer;
+    cursor: help;
   }
 
   .tooltip-text {
     visibility: hidden;
-    width: 150px;
-    min-width: 80px;
-    max-width: 150px;
-    background-color: #deebfd;
-    color: #000;
+    min-width: 120px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-primary);
+    color: var(--text-primary);
     text-align: center;
-    padding: 5px;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--shadow-primary);
+    backdrop-filter: blur(8px);
     position: absolute;
-    z-index: 1;
-    top: calc(100% + 20px); /* Adjust for arrow */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1rem;
+    z-index: 1000;
+    font-size: 0.875rem;
+    line-height: 1.4;
     white-space: normal;
     box-sizing: border-box;
     opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    justify-content: center;
-    align-items: center;
+    transform: translateY(8px);
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+  }
+
+  /* Position variants */
+  .tooltip-container[data-position='bottom'] .tooltip-text {
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+  }
+
+  .tooltip-container[data-position='top'] .tooltip-text {
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+  }
+
+  .tooltip-container[data-position='left'] .tooltip-text {
+    top: 50%;
+    right: calc(100% + 8px);
+    transform: translateY(-50%) translateX(-8px);
+  }
+
+  .tooltip-container[data-position='right'] .tooltip-text {
+    top: 50%;
+    left: calc(100% + 8px);
+    transform: translateY(-50%) translateX(8px);
   }
 
   .tooltip-text-content {
     word-wrap: break-word;
+    display: block;
   }
 
-  .tooltip-container:hover .tooltip-text {
+  /* Hover and focus states */
+  .tooltip-container:hover .tooltip-text,
+  .tooltip-container:focus .tooltip-text {
     visibility: visible;
     opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 
-  /* Arrow */
+  .tooltip-container[data-position='top']:hover .tooltip-text,
+  .tooltip-container[data-position='top']:focus .tooltip-text {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .tooltip-container[data-position='left']:hover .tooltip-text,
+  .tooltip-container[data-position='left']:focus .tooltip-text {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .tooltip-container[data-position='right']:hover .tooltip-text,
+  .tooltip-container[data-position='right']:focus .tooltip-text {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  /* Arrows */
   .tooltip-text::after {
     content: '';
     position: absolute;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -8px;
-    border-width: 8px;
     border-style: solid;
-    border-color: transparent transparent #deebfd transparent;
+    border-width: 6px;
+  }
+
+  /* Bottom arrow (tooltip above) */
+  .tooltip-container[data-position='bottom'] .tooltip-text::after {
+    top: -12px;
+    left: 50%;
+    margin-left: -6px;
+    border-color: transparent transparent var(--bg-tertiary) transparent;
+  }
+
+  /* Top arrow (tooltip below) */
+  .tooltip-container[data-position='top'] .tooltip-text::after {
+    bottom: -12px;
+    left: 50%;
+    margin-left: -6px;
+    border-color: var(--bg-tertiary) transparent transparent transparent;
+  }
+
+  /* Left arrow (tooltip to the right) */
+  .tooltip-container[data-position='left'] .tooltip-text::after {
+    top: 50%;
+    right: -12px;
+    margin-top: -6px;
+    border-color: transparent transparent transparent var(--bg-tertiary);
+  }
+
+  /* Right arrow (tooltip to the left) */
+  .tooltip-container[data-position='right'] .tooltip-text::after {
+    top: 50%;
+    left: -12px;
+    margin-top: -6px;
+    border-color: transparent var(--bg-tertiary) transparent transparent;
+  }
+
+  /* Accessibility improvements */
+  .tooltip-container:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
+    .tooltip-text {
+      max-width: 80vw;
+      font-size: 0.8rem;
+    }
   }
 </style>

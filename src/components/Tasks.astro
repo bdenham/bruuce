@@ -1,22 +1,28 @@
 ---
-
+// Tasks container component for organizing multiple task items
 ---
 
-<div class="ac-tasks">
+<div class="tasks-container">
   <slot />
 </div>
 
-<style is:global>
-  .ac-tasks.ac-tasks {
+<style>
+  .tasks-container {
     counter-reset: task;
-    padding-left: 1.5rem;
-    /* border-left: 1px solid var(--sl-color-gray-5); */
-    /* margin-bottom: 2rem; */
+    margin: 2rem 0;
+  }
+
+  .tasks-container :global(.task-item) {
+    counter-increment: task;
+  }
+
+  .tasks-container :global(.task-item:not(:last-child)) {
+    margin-bottom: 1rem;
   }
 
   @media print {
-    .ac-tasks.ac-tasks {
-      padding-left: 0;
+    .tasks-container {
+      margin: 1rem 0;
     }
   }
 </style>

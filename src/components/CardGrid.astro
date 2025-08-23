@@ -1,33 +1,127 @@
 ---
 interface Props {
   stagger?: boolean;
+  columns?: number;
+  gap?: string;
+  minWidth?: string;
 }
 
-const { stagger = false } = Astro.props;
+const { stagger = false, columns = 2, gap = '1.5rem', minWidth = '280px' } = Astro.props;
 ---
 
-<div class:list={['card-grid', { stagger }]}><slot /></div>
+<div
+  class:list={['card-grid', { stagger }]}
+  style={`--columns: ${columns}; --gap: ${gap}; --min-width: ${minWidth};`}
+>
+  <slot />
+</div>
 
-<style is:global>
+<style>
   .card-grid {
     display: grid;
-    gap: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    gap: var(--gap);
+    margin: 2rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(var(--min-width), 1fr));
   }
 
-  @media (min-width: 50rem) {
-    .card-grid.card-grid {
-      grid-template-columns: 1fr 1fr;
-      margin-top: 1.5rem;
-    }
-    .stagger {
-      --stagger-height: 5rem;
-      padding-bottom: var(--stagger-height);
+  /* Explicit column count for larger screens */
+  @media (min-width: 768px) {
+    .card-grid[style*='--columns: 1'] {
+      grid-template-columns: 1fr;
     }
 
-    .stagger > :global(*):nth-child(2n) {
-      transform: translateY(var(--stagger-height));
+    .card-grid[style*='--columns: 2'] {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card-grid[style*='--columns: 3'] {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card-grid[style*='--columns: 4'] {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Stagger effect for visual interest */
+  .card-grid.stagger {
+    --stagger-offset: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .card-grid.stagger > :global(*):nth-child(even) {
+      transform: translateY(var(--stagger-offset));
+    }
+  }
+
+  /* Enhanced grid items styling */
+  .card-grid > :global(*) {
+    transition: transform 0.2s ease;
+  }
+
+  .card-grid > :global(*):hover {
+    transform: translateY(-2px);
+  }
+
+  .card-grid.stagger > :global(*:nth-child(even)):hover {
+    transform: translateY(calc(var(--stagger-offset) - 2px));
+  }
+
+  /* Default card styling for children */
+  .card-grid > :global(.card),
+  .card-grid > :global(.project-card),
+  .card-grid > :global(.blog-post) {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+    height: fit-content;
+  }
+
+  .card-grid > :global(.card):hover,
+  .card-grid > :global(.project-card):hover,
+  .card-grid > :global(.blog-post):hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-primary);
+    box-shadow: 0 4px 12px var(--shadow-secondary);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .card-grid {
+      gap: 1rem;
+      margin: 1rem 0;
+      grid-template-columns: 1fr;
+    }
+
+    .card-grid.stagger {
+      --stagger-offset: 0;
+    }
+
+    .card-grid.stagger > :global(*):nth-child(even) {
+      transform: none;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    .card-grid {
+      display: block;
+    }
+
+    .card-grid > :global(*) {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      transform: none !important;
+    }
+
+    .card-grid > :global(.card),
+    .card-grid > :global(.project-card),
+    .card-grid > :global(.blog-post) {
+      border: 1px solid #ccc;
+      background: white;
+      box-shadow: none;
     }
   }
 </style>

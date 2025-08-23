@@ -1,27 +1,151 @@
 ---
 interface Props {
-  columns?: string;
+  columns?: number;
+  gap?: string;
+  align?: 'start' | 'center' | 'end' | 'stretch';
+  justify?: 'start' | 'center' | 'end' | 'space-between' | 'space-around';
+  wrap?: boolean;
+  direction?: 'row' | 'column';
+  responsive?: boolean;
 }
-const { columns = '2' } = Astro.props;
-const gaps = parseInt(columns) - 1;
-const gap = '1rem';
-// const slots = await Astro.slots.render('default');
+
+const {
+  columns = 2,
+  gap = '1.5rem',
+  align = 'stretch',
+  justify = 'start',
+  wrap = true,
+  direction = 'row',
+  responsive = true,
+} = Astro.props;
+
+// Calculate flex-basis for equal columns
+const flexBasis = columns > 0 ? `calc((100% - ${gap} * ${columns - 1}) / ${columns})` : 'auto';
 ---
 
-<!-- <div class='flex-items' set:html={slots} /> -->
-<div class="flex-items not-content">
+<div
+  class:list={['flex-container', { responsive }]}
+  style={`
+    --columns: ${columns};
+    --gap: ${gap};
+    --flex-basis: ${flexBasis};
+    --align-items: ${align === 'start' ? 'flex-start' : align === 'end' ? 'flex-end' : align};
+    --justify-content: ${justify === 'start' ? 'flex-start' : justify === 'end' ? 'flex-end' : justify};
+    --flex-direction: ${direction};
+    --flex-wrap: ${wrap ? 'wrap' : 'nowrap'};
+  `}
+>
   <slot />
 </div>
 
-<style define:vars={{ columns, gaps, gap }}>
-  .flex-items {
+<style>
+  .flex-container {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: var(--flex-direction);
+    flex-wrap: var(--flex-wrap);
     gap: var(--gap);
+    align-items: var(--align-items);
+    justify-content: var(--justify-content);
+    margin: 1.5rem 0;
   }
 
-  div.flex-items > :global(*) {
-    flex-basis: calc((100% / var(--columns)) - (var(--gaps) * var(--gap)) / var(--columns));
+  /* Equal column widths */
+  .flex-container > :global(*) {
+    flex-basis: var(--flex-basis);
+    min-width: 0; /* Prevent flex items from overflowing */
+  }
+
+  /* Auto-sizing for single column or when columns = 0 */
+  .flex-container[style*='--columns: 0'] > :global(*),
+  .flex-container[style*='--columns: 1'] > :global(*) {
+    flex-basis: auto;
+  }
+
+  /* Enhanced styling for flex items */
+  .flex-container > :global(.flex-item) {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  .flex-container > :global(.flex-item):hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px var(--shadow-secondary);
+  }
+
+  /* Responsive behavior */
+  @media (max-width: 768px) {
+    .flex-container.responsive {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .flex-container.responsive > :global(*) {
+      flex-basis: auto;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .flex-container.responsive {
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+  }
+
+  /* Column direction specific styles */
+  .flex-container[style*='--flex-direction: column'] {
+    align-items: stretch;
+  }
+
+  .flex-container[style*='--flex-direction: column'] > :global(*) {
+    flex-basis: auto;
+  }
+
+  /* No wrap behavior */
+  .flex-container[style*='--flex-wrap: nowrap'] {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-primary) transparent;
+  }
+
+  .flex-container[style*='--flex-wrap: nowrap']::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .flex-container[style*='--flex-wrap: nowrap']::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .flex-container[style*='--flex-wrap: nowrap']::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: 2px;
+  }
+
+  .flex-container[style*='--flex-wrap: nowrap'] > :global(*) {
+    flex-shrink: 0;
+    min-width: 200px;
+  }
+
+  /* Print styles */
+  @media print {
+    .flex-container {
+      display: block;
+    }
+
+    .flex-container > :global(*) {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+    }
+
+    .flex-container > :global(.flex-item) {
+      border: 1px solid #ccc;
+      background: white;
+      box-shadow: none;
+      transform: none !important;
+    }
   }
 </style>

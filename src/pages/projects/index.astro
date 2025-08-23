@@ -1,133 +1,578 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-
-title: 'Projects - Bruce Denham';
-description: 'Projects and work by Bruce Denham - software developer and technology enthusiast.';
+import PageHeader from '../../components/ui/PageHeader.astro';
 ---
 
 <BaseLayout
   title="Projects - Bruce Denham"
-  description="Projects and work by Bruce Denham - software developer and technology enthusiast."
+  description="Explore Bruce Denham's professional projects: developer experience initiatives, technical writing, and tools that help developers succeed."
   showBackLink={true}
   backLinkText="← Back to Home"
   backLinkHref="/"
-  footerText="Interested in collaborating? "
-  footerLinkText="Learn more about me"
-  footerLinkHref="/about/"
+  footerText="Want to collaborate on developer experience? "
+  footerLinkText="Let's connect"
+  footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
-  <h1 id="projects-title">My <span>Projects</span></h1>
-  <p class="subtitle">
-    A collection of things I've built, experiments I've conducted, and contributions I've made
+  <PageHeader accent="My" primary="Projects" id="projects-title" />
+  <p class="subtitle large">
+    A showcase of developer experience initiatives, documentation systems, and tools that help
+    developers succeed
   </p>
 
-  <div class="project-card">
-    <h2>🚀 Personal Blog & Portfolio</h2>
+  <div class="projects-intro">
     <p>
-      This very site you're browsing! Built with Astro for optimal performance and developer
-      experience. Features a custom dark/light theme system, dynamic content collections, and a
-      focus on clean, accessible design.
+      Over my 30+ year career, I've led initiatives that transform how developers learn, integrate,
+      and build with complex systems. From comprehensive documentation sites to interactive learning
+      tools, here are some highlights from my work at Adobe and beyond.
     </p>
-    <div class="tech-stack">
-      <span class="tech-tag">Astro</span>
-      <span class="tech-tag">JavaScript</span>
-      <span class="tech-tag">CSS</span>
-      <span class="tech-tag">MDX</span>
+  </div>
+
+  <div class="projects-section">
+    <h2>Current Adobe Projects</h2>
+
+    <div class="project-card featured">
+      <div class="project-header">
+        <div class="project-title-section">
+          <h3>Adobe Commerce Documentation Ecosystem</h3>
+          <div class="project-status">🚀 Active</div>
+        </div>
+        <div class="project-tags">
+          <span class="tag primary">Technical Writing</span>
+          <span class="tag">Information Architecture</span>
+          <span class="tag">Developer Experience</span>
+        </div>
+      </div>
+
+      <div class="project-description">
+        <p>
+          Leading the comprehensive documentation strategy for Adobe Storefront Commerce, serving
+          thousands of developers worldwide. This involves managing content architecture,
+          maintaining GitHub repositories, and ensuring documentation stays in sync with rapidly
+          evolving features.
+        </p>
+
+        <div class="project-details">
+          <div class="project-impact">
+            <h4>Impact Metrics</h4>
+            <ul>
+              <li>Reduced developer onboarding time significantly</li>
+              <li>Decreased support ticket volume through clearer guides</li>
+              <li>Improved developer satisfaction scores</li>
+            </ul>
+          </div>
+
+          <div class="project-tech">
+            <h4>Technologies</h4>
+            <ul>
+              <li>Markdown/MDX documentation systems</li>
+              <li>GitHub Actions for automation</li>
+              <li>Custom Algolia search integration</li>
+              <li>Multi-team collaboration workflows</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="project-links">
-      <a href="/blog/" class="project-link">View Blog →</a>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title-section">
+          <h3>Commerce API Interactive Playground</h3>
+          <div class="project-status">🔧 In Development</div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">React</span>
+          <span class="tag">API Integration</span>
+          <span class="tag">Interactive Learning</span>
+        </div>
+      </div>
+
+      <div class="project-description">
+        <p>
+          Built React applications that allow developers to test Adobe Commerce APIs in real-time
+          directly within the documentation. This hands-on approach dramatically improves API
+          adoption by letting developers see immediate results from their integration attempts.
+        </p>
+
+        <div class="project-features">
+          <h4>Key Features</h4>
+          <ul>
+            <li>Live API testing environment</li>
+            <li>Real-time response visualization</li>
+            <li>Code generation for multiple languages</li>
+            <li>Integrated with main documentation flow</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title-section">
+          <h3>SDK Documentation with Storybook 8</h3>
+          <div class="project-status">✅ Deployed</div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">Storybook</span>
+          <span class="tag">Component Documentation</span>
+          <span class="tag">SDK</span>
+        </div>
+      </div>
+
+      <div class="project-description">
+        <p>
+          Developed advanced Storybook 8 customizations to create interactive SDK documentation that
+          lets developers explore components, see live examples, and understand integration patterns
+          through visual, hands-on exploration.
+        </p>
+
+        <div class="project-achievements">
+          <h4>Achievements</h4>
+          <ul>
+            <li>Streamlined SDK adoption process</li>
+            <li>Reduced developer confusion through visual examples</li>
+            <li>Created reusable documentation patterns for other teams</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title-section">
+          <h3>Developer Productivity CLI Tools</h3>
+          <div class="project-status">🚀 Active</div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">CLI Development</span>
+          <span class="tag">Automation</span>
+        </div>
+      </div>
+
+      <div class="project-description">
+        <p>
+          Created custom CLI tools (jitnotes, pbmodules) that automate repetitive development tasks
+          and streamline workflows. These tools help teams focus on creative problem-solving instead
+          of manual processes.
+        </p>
+
+        <div class="cli-tools">
+          <div class="tool">
+            <strong>jitnotes:</strong> Rapid note-taking and documentation generation tool
+          </div>
+          <div class="tool">
+            <strong>pbmodules:</strong> PageBuilder module scaffolding and management system
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="coming-soon">
-    <p>🔨 More projects coming soon! I'm constantly working on new ideas and experiments.</p>
+  <div class="projects-section">
+    <h2>Open Source & Community</h2>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title-section">
+          <h3>PageBuilder Development Examples</h3>
+          <div class="project-status">🌟 Public Repository</div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">Open Source</span>
+          <span class="tag">Example Code</span>
+          <span class="tag">Community</span>
+        </div>
+      </div>
+
+      <div class="project-description">
+        <p>
+          Maintain a comprehensive public GitHub repository featuring full-featured PageBuilder
+          development examples. This resource provides the developer community with real-world
+          implementation patterns and best practices.
+        </p>
+
+        <div class="community-impact">
+          <h4>Community Impact</h4>
+          <ul>
+            <li>Accelerated community adoption of PageBuilder</li>
+            <li>Reduced development learning curve</li>
+            <li>Established best practices across the ecosystem</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title-section">
+          <h3>Meet Magento Indonesia Presentation</h3>
+          <div class="project-status">📢 2019</div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">Speaking</span>
+          <span class="tag">Education</span>
+          <span class="tag">Best Practices</span>
+        </div>
+      </div>
+
+      <div class="project-description">
+        <p>
+          Presented PageBuilder best practices to the international Magento community in Indonesia,
+          sharing insights on effective developer experience patterns and implementation strategies
+          that benefit the global open-source community.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="projects-section">
+    <h2>Legacy Innovations</h2>
+
+    <div class="timeline-projects">
+      <div class="timeline-project">
+        <div class="timeline-period">2006–2018</div>
+        <div class="timeline-company">TOPAZ Technologies</div>
+        <div class="timeline-achievements">
+          <h4>Key Projects</h4>
+          <ul>
+            <li>
+              <strong>AngularJS Application Modernization:</strong> Led comprehensive UI overhaul resulting
+              in major usability improvements
+            </li>
+            <li>
+              <strong>Developer Training Systems:</strong> Created Angular Material training programs
+              with hands-on code reviews
+            </li>
+            <li>
+              <strong>Prototype Development:</strong> Built cutting-edge prototypes using Flex/ActionScript
+              and Silverlight/C#
+            </li>
+            <li>
+              <strong>Product Strategy:</strong> Managed end-to-end marketing and branding strategies
+              for product growth
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-project">
+        <div class="timeline-period">2000–2005</div>
+        <div class="timeline-company">Schlumberger</div>
+        <div class="timeline-achievements">
+          <h4>Foundational Projects</h4>
+          <ul>
+            <li>
+              <strong>Global API Documentation:</strong> Created systems enabling 100+ developers across
+              multiple countries to adopt complex oil & gas systems
+            </li>
+            <li>
+              <strong>C# UI Prototyping:</strong> Built prototypes for specialized oil data analysis
+              tools using C#/WinForms
+            </li>
+            <li>
+              <strong>Dev Studio Integration:</strong> Successfully integrated documentation into Microsoft
+              Development Studio for improved workflow
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h2>Let's Collaborate</h2>
     <p>
-      Check back regularly or <a href="/blog/" style="color: var(--accent-primary);"
-        >follow my blog</a
-      > for updates on what I'm building.
+      Interested in working together on developer experience, technical writing, or documentation
+      strategy? I'm always excited to tackle new challenges and help teams create better developer
+      experiences.
     </p>
   </div>
 </BaseLayout>
 
 <style>
   /* Projects page specific styles */
-  h1 {
-    margin: 0 0 24px 0;
+
+  .projects-intro {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 40px;
+    border-left: 4px solid var(--accent-primary);
   }
 
-  .subtitle {
-    margin: 0 0 32px 0;
-    font-size: 18px;
+  .projects-intro p {
+    margin: 0;
     color: var(--text-tertiary);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .projects-section {
+    margin-bottom: 48px;
+  }
+
+  .projects-section h2 {
+    color: var(--text-primary);
+    font-size: 28px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--border-primary);
+    padding-bottom: 8px;
   }
 
   .project-card {
     background: var(--bg-card);
     border: 1px solid var(--border-secondary);
-    border-radius: 12px;
-    padding: 24px;
-    margin: 20px 0;
-    transition: all 120ms ease;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+    transition: all 0.3s ease;
   }
 
   .project-card:hover {
-    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--shadow-secondary);
     border-color: var(--border-primary);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px var(--shadow-secondary);
   }
 
-  .project-card h2 {
-    margin: 0 0 12px 0;
-    font-size: 24px;
+  .project-card.featured {
+    border: 2px solid var(--accent-primary);
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.03));
+  }
+
+  .project-header {
+    margin-bottom: 24px;
+  }
+
+  .project-title-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .project-title-section h3 {
     color: var(--text-primary);
+    margin: 0;
+    font-size: 24px;
   }
 
-  .project-card p {
-    margin: 0 0 16px 0;
-    color: var(--text-tertiary);
-    line-height: 1.6;
+  .project-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(167, 139, 250, 0.1);
+    color: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
   }
 
-  .tech-stack {
-    margin: 16px 0;
+  .project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
   }
 
-  .tech-tag {
-    background: var(--bg-primary);
-    color: var(--text-secondary);
+  .tag {
     padding: 4px 12px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-secondary);
   }
 
-  .project-links {
-    display: flex;
-    gap: 16px;
-    margin-top: 16px;
+  .tag.primary {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    border-color: var(--accent-primary);
   }
 
-  .project-link {
+  .project-description p {
+    color: var(--text-tertiary);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .project-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+  }
+
+  .project-impact,
+  .project-tech,
+  .project-features,
+  .project-achievements,
+  .community-impact {
+    background: rgba(167, 139, 250, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 3px solid var(--accent-primary);
+  }
+
+  .project-impact h4,
+  .project-tech h4,
+  .project-features h4,
+  .project-achievements h4,
+  .community-impact h4 {
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+    font-size: 16px;
+  }
+
+  .project-impact ul,
+  .project-tech ul,
+  .project-features ul,
+  .project-achievements ul,
+  .community-impact ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .project-impact li,
+  .project-tech li,
+  .project-features li,
+  .project-achievements li,
+  .community-impact li {
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+    padding-left: 16px;
+    position: relative;
+    font-weight: 300;
+  }
+
+  .project-impact li::before,
+  .project-tech li::before,
+  .project-features li::before,
+  .project-achievements li::before,
+  .community-impact li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
     color: var(--accent-primary);
-    text-decoration: none;
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
   }
 
-  .project-link:hover {
-    color: var(--accent-hover);
-    text-decoration: underline;
+  .cli-tools {
+    background: rgba(167, 139, 250, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 3px solid var(--accent-primary);
   }
 
-  .coming-soon {
+  .tool {
+    color: var(--text-tertiary);
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+
+  .tool:last-child {
+    margin-bottom: 0;
+  }
+
+  .tool strong {
+    color: var(--text-primary);
+  }
+
+  .timeline-projects {
+    display: grid;
+    gap: 32px;
+  }
+
+  .timeline-project {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .timeline-period {
+    color: var(--accent-primary);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .timeline-company {
+    color: var(--text-primary);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .timeline-achievements h4 {
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+    font-size: 16px;
+  }
+
+  .timeline-achievements ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .timeline-achievements li {
+    color: var(--text-tertiary);
+    margin-bottom: 12px;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .timeline-achievements li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+    font-weight: bold;
+  }
+
+  .timeline-achievements li strong {
+    color: var(--text-primary);
+  }
+
+  .cta-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 16px;
+    padding: 32px;
     text-align: center;
-    padding: 40px 20px;
-    color: var(--text-muted);
-    font-style: italic;
+    margin-top: 48px;
+  }
+
+  .cta-section h2 {
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+    font-size: 24px;
+  }
+
+  .cta-section p {
+    color: var(--text-tertiary);
+    margin: 0;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  @media (max-width: 768px) {
+    .project-details {
+      grid-template-columns: 1fr;
+    }
+
+    .project-title-section {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .project-tags {
+      margin-top: 8px;
+    }
   }
 </style>

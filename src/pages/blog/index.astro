@@ -1,9 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-
-title: 'Blog - Bruce Denham';
-description: 'All blog posts by Bruce Denham on software development and technology.';
+import BlogPostCard from '../../components/ui/BlogPostCard.astro';
+import PageHeader from '../../components/ui/PageHeader.astro';
 
 // Get all blog posts and sort by date (newest first)
 const blogPosts = await getCollection('blog');
@@ -11,52 +10,23 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
 ---
 
 <BaseLayout
-  title="Blog - Bruce Denham"
-  description="All blog posts by Bruce Denham on software development and technology."
+  title="Technical Writing Blog - Bruce Denham"
+  description="Insights on developer experience, API documentation, technical writing, and making complex concepts clear by Bruce Denham."
   showBackLink={true}
   backLinkText="← Back to Home"
   backLinkHref="/"
-  footerText="More posts coming soon! Check back regularly for new content."
+  footerText="More insights coming soon! "
+  footerLinkText="Connect with me on LinkedIn"
+  footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
-  <h1 id="blog-title"><span>Blog</span> Posts</h1>
-  <p class="subtitle">Thoughts on software development, technology, and continuous learning</p>
+  <PageHeader accent="Technical Writing" primary="Blog" id="blog-title" />
+  <p class="subtitle">
+    Insights on developer experience, API documentation, and making complex concepts clear
+  </p>
 
-  {
-    sortedPosts.map((post) => (
-      <a href={`/blog/${post.slug}/`} class="blog-post-link">
-        <div class="blog-post">
-          <h2>🚀 {post.data.title}</h2>
-          <p class="date">
-            Published:{' '}
-            {post.data.date.toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </p>
-          <p>{post.data.excerpt}</p>
-          <span class="read-more">Read full post →</span>
-        </div>
-      </a>
-    ))
-  }
+  {sortedPosts.map((post) => <BlogPostCard post={post} />)}
 </BaseLayout>
 
 <style>
-  /* Blog listing specific styles */
-  .subtitle {
-    margin: 0 0 24px 0;
-    font-size: 18px;
-    color: var(--text-tertiary);
-  }
-
-  .blog-post {
-    padding: 24px;
-    margin: 20px 0;
-  }
-
-  .blog-post .date {
-    font-size: 14px;
-    margin-bottom: 16px;
-  }
+  /* Blog listing specific styles - none needed, using common styles */
 </style>

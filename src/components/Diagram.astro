@@ -1,267 +1,549 @@
 ---
-const { caption, width, type = "image", code } = Astro.props;
-const id = `diagram-${Math.random().toString(36).substr(2, 9)}`;
+interface Props {
+  caption?: string;
+  width?: string;
+  type?: 'image' | 'mermaid';
+  code?: string;
+  alt?: string;
+}
+
+const { caption, width = '100%', type = 'image', code, alt = 'Diagram' } = Astro.props;
+const diagramId = `diagram-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
-<div class="diagram" data-diagram-type={type}>
-  <div class="diagram-content">
-    {type === "mermaid" ? (
-      <div id={id} class="mermaid-diagram" data-mermaid-code={code}>
-        <div class="mermaid-loading">Loading diagram...</div>
-      </div>
-    ) : (
-      <slot />
+<figure class="diagram-figure" style={`width: ${width};`}>
+  <div class="diagram-container" data-diagram-type={type}>
+    <div class="diagram-content">
+      {type === 'mermaid' ? (
+        <div id={diagramId} class="mermaid-diagram" data-mermaid-code={code}>
+          <div class="diagram-loading">
+            <div class="loading-spinner"></div>
+            <p>Rendering diagram...</p>
+          </div>
+        </div>
+      ) : (
+        <div class="image-diagram">
+          <slot />
+        </div>
+      )}
+    </div>
+    {caption && (
+      <figcaption class="diagram-caption">
+        {caption}
+      </figcaption>
     )}
   </div>
-  <div class="caption">{caption}</div>
-</div>
+</figure>
 
-{type === "mermaid" && (
-  <script define:vars={{ id, code }}>
-    // Mermaid rendering script
-    async function renderMermaidDiagram() {
-      const diagramElement = document.getElementById(id);
-      if (!diagramElement) {
-        console.error('Diagram element not found:', id);
-        return;
-      }
-      
-      if (!code) {
-        console.error('No mermaid code provided');
-        return;
-      }
+{type === 'mermaid' && (
+  <script define:vars={{ diagramId, code, alt }}>
+    // Load Mermaid library dynamically
+    async function loadMermaid() {
+      if (window.mermaid) return window.mermaid;
       
       try {
-        console.log('Loading mermaid for diagram:', id);
+        const mermaidModule = await import('https://unpkg.com/mermaid@10/dist/mermaid.esm.min.mjs');
+        const mermaid = mermaidModule.default;
         
-        // Import mermaid dynamically - use latest version for newest syntax support
-        const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs');
+        // Configure mermaid with theme-aware colors
+        const isDark = !document.documentElement.classList.contains('light');
         
-        console.log('Mermaid loaded, initializing...');
-        
-        // Initialize mermaid with explicit font to prevent text clipping
         mermaid.initialize({
           startOnLoad: false,
-          theme: 'default',
-          securityLevel: 'loose',
-          fontFamily: 'Arial, sans-serif'
+          theme: isDark ? 'dark' : 'base',
+          themeVariables: {
+            primaryColor: isDark ? '#a78bfa' : '#7c3aed',
+            primaryTextColor: isDark ? '#ffffff' : '#1e293b',
+            primaryBorderColor: isDark ? '#6366f1' : '#8b5cf6',
+            lineColor: isDark ? '#64748b' : '#94a3b8',
+            secondaryColor: isDark ? '#1e293b' : '#f1f5f9',
+            tertiaryColor: isDark ? '#334155' : '#e2e8f0',
+            background: isDark ? '#0f172a' : '#ffffff',
+            mainBkg: isDark ? '#1e293b' : '#f8fafc',
+            secondBkg: isDark ? '#334155' : '#f1f5f9'
+          },
+          fontFamily: 'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+          fontSize: 14
         });
         
-        console.log('Rendering mermaid diagram...');
+        window.mermaid = mermaid;
+        return mermaid;
+      } catch (error) {
+        console.error('Failed to load Mermaid:', error);
+        throw error;
+      }
+    }
+
+    async function renderMermaidDiagram() {
+      const diagramElement = document.getElementById(diagramId);
+      if (!diagramElement || !code) {
+        console.error('Missing diagram element or code');
+        return;
+      }
+
+      try {
+        const mermaid = await loadMermaid();
         
-        // Generate SVG
-        const { svg } = await mermaid.render(`${id}-svg`, code);
+        // Create a temporary container for rendering
+        const tempId = `temp-${diagramId}`;
+        const { svg } = await mermaid.render(tempId, code);
         
-        console.log('Mermaid diagram rendered successfully');
-        
-        // Parse and enhance the SVG for better zoom behavior
-        const parser = new DOMParser();
-        const svgDoc = parser.parseFromString(svg, 'image/svg+xml');
-        const svgElement = svgDoc.querySelector('svg');
-        
-        if (svgElement) {
-          // Get original dimensions for aspect ratio calculation
-          const originalViewBox = svgElement.getAttribute('viewBox');
-          const originalWidth = svgElement.getAttribute('width');
-          const originalHeight = svgElement.getAttribute('height');
-        
-          // Set large fixed dimensions like the working SVG images
-          // But preserve aspect ratio for sequence diagrams which can be very wide
-          let targetWidth = 1920;
-          let targetHeight = 1080;
-          
-          if (originalViewBox) {
-            const [, , vbWidth, vbHeight] = originalViewBox.split(' ').map(Number);
-            const aspectRatio = vbWidth / vbHeight;
-            
-            // If it's a very wide diagram (like sequence diagrams), adjust dimensions
-            if (aspectRatio > 2) {
-              targetHeight = Math.round(targetWidth / aspectRatio);
-            }
-          }
-        
-          svgElement.setAttribute('width', targetWidth.toString());
-          svgElement.setAttribute('height', targetHeight.toString());
-          
-          // Add white background to the SVG
-          svgElement.style.backgroundColor = 'white';
-          
-          // Also add a white background rectangle as the first child
-          const rect = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'rect');
-          rect.setAttribute('width', '100%');
-          rect.setAttribute('height', '100%');
-          rect.setAttribute('fill', 'white');
-          svgElement.insertBefore(rect, svgElement.firstChild);
-        }
-        
-        // Convert enhanced SVG to blob URL
-        const enhancedSvg = new XMLSerializer().serializeToString(svgDoc);
-        const svgBlob = new Blob([enhancedSvg], { type: 'image/svg+xml' });
+        // Create clickable image element
+        const img = document.createElement('img');
+        const svgBlob = new Blob([svg], { type: 'image/svg+xml' });
         const svgUrl = URL.createObjectURL(svgBlob);
         
-        // Create the same structure as working images
-        const zoomableWrapper = document.createElement('starlight-image-zoom-zoomable');
-        
-        const img = document.createElement('img');
         img.src = svgUrl;
-        img.alt = 'Mermaid diagram';
-        
-        // Set the calculated dimensions on the img element
-        const finalWidth = svgElement?.getAttribute('width') || '1920';
-        const finalHeight = svgElement?.getAttribute('height') || '1080';
-        img.setAttribute('width', finalWidth);
-        img.setAttribute('height', finalHeight);
-        
+        img.alt = alt;
+        img.className = 'diagram-image clickable';
         img.style.cssText = `
           max-width: 100%;
           height: auto;
           display: block;
+          cursor: zoom-in;
+          transition: transform 0.2s ease;
         `;
         
-        // Create zoom button like the working images
-        const zoomButton = document.createElement('button');
-        zoomButton.setAttribute('aria-label', 'Zoom image: Mermaid diagram');
-        zoomButton.className = 'starlight-image-zoom-control';
-        zoomButton.innerHTML = `
-          <svg aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-            <use href="#starlight-image-zoom-icon-zoom"></use>
-          </svg>
-        `;
+        // Add hover effect
+        img.addEventListener('mouseenter', () => {
+          img.style.transform = 'scale(1.02)';
+        });
         
-        // Assemble the structure
-        zoomableWrapper.appendChild(img);
-        zoomableWrapper.appendChild(zoomButton);
+        img.addEventListener('mouseleave', () => {
+          img.style.transform = 'scale(1)';
+        });
         
-        // Replace loading with the zoomable wrapper
+        // Add click to zoom functionality
+        img.addEventListener('click', () => {
+          openDiagramModal(svgUrl, alt);
+        });
+        
+        // Replace loading with rendered diagram
         diagramElement.innerHTML = '';
-        diagramElement.appendChild(zoomableWrapper);
-
-        // Store the enhanced SVG content for modal use and manage blob URL lifecycle
-        img.dataset.svgContent = enhancedSvg;
+        diagramElement.appendChild(img);
         
-        // Don't revoke the blob URL immediately - keep it for the zoom modal
-        img.onload = () => {
-          // The blob URL needs to stay alive for the zoom modal to work
-          // We'll clean it up when the page unloads or navigates
-          window.addEventListener('beforeunload', () => {
-            URL.revokeObjectURL(svgUrl);
-          });
-          
-          // Also clean up on Astro page navigation
-          document.addEventListener('astro:before-preparation', () => {
-            URL.revokeObjectURL(svgUrl);
-          });
-          
-
-          
-          // Trigger the zoom plugin to re-scan for images after our dynamic image is added
-          setTimeout(() => {
-            // Dispatch the same event the plugin listens to for re-scanning
-            document.dispatchEvent(new CustomEvent('astro:after-swap'));
-          }, 100);
-        };
+        // Clean up blob URL when page unloads
+        window.addEventListener('beforeunload', () => {
+          URL.revokeObjectURL(svgUrl);
+        });
         
       } catch (error) {
-        console.error('Error rendering mermaid diagram:', error);
-        diagramElement.innerHTML = `<div style="color: red; padding: 1rem; border: 1px solid red;">Error: ${error.message}</div>`;
+        console.error('Error rendering Mermaid diagram:', error);
+        diagramElement.innerHTML = `
+          <div class="diagram-error">
+            <div class="error-icon">⚠️</div>
+            <p>Failed to render diagram</p>
+            <details>
+              <summary>Error details</summary>
+              <pre>${error.message}</pre>
+            </details>
+          </div>
+        `;
       }
     }
-    
-    // Wait for DOM to be ready
+
+    function openDiagramModal(imageSrc, imageAlt) {
+      const modal = document.createElement('div');
+      modal.className = 'diagram-modal';
+      
+      modal.innerHTML = `
+        <div class="diagram-modal-backdrop">
+          <div class="diagram-modal-content">
+            <button class="diagram-modal-close" aria-label="Close diagram">×</button>
+            <img src="${imageSrc}" alt="${imageAlt}" class="diagram-modal-image" />
+          </div>
+        </div>
+      `;
+      
+      // Apply modal styles
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0);
+        transition: background 0.3s ease;
+      `;
+      
+      const backdrop = modal.querySelector('.diagram-modal-backdrop');
+      backdrop.style.cssText = `
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: zoom-out;
+        padding: 2rem;
+        box-sizing: border-box;
+      `;
+      
+      const content = modal.querySelector('.diagram-modal-content');
+      content.style.cssText = `
+        position: relative;
+        max-width: 95vw;
+        max-height: 95vh;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-primary);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 20px 40px var(--shadow-primary);
+        backdrop-filter: blur(8px);
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+        overflow: hidden;
+      `;
+      
+      const modalImg = modal.querySelector('.diagram-modal-image');
+      modalImg.style.cssText = `
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        display: block;
+        background: var(--bg-primary);
+        border-radius: 4px;
+      `;
+      
+      const closeBtn = modal.querySelector('.diagram-modal-close');
+      closeBtn.style.cssText = `
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 50%;
+        background: var(--bg-card);
+        border: 2px solid var(--border-primary);
+        color: var(--text-primary);
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        transition: all 0.2s ease;
+      `;
+      
+      // Event handlers
+      const closeModal = () => {
+        modal.style.background = 'rgba(0, 0, 0, 0)';
+        content.style.transform = 'scale(0.8)';
+        setTimeout(() => {
+          if (modal.parentNode) {
+            document.body.removeChild(modal);
+          }
+        }, 300);
+      };
+      
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) closeModal();
+      });
+      
+      document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') {
+          document.removeEventListener('keydown', escHandler);
+          closeModal();
+        }
+      });
+      
+      closeBtn.addEventListener('mouseenter', () => {
+        closeBtn.style.background = 'var(--bg-card-hover)';
+        closeBtn.style.transform = 'scale(1.1)';
+      });
+      
+      closeBtn.addEventListener('mouseleave', () => {
+        closeBtn.style.background = 'var(--bg-card)';
+        closeBtn.style.transform = 'scale(1)';
+      });
+      
+      // Show modal
+      document.body.appendChild(modal);
+      requestAnimationFrame(() => {
+        modal.style.background = 'rgba(0, 0, 0, 0.8)';
+        content.style.transform = 'scale(1)';
+      });
+    }
+
+    // Initialize diagram when DOM is ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', renderMermaidDiagram);
     } else {
       renderMermaidDiagram();
     }
-    
-    // Handle Astro page transitions
-    document.addEventListener('astro:page-load', () => {
-      setTimeout(renderMermaidDiagram, 100);
+  </script>
+)}
+
+{type === 'image' && (
+  <script define:vars={{ diagramId, alt }}>
+    document.addEventListener('DOMContentLoaded', () => {
+      const diagramContainer = document.querySelector(`#${diagramId}`)?.closest('.diagram-container');
+      const images = diagramContainer?.querySelectorAll('.image-diagram img');
+      
+      if (!images) return;
+      
+      images.forEach(img => {
+        img.style.cursor = 'zoom-in';
+        img.style.transition = 'transform 0.2s ease';
+        
+        img.addEventListener('mouseenter', () => {
+          img.style.transform = 'scale(1.02)';
+        });
+        
+        img.addEventListener('mouseleave', () => {
+          img.style.transform = 'scale(1)';
+        });
+        
+        img.addEventListener('click', () => {
+          const modal = document.createElement('div');
+          modal.className = 'diagram-modal';
+          
+          modal.innerHTML = `
+            <div class="diagram-modal-backdrop">
+              <div class="diagram-modal-content">
+                <button class="diagram-modal-close" aria-label="Close image">×</button>
+                <img src="${img.src}" alt="${img.alt || alt}" class="diagram-modal-image" />
+              </div>
+            </div>
+          `;
+          
+          // Apply same modal styles as mermaid
+          modal.style.cssText = `
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 10000;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(0, 0, 0, 0); transition: background 0.3s ease;
+          `;
+          
+          const backdrop = modal.querySelector('.diagram-modal-backdrop');
+          backdrop.style.cssText = `
+            width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+            cursor: zoom-out; padding: 2rem; box-sizing: border-box;
+          `;
+          
+          const content = modal.querySelector('.diagram-modal-content');
+          content.style.cssText = `
+            position: relative; max-width: 95vw; max-height: 95vh;
+            background: var(--bg-tertiary); border: 1px solid var(--border-primary);
+            border-radius: 12px; padding: 2rem; box-shadow: 0 20px 40px var(--shadow-primary);
+            backdrop-filter: blur(8px); transform: scale(0.8); transition: transform 0.3s ease;
+            overflow: hidden;
+          `;
+          
+          const modalImg = modal.querySelector('.diagram-modal-image');
+          modalImg.style.cssText = `
+            width: 100%; height: 100%; max-width: 100%; max-height: 100%;
+            object-fit: contain; display: block; background: var(--bg-primary); border-radius: 4px;
+          `;
+          
+          const closeBtn = modal.querySelector('.diagram-modal-close');
+          closeBtn.style.cssText = `
+            position: absolute; top: 16px; right: 16px; width: 40px; height: 40px;
+            border: none; border-radius: 50%; background: var(--bg-card);
+            border: 2px solid var(--border-primary); color: var(--text-primary);
+            font-size: 24px; cursor: pointer; display: flex; align-items: center;
+            justify-content: center; z-index: 1; transition: all 0.2s ease;
+          `;
+          
+          const closeModal = () => {
+            modal.style.background = 'rgba(0, 0, 0, 0)';
+            content.style.transform = 'scale(0.8)';
+            setTimeout(() => document.body.removeChild(modal), 300);
+          };
+          
+          closeBtn.addEventListener('click', closeModal);
+          backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
+          document.addEventListener('keydown', function handler(e) {
+            if (e.key === 'Escape') { document.removeEventListener('keydown', handler); closeModal(); }
+          });
+          
+          closeBtn.addEventListener('mouseenter', () => {
+            closeBtn.style.background = 'var(--bg-card-hover)'; closeBtn.style.transform = 'scale(1.1)';
+          });
+          closeBtn.addEventListener('mouseleave', () => {
+            closeBtn.style.background = 'var(--bg-card)'; closeBtn.style.transform = 'scale(1)';
+          });
+          
+          document.body.appendChild(modal);
+          requestAnimationFrame(() => {
+            modal.style.background = 'rgba(0, 0, 0, 0.8)';
+            content.style.transform = 'scale(1)';
+          });
+        });
+      });
     });
   </script>
 )}
 
-<style define:vars={{ imageWidth: width }} is:global>
-  .diagram {
-    margin: 1rem 0;
-    display: flex;
-    flex-direction: column;
-    border-radius: 0.5rem;
-    border: 1px solid var(--sl-color-gray-4);
-    box-shadow: var(--sl-shadow-sm);
-    background-color: #fff;
+<style>
+  .diagram-figure {
+    margin: 2rem 0;
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .diagram-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px var(--shadow-secondary);
+    transition: all 0.2s ease;
+  }
+  
+  .diagram-container:hover {
+    border-color: var(--border-primary);
+    box-shadow: 0 6px 20px var(--shadow-primary);
   }
 
   .diagram-content {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 200px;
     padding: 1rem;
-    overflow: hidden;
+    background: var(--bg-primary);
   }
 
-  .diagram.diagram > .diagram-content > p {
-    margin: 0;
-    font-size: 0;
-    line-height: 0;
+  .image-diagram {
     width: 100%;
+    text-align: center;
   }
 
-  .diagram.diagram img {
-    width: 100%;
-    height: 100%;
+  .image-diagram img {
     max-width: 100%;
-    object-fit: contain;
+    height: auto;
+    border-radius: 4px;
   }
 
-  .caption.caption {
-    font-size: 1rem;
-    font-style: italic;
-    line-height: normal;
-    padding: 0.75rem;
-    margin: 0;
-    color: var(--sl-color-gray-2);
-    background-color: var(--sl-color-gray-6);
-    border-top: 1px solid var(--sl-color-gray-4);
-  }
-
-  @media screen and (max-width: 600px) {
-    .caption.caption {
-      padding: 0.15rem 0.5rem;
-    }
-  }
-
-  /* Mermaid-specific styles */
   .mermaid-diagram {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial, sans-serif;
+    font-family: ui-sans-serif, system-ui, sans-serif;
   }
   
-  .mermaid-diagram svg {
+  .diagram-image {
     max-width: 100%;
     height: auto;
     display: block;
-  }
-  
-  .mermaid-loading {
-    padding: 2rem;
-    color: var(--sl-color-gray-2);
-    font-style: italic;
+    border-radius: 4px;
   }
 
-  @media print {
-    .diagram.diagram {
-      border: none;
-      box-shadow: none;
-      background-color: #fff;
+  .diagram-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-muted);
+    padding: 2rem;
+  }
+
+  .loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--border-secondary);
+    border-top: 3px solid var(--accent-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  .diagram-loading p {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .diagram-error {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 2rem;
+  }
+
+  .diagram-error .error-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .diagram-error p {
+    margin: 0 0 1rem 0;
+    color: var(--text-secondary);
+  }
+
+  .diagram-error details {
+    margin-top: 1rem;
+    text-align: left;
+  }
+
+  .diagram-error summary {
+    color: var(--accent-primary);
+    cursor: pointer;
+    font-size: 0.875rem;
+  }
+
+  .diagram-error pre {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-secondary);
+    border-radius: 4px;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    overflow-x: auto;
+  }
+
+  .diagram-caption {
+    padding: 0.75rem 1rem;
+    margin: 0;
+    font-size: 0.875rem;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--text-muted);
+    background: var(--bg-tertiary);
+    border-top: 1px solid var(--border-secondary);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .diagram-container {
+      border-radius: 6px;
+    }
+    
+    .diagram-content {
+      padding: 0.75rem;
+    }
+    
+    .diagram-caption {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
     }
   }
 
-  /* Force white background for Mermaid diagrams in zoom modals */
-  :global(img[alt="Mermaid diagram"]) {
-    background-color: white !important;
+  @media print {
+    .diagram-container {
+      border: 1px solid #ccc;
+      box-shadow: none;
+      background: white;
+    }
+    
+    .diagram-content {
+      background: white;
+    }
+    
+    .diagram-caption {
+      background: #f5f5f5;
+      color: #666;
+    }
   }
 </style>

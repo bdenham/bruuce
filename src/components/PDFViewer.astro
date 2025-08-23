@@ -31,7 +31,7 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
       aria-label={caption || 'PDF document'}
       id={workerId}
     >
-      <div class="loading">Loading PDF...</div>
+      <div class="loading">📄 Loading PDF...</div>
     </pdf-viewer>
     {
       caption && (
@@ -48,473 +48,263 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
 
 <script>
   class PDFViewer extends HTMLElement {
-    private pdfData: any;
-    private currentModal: HTMLElement | null = null;
-    private originalRect: DOMRect | null = null;
-    private originalCenterX: number | null = null;
-    private originalCenterY: number | null = null;
-    private resizeObserver: ResizeObserver | null = null;
-    private requestedScale: number = 1.0;
-    private isInitialLoad: boolean = true;
+    pdfDoc: any = null;
+    currentModal: HTMLElement | null = null;
+    originalRect: DOMRect | null = null;
+    originalCenterX: number | null = null;
+    originalCenterY: number | null = null;
 
-    constructor() {
-      super();
-      this.attachShadow({ mode: 'open' });
-
-      const style = document.createElement('style');
-      style.textContent = `
-        :host {
-          display: block;
-          width: 100%;
-        }
-        .pdf-wrapper {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        canvas {
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          display: block;
-          margin: 0 auto;
-          cursor: zoom-in;
-          transition: transform 0.2s ease;
-        }
-        canvas:hover {
-          transform: scale(1.02);
-        }
-        .loading {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 200px;
-          font-family: system-ui, sans-serif;
-          color: #666;
-        }
-        .error {
-          color: #e74c3c;
-          text-align: center;
-          padding: 2rem;
-          font-family: system-ui, sans-serif;
-        }
-        .modal {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 1000;
-          padding: 2rem;
-          box-sizing: border-box;
-        }
-        .modal-content {
-          position: relative;
-          max-width: 90vw;
-          max-height: 90vh;
-          background: white;
-          border-radius: 8px;
-          padding: 1rem;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-          transform: scale(0.8);
-          opacity: 0;
-          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-          overflow: auto;
-        }
-        .modal-close {
-          position: absolute;
-          top: -10px;
-          right: -10px;
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          background: #fff;
-          border: 2px solid #ddd;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 18px;
-          font-weight: bold;
-          color: #666;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        .modal-close:hover {
-          background: #f5f5f5;
-          color: #333;
-        }
-        .modal canvas {
-          border: none;
-          border-radius: 4px;
-          cursor: zoom-out;
-        }
-        .modal canvas:hover {
-          transform: none;
-        }
-      `;
-
-      if (this.shadowRoot) {
-        this.shadowRoot.appendChild(style);
-        this.shadowRoot.innerHTML += `<div class="loading">Loading PDF...</div>`;
-      }
-
-      // Set up resize observer to watch for container size changes
-      this.setupResizeObserver();
+    connectedCallback() {
+      this.loadPDF();
     }
 
-    setupResizeObserver() {
-      if (typeof ResizeObserver !== 'undefined') {
-        this.resizeObserver = new ResizeObserver(() => {
-          // Only trigger resize re-render after initial load is complete
-          if (this.pdfData && !this.isInitialLoad) {
-            this.renderPDF();
-          }
-        });
-      }
-    }
-
-    async connectedCallback() {
-      const pdfPath = this.getAttribute('data-pdf-path');
-      const workerPath = this.getAttribute('data-worker-path');
-      const scaleAttr = this.getAttribute('data-scale');
-      const pageAttr = this.getAttribute('data-page');
-
-      this.requestedScale = scaleAttr ? parseFloat(scaleAttr) : 1.0;
-      const pageNum = pageAttr ? parseInt(pageAttr) : 1;
-
-      if (!pdfPath || !workerPath) return;
-
+    async loadPDF() {
       try {
-        // Wait for pdfjsLib to be available
-        while (!(window as any).pdfjsLib) {
-          await new Promise((resolve) => setTimeout(resolve, 100));
+        const path = this.getAttribute('data-pdf-path');
+        const workerPath = this.getAttribute('data-worker-path');
+
+        if (!path || !workerPath) {
+          console.error('Missing required PDF attributes');
+          return;
+        }
+        const scale = parseFloat(this.getAttribute('data-scale') || '1.0');
+        const pageNumber = parseInt(this.getAttribute('data-page') || '1');
+        const maintainAspect = this.getAttribute('data-maintain-aspect') === 'true';
+
+        if (!(window as any).pdfjsLib) {
+          console.error('PDF.js library not loaded');
+          return;
         }
 
         (window as any).pdfjsLib.GlobalWorkerOptions.workerSrc = workerPath;
-        const loadingTask = (window as any).pdfjsLib.getDocument(pdfPath);
-        const pdf = await loadingTask.promise;
 
-        const page = await pdf.getPage(pageNum);
+        const loadingTask = (window as any).pdfjsLib.getDocument(path);
+        this.pdfDoc = await loadingTask.promise;
 
-        // Store pdf and page for modal use and resizing
-        this.pdfData = { pdf, page, pageNum };
+        const page = await this.pdfDoc.getPage(pageNumber);
+        const viewport = page.getViewport({ scale });
 
-        // Initial render
-        await this.renderPDF();
-
-        // Mark initial load as complete after a brief delay to prevent immediate resize triggers
-        setTimeout(() => {
-          this.isInitialLoad = false;
-        }, 100);
-
-        // Start observing size changes
-        if (this.resizeObserver) {
-          // Observe the content area that actually determines available width
-          const pdfContainer = this.parentElement;
-          const figure = pdfContainer?.parentElement;
-          const contentArea = figure?.parentElement;
-
-          const targetContainer = contentArea || figure || pdfContainer;
-          if (targetContainer) {
-            this.resizeObserver.observe(targetContainer);
-          }
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        if (!context) {
+          console.error('Could not get canvas context');
+          return;
         }
+
+        if (maintainAspect) {
+          const containerWidth = this.offsetWidth;
+          const containerHeight = this.offsetHeight;
+
+          const scaleToFit = Math.min(
+            containerWidth / viewport.width,
+            containerHeight / viewport.height
+          );
+
+          const scaledViewport = page.getViewport({ scale: scaleToFit });
+          canvas.width = scaledViewport.width;
+          canvas.height = scaledViewport.height;
+
+          const renderContext = {
+            canvasContext: context,
+            viewport: scaledViewport,
+          };
+
+          await page.render(renderContext).promise;
+        } else {
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          const renderContext = {
+            canvasContext: context,
+            viewport: viewport,
+          };
+
+          await page.render(renderContext).promise;
+        }
+
+        canvas.style.cssText = `
+          width: 100%;
+          height: auto;
+          cursor: zoom-in;
+          border-radius: 4px;
+          transition: transform 0.2s ease;
+        `;
+
+        canvas.addEventListener('mouseenter', () => {
+          canvas.style.transform = 'scale(1.02)';
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+          canvas.style.transform = 'scale(1)';
+        });
+
+        canvas.addEventListener('click', () => {
+          this.openModal(canvas, page);
+        });
+
+        if (this.innerHTML) {
+          this.innerHTML = '';
+        }
+        this.appendChild(canvas);
       } catch (error) {
         console.error('Error loading PDF:', error);
-        if (this.shadowRoot) {
-          const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-          this.shadowRoot.innerHTML = `<div class="error">Error loading PDF: ${errorMessage}</div>`;
+        if (this.innerHTML) {
+          this.innerHTML = '<div class="error">❌ Error loading PDF</div>';
         }
       }
     }
 
-    async renderPDF() {
-      if (!this.pdfData || !this.shadowRoot) return;
+    openModal(originalCanvas: HTMLCanvasElement, page: any) {
+      if (this.currentModal) return;
 
-      const { page } = this.pdfData;
+      const rect = originalCanvas.getBoundingClientRect();
+      this.originalRect = rect;
+      this.originalCenterX = rect.left + rect.width / 2;
+      this.originalCenterY = rect.top + rect.height / 2;
 
-      // Get the available width - check multiple container levels to find the actual content width
-      let maxWidth = 800; // Default fallback
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const maxModalWidth = viewportWidth * 0.9;
+      const maxModalHeight = viewportHeight * 0.9;
 
-      // Try to find the actual content area width
-      const pdfContainer = this.parentElement; // pdf-container
-      const figure = pdfContainer?.parentElement; // pdf-figure
-      const contentArea = figure?.parentElement; // actual content area (article, section, etc.)
+      const aspectRatio = rect.width / rect.height;
 
-      if (contentArea && contentArea.clientWidth > 0) {
-        maxWidth = contentArea.clientWidth - 64; // Account for margins and padding
-      } else if (figure && figure.clientWidth > 0) {
-        maxWidth = figure.clientWidth - 32;
-      } else if (pdfContainer && pdfContainer.clientWidth > 0) {
-        maxWidth = pdfContainer.clientWidth - 32;
+      let modalWidth: number;
+      if (maxModalWidth / aspectRatio <= maxModalHeight) {
+        modalWidth = maxModalWidth;
+      } else {
+        modalWidth = maxModalHeight * aspectRatio;
       }
 
-      // Get device pixel ratio for high-DPI displays
-      const devicePixelRatio = window.devicePixelRatio || 1;
-
-      // Get the PDF's natural dimensions at scale 1
-      const naturalViewport = page.getViewport({ scale: 1 });
-
-      // Calculate the scale that fits within container width (no height constraint)
-      const scaleToFitWidth = maxWidth / naturalViewport.width;
-
-      // Use the smaller of requested scale or scale-to-fit-width to prevent horizontal overflow
-      const finalScale = Math.min(this.requestedScale, scaleToFitWidth);
-
-      // First get viewport at final calculated scale
-      const baseViewport = page.getViewport({ scale: finalScale });
-
-      // Then scale up for high-DPI rendering (internal canvas resolution)
-      const renderViewport = page.getViewport({
-        scale: finalScale * devicePixelRatio,
-      });
-
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-
-      // Set canvas internal size for high-DPI (higher resolution)
-      canvas.height = renderViewport.height;
-      canvas.width = renderViewport.width;
-
-      // Set CSS display size to the calculated dimensions
-      canvas.style.height = baseViewport.height + 'px';
-      canvas.style.width = baseViewport.width + 'px';
-
-      const renderContext = {
-        canvasContext: context,
-        viewport: renderViewport,
-      };
-
-      await page.render(renderContext).promise;
-
-      // Clear and update shadow DOM
-      this.shadowRoot.innerHTML = '';
-      const style = document.createElement('style');
-      style.textContent = `
-          .pdf-wrapper {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          canvas {
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            display: block;
-            margin: 0 auto;
-            cursor: zoom-in;
-            transition: transform 0.2s ease;
-          }
-          canvas:hover {
-            transform: scale(1.02);
-          }
-        `;
-      this.shadowRoot.appendChild(style);
-
-      const wrapper = document.createElement('div');
-      wrapper.className = 'pdf-wrapper';
-
-      // Add click event to canvas for modal
-      canvas.addEventListener('click', () => this.openModal());
-
-      wrapper.appendChild(canvas);
-      this.shadowRoot.appendChild(wrapper);
-
-      // Resize the host element to match the PDF size
-      this.style.height = baseViewport.height + 'px';
-    }
-
-    disconnectedCallback() {
-      // Clean up resize observer
-      if (this.resizeObserver) {
-        this.resizeObserver.disconnect();
-      }
-    }
-
-    async openModal() {
-      if (!this.pdfData) return;
-
-      const { page } = this.pdfData;
-
-      // Get the original PDF canvas position and size for animation
-      const originalCanvas = this.shadowRoot?.querySelector('canvas');
-      if (!originalCanvas) return;
-
-      const originalRect = originalCanvas.getBoundingClientRect();
-      const originalCenterX = originalRect.left + originalRect.width / 2;
-      const originalCenterY = originalRect.top + originalRect.height / 2;
-
-      // Calculate scale for modal - use full viewport width
-      const viewportWidth = window.innerWidth * 0.95; // 95% of viewport width for full-screen feel
-
-      const naturalViewport = page.getViewport({ scale: 1 });
-      const modalScale = viewportWidth / naturalViewport.width;
-
-      const devicePixelRatio = window.devicePixelRatio || 1;
+      const modalScale = modalWidth / rect.width;
       const modalBaseViewport = page.getViewport({ scale: modalScale });
-      const modalRenderViewport = page.getViewport({
-        scale: modalScale * devicePixelRatio,
-      });
 
-      // Create modal canvas
-      const modalCanvas = document.createElement('canvas');
-      const modalContext = modalCanvas.getContext('2d');
+      const finalCenterX = viewportWidth / 2;
+      const finalCenterY = viewportHeight / 2;
 
-      modalCanvas.height = modalRenderViewport.height;
-      modalCanvas.width = modalRenderViewport.width;
-      modalCanvas.style.height = modalBaseViewport.height + 'px';
-      modalCanvas.style.width = modalBaseViewport.width + 'px';
-
-      // Render PDF to modal canvas
-      const modalRenderContext = {
-        canvasContext: modalContext,
-        viewport: modalRenderViewport,
-      };
-
-      await page.render(modalRenderContext).promise;
-
-      // Calculate final modal position (center of screen)
-      const finalCenterX = window.innerWidth / 2;
-      const finalCenterY = window.innerHeight / 2;
-
-      // Create modal elements in document body (not shadow DOM)
-      const modal = document.createElement('div');
+      const modal = document.createElement('div') as HTMLDivElement;
       modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                background: rgba(255, 255, 255, 0);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 10000;
-                padding: 2rem;
-                box-sizing: border-box;
-                overflow-y: auto;
-                transition: background-color 0.25s ease;
-            `;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        cursor: zoom-out;
+        transition: background-color 0.25s ease;
+      `;
 
-      const modalContent = document.createElement('div');
-      // Start from original position and size
+      const modalContent = document.createElement('div') as HTMLDivElement;
       modalContent.style.cssText = `
-                position: absolute;
-                width: ${originalRect.width}px;
-                height: ${originalRect.height}px;
-                left: ${originalCenterX - originalRect.width / 2}px;
-                top: ${originalCenterY - originalRect.height / 2}px;
-                background: white;
-                border-radius: 8px;
-                padding: 1rem;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-                transform-origin: center center;
-                transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                overflow: hidden;
-            `;
+        position: absolute;
+        width: ${rect.width}px;
+        height: ${rect.height}px;
+        left: ${this.originalCenterX - rect.width / 2}px;
+        top: ${this.originalCenterY - rect.height / 2}px;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-primary);
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: 0 2px 8px var(--shadow-secondary);
+        transform-origin: center center;
+        transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        overflow: hidden;
+        backdrop-filter: blur(8px);
+      `;
 
-      const closeButton = document.createElement('div');
+      const closeButton = document.createElement('div') as HTMLDivElement;
       closeButton.style.cssText = `
-                position: fixed;
-                top: 2rem;
-                right: 2rem;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                background: #fff;
-                border: 2px solid #999;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 20px;
-                font-weight: bold;
-                line-height: 1;
-                text-align: center;
-                transform: translateY(-1px);
-                color: #4285f4;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                transition: all 0.2s ease;
-                z-index: 10001;
-                opacity: 0;
-                transform: scale(0.8);
-            `;
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--bg-card);
+        border: 2px solid var(--border-primary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 1;
+        text-align: center;
+        color: var(--text-primary);
+        box-shadow: 0 4px 12px var(--shadow-primary);
+        transition: all 0.2s ease;
+        z-index: 10001;
+        opacity: 0;
+        transform: scale(0.8);
+      `;
       closeButton.innerHTML = '×';
       closeButton.addEventListener('click', (e) => {
         e.stopPropagation();
         this.closeModal();
       });
+
       closeButton.addEventListener('mouseenter', () => {
-        closeButton.style.background = '#f0f4ff';
-        closeButton.style.color = '#1a73e8';
+        closeButton.style.background = 'var(--bg-card-hover)';
         closeButton.style.transform = 'scale(1.1)';
       });
+
       closeButton.addEventListener('mouseleave', () => {
-        closeButton.style.background = '#fff';
-        closeButton.style.color = '#4285f4';
+        closeButton.style.background = 'var(--bg-card)';
         closeButton.style.transform = 'scale(1)';
       });
 
-      // Style the modal canvas to start at original size
+      const modalCanvas = document.createElement('canvas') as HTMLCanvasElement;
+      const modalContext = modalCanvas.getContext('2d');
+      if (!modalContext) {
+        console.error('Could not get modal canvas context');
+        return;
+      }
+
+      modalCanvas.width = modalBaseViewport.width;
+      modalCanvas.height = modalBaseViewport.height;
       modalCanvas.style.cssText = `
-                border: none;
-                border-radius: 4px;
-                cursor: zoom-out;
-                display: block;
-                margin: 0 auto;
-                width: ${originalRect.width - 32}px;
-                height: ${originalRect.height - 32}px;
-                transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            `;
+        width: ${rect.width - 32}px;
+        height: ${rect.height - 32}px;
+        border-radius: 4px;
+        transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      `;
 
-      // Close modal when clicking anywhere on the modal
-      modal.addEventListener('click', () => {
-        this.closeModal();
-      });
-
-      // Close modal with Escape key
-      const handleEscape = (e) => {
-        if (e.key === 'Escape') {
-          this.closeModal();
-          document.removeEventListener('keydown', handleEscape);
-        }
+      const modalRenderContext = {
+        canvasContext: modalContext,
+        viewport: modalBaseViewport,
       };
-      document.addEventListener('keydown', handleEscape);
+
+      page.render(modalRenderContext);
 
       modalContent.appendChild(modalCanvas);
       modal.appendChild(modalContent);
       modal.appendChild(closeButton);
-
-      // Add modal to document body
       document.body.appendChild(modal);
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          this.closeModal();
+        }
+      });
+
       this.currentModal = modal;
 
-      // Store original dimensions for closing animation
-      this.originalRect = originalRect;
-      this.originalCenterX = originalCenterX;
-      this.originalCenterY = originalCenterY;
-
-      // Trigger animations after adding to DOM
       requestAnimationFrame(() => {
-        // Fade in background
-        modal.style.backgroundColor = 'rgba(255, 255, 255, 1)';
+        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
 
-        // Animate to center and enlarge
         modalContent.style.width = `${modalBaseViewport.width + 32}px`;
         modalContent.style.height = `${modalBaseViewport.height + 32}px`;
         modalContent.style.left = `${finalCenterX - (modalBaseViewport.width + 32) / 2}px`;
         modalContent.style.top = `${finalCenterY - (modalBaseViewport.height + 32) / 2}px`;
-        modalContent.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
+        modalContent.style.boxShadow = '0 10px 30px var(--shadow-primary)';
 
-        // Animate canvas to final size
         modalCanvas.style.width = `${modalBaseViewport.width}px`;
         modalCanvas.style.height = `${modalBaseViewport.height}px`;
 
-        // Show close button after a delay
         setTimeout(() => {
           closeButton.style.opacity = '1';
           closeButton.style.transform = 'scale(1)';
@@ -530,33 +320,36 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
         this.originalCenterY !== null
       ) {
         const modal = this.currentModal;
-        const modalContent = modal.querySelector('div');
-        const modalCanvas = modal.querySelector('canvas');
-        const closeButton = modal.children[1] as HTMLElement; // Close button is now the second child of modal
+        const modalContent = modal.querySelector('div') as HTMLElement;
+        const modalCanvas = modal.querySelector('canvas') as HTMLCanvasElement;
+        const closeButton = modal.children[1] as HTMLElement;
 
-        // Hide close button immediately
         if (closeButton) {
           closeButton.style.opacity = '0';
           closeButton.style.transform = 'scale(0.8)';
         }
 
-        // Animate back to original position and size
-        modal.style.backgroundColor = 'rgba(255, 255, 255, 0)';
+        modal.style.backgroundColor = 'rgba(0, 0, 0, 0)';
 
-        if (modalContent && modalCanvas) {
+        if (
+          modalContent &&
+          modalCanvas &&
+          this.originalRect &&
+          this.originalCenterX !== null &&
+          this.originalCenterY !== null
+        ) {
           modalContent.style.width = `${this.originalRect.width}px`;
           modalContent.style.height = `${this.originalRect.height}px`;
           modalContent.style.left = `${this.originalCenterX - this.originalRect.width / 2}px`;
           modalContent.style.top = `${this.originalCenterY - this.originalRect.height / 2}px`;
-          modalContent.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1)';
+          modalContent.style.boxShadow = '0 2px 8px var(--shadow-secondary)';
 
           modalCanvas.style.width = `${this.originalRect.width - 32}px`;
           modalCanvas.style.height = `${this.originalRect.height - 32}px`;
         }
 
-        // Remove after animation completes
         setTimeout(() => {
-          if (modal.parentNode) {
+          if (modal && modal.parentNode) {
             document.body.removeChild(modal);
           }
         }, 250);
@@ -576,19 +369,25 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
 
 <style>
   .pdf-figure {
-    margin: 1rem 0;
+    margin: 2rem 0;
     padding: 0;
     width: fit-content;
     max-width: 100%;
   }
 
   .pdf-container {
-    border: 1px solid #e1e5e9;
-    border-radius: 6px;
+    border: 1px solid var(--border-secondary);
+    border-radius: 8px;
     padding: 1rem;
-    background: #f8f9fa;
+    background: var(--bg-card);
     width: fit-content;
     max-width: 100%;
+    transition: all 0.2s ease;
+  }
+
+  .pdf-container:hover {
+    border-color: var(--border-primary);
+    box-shadow: 0 4px 12px var(--shadow-secondary);
   }
 
   .pdf-caption {
@@ -596,7 +395,7 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
     padding: 0;
     font-size: 0.875rem;
     line-height: 1.5;
-    color: #374151;
+    color: var(--text-muted);
     text-align: left;
     font-style: italic;
     max-width: 100%;
@@ -606,6 +405,18 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
   .loading {
     text-align: center;
     padding: 2rem;
-    color: #6c757d;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+  }
+
+  .error {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 8px;
+    border-left: 4px solid #ef4444;
   }
 </style>

@@ -1,0 +1,14 @@
+---
+interface Props {
+  primary?: string;
+  accent?: string;
+  id?: string;
+  class?: string;
+}
+
+const { primary, accent, id, class: className } = Astro.props;
+---
+
+<h1 id={id} class:list={[className]}>
+  {primary && primary}{primary && accent && ' '}{accent && <span>{accent}</span>}
+</h1>

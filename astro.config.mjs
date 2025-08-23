@@ -73,37 +73,26 @@ async function config() {
                     starlightHeadingBadges(),
                     starlightLinksValidator({
                         errorOnFallbackPages: false,
-                        errorOnInconsistentLocale: true
+                        errorOnInconsistentLocale: true,
+                        exclude: [
+                            '/blog/',
+                            '/about/',
+                            '/projects/',
+                            '/blog/**',
+                        ]
                     }),
                     starlightImageZoom({
                         showCaptions: false
                     })
                 ],
-                // Component overrides
+                // Component overrides (most components now use custom architecture)
                 components: {
-                    CallToAction: './src/components/overrides/CallToAction.astro',
-                    // Footer: './src/components/overrides/Footer.astro',
-                    Icon: './src/components/overrides/Icon.astro',
-                    // Header: './src/components/overrides/Header.astro',
-                    // Hero: './src/components/overrides/Hero.astro',
-                    // PageTitle: './src/components/overrides/PageTitle.astro',
-                    // SiteTitle: './src/components/overrides/SiteTitle.astro',
-                    // SocialIcons: './src/components/overrides/SocialIcons.astro',
-                    LinkCard: './src/components/LinkCard.astro',
-                    ContentPanel: './src/components/overrides/ContentPanel.astro',
+                    // Only keeping components that still exist
                     CardGrid: './src/components/CardGrid.astro',
-                    Pagination: './src/components/overrides/Pagination.astro',
-                    PageFrame: './src/components/overrides/PageFrame.astro',
-                    PageSidebar: './src/components/overrides/PageSidebar.astro',
                 },
                 customCss: [
                     './src/styles/reset.css',
-                    './src/styles/colors.css',
-                    './src/styles/badge.css',
-                    './src/styles/asides.css',
-                    './src/styles/layout.css',
-                    './src/styles/text.css',
-                    './src/styles/custom.css',
+                    './src/styles/theme.css',
                 ],
                 // logo: {
                 //     src: './src/assets/sitelogo.svg',
@@ -113,7 +102,18 @@ async function config() {
                     { icon: 'github', label: 'GitHub', href: 'https://github.com/bdenham' },
                 ],
                 head: [
-                    // Font preloads for better accessibility (with GitHub base path)
+                    // Font preloads for better performance (with GitHub base path)
+                    // Preload 300 weight first as it's used extensively for body text
+                    {
+                        tag: 'link',
+                        attrs: {
+                            rel: 'preload',
+                            href: `${process.env.VITE_GITHUB_BASE_PATH || ''}/fonts/adobe-clean-300.woff2`,
+                            as: 'font',
+                            type: 'font/woff2',
+                            crossorigin: ''
+                        }
+                    },
                     {
                         tag: 'link',
                         attrs: {

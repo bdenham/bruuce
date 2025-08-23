@@ -1,79 +1,495 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-
-title: 'About - Bruce Denham';
-description: 'Learn more about Bruce Denham - software developer and technology enthusiast.';
+import PageHeader from '../../components/ui/PageHeader.astro';
 ---
 
 <BaseLayout
   title="About - Bruce Denham"
-  description="Learn more about Bruce Denham - software developer and technology enthusiast."
+  description="Learn about Bruce Denham's 30+ year journey as a Senior Technical Writer & Developer Experience Strategist at Adobe, TOPAZ Technologies, and Schlumberger."
   showBackLink={true}
   backLinkText="← Back to Home"
   backLinkHref="/"
-  footerText="Thanks for reading! "
-  footerLinkText="Check out my blog posts"
-  footerLinkHref="/blog/"
+  footerText="Want to collaborate? "
+  footerLinkText="Let's connect on LinkedIn"
+  footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
-  <h1 id="about-title">About <span>Bruce</span></h1>
+  <PageHeader primary="About" accent="Bruce" id="about-title" />
 
-  <p>
-    👋 Hi there! I'm Bruce Denham, a passionate software developer with a love for creating
-    efficient, user-friendly solutions and sharing knowledge with the development community.
-  </p>
+  <div class="intro-section">
+    <p class="lead">
+      👋 Hi there! I'm Bruce Denham, a Senior Technical Writer & Developer Experience Strategist
+      with 30+ years of experience at the crossroads of technical writing, frontend development,
+      visual design, and UX.
+    </p>
+    <p class="lead">
+      I turn complex concepts and APIs into clear tutorials, infographics, animations, and video
+      content. I help dev teams ship fast using docs, tools, and visuals that make tutorials and API
+      references click.
+    </p>
+  </div>
 
-  <h2>What I Do</h2>
-  <p>
-    I specialize in modern web development, focusing on building scalable applications that solve
-    real-world problems. My journey through software development has led me to explore various
-    technologies and best practices, all of which I document and share through this blog.
-  </p>
+  <div class="journey-section">
+    <h2>My Journey</h2>
 
-  <h2>My Interests</h2>
-  <ul>
-    <li>
-      <strong>Web Development:</strong> JavaScript, TypeScript, React, Astro, and modern web frameworks
-    </li>
-    <li><strong>Backend Development:</strong> Node.js, APIs, and database design</li>
-    <li>
-      <strong>Developer Experience:</strong> Tooling, automation, and workflow optimization
-    </li>
-    <li>
-      <strong>Continuous Learning:</strong> Staying current with technology trends and best practices
-    </li>
-  </ul>
+    <div class="career-timeline">
+      <div class="timeline-entry current">
+        <div class="timeline-period">2018–Present</div>
+        <div class="timeline-content">
+          <h3>Adobe, Inc.</h3>
+          <h4>Senior Technical Writer & Developer Experience Specialist</h4>
+          <p>
+            Leading documentation products across multiple teams at one of the world's premier
+            creative software companies. I manage the Adobe Storefront Commerce documentation site,
+            build interactive React apps for API demonstrations, and develop CLI tools that
+            streamline developer workflows.
+          </p>
+          <p>
+            My work includes everything from SDK documentation using Storybook 8 to custom Algolia
+            search integrations that help developers find answers fast. I've been recognized by
+            peers and leadership for creativity, UX expertise, and technical writing excellence.
+          </p>
+        </div>
+      </div>
 
-  <h2>Why This Blog?</h2>
-  <p>
-    This space serves as my digital notebook where I share insights, document solutions to
-    interesting problems, and reflect on my journey as a developer. I believe in learning in public
-    and contributing to the amazing developer community that has taught me so much.
-  </p>
+      <div class="timeline-entry">
+        <div class="timeline-period">2006–2018</div>
+        <div class="timeline-content">
+          <h3>TOPAZ Technologies</h3>
+          <h4>Senior Product Designer / Developer Support</h4>
+          <p>
+            During my 12 years at TOPAZ, I evolved from visual designer to full-stack product
+            strategist. I led comprehensive UI overhauls of legacy AngularJS applications, trained
+            development teams on Angular Material best practices, and managed end-to-end product
+            marketing strategies.
+          </p>
+          <p>
+            This role taught me the importance of bridging the gap between technical capability and
+            user needs— a philosophy that continues to drive my approach to developer experience
+            today.
+          </p>
+        </div>
+      </div>
 
-  <p>
-    Whether you're here to learn something new, find a solution to a problem, or just curious about
-    my thoughts on technology, I hope you find value in what I share.
-  </p>
+      <div class="timeline-entry">
+        <div class="timeline-period">2000–2005</div>
+        <div class="timeline-content">
+          <h3>Schlumberger</h3>
+          <h4>Senior Technical Writer / API Documentation Specialist</h4>
+          <p>
+            My foundation in technical writing was built in the oil & gas industry, where I wrote
+            API documentation and training guides that enabled 100+ global developers to adopt
+            complex systems quickly. I also built UI prototypes in C#/WinForms and integrated
+            documentation directly into Microsoft Dev Studio.
+          </p>
+          <p>
+            Working with engineers across different countries and cultures taught me that truly
+            effective documentation transcends language barriers—it communicates through clarity,
+            structure, and empathy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="philosophy-section">
+    <h2>My Philosophy</h2>
+    <div class="philosophy-grid">
+      <div class="philosophy-item">
+        <div class="philosophy-icon">🎯</div>
+        <h3>I don't just write the docs</h3>
+        <p>
+          I build tools, craft interfaces, and create explanations that click. Understanding how
+          things work from the inside makes all the difference in explaining them clearly.
+        </p>
+      </div>
+
+      <div class="philosophy-item">
+        <div class="philosophy-icon">💡</div>
+        <h3>Spark "aha" moments</h3>
+        <p>
+          The best documentation doesn't just inform—it transforms confusion into confidence,
+          complexity into clarity, and hesitation into action.
+        </p>
+      </div>
+
+      <div class="philosophy-item">
+        <div class="philosophy-icon">🤝</div>
+        <h3>I code. I design. I connect.</h3>
+        <p>
+          Great developer experience happens at the intersection of technical accuracy, visual
+          design, and human psychology. I work in all three spaces.
+        </p>
+      </div>
+
+      <div class="philosophy-item">
+        <div class="philosophy-icon">🚀</div>
+        <h3>Reduce friction, increase flow</h3>
+        <p>
+          Every tool I build and every guide I write has one goal: help developers get from question
+          to solution as smoothly as possible.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="expertise-section">
+    <h2>What I Bring to the Table</h2>
+
+    <div class="expertise-grid">
+      <div class="expertise-category">
+        <h3>Technical Writing & Documentation</h3>
+        <ul>
+          <li>API documentation that drives adoption</li>
+          <li>Developer tutorials that simplify complex workflows</li>
+          <li>Interactive playgrounds for hands-on learning</li>
+          <li>Diátaxis documentation framework expertise</li>
+        </ul>
+      </div>
+
+      <div class="expertise-category">
+        <h3>Development & Tools</h3>
+        <ul>
+          <li>React 18+, Node.js, and modern JavaScript frameworks</li>
+          <li>CLI tool development for productivity enhancement</li>
+          <li>Git/GitHub workflows and automation</li>
+          <li>Frontend development with responsive design</li>
+        </ul>
+      </div>
+
+      <div class="expertise-category">
+        <h3>Visual Communication</h3>
+        <ul>
+          <li>UI/UX design for developer tools</li>
+          <li>Infographics that clarify technical concepts</li>
+          <li>Animation and video for process explanation</li>
+          <li>Visual design that balances beauty and usability</li>
+        </ul>
+      </div>
+
+      <div class="expertise-category">
+        <h3>Leadership & Strategy</h3>
+        <ul>
+          <li>Cross-functional collaboration with UX, PM, and Engineering</li>
+          <li>Developer advocacy and community building</li>
+          <li>Remote team leadership and mentoring</li>
+          <li>Product strategy aligned with user needs</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="recognition-section">
+    <h2>Recognition & Community</h2>
+    <div class="recognition-grid">
+      <div class="recognition-item">
+        <h3>Adobe Awards</h3>
+        <p>
+          Nominated for both the Adobe Founders Award and Extreme Ownership Award for excellence in
+          technical writing and developer experience innovation.
+        </p>
+      </div>
+
+      <div class="recognition-item">
+        <h3>Speaking Engagements</h3>
+        <p>
+          Presented PageBuilder best practices at Meet Magento Indonesia 2019, sharing insights with
+          the international open-source community.
+        </p>
+      </div>
+
+      <div class="recognition-item">
+        <h3>Open Source Involvement</h3>
+        <p>
+          Deep community involvement with Magento, contributing to both code and documentation that
+          helps thousands of developers worldwide.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="personal-section">
+    <h2>Beyond the Code</h2>
+    <p>
+      When I'm not crafting documentation or building developer tools, you'll find me exploring the
+      latest in web technology, contributing to open-source projects, or mentoring aspiring
+      technical writers. I'm energized by teaching and lifting others through shared knowledge.
+    </p>
+    <p>
+      Based in the Austin, Texas metropolitan area, I thrive in remote team environments and have
+      been successfully working remotely for 5+ years. I believe the best developer experiences are
+      built through diverse, distributed teams that bring different perspectives to solving complex
+      problems.
+    </p>
+  </div>
+
+  <div class="cta-section">
+    <h2>Let's Build Better Developer Experiences Together</h2>
+    <p>
+      Whether you're looking to improve your documentation, build better developer tools, or create
+      clearer technical communication, I'd love to hear about your challenges and explore how we
+      might work together.
+    </p>
+  </div>
 </BaseLayout>
 
 <style>
-  /* About page specific styles */
-  h1 {
-    margin: 0 0 24px 0;
+  /* About page styles */
+  .intro-section {
+    margin-bottom: 40px;
   }
 
-  ul {
+  .lead {
+    font-size: 18px;
     color: var(--text-tertiary);
-    margin: 0 0 20px 0;
-    padding-left: 24px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-weight: 300;
   }
 
-  li {
-    margin-bottom: 8px;
+  .journey-section,
+  .philosophy-section,
+  .expertise-section,
+  .recognition-section,
+  .personal-section,
+  .cta-section {
+    margin-bottom: 48px;
   }
 
-  strong {
+  .journey-section h2,
+  .philosophy-section h2,
+  .expertise-section h2,
+  .recognition-section h2,
+  .personal-section h2,
+  .cta-section h2 {
     color: var(--text-primary);
+    font-size: 28px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--border-primary);
+    padding-bottom: 8px;
+  }
+
+  .career-timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .career-timeline::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border-primary);
+  }
+
+  .timeline-entry {
+    position: relative;
+    margin-bottom: 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 16px;
+    padding: 24px;
+    margin-left: 16px;
+  }
+
+  .timeline-entry.current {
+    border: 2px solid var(--accent-primary);
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.03));
+  }
+
+  .timeline-entry::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 24px;
+    width: 12px;
+    height: 12px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+  }
+
+  .timeline-entry.current::before {
+    background: var(--accent-primary);
+    box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.2);
+  }
+
+  .timeline-period {
+    position: absolute;
+    left: -80px;
+    top: 16px;
+    background: var(--bg-card);
+    color: var(--accent-primary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
     font-weight: 600;
+    border: 1px solid var(--accent-primary);
+    white-space: nowrap;
+  }
+
+  .timeline-content h3 {
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+    font-size: 22px;
+  }
+
+  .timeline-content h4 {
+    color: var(--accent-primary);
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .timeline-content p {
+    color: var(--text-tertiary);
+    line-height: 1.7;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  .timeline-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .philosophy-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .philosophy-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--shadow-secondary);
+    border-color: var(--accent-primary);
+  }
+
+  .philosophy-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .philosophy-item h3 {
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+    font-size: 18px;
+  }
+
+  .philosophy-item p {
+    color: var(--text-tertiary);
+    margin: 0;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .expertise-category {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .expertise-category h3 {
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+    font-size: 20px;
+  }
+
+  .expertise-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .expertise-category li {
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+    padding-left: 16px;
+    position: relative;
+    font-weight: 300;
+  }
+
+  .expertise-category li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+  }
+
+  .recognition-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+  }
+
+  .recognition-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .recognition-item h3 {
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+    font-size: 18px;
+  }
+
+  .recognition-item p {
+    color: var(--text-tertiary);
+    margin: 0;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .personal-section p,
+  .cta-section p {
+    color: var(--text-tertiary);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  .personal-section p:last-child,
+  .cta-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .career-timeline {
+      padding-left: 16px;
+    }
+
+    .timeline-entry {
+      margin-left: 8px;
+    }
+
+    .timeline-period {
+      left: -100px;
+      font-size: 10px;
+      padding: 2px 4px;
+    }
+
+    .philosophy-grid,
+    .expertise-grid,
+    .recognition-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

@@ -1,9 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-title: 'Bruce Denham';
-description: 'Personal blog by Bruce Denham - software developer and technology enthusiast.';
+import BlogPostCard from '../components/ui/BlogPostCard.astro';
+import ActionCard from '../components/ui/ActionCard.astro';
 
 // Get the latest blog post for the homepage
 const blogPosts = await getCollection('blog');
@@ -11,98 +10,270 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
 ---
 
 <BaseLayout
-  title="Bruce Denham - Software Developer"
-  description="Personal blog by Bruce Denham - software developer and technology enthusiast sharing insights on web development."
-  footerText="Thanks for visiting! Feel free to explore my thoughts on software development."
+  title="Bruce Denham - Senior Technical Writer & Developer Experience Strategist"
+  description="Senior Technical Writer & Developer Experience Strategist at Adobe with 30+ years turning complex concepts into clear developer experiences."
+  footerText="Thanks for visiting! Let's build better developer experiences together."
 >
   <h1 id="main-title"><span>Bruce</span> Denham</h1>
-  <p class="subtitle">Software Developer & Technology Enthusiast</p>
+  <p class="subtitle homepage">Senior Technical Writer & Developer Experience Strategist</p>
   <p class="lead">
-    Welcome to my corner of the web! I share insights on modern web development, coding best
-    practices, and my journey through the ever-evolving tech landscape.
+    I turn complex concepts into clear, human experiences. With 30+ years in docs, dev, and design,
+    I help developers learn fast, build smart, and ship with confidence.
+  </p>
+  <p class="lead">
+    At Adobe, I lead SDK docs, CLI tools, React apps, and custom search systems — all built to
+    reduce friction and spark "aha" moments.
   </p>
 
-  <div class="actions">
-    <a class="button primary" href="/blog/" aria-label="Read my blog posts">Read my blog</a>
-    <a class="button secondary" href="/about/" aria-label="Learn more about me">About me</a>
-    <a class="button secondary" href="/projects/" aria-label="View my projects">My projects</a>
+  <div class="action-cards grid-medium grid-with-margin">
+    <ActionCard
+      variant="primary"
+      icon="📋"
+      title="View My Resume"
+      description="Explore my 30+ years of experience in technical writing and developer experience"
+      href="/resume/"
+      ariaLabel="View my complete resume"
+    />
+
+    <ActionCard
+      icon="🛠️"
+      title="My Work"
+      description="SDK docs, CLI tools, React apps, and developer experience projects at Adobe and beyond"
+      href="/work/"
+      ariaLabel="View my professional work and projects"
+    />
+
+    <ActionCard
+      icon="👨‍💻"
+      title="About Me"
+      description="Learn about my journey from Schlumberger to TOPAZ to Adobe as a developer experience strategist"
+      href="/about/"
+      ariaLabel="Learn more about my background"
+    />
+
+    <ActionCard
+      icon="📝"
+      title="Technical Writing Blog"
+      description="Insights on developer experience, API documentation, and making complex concepts clear"
+      href="/blog/"
+      ariaLabel="Read my technical writing blog"
+    />
   </div>
 
   <div class="section">
     <h2>Latest Posts</h2>
-    {
-      latestPost && (
-        <a href={`/blog/${latestPost.slug}/`} class="blog-post-link">
-          <div class="blog-post">
-            <h3>🚀 {latestPost.data.title}</h3>
-            <p>{latestPost.data.excerpt}</p>
-            <p class="date">
-              Published:{' '}
-              {latestPost.data.date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </p>
-            <span class="read-more">Read more →</span>
-          </div>
-        </a>
-      )
-    }
+    {latestPost && <BlogPostCard post={latestPost} />}
   </div>
 
   <div class="section">
-    <h2>What I'm About</h2>
+    <h2>My Philosophy</h2>
     <p>
-      I'm passionate about creating efficient, user-friendly solutions and sharing knowledge with
-      the developer community. This is where I document my journey through software development,
-      explore new technologies, and share insights from building real-world applications.
+      I don't just write the docs. I build tools, craft interfaces, and create explanations that
+      click. I code. I design. I connect. My mission is helping developers have those "aha" moments
+      that turn complexity into clarity and frustration into flow.
     </p>
   </div>
 
+  <div class="recent-posts-section">
+    <h2>Recent Posts & Insights</h2>
+    <p class="posts-intro">
+      Sharing thoughts on developer experience, visual communication, and the intersection of
+      technology and humanity.
+    </p>
+
+    <div class="linkedin-posts grid-large grid-with-bottom-margin">
+      <div class="linkedin-post featured">
+        <div class="post-header">
+          <div class="platform-info">
+            <div class="platform-icon">💼</div>
+            <div class="platform-text">
+              <span class="platform-name">LinkedIn</span>
+              <span class="post-type">Creative Post</span>
+            </div>
+          </div>
+          <div class="post-date">Recent</div>
+        </div>
+        <div class="post-content">
+          <h3>The Science of Kindness</h3>
+          <p>
+            "What if kindness moved like diffusion—not with force, but with grace, filling absence
+            with abundance, and longing with love? Let what's full in you flow where it's needed.
+            That's how the world softens."
+          </p>
+          <div class="post-details">
+            <span class="post-tag">Animation</span>
+            <span class="post-tag">Kindness</span>
+            <span class="post-tag">Visual Communication</span>
+          </div>
+        </div>
+        <div class="post-link">
+          <a
+            href="https://www.linkedin.com/feed/update/urn:li:activity:7329128517764337665/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="post-cta"
+          >
+            View on LinkedIn →
+          </a>
+        </div>
+      </div>
+
+      <div class="linkedin-post">
+        <div class="post-header">
+          <div class="platform-info">
+            <div class="platform-icon">💼</div>
+            <div class="platform-text">
+              <span class="platform-name">LinkedIn</span>
+              <span class="post-type">Professional Update</span>
+            </div>
+          </div>
+          <div class="post-date">Recent</div>
+        </div>
+        <div class="post-content">
+          <h3>Developer Experience Insights</h3>
+          <p>
+            Exploring how thoughtful design and clear communication transform complex technical
+            concepts into accessible developer experiences that actually work.
+          </p>
+          <div class="post-details">
+            <span class="post-tag">Developer Experience</span>
+            <span class="post-tag">Technical Writing</span>
+          </div>
+        </div>
+        <div class="post-link">
+          <a
+            href="https://www.linkedin.com/feed/update/urn:li:activity:7326230647159619585/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="post-cta"
+          >
+            View on LinkedIn →
+          </a>
+        </div>
+      </div>
+
+      <div class="linkedin-post">
+        <div class="post-header">
+          <div class="platform-info">
+            <div class="platform-icon">💼</div>
+            <div class="platform-text">
+              <span class="platform-name">LinkedIn</span>
+              <span class="post-type">Community Engagement</span>
+            </div>
+          </div>
+          <div class="post-date">Recent</div>
+        </div>
+        <div class="post-content">
+          <h3>Building Better Documentation</h3>
+          <p>
+            Sharing thoughts on creating documentation that doesn't just inform—but transforms
+            confusion into confidence and complexity into clarity for developers worldwide.
+          </p>
+          <div class="post-details">
+            <span class="post-tag">Documentation</span>
+            <span class="post-tag">Adobe</span>
+          </div>
+        </div>
+        <div class="post-link">
+          <a
+            href="https://www.linkedin.com/feed/update/urn:li:activity:7326968144617492480/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="post-cta"
+          >
+            View on LinkedIn →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="linkedin-cta">
+      <p>
+        Follow my journey on LinkedIn for more insights on technical writing, developer experience,
+        and visual communication.
+      </p>
+      <a
+        href="https://linkedin.com/in/brucedenham/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="linkedin-follow-btn"
+      >
+        Follow on LinkedIn →
+      </a>
+    </div>
+  </div>
+
   <div class="footer-links">
-    <a href="/blog/">All Posts</a>
+    <a href="/resume/">Resume</a>
+    <a href="/work/">My Work</a>
     <a href="/about/">About</a>
-    <a href="/projects/">Projects</a>
+    <a href="/blog/">Blog</a>
   </div>
 </BaseLayout>
 
 <style>
-  /* Homepage-specific styles */
-  .subtitle {
-    margin: 0 0 8px 0;
-    font-size: 20px;
-    color: var(--text-tertiary);
+  /* Homepage-specific styles only */
+  .platform-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .platform-icon {
+    font-size: 1.2rem;
+  }
+
+  .platform-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .platform-name {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .post-type {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .post-date {
+    color: var(--text-muted);
+    font-size: 12px;
     font-weight: 500;
   }
 
-  .lead {
-    margin: 0 0 24px 0;
+  .post-content h3 {
+    color: var(--text-primary);
     font-size: 18px;
-    color: var(--text-tertiary);
+    margin: 0 0 12px 0;
   }
 
-  .actions {
+  .post-content p {
+    color: var(--text-tertiary);
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+    font-weight: 300;
+  }
+
+  .post-details {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin: 24px 0 20px 0;
+    gap: 6px;
+    margin-bottom: 16px;
   }
 
-  .footer-links {
-    margin-top: 24px;
-    text-align: center;
+  .post-link {
+    margin-top: auto;
   }
 
-  .footer-links a {
-    color: var(--accent-primary);
-    text-decoration: none;
-    margin: 0 12px;
-    font-size: 14px;
-  }
-
-  .footer-links a:hover {
-    color: var(--accent-hover);
-    text-decoration: underline;
+  /* Mobile responsive for LinkedIn posts */
+  @media (max-width: 640px) {
+    .post-details {
+      gap: 4px;
+    }
   }
 </style>

@@ -1,0 +1,37 @@
+/* Typography Components */
+
+/* Subtitles - used across multiple pages with slight variations */
+.subtitle {
+    font-size: 18px;
+    color: var(--text-tertiary);
+    font-weight: 300;
+    margin-bottom: 24px;
+}
+
+.subtitle.homepage {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.subtitle.large {
+    margin-bottom: 32px;
+}
+
+/* Lead text - intro paragraphs */
+.lead {
+    font-size: 18px;
+    color: var(--text-tertiary);
+    font-weight: 300;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+/* Section introductions */
+.section-intro,
+.posts-intro {
+    color: var(--text-tertiary);
+    font-size: 16px;
+    margin-bottom: 32px;
+    font-weight: 300;
+    line-height: 1.6;
+}

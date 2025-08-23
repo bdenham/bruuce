@@ -1,23 +1,164 @@
-<div class="full-width-container">
-  <slot />
+---
+interface Props {
+  background?: string;
+  padding?: string;
+  align?: 'left' | 'center' | 'right';
+  maxWidth?: string;
+}
+
+const { background, padding = '2rem 1rem', align = 'center', maxWidth = 'none' } = Astro.props;
+---
+
+<div
+  class="full-width-container"
+  style={`
+    ${background ? `--bg-override: ${background};` : ''}
+    --container-padding: ${padding};
+    --text-align: ${align};
+    --content-max-width: ${maxWidth};
+  `}
+>
+  <div class="full-width-content">
+    <slot />
+  </div>
 </div>
 
 <style>
   .full-width-container {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    background: var(--bg-override, var(--bg-primary));
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
+    padding: var(--container-padding);
+    position: relative;
+    overflow-x: hidden;
   }
 
-  .full-width-container :global(.sl-container) {
-    max-width: none !important;
+  .full-width-content {
     width: 100%;
+    max-width: var(--content-max-width);
+    text-align: var(--text-align);
+    position: relative;
   }
 
+  /* Override content constraints for all children */
   .full-width-container :global(*) {
-    max-width: 100%;
+    max-width: 100% !important;
+  }
+
+  /* Special styling for common elements */
+  .full-width-container :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .full-width-container :global(video) {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+
+  /* Hero-style content */
+  .full-width-container :global(.hero-content) {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-primary);
+  }
+
+  .full-width-container :global(.hero-content h1) {
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .full-width-container :global(.hero-content p) {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    margin: 0 auto 2rem auto;
+    max-width: 600px;
+    opacity: 0.9;
+  }
+
+  /* Background variants */
+  .full-width-container[style*='--bg-override: gradient'] {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+  }
+
+  .full-width-container[style*='--bg-override: accent'] {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+  }
+
+  .full-width-container[style*='--bg-override: secondary'] {
+    background: var(--bg-secondary);
+  }
+
+  .full-width-container[style*='--bg-override: tertiary'] {
+    background: var(--bg-tertiary);
+    border-top: 1px solid var(--border-secondary);
+    border-bottom: 1px solid var(--border-secondary);
+  }
+
+  /* Alignment variants */
+  .full-width-container[style*='--text-align: left'] .full-width-content {
+    text-align: left;
+  }
+
+  .full-width-container[style*='--text-align: right'] .full-width-content {
+    text-align: right;
+  }
+
+  /* Remove margin from first and last children */
+  .full-width-container :global(*:first-child) {
+    margin-top: 0;
+  }
+
+  .full-width-container :global(*:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .full-width-container {
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      padding: 1.5rem 1rem;
+    }
+
+    .full-width-container :global(.hero-content) {
+      padding: 3rem 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .full-width-container {
+      padding: 1rem 0.75rem;
+    }
+
+    .full-width-container :global(.hero-content) {
+      padding: 2rem 1rem;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    .full-width-container {
+      width: 100%;
+      margin: 0;
+      background: white !important;
+      box-shadow: none;
+      border: 1px solid #ccc;
+    }
+
+    .full-width-container :global(*) {
+      color: black !important;
+    }
   }
 </style>

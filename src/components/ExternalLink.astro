@@ -2,55 +2,162 @@
 interface Props {
   href: string;
   class?: string;
+  showIcon?: boolean;
+  openInNewTab?: boolean;
 }
 
-const { href, class: className } = Astro.props;
+const { href, class: className, showIcon = true, openInNewTab } = Astro.props;
+
+// Auto-detect external links
 const isExternal = href?.startsWith('https://') || href?.startsWith('http://');
+
+// Determine target behavior
+const target =
+  openInNewTab !== undefined
+    ? openInNewTab
+      ? '_blank'
+      : '_self'
+    : isExternal
+      ? '_blank'
+      : '_self';
+
+// Security attributes for external links
+const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
 ---
 
-<a
-  href={href}
-  target={isExternal ? '_blank' : '_self'}
-  rel={isExternal ? 'noopener noreferrer' : undefined}
-  class:list={['external-markdown-link', className]}
->
+<a href={href} target={target} rel={rel} class:list={['external-link', className]}>
   <slot />
-  {isExternal && <span class="external-icon" aria-hidden="true" />}
+  {showIcon && isExternal && <span class="external-icon" aria-hidden="true" />}
 </a>
 
 <style>
-  /* External link styling for automatically enhanced markdown links */
-  .external-markdown-link {
-    color: var(--color-primary);
+  .external-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    display: inline;
+    transition: all 0.2s ease;
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+
+  .external-link:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .external-link:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+  }
+
+  /* External link icon */
+  .external-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-left: 0.25em;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    opacity: 0.7;
+  }
+
+  .external-link:hover .external-icon {
+    opacity: 1;
+    transform: translate(1px, -1px);
+  }
+
+  /* Light theme adjustments */
+  :root.light .external-icon {
+    opacity: 0.8;
+  }
+
+  :root.light .external-link:hover .external-icon {
+    opacity: 1;
+  }
+
+  /* Enhanced styling for different contexts */
+  .external-link.button-style {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.5rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 6px;
+    font-weight: 500;
     text-decoration: none;
   }
 
-  .external-markdown-link:hover {
-    text-decoration: underline;
+  .external-link.button-style:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-primary);
+    text-decoration: none;
+    transform: translateY(-1px);
   }
 
-  .external-icon {
-    display: inline-block;
-    width: 0.9rem;
-    height: 0.9rem;
-    margin-left: 3px;
-    background-color: currentColor;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3Cpolyline points='15,3 21,3 21,9'/%3E%3Cline x1='10' y1='14' x2='21' y2='3'/%3E%3C/svg%3E")
-      no-repeat center;
-    mask-size: contain;
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3Cpolyline points='15,3 21,3 21,9'/%3E%3Cline x1='10' y1='14' x2='21' y2='3'/%3E%3C/svg%3E")
-      no-repeat center;
-    -webkit-mask-size: contain;
-    vertical-align: baseline;
+  /* Inline text styling */
+  .external-link.inline {
+    font-weight: 500;
   }
 
-  /* Ensure proper alignment in Steps components */
-  :global(.sl-steps) .external-markdown-link {
-    display: inline;
-    vertical-align: baseline;
+  /* Large text/heading context */
+  h1 .external-link,
+  h2 .external-link,
+  h3 .external-link {
+    color: inherit;
   }
 
-  :global(.sl-steps) .external-icon {
-    vertical-align: baseline;
+  h1 .external-link:hover,
+  h2 .external-link:hover,
+  h3 .external-link:hover {
+    color: var(--accent-primary);
+  }
+
+  /* Print styles */
+  @media print {
+    .external-link {
+      color: #000 !important;
+      text-decoration: underline;
+    }
+
+    .external-icon {
+      display: none;
+    }
+
+    /* Show URL after external links in print */
+    .external-link[href^='http']:after {
+      content: ' (' attr(href) ')';
+      font-size: 0.8em;
+      color: #666;
+      font-style: italic;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .external-link {
+      text-decoration: underline;
+    }
+
+    .external-icon {
+      opacity: 1;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .external-link,
+    .external-icon {
+      transition: none;
+    }
+
+    .external-link:hover .external-icon {
+      transform: none;
+    }
   }
 </style>

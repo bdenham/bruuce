@@ -1,64 +1,44 @@
 ---
-
+// Vocabulary component for defining terms and concepts
 ---
 
-<div class="vocabularyContainer vocabulary">
+<div class="vocabulary-container">
   <slot />
 </div>
 
 <style>
-  .vocabularyContainer {
+  .vocabulary-container {
     overflow-wrap: break-word;
-    background-color: var(--sl-color-vocab);
-    padding: 0.5rem;
-    padding-top: 0.25rem;
-    padding-right: 1rem;
-    border-radius: 10px;
-    margin-left: -0.25rem;
-  }
-  .vocabularyContainer > :global(p) {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    margin-left: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-left: 4px solid var(--accent-primary);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1.5rem 0;
   }
 
-  .vocabularyContainer > :global(h3) {
-    margin-top: 1.25rem;
-    margin-bottom: 0.2rem;
-  }
-
-  .vocabulary > :global(h3) {
-    color: var(--sl-color-white);
+  .vocabulary-container :global(h3) {
+    color: var(--text-primary);
     font-size: 1.1rem;
-    font-weight: 700;
-    margin-left: 0.25rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  .vocabulary > :global(h3::before) {
-    display: inline-block;
-    border-color: var(--sl-color-black);
-    text-align: center;
-    vertical-align: sub;
-    content: '🔥';
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-right: 1rem;
-    height: 0.75rem;
-    width: 0.75rem;
+  .vocabulary-container :global(h3::before) {
+    content: '📚';
     font-size: 1rem;
   }
 
-  /* .vocabulary > :global(h3::after) {
-    display: inline-block;
-    text-align: center;
-    vertical-align: baseline;
-    color: #147af3;
-    content: '(noun)';
-    margin-top: 0;
+  .vocabulary-container :global(p) {
+    margin: 0 0 1rem 0;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+  }
+
+  .vocabulary-container :global(p:last-child) {
     margin-bottom: 0;
-    margin-left: 0.35rem;
-    font-weight: 400;
-    font-style: italic;
-    font-size: 13px;
-  } */
+  }
 </style>

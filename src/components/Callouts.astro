@@ -1,50 +1,56 @@
 ---
 interface Props {
   square?: boolean;
-  color?: string;
   columnCount?: number;
 }
 
-const { square, columnCount = 2 } = Astro.props;
-const radius = square ? 0 : '99rem';
+const { square = false, columnCount = 2 } = Astro.props;
 ---
 
-<div class="callouts">
+<div class="callouts" data-column-count={columnCount} data-square={square}>
   <slot />
 </div>
 
-<style is:global define:vars={{ radius, columnCount }}>
-  .callouts.callouts {
-    column-count: var(--columnCount);
+<style>
+  .callouts {
+    column-count: 2;
     column-gap: 1.5rem;
-    padding-top: 1rem;
+    margin: 2rem 0;
     overflow-wrap: break-word;
   }
+  
+  .callouts[data-column-count="1"] {
+    column-count: 1;
+  }
+  
+  .callouts[data-column-count="3"] {
+    column-count: 3;
+  }
 
-  .callouts ol {
+  .callouts :global(ol) {
+    padding-inline-start: 0;
+    margin-top: 0;
+    counter-reset: list-item;
+  }
+
+  .callouts :global(ul) {
     padding-inline-start: 0;
     margin-top: 0;
   }
 
-  .callouts ul {
-    padding-inline-start: 0;
-    margin-top: 0 !important;
-  }
-
-  .callouts ol li {
+  .callouts :global(ol li) {
     position: relative;
     padding-inline-start: 2.25rem;
     padding-bottom: 0;
     list-style: none;
     counter-increment: list-item;
-    color: var(--sl-color-gray-1);
+    color: var(--text-secondary);
     letter-spacing: -0.02rem;
-    min-height: calc(var(--bullet-size) + var(--bullet-margin));
-    /* min-height: 1rem; */
+    min-height: calc(1.5rem + 0.25rem);
     break-inside: avoid-column;
   }
 
-  .callouts ol li::before {
+  .callouts :global(ol li::before) {
     --bullet-size: 1.5rem;
     --bullet-margin: 0.25rem;
     position: absolute;
@@ -53,17 +59,21 @@ const radius = square ? 0 : '99rem';
     font-size: 1rem;
     font-weight: 700;
     text-align: center;
-    color: var(--sl-color-black);
-    background-color: var(--sl-color-white);
-    border-radius: var(--radius);
+    color: var(--text-primary);
+    background-color: var(--accent-primary);
+    border-radius: var(--square, 50%) == 'true' ? 4px : 50%;
     margin-left: -2rem;
     margin-right: var(--bullet-margin);
     margin-top: 0;
     width: var(--bullet-size);
     height: var(--bullet-size);
   }
+  
+  .callouts[data-square="true"] :global(ol li::before) {
+    border-radius: 4px;
+  }
 
-  .callouts ol li ul li {
+  .callouts :global(ol li ul li) {
     margin-top: 0;
     position: relative;
     padding-inline-start: 0;
@@ -71,33 +81,25 @@ const radius = square ? 0 : '99rem';
     margin-left: 1.25rem;
     list-style: none;
     counter-increment: none;
-    color: var(--sl-color-gray-1);
+    color: var(--text-tertiary);
     letter-spacing: 0;
     min-height: 1rem;
     break-inside: auto;
   }
 
-  .callouts ol li ul li::before {
-    --bullet-size: 0;
-    --bullet-margin: 0;
+  .callouts :global(ol li ul li::before) {
     position: absolute;
-    content: '⚫️';
+    content: '•';
     line-height: 1.6rem;
-    font-size: 0.4rem;
+    font-size: 1rem;
     font-weight: 700;
-    text-align: justify;
-    color: none;
-    background-color: none;
-    border-radius: 0;
+    color: var(--accent-primary);
     margin-left: -1rem;
-    margin-right: 0;
     margin-top: 0;
-    width: var(--bullet-size);
-    height: var(--bullet-size);
   }
 
   @media only screen and (max-width: 600px) {
-    .callouts.callouts {
+    .callouts {
       column-count: 1;
     }
   }

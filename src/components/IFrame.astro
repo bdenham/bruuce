@@ -1,135 +1,301 @@
 ---
 interface Props {
   src?: string;
+  title?: string;
+  width?: string;
+  height?: string;
+  minHeight?: string;
+  allowFullscreen?: boolean;
+  sandbox?: string;
+  loading?: 'eager' | 'lazy';
+  errorMessage?: string;
 }
-const { src } = Astro.props;
+
+const {
+  src,
+  title,
+  width = '100%',
+  height = '500px',
+  minHeight = '300px',
+  allowFullscreen = true,
+  sandbox = 'allow-scripts allow-same-origin allow-forms allow-popups',
+  loading = 'lazy',
+  errorMessage = 'Content failed to load. Please check the source URL.',
+} = Astro.props;
 
 if (!src) {
   console.warn('No iframe src provided');
 }
 
+// Handle legacy Storybook integration
 const basePath = import.meta.env.VITE_PROD_BASE_PATH || import.meta.env.VITE_GITHUB_BASE_PATH || '';
-const iframeSrc = src ? `${basePath}/storybook-static/iframe.html?id=${src}` : '#';
+const isStorybook = src && !src.startsWith('http') && !src.startsWith('/');
+const iframeSrc = isStorybook ? `${basePath}/storybook-static/iframe.html?id=${src}` : src || '';
+
+const iframeId = `iframe-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
 <div class="iframe-container">
-  <iframe
-    id="story"
-    title={src}
-    src={iframeSrc}
-    allow="clipboard-read; clipboard-write"
-    width="100%"
-    style="border: none; overflow: hidden; height: 100vh;"
-  >
-  </iframe>
   {
-    !src && (
+    src ? (
+      <div class="iframe-wrapper">
+        <iframe
+          id={iframeId}
+          title={title || src}
+          src={iframeSrc}
+          width={width}
+          height={height}
+          style={`min-height: ${minHeight};`}
+          allowfullscreen={allowFullscreen}
+          sandbox={sandbox}
+          loading={loading}
+          class="iframe-content"
+        />
+        <div class="loading-overlay">
+          <div class="loading-spinner">
+            <div class="spinner" />
+            <p>Loading content...</p>
+          </div>
+        </div>
+      </div>
+    ) : (
       <div class="error-message">
-        Storybook component not found. Please ensure Storybook is built and the iframe.html file
-        exists in the public/storybook-static directory.
+        <div class="error-icon">⚠️</div>
+        <h3>Content Not Available</h3>
+        <p>{errorMessage}</p>
       </div>
     )
   }
 </div>
 
-<style>
-  .iframe-container {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    min-width: 720px;
-    justify-self: flex-start;
-    padding: 0;
-  }
+<script define:vars={{ iframeId, isStorybook }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const iframe = document.getElementById(iframeId);
+    const loadingOverlay = iframe?.parentElement?.querySelector('.loading-overlay');
 
-  .error-message {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #f8f8f8;
-    padding: 1rem;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    text-align: center;
-    max-width: 80%;
-  }
-</style>
+    if (!iframe) return;
 
-<script>
-  window.addEventListener('message', (event) => {
-    if (event.data.height) {
-      const iframe = document.getElementById('story');
-      if (iframe) {
-        const iframeDocument =
-          (iframe as HTMLIFrameElement).contentDocument ||
-          (iframe as HTMLIFrameElement).contentWindow?.document;
-        if (iframeDocument) {
-          iframeDocument.documentElement.style.overflow = 'hidden';
-
-          // Get the actual content height including margins
-          const contentHeight = Math.max(
-            iframeDocument.documentElement.scrollHeight,
-            iframeDocument.body.scrollHeight,
-            event.data.height
-          );
-
-          // Set the iframe height to the maximum content height
-          iframe.style.height = contentHeight + 'px';
-        }
+    // Hide loading overlay when iframe loads
+    iframe.addEventListener('load', () => {
+      if (loadingOverlay) {
+        loadingOverlay.style.opacity = '0';
+        setTimeout(() => {
+          loadingOverlay.style.display = 'none';
+        }, 300);
       }
+
+      // Inject Storybook-specific styles if needed
+      if (isStorybook) {
+        injectStorybookStyles(iframe);
+      }
+    });
+
+    // Handle iframe errors
+    iframe.addEventListener('error', () => {
+      if (loadingOverlay) {
+        loadingOverlay.innerHTML = `
+          <div class="error-state">
+            <div class="error-icon">❌</div>
+            <p>Failed to load content</p>
+          </div>
+        `;
+      }
+    });
+
+    // Handle responsive height for Storybook
+    if (isStorybook) {
+      window.addEventListener('message', (event) => {
+        if (event.data.height && event.source === iframe.contentWindow) {
+          const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
+
+          if (iframeDocument) {
+            iframeDocument.documentElement.style.overflow = 'hidden';
+
+            const contentHeight = Math.max(
+              iframeDocument.documentElement.scrollHeight,
+              iframeDocument.body.scrollHeight,
+              event.data.height
+            );
+
+            iframe.style.height = contentHeight + 'px';
+          }
+        }
+      });
     }
   });
 
-  // Function to inject styles into the iframe
-  function injectStyles(iframe) {
-    if (!iframe) return;
+  // Function to inject Storybook-specific styles
+  function injectStorybookStyles(iframe) {
+    try {
+      const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
+      if (!iframeDocument) return;
 
-    const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
-    if (!iframeDocument) return;
+      const style = iframeDocument.createElement('style');
+      style.textContent = `
+        .sbdocs.sbdocs-wrapper {
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        h1.sbdocs-title.sb-unstyled {
+          display: none;
+        }
+        .sbdocs.sbdocs-content p:first-child {
+          font-size: clamp(1.1rem, calc(1.1rem + 1vw), 1.5rem);
+          line-height: clamp(1.75rem, calc(1.75rem + 1vw), 2.1rem);
+          margin-bottom: 1.5rem;
+          color: #6b7280;
+          text-wrap: pretty;
+          padding-top: 0;
+          margin-top: 0;
+        }
+        .sbdocs.sbdocs-content .sb-unstyled h1 {
+          display: none;
+        }
+        .sbdocs.sbdocs-content .sb-unstyled h1 + p {
+          font-size: clamp(1.1rem, calc(1.1rem + 1vw), 1.5rem);
+          line-height: clamp(1.75rem, calc(1.75rem + 1vw), 2.1rem);
+          margin-bottom: 1.5rem;
+          color: #6b7280;
+          text-wrap: pretty;
+          padding-top: 0;
+          margin-top: 0;
+        }
+      `;
 
-    // Create a style element
-    const style = iframeDocument.createElement('style');
-    style.textContent = `
-      .sbdocs.sbdocs-wrapper {
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-      h1.sbdocs-title.sb-unstyled {
-        display: none;
-      }
-      .sbdocs.sbdocs-content p:first-child {
-        font-size: clamp(1.1rem, calc(1.1rem + 1vw), 1.5rem);
-        line-height: clamp(1.75rem, calc(1.75rem + 1vw), 2.1rem);
-        margin-bottom: 1.5rem;
-        color: gray;
-        text-wrap: pretty;
-        padding-top: 0;
-        margin-top: 0;
-      }
-      .sbdocs.sbdocs-content .sb-unstyled h1 {
-        display: none;
-      }
-      .sbdocs.sbdocs-content .sb-unstyled h1 + p {
-        font-size: clamp(1.1rem, calc(1.1rem + 1vw), 1.5rem);
-        line-height: clamp(1.75rem, calc(1.75rem + 1vw), 2.1rem);
-        margin-bottom: 1.5rem;
-        color: gray;
-        text-wrap: pretty;
-        padding-top: 0;
-        margin-top: 0;
-      }
-    `;
-
-    // Append the style to the iframe's head
-    iframeDocument.head.appendChild(style);
-  }
-
-  // Wait for iframe to load before injecting styles
-  const iframe = document.getElementById('story');
-  if (iframe) {
-    iframe.addEventListener('load', () => {
-      injectStyles(iframe);
-    });
+      iframeDocument.head.appendChild(style);
+    } catch (error) {
+      console.warn('Could not inject Storybook styles:', error);
+    }
   }
 </script>
+
+<style>
+  .iframe-container {
+    margin: 2rem 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .iframe-wrapper {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px var(--shadow-secondary);
+    transition: all 0.2s ease;
+  }
+
+  .iframe-wrapper:hover {
+    border-color: var(--border-primary);
+    box-shadow: 0 6px 20px var(--shadow-primary);
+  }
+
+  .iframe-content {
+    width: 100%;
+    border: none;
+    display: block;
+    background: var(--bg-primary);
+  }
+
+  .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .loading-spinner {
+    text-align: center;
+    color: var(--text-muted);
+  }
+
+  .loading-spinner p {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border-secondary);
+    border-top: 3px solid var(--accent-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .error-message {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-left: 4px solid #ef4444;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+  }
+
+  .error-message .error-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .error-message h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+  }
+
+  .error-message p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .error-state {
+    text-align: center;
+    color: var(--text-muted);
+  }
+
+  .error-state .error-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .error-state p {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .iframe-container {
+      margin: 1rem 0;
+    }
+
+    .iframe-wrapper {
+      border-radius: 6px;
+    }
+
+    .error-message {
+      padding: 1.5rem;
+    }
+  }
+</style>

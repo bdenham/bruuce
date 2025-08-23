@@ -1,150 +1,417 @@
 ---
-import { fileTreeProcessor } from '@utils/file-tree';
-
-const content = await Astro.slots.render('default');
-
-if (!/^\s*<ul>/.test(content)) {
-  throw new Error(
-    `<FileTree> component expects its content to be an unordered list but found HTML starting with "${content.slice(
-      0,
-      20
-    )}..."`
-  );
+interface Props {
+  title?: string;
+  showRoot?: boolean;
+  rootName?: string;
 }
 
-const processedContent = await fileTreeProcessor.process({
-  value: content,
-  data: { directoryLabel: 'Directory' },
-});
+const { title, showRoot = true, rootName = 'Project' } = Astro.props;
+const treeId = `filetree-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
-<file-tree set:html={processedContent} class="not-content" data-pagefind-ignore />
+<div class="file-tree-container">
+  {title && <h4 class="file-tree-title">📁 {title}</h4>}
+  <div id={treeId} class="file-tree" data-show-root={showRoot.toString()} data-root-name={rootName}>
+    <div class="file-tree-content">
+      <slot />
+    </div>
+  </div>
+</div>
 
-<style is:global>
-  file-tree {
-    --x-space: 0.75rem;
-    --y-pad: 0;
+<script define:vars={{ treeId, showRoot, rootName }}>
+  function initializeFileTree() {
+    const container = document.getElementById(treeId);
+    if (!container) return;
 
-    display: block;
-    border: 1px solid var(--sl-color-gray-4);
-    border-radius: 0.25rem;
-    padding: 0.5rem 1rem;
-    font-size: 14px;
-    /* font-family: var(--__sl-font-mono); */
-    overflow-x: auto;
-    max-height: 600px;
-    margin-bottom: 1.5rem;
-    background-color: var(--sl-color-black);
-  }
+    const content = container.querySelector('.file-tree-content');
+    const ul = content?.querySelector('ul');
 
-  file-tree .directory > details,
-  file-tree .directory > details:hover,
-  file-tree .directory > details[open] {
-    border: 0;
-    padding: 0;
-    background: transparent;
-    text-wrap: nowrap;
-  }
+    if (!ul) {
+      console.warn('FileTree expects content to be a <ul> element');
+      return;
+    }
 
-  file-tree .directory > details > summary,
-  file-tree .directory > details[open] > summary {
-    margin-inline-start: calc(-1 * var(--x-space));
-    border: 0;
-    padding: 0 0.625rem;
-    font-weight: normal;
-    color: var(--sl-color-white);
-    max-width: 100%;
-    text-wrap: nowrap;
-  }
+    // Process the tree structure
+    processFileTree(ul);
 
-  file-tree .directory > details > summary::marker,
-  file-tree .directory > details > summary::-webkit-details-marker {
-    color: transparent;
-    /* margin-left: -1rem; */
-  }
+    // Create root wrapper if needed
+    if (showRoot) {
+      const rootDetails = document.createElement('details');
+      rootDetails.className = 'directory root-directory';
+      rootDetails.open = true;
 
-  file-tree .directory > details > summary:hover .tree-icon,
-  file-tree .directory > details > summary:hover {
-    cursor: pointer;
-    color: var(--sl-color-text-accent);
-    fill: var(--sl-color-text-accent);
-  }
+      const rootSummary = document.createElement('summary');
+      rootSummary.className = 'tree-entry';
+      rootSummary.innerHTML = `
+        <span class="tree-icon">📁</span>
+        <span class="tree-name">${rootName}/</span>
+      `;
 
-  file-tree ul,
-  file-tree .directory > details ul {
-    margin-inline-start: 1rem;
-    padding: 0;
-    padding-inline-start: 0.125rem;
-    list-style: none;
-  }
+      rootDetails.appendChild(rootSummary);
+      rootDetails.appendChild(ul);
 
-  file-tree .directory > details > summary:hover ~ ul {
-    border-color: var(--sl-color-gray-4);
-  }
-
-  file-tree .directory > details > summary:hover .highlight .tree-icon {
-    fill: var(--sl-color-text-invert);
-  }
-
-  file-tree > ul {
-    margin: 0;
-    border: 0;
-    padding: 0;
-  }
-
-  file-tree li {
-    padding: 3px 0;
-  }
-
-  file-tree .file {
-    margin-inline-start: calc(var(--x-space) - 0.125rem);
-    color: var(--sl-color-gray-1);
-  }
-
-  file-tree .tree-entry {
-    display: inline-flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    max-width: calc(100% - 1rem);
-  }
-  @media (min-width: 30em) {
-    file-tree .tree-entry {
-      flex-wrap: nowrap;
+      content.innerHTML = '';
+      content.appendChild(rootDetails);
     }
   }
 
-  file-tree .tree-entry > :first-child {
+  function processFileTree(ul) {
+    const items = Array.from(ul.children);
+
+    items.forEach((li) => {
+      const text = li.textContent?.trim() || '';
+      const childUl = li.querySelector('ul');
+
+      // Clean the text content
+      const cleanText = text.replace(/^\s*[-*+]\s*/, '').trim();
+
+      if (childUl) {
+        // This is a directory
+        const details = document.createElement('details');
+        details.className = 'directory';
+        details.open = false; // Collapsed by default
+
+        const summary = document.createElement('summary');
+        summary.className = 'tree-entry';
+
+        // Extract directory name (everything before the first nested item)
+        const dirName = cleanText.split('\n')[0] || cleanText;
+
+        summary.innerHTML = `
+          <span class="tree-icon">📁</span>
+          <span class="tree-name">${dirName}/</span>
+        `;
+
+        details.appendChild(summary);
+
+        // Process nested ul
+        processFileTree(childUl);
+        details.appendChild(childUl);
+
+        li.innerHTML = '';
+        li.appendChild(details);
+        li.className = 'tree-item directory-item';
+      } else {
+        // This is a file
+        const wrapper = document.createElement('div');
+        wrapper.className = 'tree-entry';
+
+        // Determine file type and icon
+        const { icon, type } = getFileIcon(cleanText);
+
+        wrapper.innerHTML = `
+          <span class="tree-icon">${icon}</span>
+          <span class="tree-name">${cleanText}</span>
+        `;
+
+        li.innerHTML = '';
+        li.appendChild(wrapper);
+        li.className = `tree-item file-item file-${type}`;
+      }
+    });
+  }
+
+  function getFileIcon(filename) {
+    const ext = filename.split('.').pop()?.toLowerCase() || '';
+
+    const iconMap = {
+      // Code files
+      js: { icon: '📜', type: 'javascript' },
+      ts: { icon: '📘', type: 'typescript' },
+      jsx: { icon: '⚛️', type: 'react' },
+      tsx: { icon: '⚛️', type: 'react' },
+      vue: { icon: '💚', type: 'vue' },
+      py: { icon: '🐍', type: 'python' },
+      java: { icon: '☕', type: 'java' },
+      php: { icon: '🐘', type: 'php' },
+      rb: { icon: '💎', type: 'ruby' },
+      go: { icon: '🐹', type: 'go' },
+      rs: { icon: '🦀', type: 'rust' },
+      cpp: { icon: '⚡', type: 'cpp' },
+      c: { icon: '⚡', type: 'c' },
+
+      // Web files
+      html: { icon: '🌐', type: 'html' },
+      css: { icon: '🎨', type: 'css' },
+      scss: { icon: '🎨', type: 'scss' },
+      sass: { icon: '🎨', type: 'sass' },
+
+      // Config files
+      json: { icon: '⚙️', type: 'config' },
+      yaml: { icon: '⚙️', type: 'config' },
+      yml: { icon: '⚙️', type: 'config' },
+      toml: { icon: '⚙️', type: 'config' },
+      xml: { icon: '⚙️', type: 'config' },
+
+      // Documentation
+      md: { icon: '📄', type: 'markdown' },
+      txt: { icon: '📄', type: 'text' },
+      pdf: { icon: '📕', type: 'pdf' },
+
+      // Images
+      png: { icon: '🖼️', type: 'image' },
+      jpg: { icon: '🖼️', type: 'image' },
+      jpeg: { icon: '🖼️', type: 'image' },
+      gif: { icon: '🖼️', type: 'image' },
+      svg: { icon: '🎨', type: 'image' },
+      webp: { icon: '🖼️', type: 'image' },
+
+      // Archives
+      zip: { icon: '📦', type: 'archive' },
+      tar: { icon: '📦', type: 'archive' },
+      gz: { icon: '📦', type: 'archive' },
+
+      // Special files
+      gitignore: { icon: '🙈', type: 'git' },
+      dockerfile: { icon: '🐳', type: 'docker' },
+      Dockerfile: { icon: '🐳', type: 'docker' },
+    };
+
+    // Check for special filenames first
+    const filename_lower = filename.toLowerCase();
+    if (iconMap[filename_lower]) {
+      return iconMap[filename_lower];
+    }
+
+    // Check by extension
+    if (iconMap[ext]) {
+      return iconMap[ext];
+    }
+
+    // Default file icon
+    return { icon: '📄', type: 'default' };
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeFileTree);
+  } else {
+    initializeFileTree();
+  }
+</script>
+
+<style>
+  .file-tree-container {
+    margin: 2rem 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px var(--shadow-secondary);
+  }
+
+  .file-tree-container:hover {
+    border-color: var(--border-primary);
+    box-shadow: 0 4px 12px var(--shadow-primary);
+  }
+
+  .file-tree-title {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-secondary);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .file-tree {
+    padding: 1rem;
+    background: var(--bg-primary);
+    font-family: 'Courier New', Courier, 'Lucida Console', 'Monaco', monospace;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    overflow-x: auto;
+  }
+
+  /* Root directory styling */
+  .root-directory {
+    border: none;
+    margin: 0;
+  }
+
+  .root-directory > summary {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  /* Directory styling */
+  .directory {
+    margin: 0;
+    border: none;
+  }
+
+  .directory > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.25rem 0;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    user-select: none;
+  }
+
+  .directory > summary:hover {
+    background: var(--bg-tertiary);
+    color: var(--accent-primary);
+  }
+
+  .directory > summary::marker,
+  .directory > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .directory[open] > summary {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Tree structure */
+  .file-tree ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 1rem;
+    border-left: 1px solid var(--border-secondary);
+    position: relative;
+  }
+
+  .file-tree > .file-tree-content > ul,
+  .root-directory > ul {
+    border-left: none;
+    margin-left: 0;
+  }
+
+  .tree-item {
+    position: relative;
+    padding: 0.125rem 0;
+  }
+
+  .tree-item::before {
+    content: '';
+    position: absolute;
+    left: -1rem;
+    top: 0.75rem;
+    width: 0.75rem;
+    height: 1px;
+    background: var(--border-secondary);
+  }
+
+  .file-tree > .file-tree-content > ul > .tree-item::before,
+  .root-directory > ul > .tree-item::before {
+    display: none;
+  }
+
+  .tree-entry {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .tree-entry:hover {
+    color: var(--text-primary);
+  }
+
+  .tree-icon {
+    font-size: 1rem;
+    line-height: 1;
     flex-shrink: 0;
   }
 
-  file-tree .empty {
-    color: var(--sl-color-gray-3);
-    padding-inline-start: 0.375rem;
+  .tree-name {
+    font-family: inherit;
+    word-break: break-all;
   }
 
-  file-tree .comment {
-    color: var(--sl-color-gray-3);
-    padding-inline-start: 0.5rem;
-    /* max-width: 24rem; */
-    /* min-width: 12rem; */
+  /* File type specific styling */
+  .file-javascript .tree-name,
+  .file-typescript .tree-name {
+    color: var(--text-secondary);
   }
 
-  file-tree .highlight {
-    display: inline-block;
-    border-radius: 0.25rem;
-    padding-inline-end: 0.5rem;
-    color: var(--sl-color-text-invert);
+  .file-html .tree-name,
+  .file-css .tree-name {
+    color: var(--text-secondary);
   }
 
-  file-tree svg.tree-icon {
-    display: inline;
-    vertical-align: middle;
-    margin-right: 0.25rem;
-    width: 1.25rem;
-    height: 1.25rem;
-    stroke: var(--sl-color-gray-2);
+  .file-config .tree-name {
+    color: var(--text-muted);
+    font-style: italic;
   }
-  file-tree .highlight svg.tree-icon {
-    fill: var(--sl-color-text-invert);
+
+  .directory-item .tree-name {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  /* Hover effects */
+  .tree-item:hover .tree-entry {
+    background: var(--bg-tertiary);
+    padding: 0.25rem 0.5rem;
+    margin: -0.25rem -0.5rem;
+    border-radius: 4px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .file-tree {
+      padding: 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .file-tree ul {
+      margin-left: 0.75rem;
+    }
+
+    .tree-item::before {
+      left: -0.75rem;
+      width: 0.5rem;
+    }
+
+    .tree-entry {
+      gap: 0.375rem;
+    }
+
+    .tree-icon {
+      font-size: 0.875rem;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    .file-tree-container {
+      border: 1px solid #ccc;
+      box-shadow: none;
+      background: white;
+    }
+
+    .file-tree-title {
+      background: #f5f5f5;
+      color: black;
+    }
+
+    .file-tree {
+      background: white;
+    }
+
+    .tree-entry,
+    .tree-name {
+      color: black !important;
+    }
+
+    .file-tree ul {
+      border-left-color: #ccc;
+    }
+
+    .tree-item::before {
+      background: #ccc;
+    }
+
+    .directory > summary:hover {
+      background: none;
+    }
   }
 </style>

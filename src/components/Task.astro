@@ -1,117 +1,95 @@
 ---
 interface Props {
   square?: boolean;
+  title?: string;
 }
 
-const { square } = Astro.props;
-const radius = square ? 0 : 0;
+const { square = false, title } = Astro.props;
 ---
 
-<div class="ac-task">
+<div class="task-item" data-square={square}>
+  {title && <h4 class="task-title">{title}</h4>}
   <slot />
 </div>
 
-<style is:global define:vars={{ radius }}>
-  .ac-task.ac-task {
+<style>
+  .task-item {
     --bullet-size: 2.5rem;
-    border-radius: 0.5rem;
-    border: 1px solid var(--sl-color-gray-5);
-    background-color: var(--sl-color-gray-8);
-    color: var(--sl-color-gray-1);
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    margin-left: -1rem;
-    overflow-wrap: break-word;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-bottom: 1rem;
-    /* box-shadow: 0 0 6px 1px var(--sl-color-gray-5); */
-  }
-
-  .ac-task.ac-task > ol {
-    color: var(--sl-color-gray-1);
-    padding-left: 1rem;
-  }
-
-  .ac-task.ac-task > h3 {
-    counter-increment: task;
-    color: var(--sl-color-gray-1);
-    line-height: 1;
-    padding-left: 0;
+    border-radius: 8px;
+    border: 1px solid var(--border-secondary);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    padding: 1rem;
     margin-bottom: 1rem;
-  }
-
-  .ac-task.ac-task > h3::before {
-    content: 'Step ' counter(task);
-    border-radius: 0.2rem;
-    display: inline-block;
-    text-align: center;
-    color: var(--sl-color-black);
-    width: 4rem;
-    height: 1.5rem;
-    line-height: normal;
-
-    /* Screen rules */
-    font-size: 1rem;
-    margin-left: -1.75rem;
-    margin-top: -2.75rem;
-    margin-right: 0;
-    position: absolute;
-    color: var(--sl-color-black);
-    background-color: var(--sl-color-accent);
-
-    /* Test Print rules */
-    /* font-size: 1.2rem;
-    margin-left: -1rem;
-    margin-top: -1rem;
-    margin-right: 0.2rem;
-    margin-bottom: -1rem;
     position: relative;
-    color: #cb361d;
-    background-color: transparent; */
+    padding-left: calc(var(--bullet-size) + 1rem);
   }
 
-  /* Print-specific styles */
-  @media print {
-    .ac-task.ac-task {
-      background-color: #fff;
-      color: #000;
-      border: none;
-      page-break-after: always;
-      page-break-inside: avoid;
-    }
+  .task-item[data-square='true'] {
+    border-radius: 4px;
+  }
 
-    .ac-task.ac-task > ol {
-      padding-left: 0;
-      margin: 0;
-      padding: 0;
-    }
-    .ac-task.ac-task ol.sl-steps li {
-      margin-bottom: 0;
-    }
+  .task-item::before {
+    content: counter(task);
+    position: absolute;
+    left: 0.75rem;
+    top: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--bullet-size);
+    height: var(--bullet-size);
+    background: var(--accent-primary);
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 50%;
+    line-height: 1;
+  }
 
-    .ac-task.ac-task > h3::before {
-      content: 'Step ' counter(task);
-      border-radius: 0.2rem;
-      display: inline-block;
-      text-align: center;
-      color: var(--sl-color-black);
-      width: 4rem;
-      height: 1.5rem;
-      line-height: normal;
+  .task-item[data-square='true']::before {
+    border-radius: 4px;
+  }
 
-      font-size: 1.2rem;
-      margin-left: -0.5rem;
-      margin-top: -1rem;
-      margin-right: 0.2rem;
-      margin-bottom: -1rem;
-      position: relative;
-      color: #cb361d;
-      background-color: transparent;
-    }
-    .ac-task.ac-task > h3 {
-      margin-top: 0;
-      margin-bottom: 0.75rem;
-    }
+  .task-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .task-item :global(p) {
+    margin-bottom: 0.75rem;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+  }
+
+  .task-item :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .task-item :global(ul),
+  .task-item :global(ol) {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+  }
+
+  .task-item :global(li) {
+    margin-bottom: 0.25rem;
+    color: var(--text-tertiary);
+  }
+
+  .task-item :global(code) {
+    background: var(--bg-primary);
+    color: var(--accent-primary);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: 'Courier New', Courier, 'Lucida Console', 'Monaco', monospace;
+  }
+
+  .task-item :global(strong) {
+    color: var(--text-primary);
+    font-weight: 600;
   }
 </style>

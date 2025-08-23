@@ -1,5 +1,4 @@
 ---
-import Icon from './overrides/Icon.astro';
 import Tooltip from './Tooltip.astro';
 
 type IconName =
@@ -7,16 +6,27 @@ type IconName =
   | 'html'
   | 'css'
   | 'js'
+  | 'javascript'
   | 'node'
+  | 'nodejs'
   | 'sharepoint'
   | 'googledrive'
   | 'sidekick'
   | 'codesync'
   | 'graphql'
-  | 'commerce';
+  | 'commerce'
+  | 'react'
+  | 'vue'
+  | 'astro'
+  | 'typescript'
+  | 'python'
+  | 'docker'
+  | 'git';
 
-interface PrerequisiteProps {
+interface Props {
   prerequisites?: Record<IconName, boolean>;
+  title?: string;
+  showTitle?: boolean;
 }
 
 const DEFAULT_PREREQUISITES: Record<IconName, boolean> = {
@@ -24,64 +34,302 @@ const DEFAULT_PREREQUISITES: Record<IconName, boolean> = {
   html: false,
   css: false,
   js: false,
+  javascript: false,
   node: false,
+  nodejs: false,
   sharepoint: false,
   googledrive: false,
   sidekick: false,
   codesync: false,
   graphql: false,
   commerce: false,
+  react: false,
+  vue: false,
+  astro: false,
+  typescript: false,
+  python: false,
+  docker: false,
+  git: false,
 };
 
-const { prerequisites = DEFAULT_PREREQUISITES } = Astro.props as PrerequisiteProps;
+// Icon mappings - using emojis and symbols for maximum compatibility
+const ICON_SYMBOLS: Record<IconName, string> = {
+  github: '🐙',
+  html: '🌐',
+  css: '🎨',
+  js: '💛',
+  javascript: '💛',
+  node: '💚',
+  nodejs: '💚',
+  sharepoint: '📊',
+  googledrive: '💾',
+  sidekick: '🚀',
+  codesync: '🔄',
+  graphql: '🔗',
+  commerce: '🛒',
+  react: '⚛️',
+  vue: '💚',
+  astro: '🚀',
+  typescript: '💙',
+  python: '🐍',
+  docker: '🐳',
+  git: '📝',
+};
 
 const TOOLTIP_TEXTS: Record<IconName, string> = {
-  github: 'GitHub account',
-  html: 'HTML proficiency',
-  css: 'CSS proficiency',
-  js: 'JavaScript proficiency',
-  node: 'Node.js (LTS version)',
-  sharepoint: 'GoogleDrive or Sharepoint account',
-  googledrive: 'GoogleDrive or Sharepoint account',
-  sidekick: 'Sidekick extension',
-  codesync: 'AEM Code Sync app',
-  graphql: 'GraphQL proficiency',
-  commerce: 'E-commerce platform configured',
+  github: 'GitHub account and basic Git knowledge',
+  html: 'HTML fundamentals',
+  css: 'CSS styling knowledge',
+  js: 'JavaScript programming',
+  javascript: 'JavaScript programming',
+  node: 'Node.js runtime environment',
+  nodejs: 'Node.js runtime environment',
+  sharepoint: 'SharePoint experience',
+  googledrive: 'Google Drive access',
+  sidekick: 'Adobe Experience Manager Sidekick',
+  codesync: 'Code synchronization tools',
+  graphql: 'GraphQL query language',
+  commerce: 'E-commerce platform knowledge',
+  react: 'React framework',
+  vue: 'Vue.js framework',
+  astro: 'Astro framework',
+  typescript: 'TypeScript language',
+  python: 'Python programming',
+  docker: 'Docker containerization',
+  git: 'Git version control',
 };
 
+const {
+  prerequisites = DEFAULT_PREREQUISITES,
+  title = 'Prerequisites',
+  showTitle = true,
+} = Astro.props;
+
+// Filter to only show required prerequisites
+const requiredPrereqs = Object.fromEntries(
+  Object.entries(prerequisites).filter(([_, required]) => required)
+) as Record<IconName, boolean>;
+
 function getTooltipText(prereqs: Record<IconName, boolean>) {
-  const uniqueTooltips = new Set<string>();
+  const requiredItems = Object.entries(prereqs)
+    .filter(([_, required]) => required)
+    .map(([key, _]) => TOOLTIP_TEXTS[key as IconName])
+    .filter(Boolean);
 
-  Object.entries(prereqs).forEach(([key, value]) => {
-    if (value) {
-      uniqueTooltips.add(TOOLTIP_TEXTS[key as IconName]);
-    }
-  });
+  if (requiredItems.length === 0) {
+    return 'No specific prerequisites required';
+  }
 
-  return `PREREQUISITES: ${Array.from(uniqueTooltips).join(', ')}`;
+  return `Prerequisites: ${requiredItems.join(', ')}`;
 }
 
-let tooltipText = getTooltipText(prerequisites);
+const tooltipText = getTooltipText(requiredPrereqs);
+const hasPrerequisites = Object.keys(requiredPrereqs).length > 0;
 ---
 
 {
-  prerequisites && (
-    <Tooltip text={tooltipText}>
-      <div class="icons">
-        {Object.keys(prerequisites).map((key) => (
-          <Icon name={key as IconName} size="1.5rem" label={key} title={key} />
-        ))}
+  hasPrerequisites && (
+    <div class="prerequisites-section">
+      {showTitle && <h4 class="prerequisites-title">📋 {title}</h4>}
+      <Tooltip text={tooltipText} position="bottom" maxWidth="300px">
+        <div class="prerequisites-container">
+          <div class="prerequisites-icons">
+            {Object.entries(requiredPrereqs).map(
+              ([key, required]) =>
+                required && (
+                  <div class="prerequisite-item">
+                    <span
+                      class="prerequisite-icon"
+                      role="img"
+                      aria-label={TOOLTIP_TEXTS[key as IconName]}
+                    >
+                      {ICON_SYMBOLS[key as IconName]}
+                    </span>
+                    <span class="prerequisite-label">{key.toUpperCase()}</span>
+                  </div>
+                )
+            )}
+          </div>
+          <div class="prerequisites-hint">
+            <span class="hint-text">Hover for details</span>
+          </div>
+        </div>
+      </Tooltip>
+    </div>
+  )
+}
+
+{
+  !hasPrerequisites && showTitle && (
+    <div class="prerequisites-section">
+      <div class="no-prerequisites">
+        <span class="no-prereq-icon">✨</span>
+        <span>No specific prerequisites required</span>
       </div>
-    </Tooltip>
+    </div>
   )
 }
 
 <style>
-  .icons {
-    align-items: baseline;
+  .prerequisites-section {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-left: 4px solid var(--accent-primary);
     border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .prerequisites-section:hover {
+    border-color: var(--border-primary);
+    box-shadow: 0 2px 8px var(--shadow-secondary);
+  }
+
+  .prerequisites-title {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
     display: flex;
+    align-items: center;
     gap: 0.5rem;
-    margin-top: 0;
+  }
+
+  .prerequisites-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .prerequisites-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .prerequisite-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-secondary);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    min-width: 3.5rem;
+  }
+
+  .prerequisite-item:hover {
+    background: var(--bg-primary);
+    border-color: var(--border-primary);
+    transform: translateY(-1px);
+  }
+
+  .prerequisite-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .prerequisite-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+  .prerequisites-hint {
+    align-self: flex-end;
+  }
+
+  .hint-text {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-style: italic;
+    opacity: 0.7;
+  }
+
+  .no-prerequisites {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+
+  .no-prereq-icon {
+    font-size: 1rem;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .prerequisites-section {
+      padding: 0.75rem;
+      margin: 1rem 0;
+    }
+
+    .prerequisites-icons {
+      gap: 0.5rem;
+    }
+
+    .prerequisite-item {
+      padding: 0.375rem;
+      min-width: 3rem;
+    }
+
+    .prerequisite-icon {
+      font-size: 1.1rem;
+    }
+
+    .prerequisite-label {
+      font-size: 0.6rem;
+    }
+
+    .prerequisites-hint {
+      display: none; /* Hide hint on mobile to save space */
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .prerequisites-section {
+      border-width: 2px;
+    }
+
+    .prerequisite-item {
+      border-width: 2px;
+    }
+
+    .prerequisite-label {
+      font-weight: 700;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    .prerequisites-section {
+      border: 1px solid #ccc;
+      background: white;
+      box-shadow: none;
+    }
+
+    .prerequisite-item {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+    }
+
+    .prerequisite-label,
+    .hint-text,
+    .no-prerequisites {
+      color: black !important;
+    }
+
+    .prerequisites-hint {
+      display: none;
+    }
   }
 </style>
