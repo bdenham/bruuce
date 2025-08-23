@@ -55,7 +55,7 @@ const screenshotId = `screenshot-${Math.random().toString(36).substr(2, 9)}`;
 {clickToZoom && (
   <script define:vars={{ screenshotId }}>
     document.addEventListener('DOMContentLoaded', () => {
-      const screenshot = document.querySelector(`[data-screenshot-id="${screenshotId}"]`);
+      const screenshot = document.querySelector('[data-screenshot-id="' + screenshotId + '"]');
       const img = screenshot?.querySelector('.screenshot-image');
       
       if (!screenshot || !img) return;
@@ -64,14 +64,13 @@ const screenshotId = `screenshot-${Math.random().toString(36).substr(2, 9)}`;
         // Create modal
         const modal = document.createElement('div');
         modal.className = 'screenshot-modal';
-        modal.innerHTML = `
-          <div class="screenshot-modal-backdrop">
-            <div class="screenshot-modal-content">
-              <button class="screenshot-modal-close" aria-label="Close">×</button>
-              <img src="${img.src}" alt="${img.alt}" class="screenshot-modal-image" />
-            </div>
-          </div>
-        `;
+        modal.innerHTML = 
+          '<div class="screenshot-modal-backdrop">' +
+            '<div class="screenshot-modal-content">' +
+              '<button class="screenshot-modal-close" aria-label="Close">×</button>' +
+              '<img src="' + img.src + '" alt="' + img.alt + '" class="screenshot-modal-image" />' +
+            '</div>' +
+          '</div>';
         
         // Add modal styles
         modal.style.cssText = `
