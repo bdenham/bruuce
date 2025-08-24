@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogPostCard from '../../components/ui/BlogPostCard.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
+import { pathWithBase } from '../../utils/base';
 
 // Get all blog posts and sort by date (newest first)
 const blogPosts = await getCollection('blog');
@@ -14,7 +15,7 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
   description="Insights on developer experience, API documentation, technical writing, and making complex concepts clear by Bruce Denham."
   showBackLink={true}
   backLinkText="← Back to Home"
-  backLinkHref="/"
+  backLinkHref={pathWithBase('/')}
   footerText="More insights coming soon! "
   footerLinkText="Connect with me on LinkedIn"
   footerLinkHref="https://linkedin.com/in/brucedenham/"

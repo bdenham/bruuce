@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
+import { pathWithBase } from '../../utils/base';
 ---
 
 <BaseLayout
@@ -8,7 +9,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   description="Complete resume of Bruce Denham, Senior Technical Writer & Developer Experience Strategist with 30+ years of experience."
   showBackLink={true}
   backLinkText="← Back to Home"
-  backLinkHref="/"
+  backLinkHref={pathWithBase('/')}
   footerText="Ready to collaborate? "
   footerLinkText="Let's connect on LinkedIn"
   footerLinkHref="https://linkedin.com/in/brucedenham/"
