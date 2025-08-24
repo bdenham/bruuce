@@ -129,22 +129,7 @@ async function config() {
                     { icon: 'github', label: 'GitHub', href: 'https://github.com/bdenham' },
                 ],
                 head: [
-                    // Resource hints for better performance
-                    {
-                        tag: 'link',
-                        attrs: {
-                            rel: 'dns-prefetch',
-                            href: '//unpkg.com'
-                        }
-                    },
-                    {
-                        tag: 'link',
-                        attrs: {
-                            rel: 'preconnect',
-                            href: 'https://unpkg.com',
-                            crossorigin: ''
-                        }
-                    },
+                    // Minimal resource hints - only critical fonts
                     // Critical font preloading - only the 2 essential fonts
                     {
                         tag: 'link',
