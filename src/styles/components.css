@@ -195,7 +195,7 @@
     align-items: center;
     gap: 6px;
     background: var(--accent-primary);
-    color: #ffffff;
+    color: var(--bg-primary);
     text-decoration: none;
     padding: 12px 24px;
     border-radius: 8px;

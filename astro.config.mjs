@@ -24,19 +24,6 @@ async function config() {
         },
         trailingSlash: 'ignore',
         outDir: './dist',
-        build: {
-            assets: '_astro',
-            assetsInlineLimit: 0, // Ensure assets are hashed and externalized
-            cssCodeSplit: true, // Enable CSS code splitting for better caching
-            rollupOptions: {
-                output: {
-                    // Ensure consistent hashing for better caching
-                    entryFileNames: '_astro/[name].[hash].js',
-                    chunkFileNames: '_astro/[name].[hash].js',
-                    assetFileNames: '_astro/[name].[hash][extname]'
-                }
-            }
-        },
 
         integrations: [
             starlight({
@@ -117,24 +104,23 @@ async function config() {
                     { icon: 'github', label: 'GitHub', href: 'https://github.com/bdenham' },
                 ],
                 head: [
-                    // Font preloads for better LCP performance (with GitHub base path)
-                    // Preload 400 weight first with high priority - used by h1 LCP element
+                    // Font preloads for better performance (with GitHub base path)
+                    // Preload 300 weight first as it's used extensively for body text
                     {
                         tag: 'link',
                         attrs: {
                             rel: 'preload',
-                            href: `${basePath}/fonts/adobe-clean-400.woff2`,
+                            href: `${basePath}/fonts/adobe-clean-300.woff2`,
                             as: 'font',
                             type: 'font/woff2',
-                            crossorigin: '',
-                            fetchpriority: 'high'
+                            crossorigin: ''
                         }
                     },
                     {
                         tag: 'link',
                         attrs: {
                             rel: 'preload',
-                            href: `${basePath}/fonts/adobe-clean-300.woff2`,
+                            href: `${basePath}/fonts/adobe-clean-400.woff2`,
                             as: 'font',
                             type: 'font/woff2',
                             crossorigin: ''

@@ -86,34 +86,6 @@
     --button-secondary-hover-border: rgba(160, 174, 192, 0.5);
 }
 
-/* Skip link for keyboard navigation accessibility */
-.skip-link {
-    position: absolute;
-    left: -10000px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    background: var(--accent-primary);
-    color: #ffffff;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 600;
-    z-index: 1000;
-    transition: all 0.2s ease;
-}
-
-.skip-link:focus {
-    position: fixed;
-    left: 16px;
-    top: 16px;
-    width: auto;
-    height: auto;
-    overflow: visible;
-    box-shadow: 0 4px 12px var(--shadow-primary);
-}
-
 /* Global base styles */
 *,
 *::before,
@@ -247,11 +219,6 @@ h1 {
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: var(--text-primary);
-    /* LCP optimizations */
-    font-weight: 400;
-    /* Prevent layout shifts during font loading */
-    font-size-adjust: 0.5;
-    contain: layout style;
 }
 
 h1 span {
@@ -764,32 +731,10 @@ footer a:hover {
 }
 
 /* Page headers */
-#main-title {
-    /* No animation delay for LCP optimization */
-    animation: slideInUp 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
-    animation-delay: 0ms;
-    /* Prevent layout shifts */
-    contain: layout style;
-    will-change: transform, opacity;
-}
-
+#main-title,
 #blog-title,
 #about-title,
 #projects-title {
     animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
     animation-delay: 50ms;
-}
-
-/* Performance optimization for reduced motion and LCP */
-@media (prefers-reduced-motion: reduce) {
-
-    #main-title,
-    #blog-title,
-    #about-title,
-    #projects-title {
-        animation: none;
-        animation-delay: 0ms;
-        opacity: 1;
-        transform: none;
-    }
 }
