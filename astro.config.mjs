@@ -10,7 +10,7 @@ import starlightBlog from 'starlight-blog'
 
 // https://astro.build/config
 async function config() {
-    // No base path needed - serving from root domain
+    // No base path for clean URLs, but we'll handle assets separately
     const basePath = process.env.VITE_GITHUB_BASE_PATH || '';
 
     return defineConfig({

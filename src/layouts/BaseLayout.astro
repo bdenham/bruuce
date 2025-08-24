@@ -56,7 +56,19 @@ const {
       })();
     </script>
     <!-- Lazy load search scripts only when needed -->
-    <script src="/scripts/search-loader.js" type="module"></script>
+    <script>
+      // Determine correct script path for GitHub Pages vs custom domain
+      const scriptPath =
+        window.location.hostname === 'bdenham.github.io' &&
+        window.location.pathname.startsWith('/sanity-check/')
+          ? '/sanity-check/scripts/search-loader.js'
+          : '/scripts/search-loader.js';
+
+      const script = document.createElement('script');
+      script.src = scriptPath;
+      script.type = 'module';
+      document.head.appendChild(script);
+    </script>
   </head>
   <body>
     <!-- Skip link for keyboard navigation -->
