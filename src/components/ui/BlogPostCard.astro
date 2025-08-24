@@ -1,4 +1,6 @@
 ---
+import { pathWithBase } from '../../utils/base';
+
 interface Props {
   post: {
     slug: string;
@@ -14,7 +16,7 @@ interface Props {
 const { post, showEmoji = true } = Astro.props;
 ---
 
-<a href={`/blog/${post.slug}/`} class="blog-post-link">
+<a href={pathWithBase(`/blog/${post.slug}/`)} class="blog-post-link">
   <div class="blog-post">
     <h3>{showEmoji ? '🚀 ' : ''}{post.data.title}</h3>
     <p>{post.data.excerpt}</p>
