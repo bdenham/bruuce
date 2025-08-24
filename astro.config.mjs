@@ -23,6 +23,7 @@ async function config() {
             build: {
                 cssCodeSplit: true, // Split CSS by route
                 assetsInlineLimit: 2048, // Inline assets smaller than 2KB
+                target: 'es2022', // Modern browser optimization with top-level await support
             },
         },
         image: {
