@@ -183,6 +183,10 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
       const finalCenterY = viewportHeight / 2;
 
       const modal = document.createElement('div') as HTMLDivElement;
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('aria-labelledby', 'pdf-modal-title');
+      modal.setAttribute('aria-describedby', 'pdf-modal-desc');
       modal.style.cssText = `
         position: fixed;
         top: 0;
@@ -216,7 +220,19 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
         backdrop-filter: blur(8px);
       `;
 
-      const closeButton = document.createElement('div') as HTMLDivElement;
+      // Add screen reader titles
+      const modalTitle = document.createElement('h2');
+      modalTitle.id = 'pdf-modal-title';
+      modalTitle.className = 'sr-only';
+      modalTitle.textContent = 'PDF Viewer';
+      
+      const modalDesc = document.createElement('p');
+      modalDesc.id = 'pdf-modal-desc';
+      modalDesc.className = 'sr-only';
+      modalDesc.textContent = 'Press Escape or click the X to close this dialog';
+
+      const closeButton = document.createElement('button') as HTMLButtonElement;
+      closeButton.setAttribute('aria-label', 'Close PDF viewer dialog');
       closeButton.style.cssText = `
         position: fixed;
         top: 2rem;
@@ -281,9 +297,26 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
       page.render(modalRenderContext);
 
       modalContent.appendChild(modalCanvas);
+      modal.appendChild(modalTitle);
+      modal.appendChild(modalDesc);
       modal.appendChild(modalContent);
       modal.appendChild(closeButton);
       document.body.appendChild(modal);
+      
+      // Focus management
+      setTimeout(() => closeButton.focus(), 100);
+      
+      // Trap focus within modal
+      modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.closeModal();
+        }
+        if (e.key === 'Tab') {
+          // Only close button is focusable, so just keep focus on it
+          e.preventDefault();
+          closeButton.focus();
+        }
+      });
 
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {

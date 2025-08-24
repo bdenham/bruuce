@@ -114,8 +114,19 @@ const diagramId = `diagram-${Math.random().toString(36).substr(2, 9)}`;
         });
         
         // Add click to zoom functionality
-        img.addEventListener('click', () => {
-          openDiagramModal(svgUrl, alt);
+        // Make image keyboard accessible
+        img.tabIndex = 0;
+        img.setAttribute('role', 'button');
+        img.setAttribute('aria-label', `View ${alt} in full screen. Press Enter or Space to open.`);
+        
+        const openModal = () => openDiagramModal(svgUrl, alt);
+        
+        img.addEventListener('click', openModal);
+        img.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal();
+          }
         });
         
         // Replace loading with rendered diagram
@@ -145,11 +156,17 @@ const diagramId = `diagram-${Math.random().toString(36).substr(2, 9)}`;
     function openDiagramModal(imageSrc, imageAlt) {
       const modal = document.createElement('div');
       modal.className = 'diagram-modal';
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('aria-labelledby', 'diagram-modal-title');
+      modal.setAttribute('aria-describedby', 'diagram-modal-desc');
       
       modal.innerHTML = `
         <div class="diagram-modal-backdrop">
           <div class="diagram-modal-content">
-            <button class="diagram-modal-close" aria-label="Close diagram">×</button>
+            <h2 id="diagram-modal-title" class="sr-only">Diagram Viewer</h2>
+            <p id="diagram-modal-desc" class="sr-only">Press Escape or click the X to close this dialog</p>
+            <button class="diagram-modal-close" aria-label="Close diagram viewer dialog">×</button>
             <img src="${imageSrc}" alt="${imageAlt}" class="diagram-modal-image" />
           </div>
         </div>
@@ -301,7 +318,12 @@ const diagramId = `diagram-${Math.random().toString(36).substr(2, 9)}`;
           img.style.transform = 'scale(1)';
         });
         
-        img.addEventListener('click', () => {
+        // Make image keyboard accessible
+        img.tabIndex = 0;
+        img.setAttribute('role', 'button');
+        img.setAttribute('aria-label', `View ${img.alt || alt} in full screen. Press Enter or Space to open.`);
+        
+        const openModalHandler = () => {
           const modal = document.createElement('div');
           modal.className = 'diagram-modal';
           
@@ -352,16 +374,49 @@ const diagramId = `diagram-${Math.random().toString(36).substr(2, 9)}`;
           `;
           
           const closeModal = () => {
+            // Return focus to the element that triggered the modal
+            const triggerElement = document.activeElement;
             modal.style.background = 'rgba(0, 0, 0, 0)';
             content.style.transform = 'scale(0.8)';
-            setTimeout(() => document.body.removeChild(modal), 300);
+            setTimeout(() => {
+              document.body.removeChild(modal);
+              // Return focus to the image that opened the modal
+              if (triggerElement && triggerElement !== document.body) {
+                (triggerElement as HTMLElement).focus();
+              }
+            }, 300);
           };
+          
+          // Focus management
+          const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          const firstFocusableElement = focusableElements[0] as HTMLElement;
+          const lastFocusableElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+          
+          // Focus the close button when modal opens
+          setTimeout(() => firstFocusableElement?.focus(), 100);
+          
+          // Trap focus within modal
+          modal.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+              if (e.shiftKey) {
+                if (document.activeElement === firstFocusableElement) {
+                  e.preventDefault();
+                  lastFocusableElement?.focus();
+                }
+              } else {
+                if (document.activeElement === lastFocusableElement) {
+                  e.preventDefault();
+                  firstFocusableElement?.focus();
+                }
+              }
+            }
+            if (e.key === 'Escape') {
+              closeModal();
+            }
+          });
           
           closeBtn.addEventListener('click', closeModal);
           backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
-          document.addEventListener('keydown', function handler(e) {
-            if (e.key === 'Escape') { document.removeEventListener('keydown', handler); closeModal(); }
-          });
           
           closeBtn.addEventListener('mouseenter', () => {
             closeBtn.style.background = 'var(--bg-card-hover)'; closeBtn.style.transform = 'scale(1.1)';
@@ -371,6 +426,15 @@ const diagramId = `diagram-${Math.random().toString(36).substr(2, 9)}`;
           });
           
           document.body.appendChild(modal);
+        };
+        
+        img.addEventListener('click', openModalHandler);
+        img.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModalHandler();
+          }
+        });
           requestAnimationFrame(() => {
             modal.style.background = 'rgba(0, 0, 0, 0.8)';
             content.style.transform = 'scale(1)';
