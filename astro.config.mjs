@@ -90,6 +90,7 @@ async function config() {
                         errorOnFallbackPages: false,
                         errorOnInconsistentLocale: true,
                         exclude: [
+                            // Root paths (current structure)
                             `/blog/`,
                             `/about/`,
                             `/projects/`,
@@ -97,6 +98,14 @@ async function config() {
                             `/resume/`,
                             `/blog/**`,
                             `/`,
+                            // Legacy paths with base prefix (for GitHub Actions compatibility)
+                            `/sanity-check/blog/`,
+                            `/sanity-check/about/`,
+                            `/sanity-check/projects/`,
+                            `/sanity-check/work/`,
+                            `/sanity-check/resume/`,
+                            `/sanity-check/blog/**`,
+                            `/sanity-check/`,
                         ]
                     }),
                     starlightImageZoom({
