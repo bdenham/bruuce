@@ -20,7 +20,7 @@
 .lead {
     font-size: 18px;
     color: var(--text-tertiary);
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 24px;
     line-height: 1.6;
 }
@@ -30,7 +30,7 @@
     color: var(--text-tertiary);
     font-size: 16px;
     margin-bottom: 32px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.6;
 }
 
@@ -349,7 +349,7 @@
     color: var(--text-tertiary);
     margin: 0 0 16px 0;
     line-height: 1.6;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .doc-highlights ul,
@@ -376,7 +376,7 @@
     padding-left: 16px;
     position: relative;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .doc-highlights li:last-child,
@@ -503,16 +503,15 @@ body {
     min-height: 100vh;
     margin: 0;
     font-family:
-        adobe-clean,
         ui-sans-serif,
         system-ui,
         -apple-system,
-        Segoe UI,
+        'Segoe UI',
         Roboto,
         Helvetica,
         Arial,
-        'Apple Color Emoji',
-        'Segoe UI Emoji';
+        adobe-clean,
+        sans-serif;
     line-height: 1.6;
     color: var(--text-secondary);
     transition: color 0.3s ease;
@@ -659,6 +658,7 @@ h1 {
     letter-spacing: -0.02em;
     color: var(--text-primary);
     font-weight: 700;
+    font-family: adobe-clean, ui-sans-serif, system-ui, sans-serif;
 }
 
 h1 span {
@@ -669,12 +669,23 @@ h2 {
     color: var(--text-primary);
     font-size: 32px;
     margin: 32px 0 16px 0;
+    font-family: adobe-clean, ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+}
+
+h3,
+h4,
+h5,
+h6 {
+    font-family: adobe-clean, ui-sans-serif, system-ui, sans-serif;
+    color: var(--text-primary);
+    font-weight: 700;
 }
 
 p {
     margin: 0 0 20px 0;
     color: var(--text-tertiary);
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.7;
 }
 
@@ -819,7 +830,7 @@ footer a:hover {
 /* Content styling for blog posts */
 .content {
     color: var(--text-tertiary);
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.7;
 }
 
@@ -861,43 +872,19 @@ footer a:hover {
     margin: 32px 0;
 }
 
-/* Font faces */
-@font-face {
-    font-family: adobe-clean;
-    src: url('/fonts/adobe-clean-300.woff2') format('woff2');
-    font-display: swap;
-    font-style: normal;
-    font-weight: 300;
-}
-
-@font-face {
-    font-family: adobe-clean;
-    src: url('/fonts/adobe-clean-300-italic.woff2') format('woff2');
-    font-display: swap;
-    font-style: italic;
-    font-weight: 300;
-}
-
+/* Optimized font loading - only critical fonts with optional display */
 @font-face {
     font-family: adobe-clean;
     src: url('/fonts/adobe-clean-400.woff2') format('woff2');
-    font-display: swap;
+    font-display: optional;
     font-style: normal;
-    font-weight: 400;
-}
-
-@font-face {
-    font-family: adobe-clean;
-    src: url('/fonts/adobe-clean-400-italic.woff2') format('woff2');
-    font-display: swap;
-    font-style: italic;
     font-weight: 400;
 }
 
 @font-face {
     font-family: adobe-clean;
     src: url('/fonts/adobe-clean-700.woff2') format('woff2');
-    font-display: swap;
+    font-display: optional;
     font-style: normal;
     font-weight: 700;
 }
