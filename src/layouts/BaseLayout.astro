@@ -2,7 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Sidebar from '../components/Sidebar.astro';
-// theme.css now loaded asynchronously in head for better Speed Index
+import '../styles/theme.css';
 
 export interface Props {
   title: string;
@@ -38,229 +38,6 @@ const {
     <!-- Performance optimizations -->
     <meta name="robots" content="index, follow" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
-
-    <!-- Critical CSS inlined for Speed Index optimization -->
-    <style>
-      /* Critical Variables */
-      :root {
-        --bg-primary: #0b1020;
-        --bg-secondary: #0f172a;
-        --bg-tertiary: rgba(15, 23, 42, 0.6);
-        --bg-card: rgba(15, 23, 42, 0.4);
-        --bg-card-hover: rgba(15, 23, 42, 0.6);
-        --text-primary: #ffffff;
-        --text-secondary: #e5e7eb;
-        --text-tertiary: #d1d5db;
-        --text-muted: #a1a1aa;
-        --border-primary: rgba(148, 163, 184, 0.25);
-        --border-secondary: rgba(148, 163, 184, 0.15);
-        --accent-primary: #0066cc;
-        --accent-hover: #0080ff;
-        --shadow-secondary: rgba(0, 0, 0, 0.3);
-      }
-
-      :root.light {
-        --bg-primary: #f7f3f0;
-        --bg-secondary: #f0f4f8;
-        --bg-tertiary: rgba(255, 255, 255, 1);
-        --bg-card: rgba(255, 255, 255, 0.75);
-        --bg-card-hover: rgba(248, 244, 241, 0.95);
-        --text-primary: #2d3748;
-        --text-secondary: #4a5568;
-        --text-tertiary: #4a5568;
-        --text-muted: #374151;
-        --border-primary: rgba(141, 148, 157, 0.498);
-        --border-secondary: rgba(138, 143, 151, 0.25);
-        --accent-primary: #0066cc;
-        --accent-hover: #0080ff;
-        --shadow-secondary: rgba(45, 55, 72, 0.06);
-      }
-
-      /* Critical Base Styles */
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
-
-      html {
-        height: 100%;
-        background-color: var(--bg-primary);
-        background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-        background-attachment: fixed;
-      }
-
-      :root.light html {
-        background-color: var(--bg-primary);
-        background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-        background-attachment: fixed;
-      }
-
-      body {
-        min-height: 100vh;
-        margin: 0;
-        font-family:
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          'Segoe UI',
-          Roboto,
-          Helvetica,
-          Arial,
-          sans-serif;
-        line-height: 1.6;
-        color: var(--text-secondary);
-        transition: color 0.3s ease;
-      }
-
-      /* Critical Typography */
-      h1 {
-        margin: 0 0 12px 0;
-        font-size: 48px;
-        line-height: 1.15;
-        letter-spacing: -0.02em;
-        color: var(--text-primary);
-        font-family: adobe-clean, ui-sans-serif, system-ui, sans-serif;
-        font-weight: 700;
-      }
-
-      h1 span {
-        color: var(--accent-primary);
-      }
-
-      .subtitle {
-        font-size: 18px;
-        color: var(--text-primary);
-        font-weight: 400;
-        margin-bottom: 24px;
-      }
-
-      .subtitle.homepage {
-        font-size: 20px;
-        margin-bottom: 8px;
-      }
-
-      .lead {
-        font-size: 18px;
-        color: var(--text-tertiary);
-        font-weight: 300;
-        margin-bottom: 24px;
-        line-height: 1.6;
-      }
-
-      /* Critical Layout */
-      #root {
-        display: flex;
-        min-height: 100vh;
-      }
-
-      .app-content {
-        flex: 1;
-        margin-left: 280px;
-        transition: margin-left 0.3s ease;
-      }
-
-      .main-container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 80px 32px 32px 32px;
-      }
-
-      .content-panel {
-        background: var(--bg-tertiary);
-        backdrop-filter: saturate(120%) blur(8px);
-        border-radius: 20px;
-        padding: 40px;
-        margin-bottom: 32px;
-        border: 1px solid var(--border-secondary);
-        box-shadow: 0 8px 32px var(--shadow-secondary);
-      }
-
-      /* Critical Grid */
-      .grid-medium {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
-      }
-
-      .grid-with-margin {
-        margin: 32px 0 24px 0;
-      }
-
-      /* Critical Action Card Styles */
-      .action-card {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding: 20px;
-        border-radius: 16px;
-        text-decoration: none;
-        color: inherit;
-        background: var(--bg-card);
-        border: 1px solid var(--border-secondary);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .card-icon {
-        font-size: 2.5rem;
-        line-height: 1;
-        flex-shrink: 0;
-      }
-
-      .card-content {
-        flex: 1;
-        min-width: 0;
-      }
-
-      .card-title {
-        margin: 0 0 6px 0;
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        line-height: 1.2;
-      }
-
-      .card-description {
-        margin: 0;
-        font-size: 0.9rem;
-        color: var(--text-tertiary);
-        font-weight: 300;
-        line-height: 1.4;
-      }
-
-      .card-arrow {
-        font-size: 1.2rem;
-        color: var(--accent-primary);
-        flex-shrink: 0;
-        font-weight: bold;
-      }
-
-      /* Critical Mobile */
-      @media (max-width: 768px) {
-        .app-content {
-          margin-left: 0;
-        }
-
-        .main-container {
-          padding: 60px 20px 20px 20px;
-        }
-
-        .content-panel {
-          padding: 24px 20px;
-        }
-
-        .grid-medium {
-          grid-template-columns: 1fr;
-          gap: 16px;
-        }
-
-        h1 {
-          font-size: 32px;
-        }
-      }
-    </style>
     <!-- Prevent white flash by setting theme early -->
     <script is:inline>
       // Set theme immediately to prevent white flash
@@ -278,55 +55,19 @@ const {
         }
       })();
     </script>
-    <!-- Critical theme script (inline for immediate execution) -->
-    <script is:inline>
-      // Optimize theme loading with efficient theme switcher
-      window.themeManager = {
-        init() {
-          const saved = localStorage.getItem('theme');
-          const root = document.documentElement;
-          const meta = document.querySelector('meta[name="color-scheme"]');
-
-          if (saved === 'light') {
-            root.classList.add('light');
-            meta?.setAttribute('content', 'light dark');
-          } else {
-            root.classList.remove('light');
-            meta?.setAttribute('content', 'dark light');
-          }
-        },
-
-        toggle() {
-          const root = document.documentElement;
-          const isLight = root.classList.toggle('light');
-          const meta = document.querySelector('meta[name="color-scheme"]');
-
-          localStorage.setItem('theme', isLight ? 'light' : 'dark');
-          meta?.setAttribute('content', isLight ? 'light dark' : 'dark light');
-
-          // Update UI
-          const icon = document.getElementById('theme-icon');
-          const text = document.getElementById('theme-text');
-          if (icon && text) {
-            icon.textContent = isLight ? '☀️' : '🌙';
-            text.textContent = isLight ? 'Light' : 'Dark';
-          }
-        },
-      };
-
-      // Initialize immediately
-      themeManager.init();
-    </script>
-
-    <!-- Load remaining theme CSS asynchronously - non-critical styles -->
+    <!-- Lazy load search scripts only when needed -->
     <script>
-      // Async CSS loading to prevent render blocking
-      setTimeout(() => {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = '/src/styles/theme.css';
-        document.head.appendChild(link);
-      }, 200);
+      // Determine correct script path for GitHub Pages vs custom domain
+      const scriptPath =
+        window.location.hostname === 'bdenham.github.io' &&
+        window.location.pathname.startsWith('/sanity-check/')
+          ? '/sanity-check/scripts/search-loader.js'
+          : '/scripts/search-loader.js';
+
+      const script = document.createElement('script');
+      script.src = scriptPath;
+      script.type = 'module';
+      document.head.appendChild(script);
     </script>
   </head>
   <body>
@@ -425,23 +166,6 @@ const {
       // Re-initialize theme after View Transitions
       document.addEventListener('astro:after-swap', initTheme);
     </script>
-
-    <!-- Deferred search loading for better Speed Index -->
-    <script type="module" defer>
-      // Load search functionality only after page is interactive
-      setTimeout(() => {
-        const scriptPath =
-          window.location.hostname === 'bdenham.github.io' &&
-          window.location.pathname.startsWith('/sanity-check/')
-            ? '/sanity-check/scripts/search-loader.js'
-            : '/scripts/search-loader.js';
-
-        const script = document.createElement('script');
-        script.src = scriptPath;
-        script.type = 'module';
-        document.head.appendChild(script);
-      }, 300);
-    </script>
   </body>
 </html>
 
@@ -454,23 +178,56 @@ const {
 
   .app-content {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    margin-left: 280px;
     transition: margin-left 0.3s ease;
   }
 
-  /* Desktop: Make room for sidebar */
-  @media (min-width: 1024px) {
-    .app-content {
-      margin-left: 280px;
-    }
+  .main-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 32px 32px 32px;
   }
 
-  /* Mobile: Full width */
-  @media (max-width: 1023px) {
+  .content-panel {
+    background: var(--bg-tertiary);
+    backdrop-filter: saturate(120%) blur(8px);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 32px;
+    border: 1px solid var(--border-secondary);
+    box-shadow: 0 8px 32px var(--shadow-secondary);
+  }
+
+  .nav-back {
+    margin-bottom: 24px;
+  }
+
+  .nav-back a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s ease;
+  }
+
+  .nav-back a:hover {
+    color: var(--accent-hover);
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
     .app-content {
       margin-left: 0;
+    }
+
+    .main-container {
+      padding: 60px 20px 20px 20px;
+    }
+
+    .content-panel {
+      padding: 24px 20px;
     }
   }
 </style>
