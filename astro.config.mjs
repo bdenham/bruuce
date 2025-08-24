@@ -10,7 +10,8 @@ import starlightBlog from 'starlight-blog'
 
 // https://astro.build/config
 async function config() {
-    const basePath = process.env.VITE_GITHUB_BASE_PATH || '';
+    // Set the correct base path for GitHub Pages deployment
+    const basePath = process.env.VITE_GITHUB_BASE_PATH || '/sanity-check';
 
     return defineConfig({
         // Performance optimizations
@@ -88,10 +89,13 @@ async function config() {
                         errorOnFallbackPages: false,
                         errorOnInconsistentLocale: true,
                         exclude: [
-                            `${basePath}/blog/`,
-                            `${basePath}/about/`,
-                            `${basePath}/projects/`,
-                            `${basePath}/blog/**`,
+                            `/blog/`,
+                            `/about/`,
+                            `/projects/`,
+                            `/work/`,
+                            `/resume/`,
+                            `/blog/**`,
+                            `/`,
                         ]
                     }),
                     starlightImageZoom({
