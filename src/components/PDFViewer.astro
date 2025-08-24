@@ -43,8 +43,7 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
   </div>
 </figure>
 
-<script is:inline src="https://unpkg.com/pdfjs-dist@4.0.269/build/pdf.min.mjs" type="module"
-></script>
+<!-- PDF.js now loaded dynamically for better performance -->
 
 <script>
   class PDFViewer extends HTMLElement {
@@ -55,7 +54,32 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
     originalCenterY: number | null = null;
 
     connectedCallback() {
-      this.loadPDF();
+      // Use Intersection Observer for lazy loading PDF
+      this.setupLazyLoading();
+    }
+
+    setupLazyLoading() {
+      if (typeof IntersectionObserver !== 'undefined') {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                this.loadPDF();
+                observer.disconnect();
+              }
+            });
+          },
+          {
+            rootMargin: '200px', // Load when 200px away from viewport
+            threshold: 0.1,
+          }
+        );
+
+        observer.observe(this);
+      } else {
+        // Fallback - load immediately
+        this.loadPDF();
+      }
     }
 
     async loadPDF() {
@@ -71,9 +95,15 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
         const pageNumber = parseInt(this.getAttribute('data-page') || '1');
         const maintainAspect = this.getAttribute('data-maintain-aspect') === 'true';
 
+        // Dynamically load PDF.js for better performance
         if (!(window as any).pdfjsLib) {
-          console.error('PDF.js library not loaded');
-          return;
+          try {
+            await this.loadPDFLibrary(workerPath);
+          } catch (error) {
+            console.error('Failed to load PDF.js library:', error);
+            this.showError('Failed to load PDF library');
+            return;
+          }
         }
 
         (window as any).pdfjsLib.GlobalWorkerOptions.workerSrc = workerPath;
@@ -225,7 +255,7 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
       modalTitle.id = 'pdf-modal-title';
       modalTitle.className = 'sr-only';
       modalTitle.textContent = 'PDF Viewer';
-      
+
       const modalDesc = document.createElement('p');
       modalDesc.id = 'pdf-modal-desc';
       modalDesc.className = 'sr-only';
@@ -302,10 +332,10 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
       modal.appendChild(modalContent);
       modal.appendChild(closeButton);
       document.body.appendChild(modal);
-      
+
       // Focus management
       setTimeout(() => closeButton.focus(), 100);
-      
+
       // Trap focus within modal
       modal.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
@@ -343,6 +373,37 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
           closeButton.style.transform = 'scale(1)';
         }, 150);
       });
+    }
+
+    async loadPDFLibrary(workerPath: string) {
+      // Create a script element to load PDF.js dynamically
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/pdfjs-dist@4.0.269/build/pdf.min.mjs';
+        script.type = 'module';
+        script.onload = () => {
+          // Give PDF.js a moment to initialize
+          setTimeout(resolve, 100);
+        };
+        script.onerror = () => reject(new Error('Failed to load PDF.js'));
+        document.head.appendChild(script);
+      });
+    }
+
+    showError(message: string) {
+      this.innerHTML = `
+        <div class="pdf-error" style="
+          padding: 20px;
+          text-align: center;
+          color: var(--text-tertiary);
+          background: var(--bg-secondary);
+          border-radius: 8px;
+          border: 1px solid var(--border-secondary);
+        ">
+          <div style="font-size: 24px; margin-bottom: 8px;">📄</div>
+          <p style="margin: 0; font-size: 14px;">${message}</p>
+        </div>
+      `;
     }
 
     closeModal() {

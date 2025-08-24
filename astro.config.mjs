@@ -13,6 +13,17 @@ async function config() {
     const basePath = process.env.VITE_GITHUB_BASE_PATH || '';
 
     return defineConfig({
+        // Performance optimizations
+        build: {
+            inlineStylesheets: 'auto', // Inline small CSS files
+            assetsPrefix: basePath, // Proper asset prefixing
+        },
+        vite: {
+            build: {
+                cssCodeSplit: true, // Split CSS by route
+                assetsInlineLimit: 2048, // Inline assets smaller than 2KB
+            },
+        },
         image: {
             service: passthroughImageService(),
         },
@@ -104,18 +115,24 @@ async function config() {
                     { icon: 'github', label: 'GitHub', href: 'https://github.com/bdenham' },
                 ],
                 head: [
-                    // Font preloads for better performance (with GitHub base path)
-                    // Preload 300 weight first as it's used extensively for body text
+                    // Resource hints for better performance
                     {
                         tag: 'link',
                         attrs: {
-                            rel: 'preload',
-                            href: `${basePath}/fonts/adobe-clean-300.woff2`,
-                            as: 'font',
-                            type: 'font/woff2',
+                            rel: 'dns-prefetch',
+                            href: '//unpkg.com'
+                        }
+                    },
+                    {
+                        tag: 'link',
+                        attrs: {
+                            rel: 'preconnect',
+                            href: 'https://unpkg.com',
                             crossorigin: ''
                         }
                     },
+                    // Optimized font preloading - only preload critical weights
+                    // Preload only 400 weight (most used) and 300 weight (body text)
                     {
                         tag: 'link',
                         attrs: {
@@ -130,21 +147,14 @@ async function config() {
                         tag: 'link',
                         attrs: {
                             rel: 'preload',
-                            href: `${basePath}/fonts/adobe-clean-700.woff2`,
+                            href: `${basePath}/fonts/adobe-clean-300.woff2`,
                             as: 'font',
                             type: 'font/woff2',
                             crossorigin: ''
                         }
                     },
-                    // Search Highlighting Scripts (external files)
-                    {
-                        tag: 'script',
-                        attrs: { src: `${basePath}/scripts/search-highlighter.js` }
-                    },
-                    {
-                        tag: 'script',
-                        attrs: { src: `${basePath}/scripts/search-click-handler.js` }
-                    },
+                    // Bold weight (700) loads on demand for better initial performance
+                    // Search scripts now loaded lazily when search is used
                 ],
             })
         ]

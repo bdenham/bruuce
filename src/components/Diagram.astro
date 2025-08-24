@@ -37,12 +37,13 @@ const diagramId = `diagram-${Math.random().toString(36).substr(2, 9)}`;
 
 {type === 'mermaid' && (
   <script define:vars={{ diagramId, code, alt }}>
-    // Load Mermaid library dynamically
+    // Load Mermaid library dynamically (local version)
     async function loadMermaid() {
       if (window.mermaid) return window.mermaid;
       
       try {
-        const mermaidModule = await import('https://unpkg.com/mermaid@10/dist/mermaid.esm.min.mjs');
+        // Use bundled mermaid instead of CDN for better performance
+        const mermaidModule = await import('mermaid');
         const mermaid = mermaidModule.default;
         
         // Configure mermaid with theme-aware colors
@@ -289,11 +290,36 @@ const diagramId = `diagram-${Math.random().toString(36).substr(2, 9)}`;
       });
     }
 
-    // Initialize diagram when DOM is ready
+    // Lazy load diagram only when it comes into view for better performance
+    function initializeDiagram() {
+      if (typeof IntersectionObserver !== 'undefined') {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              renderMermaidDiagram();
+              observer.disconnect();
+            }
+          });
+        }, { 
+          rootMargin: '100px', // Load 100px before it comes into view
+          threshold: 0.1 // Trigger when 10% visible
+        });
+        
+        const diagramContainer = document.getElementById(diagramId)?.closest('.diagram-container');
+        if (diagramContainer) {
+          observer.observe(diagramContainer);
+        }
+      } else {
+        // Fallback for browsers without IntersectionObserver
+        renderMermaidDiagram();
+      }
+    }
+
+    // Initialize lazy loading when DOM is ready
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', renderMermaidDiagram);
+      document.addEventListener('DOMContentLoaded', initializeDiagram);
     } else {
-      renderMermaidDiagram();
+      initializeDiagram();
     }
   </script>
 )}
