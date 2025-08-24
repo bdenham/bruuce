@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPostCard from '../components/ui/BlogPostCard.astro';
 import ActionCard from '../components/ui/ActionCard.astro';
-import { pathWithBase } from '../utils/base';
 
 // Get the latest blog post for the homepage
 const blogPosts = await getCollection('blog');
@@ -32,7 +31,7 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
       icon="📋"
       title="View My Resume"
       description="Explore my 30+ years of experience in technical writing and developer experience"
-      href={pathWithBase('/resume/')}
+      href="/resume/"
       ariaLabel="View my complete resume"
     />
 
@@ -40,7 +39,7 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
       icon="🛠️"
       title="My Work"
       description="SDK docs, CLI tools, React apps, and developer experience projects at Adobe and beyond"
-      href={pathWithBase('/work/')}
+      href="/work/"
       ariaLabel="View my professional work and projects"
     />
 
@@ -48,7 +47,7 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
       icon="👨‍💻"
       title="About Me"
       description="Learn about my journey from Schlumberger to TOPAZ to Adobe as a developer experience strategist"
-      href={pathWithBase('/about/')}
+      href="/about/"
       ariaLabel="Learn more about my background"
     />
 
@@ -56,7 +55,7 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
       icon="📝"
       title="Technical Writing Blog"
       description="Insights on developer experience, API documentation, and making complex concepts clear"
-      href={pathWithBase('/blog/')}
+      href="/blog/"
       ariaLabel="Read my technical writing blog"
     />
   </div>
@@ -205,10 +204,10 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
   </div>
 
   <div class="footer-links">
-    <a href={pathWithBase('/resume/')}>Resume</a>
-    <a href={pathWithBase('/work/')}>My Work</a>
-    <a href={pathWithBase('/about/')}>About</a>
-    <a href={pathWithBase('/blog/')}>Blog</a>
+    <a href="/resume/">Resume</a>
+    <a href="/work/">My Work</a>
+    <a href="/about/">About</a>
+    <a href="/blog/">Blog</a>
   </div>
 </BaseLayout>
 

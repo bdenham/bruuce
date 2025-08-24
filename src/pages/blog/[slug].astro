@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { pathWithBase } from '../../utils/base';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
@@ -23,10 +22,10 @@ description: post.data.excerpt;
   description={post.data.excerpt}
   showBackLink={true}
   backLinkText="← Back to Blog"
-  backLinkHref={pathWithBase('/blog/')}
+  backLinkHref="/blog/"
   footerText="Thanks for reading! "
   footerLinkText="Browse more posts"
-  footerLinkHref={pathWithBase('/blog/')}
+  footerLinkHref="/blog/"
 >
   <h1 id="post-title">{post.data.title}</h1>
   <p class="date">

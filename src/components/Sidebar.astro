@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import { pathWithBase } from '../utils/base';
 
 // Get all blog posts and sort by date (newest first)
 const blogPosts = await getCollection('blog');
@@ -72,40 +71,31 @@ function getShortenedTitle(title: string): string {
       <h3>Portfolio</h3>
       <ul>
         <li>
-          <a href={pathWithBase('/')} class={currentPath === '/' ? 'active' : ''}>
+          <a href="/" class={currentPath === '/' ? 'active' : ''}>
             <span class="nav-icon" aria-hidden="true">🏠</span>
             <span class="nav-text">Home</span>
           </a>
         </li>
         <li>
-          <a
-            href={pathWithBase('/about/')}
-            class={currentPath.startsWith('/about') ? 'active' : ''}
-          >
+          <a href="/about/" class={currentPath.startsWith('/about') ? 'active' : ''}>
             <span class="nav-icon" aria-hidden="true">👨‍💻</span>
             <span class="nav-text">About Me</span>
           </a>
         </li>
         <li>
-          <a
-            href={pathWithBase('/resume/')}
-            class={currentPath.startsWith('/resume') ? 'active' : ''}
-          >
+          <a href="/resume/" class={currentPath.startsWith('/resume') ? 'active' : ''}>
             <span class="nav-icon" aria-hidden="true">📋</span>
             <span class="nav-text">Resume</span>
           </a>
         </li>
         <li>
-          <a href={pathWithBase('/work/')} class={currentPath.startsWith('/work') ? 'active' : ''}>
+          <a href="/work/" class={currentPath.startsWith('/work') ? 'active' : ''}>
             <span class="nav-icon" aria-hidden="true">🛠️</span>
             <span class="nav-text">My Work</span>
           </a>
         </li>
         <li>
-          <a
-            href={pathWithBase('/projects/')}
-            class={currentPath.startsWith('/projects') ? 'active' : ''}
-          >
+          <a href="/projects/" class={currentPath.startsWith('/projects') ? 'active' : ''}>
             <span class="nav-icon" aria-hidden="true">🚀</span>
             <span class="nav-text">Projects</span>
           </a>
@@ -116,7 +106,7 @@ function getShortenedTitle(title: string): string {
     <!-- Blog Section -->
     <div class="nav-section">
       <h3>
-        <a href={pathWithBase('/blog/')} class={currentPath === '/blog/' ? 'active' : ''}>
+        <a href="/blog/" class={currentPath === '/blog/' ? 'active' : ''}>
           <span>Blog</span>
           <span class="clickable-indicator" aria-hidden="true">→</span>
         </a>
@@ -126,7 +116,7 @@ function getShortenedTitle(title: string): string {
           sortedPosts.map((post) => (
             <li>
               <a
-                href={pathWithBase(`/blog/${post.slug}/`)}
+                href={`/blog/${post.slug}/`}
                 class={currentPath === `/blog/${post.slug}/` ? 'active' : ''}
                 title={post.data.excerpt}
               >
