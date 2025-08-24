@@ -145,8 +145,7 @@ async function config() {
                             crossorigin: ''
                         }
                     },
-                    // Optimized font preloading - only preload critical weights
-                    // Preload only 400 weight (most used) and 300 weight (body text)
+                    // Critical font preloading - only the 2 essential fonts
                     {
                         tag: 'link',
                         attrs: {
@@ -161,7 +160,7 @@ async function config() {
                         tag: 'link',
                         attrs: {
                             rel: 'preload',
-                            href: `${basePath}/fonts/adobe-clean-300.woff2`,
+                            href: `${basePath}/fonts/adobe-clean-700.woff2`,
                             as: 'font',
                             type: 'font/woff2',
                             crossorigin: ''

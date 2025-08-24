@@ -55,19 +55,44 @@ const {
         }
       })();
     </script>
-    <!-- Lazy load search scripts only when needed -->
-    <script>
-      // Determine correct script path for GitHub Pages vs custom domain
-      const scriptPath =
-        window.location.hostname === 'bdenham.github.io' &&
-        window.location.pathname.startsWith('/sanity-check/')
-          ? '/sanity-check/scripts/search-loader.js'
-          : '/scripts/search-loader.js';
+    <!-- Critical theme script (inline for immediate execution) -->
+    <script is:inline>
+      // Optimize theme loading with efficient theme switcher
+      window.themeManager = {
+        init() {
+          const saved = localStorage.getItem('theme');
+          const root = document.documentElement;
+          const meta = document.querySelector('meta[name="color-scheme"]');
 
-      const script = document.createElement('script');
-      script.src = scriptPath;
-      script.type = 'module';
-      document.head.appendChild(script);
+          if (saved === 'light') {
+            root.classList.add('light');
+            meta?.setAttribute('content', 'light dark');
+          } else {
+            root.classList.remove('light');
+            meta?.setAttribute('content', 'dark light');
+          }
+        },
+
+        toggle() {
+          const root = document.documentElement;
+          const isLight = root.classList.toggle('light');
+          const meta = document.querySelector('meta[name="color-scheme"]');
+
+          localStorage.setItem('theme', isLight ? 'light' : 'dark');
+          meta?.setAttribute('content', isLight ? 'light dark' : 'dark light');
+
+          // Update UI
+          const icon = document.getElementById('theme-icon');
+          const text = document.getElementById('theme-text');
+          if (icon && text) {
+            icon.textContent = isLight ? '☀️' : '🌙';
+            text.textContent = isLight ? 'Light' : 'Dark';
+          }
+        },
+      };
+
+      // Initialize immediately
+      themeManager.init();
     </script>
   </head>
   <body>
@@ -165,6 +190,23 @@ const {
 
       // Re-initialize theme after View Transitions
       document.addEventListener('astro:after-swap', initTheme);
+    </script>
+
+    <!-- Deferred search loading for better Speed Index -->
+    <script type="module" defer>
+      // Load search functionality only after page is interactive
+      setTimeout(() => {
+        const scriptPath =
+          window.location.hostname === 'bdenham.github.io' &&
+          window.location.pathname.startsWith('/sanity-check/')
+            ? '/sanity-check/scripts/search-loader.js'
+            : '/scripts/search-loader.js';
+
+        const script = document.createElement('script');
+        script.src = scriptPath;
+        script.type = 'module';
+        document.head.appendChild(script);
+      }, 100);
     </script>
   </body>
 </html>
