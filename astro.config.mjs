@@ -10,8 +10,8 @@ import starlightBlog from 'starlight-blog'
 
 // https://astro.build/config
 async function config() {
-    // Set the correct base path for GitHub Pages deployment
-    const basePath = process.env.VITE_GITHUB_BASE_PATH || '/sanity-check';
+    // No base path needed - serving from root domain
+    const basePath = process.env.VITE_GITHUB_BASE_PATH || '';
 
     return defineConfig({
         // Performance optimizations
@@ -28,7 +28,7 @@ async function config() {
         image: {
             service: passthroughImageService(),
         },
-        site: 'https://bdenham.github.io/sanity-check',
+        site: 'https://bruuce.com',
         base: basePath,
         markdown: {
             remarkPlugins: [remarkBasePathLinks],
