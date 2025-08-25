@@ -90,19 +90,30 @@ async function config() {
                         errorOnFallbackPages: false,
                         errorOnInconsistentLocale: true,
                         exclude: [
-                            `${basePath}blog/`,
-                            `${basePath}about/`,
-                            `${basePath}projects/`,
-                            `${basePath}blog/**`,
-                            `${basePath}work/`,
-                            `${basePath}resume/`,
+                            // All possible path variations for GitHub Pages
+                            '/sanity-check/blog/',
+                            '/sanity-check/about/',
+                            '/sanity-check/projects/',
+                            '/sanity-check/work/',
+                            '/sanity-check/resume/',
+                            '/sanity-check/blog/**',
+                            '/sanity-check/',
+                            // Root paths for custom domain
                             '/blog/',
                             '/about/',
                             '/projects/',
-                            '/blog/**',
                             '/work/',
                             '/resume/',
+                            '/blog/**',
                             '/',
+                            // Dynamic basePath versions
+                            `${basePath}blog/`,
+                            `${basePath}about/`,
+                            `${basePath}projects/`,
+                            `${basePath}work/`,
+                            `${basePath}resume/`,
+                            `${basePath}blog/**`,
+                            basePath,
                         ]
                     }),
                     starlightImageZoom({
