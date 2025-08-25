@@ -26,8 +26,8 @@ async function config() {
         outDir: './dist',
         build: {
             assets: '_astro',
-            assetsInlineLimit: 0, // Ensure assets are hashed and externalized
-            cssCodeSplit: true, // Enable CSS code splitting for better caching
+            assetsInlineLimit: 4096, // Inline small CSS/JS for faster loading
+            cssCodeSplit: false, // Single CSS bundle for better Speed Index
             rollupOptions: {
                 output: {
                     // Ensure consistent hashing for better caching
