@@ -129,29 +129,8 @@ async function config() {
                     { icon: 'github', label: 'GitHub', href: 'https://github.com/bdenham' },
                 ],
                 head: [
-                    // Critical font preloading - only essential weights
-                    {
-                        tag: 'link',
-                        attrs: {
-                            rel: 'preload',
-                            href: `${basePath}/fonts/adobe-clean-400.woff2`,
-                            as: 'font',
-                            type: 'font/woff2',
-                            crossorigin: ''
-                        }
-                    },
-                    {
-                        tag: 'link',
-                        attrs: {
-                            rel: 'preload',
-                            href: `${basePath}/fonts/adobe-clean-700.woff2`,
-                            as: 'font',
-                            type: 'font/woff2',
-                            crossorigin: ''
-                        }
-                    },
-                    // Bold weight (700) loads on demand for better initial performance
-                    // Search scripts now loaded lazily when search is used
+                    // Font loading now handled in BaseLayout.astro for better cross-page compatibility
+                    // Search scripts loaded lazily when search is used
                 ],
             })
         ]
