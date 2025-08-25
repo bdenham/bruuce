@@ -37,6 +37,19 @@ async function config() {
         },
         trailingSlash: 'ignore',
         outDir: './dist',
+        build: {
+            assets: '_astro',
+            assetsInlineLimit: 0, // Ensure assets are hashed and externalized
+            cssCodeSplit: true, // Enable CSS code splitting for better caching
+            rollupOptions: {
+                output: {
+                    // Ensure consistent hashing for better caching
+                    entryFileNames: '_astro/[name].[hash].js',
+                    chunkFileNames: '_astro/[name].[hash].js',
+                    assetFileNames: '_astro/[name].[hash][extname]'
+                }
+            }
+        },
 
         integrations: [
             starlight({
@@ -129,8 +142,48 @@ async function config() {
                     { icon: 'github', label: 'GitHub', href: 'https://github.com/bdenham' },
                 ],
                 head: [
-                    // Font loading now handled in BaseLayout.astro for better cross-page compatibility
-                    // Search scripts loaded lazily when search is used
+                    // Font preloads for better LCP performance (with GitHub base path)
+                    // Preload 400 weight first with high priority - used by h1 LCP element
+                    {
+                        tag: 'link',
+                        attrs: {
+                            rel: 'preload',
+                            href: `${basePath}/fonts/adobe-clean-400.woff2`,
+                            as: 'font',
+                            type: 'font/woff2',
+                            crossorigin: '',
+                            fetchpriority: 'high'
+                        }
+                    },
+                    {
+                        tag: 'link',
+                        attrs: {
+                            rel: 'preload',
+                            href: `${basePath}/fonts/adobe-clean-300.woff2`,
+                            as: 'font',
+                            type: 'font/woff2',
+                            crossorigin: ''
+                        }
+                    },
+                    {
+                        tag: 'link',
+                        attrs: {
+                            rel: 'preload',
+                            href: `${basePath}/fonts/adobe-clean-700.woff2`,
+                            as: 'font',
+                            type: 'font/woff2',
+                            crossorigin: ''
+                        }
+                    },
+                    // Search Highlighting Scripts (external files)
+                    {
+                        tag: 'script',
+                        attrs: { src: `${basePath}/scripts/search-highlighter.js` }
+                    },
+                    {
+                        tag: 'script',
+                        attrs: { src: `${basePath}/scripts/search-click-handler.js` }
+                    },
                 ],
             })
         ]
