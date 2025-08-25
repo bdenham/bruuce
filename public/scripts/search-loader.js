@@ -23,22 +23,28 @@
           script2.onload = resolve;
           script2.onerror = reject;
           document.head.appendChild(script2);
+        }),
+      ])
+        .then(() => {
+          searchScriptsLoaded = true;
         })
-      ]).then(() => {
-        searchScriptsLoaded = true;
-      }).catch(error => {
-        console.warn('Failed to load search scripts:', error);
-      });
+        .catch((error) => {
+          console.warn('Failed to load search scripts:', error);
+        });
     }
 
     // Load scripts when user interacts with search
     function initSearchLazyLoading() {
-      const searchInputs = document.querySelectorAll('input[type="search"], [class*="search"], [id*="search"]');
-      const searchButtons = document.querySelectorAll('button[aria-label*="search" i], [class*="search-button"]');
+      const searchInputs = document.querySelectorAll(
+        'input[type="search"], [class*="search"], [id*="search"]'
+      );
+      const searchButtons = document.querySelectorAll(
+        'button[aria-label*="search" i], [class*="search-button"]'
+      );
 
       const elements = [...searchInputs, ...searchButtons];
 
-      elements.forEach(element => {
+      elements.forEach((element) => {
         // Load on first interaction
         const loadOnInteraction = () => {
           loadSearchScripts();
@@ -51,11 +57,13 @@
       });
 
       // Also check for dynamically added search elements (like Pagefind)
-      const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-          mutation.addedNodes.forEach(node => {
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          mutation.addedNodes.forEach((node) => {
             if (node.nodeType === Node.ELEMENT_NODE) {
-              const searchElements = node.querySelectorAll?.('pagefind-ui, [class*="pagefind"], input[type="search"]');
+              const searchElements = node.querySelectorAll?.(
+                'pagefind-ui, [class*="pagefind"], input[type="search"]'
+              );
               if (searchElements?.length) {
                 loadSearchScripts();
                 observer.disconnect();

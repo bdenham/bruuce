@@ -18,7 +18,13 @@ const tooltipId = `tooltip-${Math.random().toString(36).substr(2, 9)}`;
   data-position={position}
 >
   <slot />
-  <div class="tooltip-text" role="tooltip" style={`max-width: ${maxWidth}`} aria-hidden="true" id={tooltipId}>
+  <div
+    class="tooltip-text"
+    role="tooltip"
+    style={`max-width: ${maxWidth}`}
+    aria-hidden="true"
+    id={tooltipId}
+  >
     <span class="tooltip-text-content">{text}</span>
   </div>
 </div>
@@ -185,7 +191,7 @@ const tooltipId = `tooltip-${Math.random().toString(36).substr(2, 9)}`;
       // Add event listeners for mouse
       container.addEventListener('mouseenter', showTooltip);
       container.addEventListener('mouseleave', hideTooltip);
-      
+
       // Add event listeners for keyboard focus
       container.addEventListener('focus', showTooltip);
       container.addEventListener('blur', hideTooltip);

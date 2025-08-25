@@ -5,7 +5,7 @@ A modern personal blog built with [Astro](https://astro.build/) featuring a cust
 ## 🚀 Features
 
 - **🎨 Custom Theme System**: Beautiful dark/light mode with CSS custom properties
-- **📱 Responsive Design**: Mobile-first design that works on all devices  
+- **📱 Responsive Design**: Mobile-first design that works on all devices
 - **⚡ Fast Performance**: Static site generation with Astro
 - **🧩 Rich Component Library**: 17 powerful interactive components
 - **📝 MDX Content**: Write blog posts with Markdown and custom components
@@ -17,6 +17,7 @@ A modern personal blog built with [Astro](https://astro.build/) featuring a cust
 This blog includes a comprehensive set of **17 custom components** designed for technical writing and documentation:
 
 ### 1. 🧩 Tooltip Component
+
 Interactive tooltips with multiple positioning options.
 
 ```astro
@@ -26,29 +27,23 @@ Interactive tooltips with multiple positioning options.
 </Tooltip>
 
 <!-- Positioned tooltip with custom width -->
-<Tooltip 
-  text="Detailed technical explanation that might be longer" 
-  position="top" 
-  maxWidth="300px"
->
+<Tooltip text="Detailed technical explanation that might be longer" position="top" maxWidth="300px">
   <strong>Technical term</strong>
 </Tooltip>
 ```
 
 **Features**: Top/bottom/left/right positioning, custom width, smooth animations, keyboard accessible
 
-### 2. 📷 Screenshot Component  
+### 2. 📷 Screenshot Component
+
 Click-to-zoom image viewer perfect for showcasing UI and code examples.
 
 ```astro
 <!-- Basic screenshot with zoom -->
-<Screenshot 
-  src="/images/demo-ui.png" 
-  alt="Demo user interface"
-/>
+<Screenshot src="/images/demo-ui.png" alt="Demo user interface" />
 
 <!-- With caption and custom sizing -->
-<Screenshot 
+<Screenshot
   src="/images/code-example.png"
   alt="Code example screenshot"
   caption="Click to zoom for better readability"
@@ -56,27 +51,21 @@ Click-to-zoom image viewer perfect for showcasing UI and code examples.
 />
 
 <!-- Disable zoom if needed -->
-<Screenshot 
-  src="/images/small-icon.png"
-  alt="App icon"
-  clickToZoom={false}
-/>
+<Screenshot src="/images/small-icon.png" alt="App icon" clickToZoom={false} />
 ```
 
 **Features**: Click-to-zoom modal, loading states, captions, responsive sizing
 
 ### 3. 🖼️ IFrame Component
+
 Enhanced embedded content with loading states and error handling.
 
 ```astro
 <!-- Basic iframe -->
-<IFrame 
-  src="https://example.com/demo"
-  title="Interactive Demo"
-/>
+<IFrame src="https://example.com/demo" title="Interactive Demo" />
 
 <!-- Customized sizing and sandbox -->
-<IFrame 
+<IFrame
   src="/local-demo.html"
   title="Local Demo"
   height="600px"
@@ -91,18 +80,19 @@ Enhanced embedded content with loading states and error handling.
 **Features**: Loading spinners, error handling, responsive height, Storybook support
 
 ### 4. 📊 Diagram Component
+
 Powerful diagram renderer supporting both Mermaid diagrams and regular images with zoom.
 
 ```astro
 <!-- Mermaid diagram -->
-<Diagram 
-  type="mermaid" 
+<Diagram
+  type="mermaid"
   code="graph TD; A[Start] --> B[Process]; B --> C[End];"
   caption="System workflow diagram"
 />
 
 <!-- Sequence diagram -->
-<Diagram 
+<Diagram
   type="mermaid"
   code="sequenceDiagram
     participant U as User
@@ -124,6 +114,7 @@ Powerful diagram renderer supporting both Mermaid diagrams and regular images wi
 **Features**: Mermaid rendering, theme-aware colors, click-to-zoom, error handling
 
 ### 5. ✅ Checklist Component
+
 Interactive progress-tracking checklists with localStorage persistence.
 
 ```astro
@@ -138,11 +129,7 @@ Interactive progress-tracking checklists with localStorage persistence.
 </Checklist>
 
 <!-- Tutorial checklist with custom title -->
-<Checklist 
-  checklistKey="react-tutorial" 
-  title="React Learning Path"
-  showProgress={true}
->
+<Checklist checklistKey="react-tutorial" title="React Learning Path" showProgress={true}>
   <ul>
     <li>[ ] Learn JSX syntax</li>
     <li>[ ] Understand components</li>
@@ -155,60 +142,63 @@ Interactive progress-tracking checklists with localStorage persistence.
 **Features**: Progress tracking, localStorage persistence, automatic markdown parsing
 
 ### 6. 📋 Prerequisites Component
+
 Visual display of required skills and technologies with tooltips.
 
 ```astro
 <!-- Basic prerequisites -->
-<Prerequisites 
+<Prerequisites
   prerequisites={{
     html: true,
-    css: true, 
+    css: true,
     javascript: true,
-    react: true
+    react: true,
   }}
 />
 
 <!-- Custom title and expanded prerequisites -->
-<Prerequisites 
+<Prerequisites
   prerequisites={{
     node: true,
     typescript: true,
     docker: true,
-    git: true
+    git: true,
   }}
   title="Advanced Requirements"
   showTitle={true}
 />
 
 <!-- Minimal version -->
-<Prerequisites 
-  prerequisites={{ python: true }}
-  showTitle={false}
-/>
+<Prerequisites prerequisites={{ python: true }} showTitle={false} />
 ```
 
 **Features**: 20+ technology icons, hover tooltips, responsive layout, emoji-based icons
 
 ### 7. 📁 FileTree Component
+
 Interactive file structure display with collapsible directories.
 
 ```astro
 <!-- Project structure -->
 <FileTree title="Project Structure">
   <ul>
-    <li>src/
+    <li>
+      src/
       <ul>
-        <li>components/
+        <li>
+          components/
           <ul>
             <li>Header.astro</li>
             <li>Footer.astro</li>
             <li>ThemeToggle.astro</li>
           </ul>
         </li>
-        <li>pages/
+        <li>
+          pages/
           <ul>
             <li>index.astro</li>
-            <li>blog/
+            <li>
+              blog/
               <ul>
                 <li>index.astro</li>
                 <li>[slug].astro</li>
@@ -216,7 +206,8 @@ Interactive file structure display with collapsible directories.
             </li>
           </ul>
         </li>
-        <li>styles/
+        <li>
+          styles/
           <ul>
             <li>theme.css</li>
           </ul>
@@ -243,6 +234,7 @@ Interactive file structure display with collapsible directories.
 **Features**: 30+ file type icons, collapsible directories, tree visualization, monospace font
 
 ### 8. 🗂️ CardGrid Component
+
 Responsive grid layout system perfect for showcasing projects or organizing content cards.
 
 ```astro
@@ -290,6 +282,7 @@ Responsive grid layout system perfect for showcasing projects or organizing cont
 **Features**: Auto-responsive columns, stagger effects, customizable gaps, hover animations
 
 ### 9. 📐 Flex Component
+
 Powerful flexible layout system with precise column control and alignment options.
 
 ```astro
@@ -301,12 +294,7 @@ Powerful flexible layout system with precise column control and alignment option
 </Flex>
 
 <!-- Custom alignment and spacing -->
-<Flex 
-  columns={2} 
-  gap="2.5rem" 
-  align="center" 
-  justify="space-between"
->
+<Flex columns={2} gap="2.5rem" align="center" justify="space-between">
   <div>
     <h3>Feature List</h3>
     <ul>
@@ -345,6 +333,7 @@ Powerful flexible layout system with precise column control and alignment option
 **Features**: Flexible columns, custom alignment, responsive behavior, scrollable layouts
 
 ### 10. 📏 FullWidthContainer Component
+
 Break out of content constraints with full-viewport-width containers, perfect for hero sections.
 
 ```astro
@@ -362,12 +351,7 @@ Break out of content constraints with full-viewport-width containers, perfect fo
 </FullWidthContainer>
 
 <!-- Accent background with custom alignment -->
-<FullWidthContainer 
-  background="accent" 
-  align="left" 
-  maxWidth="1200px"
-  padding="3rem 2rem"
->
+<FullWidthContainer background="accent" align="left" maxWidth="1200px" padding="3rem 2rem">
   <h2>Featured Content</h2>
   <p>This section stands out with an accent background</p>
 </FullWidthContainer>
@@ -390,51 +374,37 @@ Break out of content constraints with full-viewport-width containers, perfect fo
 **Features**: Viewport-width breakout, background variants, custom alignment, hero content styling
 
 ### 11. 🔗 ExternalLink Component
+
 Smart external link component with automatic security attributes and visual indicators.
 
 ```astro
 <!-- Basic external link (auto-detects and adds security) -->
-<ExternalLink href="https://astro.build/">
-  Astro Documentation
-</ExternalLink>
+<ExternalLink href="https://astro.build/"> Astro Documentation </ExternalLink>
 
 <!-- Internal link (no icon, no new tab) -->
-<ExternalLink href="/about/">
-  About Page
-</ExternalLink>
+<ExternalLink href="/about/"> About Page </ExternalLink>
 
 <!-- Force new tab for internal link -->
-<ExternalLink href="/projects/" openInNewTab={true}>
-  My Projects
-</ExternalLink>
+<ExternalLink href="/projects/" openInNewTab={true}> My Projects </ExternalLink>
 
 <!-- Disable external icon -->
-<ExternalLink href="https://github.com/" showIcon={false}>
-  GitHub (no icon)
-</ExternalLink>
+<ExternalLink href="https://github.com/" showIcon={false}> GitHub (no icon) </ExternalLink>
 
 <!-- Button-style external link -->
-<ExternalLink 
-  href="https://docs.astro.build/" 
-  class="button-style"
->
+<ExternalLink href="https://docs.astro.build/" class="button-style">
   📚 Read the Docs
 </ExternalLink>
 
 <!-- Inline style in text -->
 <p>
-  Check out this 
-  <ExternalLink href="https://example.com/" class="inline">
-    awesome resource
-  </ExternalLink> 
+  Check out this
+  <ExternalLink href="https://example.com/" class="inline"> awesome resource </ExternalLink>
   for more information.
 </p>
 
 <!-- In headings -->
 <h2>
-  <ExternalLink href="https://webdev.com/">
-    Web Development Guide
-  </ExternalLink>
+  <ExternalLink href="https://webdev.com/"> Web Development Guide </ExternalLink>
 </h2>
 ```
 
@@ -447,7 +417,7 @@ Smart external link component with automatic security attributes and visual indi
 **14. 📚 Vocabulary** - Term definition boxes with highlighting  
 **15. 📋 Tasks** - Task list container with numbering  
 **16. ✓ Task** - Individual numbered task items  
-**17. 🎨 Callouts** - Multi-column callout system  
+**17. 🎨 Callouts** - Multi-column callout system
 
 ## 🎨 Theme System
 
@@ -472,18 +442,20 @@ The site features a comprehensive dark/light theme system controlled by CSS cust
 ```
 
 Toggle between themes using the header button or programmatically:
+
 ```javascript
 // Switch to light mode
 document.documentElement.classList.add('light');
 
-// Switch to dark mode  
+// Switch to dark mode
 document.documentElement.classList.remove('light');
 ```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - pnpm 8+
 
 ### Installation
@@ -506,9 +478,9 @@ Create new posts in `src/content/blog/`:
 
 ```markdown
 ---
-title: "My New Post"
+title: 'My New Post'
 date: 2024-01-15
-excerpt: "A brief description of the post content"
+excerpt: 'A brief description of the post content'
 ---
 
 # My New Post
@@ -562,7 +534,7 @@ sanity-check/
 ```bash
 # Development
 pnpm dev              # Start development server
-pnpm build            # Build for production  
+pnpm build            # Build for production
 pnpm preview          # Preview production build
 
 # Maintenance
@@ -574,7 +546,7 @@ pnpm lint             # Run linting
 Deploy to any static hosting service:
 
 - **Netlify**: Connect repository for auto-deploy
-- **Vercel**: Import project for seamless deployment  
+- **Vercel**: Import project for seamless deployment
 - **GitHub Pages**: Use Actions workflow
 - **Cloudflare Pages**: Deploy from repository
 
