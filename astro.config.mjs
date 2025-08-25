@@ -150,15 +150,6 @@ async function config() {
                             crossorigin: ''
                         }
                     },
-                    // Search Highlighting Scripts (external files)
-                    {
-                        tag: 'script',
-                        attrs: { src: `${basePath}/scripts/search-highlighter.js` }
-                    },
-                    {
-                        tag: 'script',
-                        attrs: { src: `${basePath}/scripts/search-click-handler.js` }
-                    },
                 ],
             })
         ]
