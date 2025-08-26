@@ -883,7 +883,22 @@ footer a:hover {
 }
 
 /* GitHub Pages-style font loading */
-/* Static font declarations moved to BaseLayout.astro for dynamic base path support */
+/* Static font declarations for Vercel (pure performance) */
+@font-face {
+    font-family: adobe-clean;
+    src: url('/fonts/adobe-clean-400.woff2') format('woff2');
+    font-display: optional;
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: adobe-clean;
+    src: url('/fonts/adobe-clean-700.woff2') format('woff2');
+    font-display: optional;
+    font-style: normal;
+    font-weight: 700;
+}
 
 /* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
