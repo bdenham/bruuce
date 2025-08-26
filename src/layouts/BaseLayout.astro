@@ -39,28 +39,7 @@ const {
     <meta name="robots" content="index, follow" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
-    <!-- Dynamic font preloads for cross-platform compatibility -->
-    <script is:inline>
-      // Early font preloading
-      const basePath = window.location.pathname.includes('/bruuce/') ? '/bruuce/' : '/';
-
-      const preload400 = document.createElement('link');
-      preload400.rel = 'preload';
-      preload400.href = basePath + 'fonts/adobe-clean-400.woff2';
-      preload400.as = 'font';
-      preload400.type = 'font/woff2';
-      preload400.crossOrigin = 'anonymous';
-      preload400.fetchPriority = 'high';
-      document.head.appendChild(preload400);
-
-      const preload700 = document.createElement('link');
-      preload700.rel = 'preload';
-      preload700.href = basePath + 'fonts/adobe-clean-700.woff2';
-      preload700.as = 'font';
-      preload700.type = 'font/woff2';
-      preload700.crossOrigin = 'anonymous';
-      document.head.appendChild(preload700);
-    </script>
+    <!-- Combined dynamic font loading and theme initialization -->
 
     <!-- Dynamic @font-face declarations for GitHub Pages support -->
     <style>
@@ -114,37 +93,57 @@ const {
 
     <!-- CSS will be inlined by Astro for zero render-blocking -->
 
-    <!-- Dynamic font loading for cross-platform compatibility -->
     <script is:inline>
-      // Determine the correct base path for fonts
-      const basePath = window.location.pathname.includes('/bruuce/') ? '/bruuce/' : '/';
+      // Combined script for font loading and theme initialization
+      (function () {
+        // Determine the correct base path for fonts
+        const basePath = window.location.pathname.includes('/bruuce/') ? '/bruuce/' : '/';
 
-      // Create and inject font-face CSS
-      const fontCSS = `
-        @font-face {
-          font-family: adobe-clean;
-          src: url('${basePath}fonts/adobe-clean-400.woff2') format('woff2');
-          font-display: optional;
-          font-style: normal;
-          font-weight: 400;
+        // Early font preloading
+        const preload400 = document.createElement('link');
+        preload400.rel = 'preload';
+        preload400.href = basePath + 'fonts/adobe-clean-400.woff2';
+        preload400.as = 'font';
+        preload400.type = 'font/woff2';
+        preload400.crossOrigin = 'anonymous';
+        preload400.fetchPriority = 'high';
+        document.head.appendChild(preload400);
+
+        const preload700 = document.createElement('link');
+        preload700.rel = 'preload';
+        preload700.href = basePath + 'fonts/adobe-clean-700.woff2';
+        preload700.as = 'font';
+        preload700.type = 'font/woff2';
+        preload700.crossOrigin = 'anonymous';
+        document.head.appendChild(preload700);
+
+        // Create and inject font-face CSS
+        const fontCSS = `
+          @font-face {
+            font-family: adobe-clean;
+            src: url('${basePath}fonts/adobe-clean-400.woff2') format('woff2');
+            font-display: optional;
+            font-style: normal;
+            font-weight: 400;
+          }
+          @font-face {
+            font-family: adobe-clean;
+            src: url('${basePath}fonts/adobe-clean-700.woff2') format('woff2');
+            font-display: optional;
+            font-style: normal;
+            font-weight: 700;
+          }
+        `;
+
+        const style = document.createElement('style');
+        style.textContent = fontCSS;
+        document.head.appendChild(style);
+
+        // Theme initialization
+        if (localStorage.getItem('theme') === 'light') {
+          document.documentElement.classList.add('light');
         }
-        @font-face {
-          font-family: adobe-clean;
-          src: url('${basePath}fonts/adobe-clean-700.woff2') format('woff2');
-          font-display: optional;
-          font-style: normal;
-          font-weight: 700;
-        }
-      `;
-
-      const style = document.createElement('style');
-      style.textContent = fontCSS;
-      document.head.appendChild(style);
-
-      // Theme initialization
-      if (localStorage.getItem('theme') === 'light') {
-        document.documentElement.classList.add('light');
-      }
+      })();
     </script>
   </head>
   <body>
