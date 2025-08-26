@@ -10,8 +10,9 @@ export default defineConfig({
     // Vercel adapter for optimal performance
     output: 'static',
     adapter: vercel({
-        webAnalytics: { enabled: true },
-        speedInsights: { enabled: true },
+        webAnalytics: { enabled: false }, // Disable to fix MIME type issues
+        speedInsights: { enabled: false }, // Disable to prevent console errors
+        isr: true, // Enable incremental static regeneration for better performance
     }),
 
     // Site configuration
@@ -19,12 +20,12 @@ export default defineConfig({
     trailingSlash: 'ignore',
     outDir: './dist',
 
-    // Performance optimizations
+    // GitHub Pages-style performance optimizations
     build: {
-        inlineStylesheets: 'auto',
+        inlineStylesheets: 'always', // Inline all CSS to eliminate render-blocking
         assets: '_astro',
-        assetsInlineLimit: 2048,
-        cssCodeSplit: true,
+        assetsInlineLimit: 2048, // More conservative inlining
+        cssCodeSplit: true, // Allow CSS splitting for better caching
         rollupOptions: {
             output: {
                 entryFileNames: '_astro/[name].[hash].js',
@@ -36,8 +37,8 @@ export default defineConfig({
 
     vite: {
         build: {
-            cssCodeSplit: true,
-            assetsInlineLimit: 2048,
+            cssCodeSplit: true, // Enable CSS code splitting
+            assetsInlineLimit: 2048, // Conservative asset inlining
             target: 'es2022',
         },
     },

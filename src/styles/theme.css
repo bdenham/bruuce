@@ -418,9 +418,12 @@
     --bg-card-hover: rgba(15, 23, 42, 0.6);
     --text-primary: #ffffff;
     --text-secondary: #e5e7eb;
-    --text-tertiary: #d1d5db;
-    --text-muted: #a1a1aa;
-    --text-dim: #71717a;
+    --text-tertiary: #f3f4f6;
+    /* Improved contrast for WCAG AA compliance */
+    --text-muted: #d1d5db;
+    /* Improved contrast for dates and secondary text */
+    --text-dim: #d1d5db;
+    /* Fixed contrast for WCAG AA compliance */
     --border-primary: rgba(148, 163, 184, 0.25);
     --border-secondary: rgba(148, 163, 184, 0.15);
     --accent-primary: #00aaff;
@@ -464,7 +467,8 @@
     --text-secondary: #4a5568;
     --text-tertiary: #4a5568;
     --text-muted: #374151;
-    --text-dim: #6b7280;
+    --text-dim: #374151;
+    /* Fixed contrast for light mode WCAG AA compliance */
     --border-primary: rgba(141, 148, 157, 0.498);
     --border-secondary: rgba(138, 143, 151, 0.25);
     --accent-primary: #0066cc;
@@ -878,12 +882,12 @@ footer a:hover {
     margin: 32px 0;
 }
 
-/* Critical font loading - optimized for LCP */
+/* GitHub Pages-style font loading */
 @font-face {
     font-family: adobe-clean;
     src: url('/fonts/adobe-clean-400.woff2') format('woff2');
-    font-display: block;
-    /* Block for critical text, prevents layout shift */
+    font-display: optional;
+    /* Better for performance metrics */
     font-style: normal;
     font-weight: 400;
 }
@@ -891,8 +895,8 @@ footer a:hover {
 @font-face {
     font-family: adobe-clean;
     src: url('/fonts/adobe-clean-700.woff2') format('woff2');
-    font-display: swap;
-    /* Non-critical text can use fallback */
+    font-display: optional;
+    /* Better for performance metrics */
     font-style: normal;
     font-weight: 700;
 }
