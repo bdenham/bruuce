@@ -1,19 +1,15 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import { defineConfig, passthroughImageService } from 'astro/config';
-import vercel from '@astrojs/vercel';
+// import vercel from '@astrojs/vercel';  // Removed - using pure static deployment
 import mdx from '@astrojs/mdx';
 import { remarkBasePathLinks } from './src/plugins/remarkBasePathLinks';
 
 // https://astro.build/config
 export default defineConfig({
-    // Vercel adapter for static site deployment
+    // Pure static site deployment (no adapter needed)
     output: 'static',
-    adapter: vercel({
-        webAnalytics: { enabled: false }, // Disable to fix MIME type issues
-        speedInsights: { enabled: false }, // Disable to prevent console errors
-        // Remove ISR - not needed for static sites and conflicts with CSS deployment
-    }),
+    // adapter removed - using pure static files for Vercel
 
     // Site configuration - GitHub Pages compatible
     site: process.env.GITHUB_PAGES
