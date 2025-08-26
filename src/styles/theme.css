@@ -883,10 +883,11 @@ footer a:hover {
 }
 
 /* GitHub Pages-style font loading */
-/* BASELINE: Simple font declarations - no optimization */
+/* FIX 1: Remove fonts from critical path - should save 300ms */
 @font-face {
     font-family: adobe-clean;
     src: url('/fonts/adobe-clean-400.woff2') format('woff2');
+    font-display: swap; /* Remove from critical path */
     font-style: normal;
     font-weight: 400;
 }
@@ -894,6 +895,7 @@ footer a:hover {
 @font-face {
     font-family: adobe-clean;
     src: url('/fonts/adobe-clean-700.woff2') format('woff2');
+    font-display: swap; /* Remove from critical path */
     font-style: normal;
     font-weight: 700;
 }
