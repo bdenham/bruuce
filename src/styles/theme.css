@@ -887,7 +887,7 @@ footer a:hover {
 @font-face {
     font-family: adobe-clean;
     src: url('/fonts/adobe-clean-400.woff2') format('woff2');
-    font-display: optional;
+    font-display: swap;
     font-style: normal;
     font-weight: 400;
 }
@@ -895,7 +895,7 @@ footer a:hover {
 @font-face {
     font-family: adobe-clean;
     src: url('/fonts/adobe-clean-700.woff2') format('woff2');
-    font-display: optional;
+    font-display: swap;
     font-style: normal;
     font-weight: 700;
 }
