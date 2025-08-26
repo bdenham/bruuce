@@ -22,7 +22,7 @@ export default defineConfig({
 
     // GitHub Pages-style performance optimizations
     build: {
-        inlineStylesheets: 'always', // Inline all CSS to eliminate render-blocking
+        inlineStylesheets: 'never', // Keep CSS external for better caching and performance
         assets: '_astro',
         assetsInlineLimit: 2048, // More conservative inlining
         cssCodeSplit: true, // Allow CSS splitting for better caching
