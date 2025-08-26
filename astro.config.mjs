@@ -21,29 +21,8 @@ export default defineConfig({
     trailingSlash: 'ignore',
     outDir: './dist',
 
-    // EMERGENCY REVERT: External CSS with aggressive caching for 0.9s Speed Index
-    build: {
-        inlineStylesheets: 'never', // External CSS with caching beats bloated HTML
-        assets: '_astro',
-        assetsInlineLimit: 0, // No asset inlining
-        cssCodeSplit: false, // Single CSS bundle
-        rollupOptions: {
-            output: {
-                entryFileNames: '_astro/[name].[hash].js',
-                chunkFileNames: '_astro/[name].[hash].js',
-                assetFileNames: '_astro/[name].[hash][extname]'
-            }
-        }
-    },
-
-    vite: {
-        build: {
-            cssCodeSplit: false, // Single CSS bundle to prevent render-blocking
-            assetsInlineLimit: 0, // No asset inlining - external files cache better
-            target: 'es2022',
-            cssMinify: 'esbuild', // Fast CSS minification
-        },
-    },
+    // CLEAN BASELINE: Default Astro configuration (no optimizations)
+    // No build customizations - let Astro use defaults
 
     // Image optimization
     image: {
