@@ -883,7 +883,7 @@ footer a:hover {
 }
 
 /* GitHub Pages-style font loading */
-/* Font declarations moved to BaseLayout.astro for dynamic base path support */
+/* Static font declarations moved to BaseLayout.astro for dynamic base path support */
 
 /* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {

@@ -39,11 +39,39 @@ const {
     <meta name="robots" content="index, follow" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
-    <!-- Combined dynamic font loading and theme initialization -->
-
-    <!-- Dynamic @font-face declarations for GitHub Pages support -->
+    <!-- Critical font preloads for LCP optimization -->
+    <link
+      rel="preload"
+      href="/bruuce/fonts/adobe-clean-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      href="/bruuce/fonts/adobe-clean-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <style>
-      /* @font-face declarations now in theme.css for better performance */
+      /* Critical @font-face declarations for proven performance */
+      @font-face {
+        font-family: adobe-clean;
+        src: url('/bruuce/fonts/adobe-clean-400.woff2') format('woff2');
+        font-display: optional; /* Better for performance metrics */
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: adobe-clean;
+        src: url('/bruuce/fonts/adobe-clean-700.woff2') format('woff2');
+        font-display: optional; /* Better for performance metrics */
+        font-style: normal;
+        font-weight: 700;
+      }
 
       :root {
         --bg-primary: #0f1419;
@@ -93,57 +121,11 @@ const {
 
     <!-- CSS will be inlined by Astro for zero render-blocking -->
 
+    <!-- Minimal theme initialization -->
     <script is:inline>
-      // Combined script for font loading and theme initialization
-      (function () {
-        // Determine the correct base path for fonts
-        const basePath = window.location.pathname.includes('/bruuce/') ? '/bruuce/' : '/';
-
-        // Early font preloading
-        const preload400 = document.createElement('link');
-        preload400.rel = 'preload';
-        preload400.href = basePath + 'fonts/adobe-clean-400.woff2';
-        preload400.as = 'font';
-        preload400.type = 'font/woff2';
-        preload400.crossOrigin = 'anonymous';
-        preload400.fetchPriority = 'high';
-        document.head.appendChild(preload400);
-
-        const preload700 = document.createElement('link');
-        preload700.rel = 'preload';
-        preload700.href = basePath + 'fonts/adobe-clean-700.woff2';
-        preload700.as = 'font';
-        preload700.type = 'font/woff2';
-        preload700.crossOrigin = 'anonymous';
-        document.head.appendChild(preload700);
-
-        // Create and inject font-face CSS
-        const fontCSS = `
-          @font-face {
-            font-family: adobe-clean;
-            src: url('${basePath}fonts/adobe-clean-400.woff2') format('woff2');
-            font-display: optional;
-            font-style: normal;
-            font-weight: 400;
-          }
-          @font-face {
-            font-family: adobe-clean;
-            src: url('${basePath}fonts/adobe-clean-700.woff2') format('woff2');
-            font-display: optional;
-            font-style: normal;
-            font-weight: 700;
-          }
-        `;
-
-        const style = document.createElement('style');
-        style.textContent = fontCSS;
-        document.head.appendChild(style);
-
-        // Theme initialization
-        if (localStorage.getItem('theme') === 'light') {
-          document.documentElement.classList.add('light');
-        }
-      })();
+      if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.classList.add('light');
+      }
     </script>
   </head>
   <body>

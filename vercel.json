@@ -1,4 +1,10 @@
 {
+    "rewrites": [
+        {
+            "source": "/bruuce/fonts/(.*)",
+            "destination": "/fonts/$1"
+        }
+    ],
     "headers": [
         {
             "source": "/fonts/(.*)",
