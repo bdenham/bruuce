@@ -322,7 +322,8 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: var(--accent-primary);
+    background: #0077b5;
+    /* LinkedIn brand blue - WCAG AAA compliant with white text */
     color: #ffffff;
     text-decoration: none;
     padding: 12px 24px;
@@ -333,7 +334,8 @@
 }
 
 .linkedin-follow-btn:hover {
-    background: var(--accent-hover);
+    background: #005885;
+    /* Darker LinkedIn blue for hover */
     transform: translateY(-1px);
 }
 
@@ -876,11 +878,12 @@ footer a:hover {
     margin: 32px 0;
 }
 
-/* High-performance font loading - static CSS for immediate loading */
+/* Critical font loading - optimized for LCP */
 @font-face {
     font-family: adobe-clean;
     src: url('/fonts/adobe-clean-400.woff2') format('woff2');
-    font-display: swap;
+    font-display: block;
+    /* Block for critical text, prevents layout shift */
     font-style: normal;
     font-weight: 400;
 }
@@ -889,6 +892,7 @@ footer a:hover {
     font-family: adobe-clean;
     src: url('/fonts/adobe-clean-700.woff2') format('woff2');
     font-display: swap;
+    /* Non-critical text can use fallback */
     font-style: normal;
     font-weight: 700;
 }

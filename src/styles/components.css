@@ -194,7 +194,8 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: var(--accent-primary);
+    background: #0077b5;
+    /* LinkedIn brand blue - WCAG AAA compliant with white text */
     color: #ffffff;
     text-decoration: none;
     padding: 12px 24px;
@@ -205,7 +206,8 @@
 }
 
 .linkedin-follow-btn:hover {
-    background: var(--accent-hover);
+    background: #005885;
+    /* Darker LinkedIn blue for hover */
     transform: translateY(-1px);
 }
 

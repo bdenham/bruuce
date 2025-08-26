@@ -39,9 +39,11 @@ const {
     <meta name="robots" content="index, follow" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
     <!-- Performance: Font preloads now handled in astro.config.mjs for immediate loading -->
-    <!-- Preload critical CSS and JS to reduce chain latency -->
+    <!-- Critical resource hints for performance -->
     <link rel="dns-prefetch" href="//_astro/" />
     <link rel="preconnect" href="//_astro/" />
+    <link rel="dns-prefetch" href="//static.cloudflareinsights.com" />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
     <!-- Prevent white flash by setting theme early -->
     <script is:inline>
       // Set theme immediately to prevent white flash

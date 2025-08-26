@@ -155,16 +155,7 @@ async function config() {
                             fetchpriority: 'high'
                         }
                     },
-                    {
-                        tag: 'link',
-                        attrs: {
-                            rel: 'preload',
-                            href: `${basePath}/fonts/adobe-clean-300.woff2`,
-                            as: 'font',
-                            type: 'font/woff2',
-                            crossorigin: ''
-                        }
-                    },
+
                     {
                         tag: 'link',
                         attrs: {
