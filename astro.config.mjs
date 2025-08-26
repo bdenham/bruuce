@@ -21,8 +21,12 @@ export default defineConfig({
     trailingSlash: 'ignore',
     outDir: './dist',
 
-    // CLEAN BASELINE: Default Astro configuration (no optimizations)
-    // No build customizations - let Astro use defaults
+    // SIMPLE FIX: Single CSS bundle to eliminate render-blocking waterfall
+    vite: {
+        build: {
+            cssCodeSplit: false, // Force single CSS file instead of 5 separate files
+        },
+    },
 
     // Image optimization
     image: {
