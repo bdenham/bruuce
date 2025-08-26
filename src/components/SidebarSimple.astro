@@ -1,0 +1,92 @@
+---
+// Simple sidebar - no dynamic content, minimal DOM
+const currentPath = Astro.url.pathname;
+---
+
+<aside class="sidebar-simple">
+  <nav>
+    <div class="nav-header">
+      <h2><a href="/">Bruce Denham</a></h2>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="/" class={currentPath === '/' ? 'active' : ''}>Home</a></li>
+      <li><a href="/about/" class={currentPath.startsWith('/about') ? 'active' : ''}>About</a></li>
+      <li>
+        <a href="/resume/" class={currentPath.startsWith('/resume') ? 'active' : ''}>Resume</a>
+      </li>
+      <li><a href="/work/" class={currentPath.startsWith('/work') ? 'active' : ''}>Work</a></li>
+      <li>
+        <a href="/projects/" class={currentPath.startsWith('/projects') ? 'active' : ''}
+          >Projects</a>
+      </li>
+      <li><a href="/blog/" class={currentPath.startsWith('/blog') ? 'active' : ''}>Blog</a></li>
+    </ul>
+
+    <ul class="social-links">
+      <li><a href="https://linkedin.com/in/brucedenham/" target="_blank">LinkedIn</a></li>
+      <li><a href="https://github.com/bdenham" target="_blank">GitHub</a></li>
+      <li><a href="mailto:brucedenham@mac.com">Email</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<style>
+  .sidebar-simple {
+    width: 200px;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-primary);
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+  }
+
+  .nav-header h2 {
+    margin: 0 0 24px 0;
+    font-size: 18px;
+  }
+
+  .nav-header a {
+    color: var(--accent-primary);
+    text-decoration: none;
+  }
+
+  .nav-links,
+  .social-links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+  }
+
+  .nav-links li,
+  .social-links li {
+    margin: 8px 0;
+  }
+
+  .nav-links a,
+  .social-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: block;
+  }
+
+  .nav-links a:hover,
+  .social-links a:hover,
+  .nav-links a.active {
+    color: var(--accent-primary);
+    background: var(--bg-card);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sidebar-simple {
+      display: none;
+    }
+  }
+</style>
