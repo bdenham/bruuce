@@ -1,5 +1,5 @@
 {
-  "name": "sanity-check",
+  "name": "bruuce.com",
   "version": "0.1.0",
   "license": "MIT",
   "description": "A personal blog built with Astro and Starlight.",
@@ -58,10 +58,10 @@
   "engine-strict": true,
   "private": true,
   "sideEffects": false,
-  "homepage": "https://github.com/bdenham/sanity-check",
+  "homepage": "https://bruuce.com",
   "repository": {
     "type": "git",
-    "url": "git@github.com:bdenham/sanity-check.git"
+    "url": "git@github.com:bdenham/bruuce.git"
   },
-  "bugs": "https://github.com/bdenham/sanity-check/issues"
+  "bugs": "https://github.com/bdenham/bruuce/issues"
 }

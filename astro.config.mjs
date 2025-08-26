@@ -54,7 +54,7 @@ async function config() {
         integrations: [
             starlight({
                 editLink: {
-                    baseUrl: 'https://github.com/bdenham/sanity-check/edit/main/'
+                    baseUrl: 'https://github.com/bdenham/bruuce/edit/main/'
                 },
                 expressiveCode: {
                     themes: ['github-light', 'github-dark'],
@@ -111,14 +111,14 @@ async function config() {
                             `/resume/`,
                             `/blog/**`,
                             `/`,
-                            // Legacy paths with base prefix (for GitHub Actions compatibility)
-                            `/sanity-check/blog/`,
-                            `/sanity-check/about/`,
-                            `/sanity-check/projects/`,
-                            `/sanity-check/work/`,
-                            `/sanity-check/resume/`,
-                            `/sanity-check/blog/**`,
-                            `/sanity-check/`,
+                            // Legacy paths with base prefix (for GitHub Actions compatibility)  
+                            `/bruuce/blog/`,
+                            `/bruuce/about/`,
+                            `/bruuce/projects/`,
+                            `/bruuce/work/`,
+                            `/bruuce/resume/`,
+                            `/bruuce/blog/**`,
+                            `/bruuce/`,
                         ]
                     }),
                     starlightImageZoom({

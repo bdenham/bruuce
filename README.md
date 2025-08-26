@@ -462,8 +462,8 @@ document.documentElement.classList.remove('light');
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/sanity-check.git
-cd sanity-check
+git clone https://github.com/bdenham/bruuce.git
+cd bruuce
 
 # Install dependencies
 pnpm install
@@ -503,7 +503,7 @@ Content here with any of the components:
 ## 📁 Project Structure
 
 ```
-sanity-check/
+bruuce/
 ├── src/
 │   ├── components/           # Reusable Astro components
 │   │   ├── Header.astro     # Site header with theme toggle
