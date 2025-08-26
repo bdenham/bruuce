@@ -7,12 +7,12 @@ import { remarkBasePathLinks } from './src/plugins/remarkBasePathLinks';
 
 // https://astro.build/config
 export default defineConfig({
-    // Vercel adapter for optimal performance
+    // Vercel adapter for static site deployment
     output: 'static',
     adapter: vercel({
         webAnalytics: { enabled: false }, // Disable to fix MIME type issues
         speedInsights: { enabled: false }, // Disable to prevent console errors
-        isr: true, // Enable incremental static regeneration for better performance
+        // Remove ISR - not needed for static sites and conflicts with CSS deployment
     }),
 
     // Site configuration - GitHub Pages compatible
