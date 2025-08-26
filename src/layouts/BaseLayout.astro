@@ -38,9 +38,6 @@ const {
     <!-- Performance optimizations -->
     <meta name="robots" content="index, follow" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
-    <!-- Performance optimizations for LCP -->
-    <link rel="preconnect" href="https://bdenham.github.io" crossorigin />
-    <link rel="dns-prefetch" href="https://bdenham.github.io" />
 
     <!-- Critical font preloads for LCP optimization -->
     <link
@@ -64,7 +61,7 @@ const {
       @font-face {
         font-family: adobe-clean;
         src: url({import.meta.env.BASE_URL + 'fonts/adobe-clean-400.woff2'}) format('woff2');
-        font-display: swap; /* Better for LCP - allows text to be shown immediately */
+        font-display: optional; /* Better for performance metrics */
         font-style: normal;
         font-weight: 400;
       }
@@ -72,7 +69,7 @@ const {
       @font-face {
         font-family: adobe-clean;
         src: url({import.meta.env.BASE_URL + 'fonts/adobe-clean-700.woff2'}) format('woff2');
-        font-display: swap; /* Better for LCP - allows text to be shown immediately */
+        font-display: optional; /* Better for performance metrics */
         font-style: normal;
         font-weight: 700;
       }

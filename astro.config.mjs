@@ -25,12 +25,12 @@ export default defineConfig({
     trailingSlash: 'ignore',
     outDir: './dist',
 
-    // LCP-optimized performance settings
+    // GitHub Pages-style performance optimizations (proven 0.9s Speed Index)
     build: {
-        inlineStylesheets: 'auto', // Inline critical CSS for faster LCP
+        inlineStylesheets: 'never', // Keep CSS external for better caching and performance
         assets: '_astro',
-        assetsInlineLimit: 4096, // Inline more assets to reduce requests
-        cssCodeSplit: false, // Single CSS file for faster initial load
+        assetsInlineLimit: 2048, // More conservative inlining
+        cssCodeSplit: true, // Allow CSS splitting for better caching
         rollupOptions: {
             output: {
                 entryFileNames: '_astro/[name].[hash].js',
@@ -42,9 +42,10 @@ export default defineConfig({
 
     vite: {
         build: {
-            cssCodeSplit: false, // Single CSS bundle for faster LCP
-            assetsInlineLimit: 4096, // Inline more assets to reduce HTTP requests
+            cssCodeSplit: true, // Enable CSS code splitting for better caching
+            assetsInlineLimit: 2048, // Conservative asset inlining
             target: 'es2022',
+            cssMinify: 'esbuild', // Fast CSS minification
         },
     },
 
