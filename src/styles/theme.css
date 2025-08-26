@@ -883,24 +883,7 @@ footer a:hover {
 }
 
 /* GitHub Pages-style font loading */
-/* GitHub Pages static font declarations */
-@font-face {
-    font-family: adobe-clean;
-    src: url('/bruuce/fonts/adobe-clean-400.woff2') format('woff2');
-    font-display: optional;
-    /* Better for performance metrics */
-    font-style: normal;
-    font-weight: 400;
-}
-
-@font-face {
-    font-family: adobe-clean;
-    src: url('/bruuce/fonts/adobe-clean-700.woff2') format('woff2');
-    font-display: optional;
-    /* Better for performance metrics */
-    font-style: normal;
-    font-weight: 700;
-}
+/* Font declarations moved to BaseLayout.astro for dynamic base path support */
 
 /* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
