@@ -21,9 +21,9 @@ export default defineConfig({
     trailingSlash: 'ignore',
     outDir: './dist',
 
-    // FIX 2: Inline critical CSS to eliminate render-blocking (1,210ms savings)
+    // FIX 2: Force CSS inlining to eliminate render-blocking (1,210ms savings)
     build: {
-        inlineStylesheets: 'auto', // Inline critical CSS automatically
+        inlineStylesheets: 'always', // Force inline ALL CSS (even if large)
     },
     vite: {
         build: {
