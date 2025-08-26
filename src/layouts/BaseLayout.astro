@@ -38,51 +38,7 @@ const {
     <!-- Performance optimizations -->
     <meta name="robots" content="index, follow" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
-    <!-- Font loading with dynamic base path support -->
-    <script is:inline>
-      // Determine correct font path for GitHub Pages vs custom domain
-      const basePath =
-        window.location.hostname === 'bdenham.github.io' &&
-        window.location.pathname.startsWith('/bruuce/')
-          ? '/bruuce'
-          : '';
-
-      // Create preload links for critical fonts
-      const fontPreloads = [
-        { href: `${basePath}/fonts/adobe-clean-400.woff2`, weight: '400' },
-        { href: `${basePath}/fonts/adobe-clean-700.woff2`, weight: '700' },
-      ];
-
-      fontPreloads.forEach((font) => {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.href = font.href;
-        link.as = 'font';
-        link.type = 'font/woff2';
-        link.crossOrigin = '';
-        document.head.appendChild(link);
-      });
-
-      // Create font-face declarations
-      const style = document.createElement('style');
-      style.textContent = `
-        @font-face {
-          font-family: adobe-clean;
-          src: url('${basePath}/fonts/adobe-clean-400.woff2') format('woff2');
-          font-display: optional;
-          font-style: normal;
-          font-weight: 400;
-        }
-        @font-face {
-          font-family: adobe-clean;
-          src: url('${basePath}/fonts/adobe-clean-700.woff2') format('woff2');
-          font-display: optional;
-          font-style: normal;
-          font-weight: 700;
-        }
-      `;
-      document.head.appendChild(style);
-    </script>
+    <!-- Performance: Font preloads now handled in astro.config.mjs for immediate loading -->
     <!-- Preload critical CSS and JS to reduce chain latency -->
     <link rel="dns-prefetch" href="//_astro/" />
     <link rel="preconnect" href="//_astro/" />

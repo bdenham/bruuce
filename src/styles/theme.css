@@ -876,7 +876,22 @@ footer a:hover {
     margin: 32px 0;
 }
 
-/* Font-face declarations moved to HTML head in astro.config.mjs for dynamic base path support */
+/* High-performance font loading - static CSS for immediate loading */
+@font-face {
+    font-family: adobe-clean;
+    src: url('/fonts/adobe-clean-400.woff2') format('woff2');
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: adobe-clean;
+    src: url('/fonts/adobe-clean-700.woff2') format('woff2');
+    font-display: swap;
+    font-style: normal;
+    font-weight: 700;
+}
 
 /* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
