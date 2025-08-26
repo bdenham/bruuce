@@ -60,7 +60,7 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Build with Astro
-        run: NODE_ENV=github VITE_GITHUB_BASE_PATH=${{ steps.pages.outputs.base_path }} npm run build
+        run: GITHUB_PAGES=true npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -15,8 +15,13 @@ export default defineConfig({
         isr: true, // Enable incremental static regeneration for better performance
     }),
 
-    // Site configuration
-    site: 'https://bruuce.com',
+    // Site configuration - GitHub Pages compatible
+    site: process.env.GITHUB_PAGES 
+        ? 'https://bdenham.github.io' 
+        : 'https://bruuce.com',
+    base: process.env.GITHUB_PAGES 
+        ? '/bruuce/' 
+        : undefined,
     trailingSlash: 'ignore',
     outDir: './dist',
 
