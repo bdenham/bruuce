@@ -22,24 +22,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-          cache: 'pnpm'
-          cache-dependency-path: 'pnpm-lock.yaml'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Run linting
-        run: pnpm run lint
+        run: npm run lint
 
       - name: Build project
-        run: pnpm run build
+        run: npm run build
 
   deploy:
     name: Deploy to GitHub Pages
@@ -52,25 +48,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-          cache: 'pnpm'
-          cache-dependency-path: 'pnpm-lock.yaml'
+          cache: 'npm'
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Build with Astro
-        run: NODE_ENV=github VITE_GITHUB_BASE_PATH=${{ steps.pages.outputs.base_path }} pnpm run build
+        run: NODE_ENV=github VITE_GITHUB_BASE_PATH=${{ steps.pages.outputs.base_path }} npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
