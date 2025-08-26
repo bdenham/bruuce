@@ -59,7 +59,7 @@ const {
     <script is:inline>
       // Detect correct base path for fonts (GitHub Pages vs Vercel)
       const basePath = window.location.pathname.includes('/bruuce/') ? '/bruuce/' : '/';
-      
+
       // Create and inject font-face CSS with correct paths
       const fontCSS = `
         @font-face {
@@ -77,11 +77,11 @@ const {
           font-weight: 700;
         }
       `;
-      
+
       const style = document.createElement('style');
       style.textContent = fontCSS;
       document.head.appendChild(style);
-      
+
       // Theme initialization
       if (localStorage.getItem('theme') === 'light') {
         document.documentElement.classList.add('light');
