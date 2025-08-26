@@ -62,7 +62,7 @@ function getShortenedTitle(title: string): string {
 
   <nav class="sidebar-nav" id="sidebar-nav">
     <div class="nav-header">
-      <h2>Bruce Denham</h2>
+      <h2><a href="/" class="nav-header-link">Bruce Denham</a></h2>
       <button class="sidebar-close" id="sidebar-close" aria-label="Close navigation">×</button>
     </div>
 
@@ -223,6 +223,16 @@ function getShortenedTitle(title: string): string {
     font-size: 18px;
     margin: 0;
     font-weight: 600;
+  }
+
+  .nav-header-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .nav-header-link:hover {
+    color: var(--accent-primary);
   }
 
   .sidebar-close {
