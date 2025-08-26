@@ -25,12 +25,12 @@ export default defineConfig({
     trailingSlash: 'ignore',
     outDir: './dist',
 
-    // ORIGINAL 0.9s Speed Index configuration - external CSS with optimal caching
+    // OPTIMIZED 0.9s Speed Index: single external CSS bundle (no splitting)
     build: {
-        inlineStylesheets: 'never', // Keep CSS external for better performance
+        inlineStylesheets: 'never', // Keep CSS external for caching
         assets: '_astro',
-        assetsInlineLimit: 0, // No asset inlining - keep external for caching
-        cssCodeSplit: true, // Allow CSS splitting for better caching
+        assetsInlineLimit: 0, // No asset inlining
+        cssCodeSplit: false, // Single CSS bundle to prevent render-blocking cascade
         rollupOptions: {
             output: {
                 entryFileNames: '_astro/[name].[hash].js',
@@ -42,7 +42,7 @@ export default defineConfig({
 
     vite: {
         build: {
-            cssCodeSplit: true, // Enable CSS code splitting for better caching
+            cssCodeSplit: false, // Single CSS bundle to prevent render-blocking
             assetsInlineLimit: 0, // No asset inlining - external files cache better
             target: 'es2022',
             cssMinify: 'esbuild', // Fast CSS minification
