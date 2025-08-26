@@ -16,11 +16,11 @@ export default defineConfig({
     }),
 
     // Site configuration - GitHub Pages compatible
-    site: process.env.GITHUB_PAGES 
-        ? 'https://bdenham.github.io' 
+    site: process.env.GITHUB_PAGES
+        ? 'https://bdenham.github.io'
         : 'https://bruuce.com',
-    base: process.env.GITHUB_PAGES 
-        ? '/bruuce/' 
+    base: process.env.GITHUB_PAGES
+        ? '/bruuce/'
         : undefined,
     trailingSlash: 'ignore',
     outDir: './dist',
