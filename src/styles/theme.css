@@ -421,10 +421,10 @@
     --text-dim: #71717a;
     --border-primary: rgba(148, 163, 184, 0.25);
     --border-secondary: rgba(148, 163, 184, 0.15);
-    --accent-primary: #0066cc;
-    --accent-hover: #0080ff;
-    --gradient-1: rgba(0, 102, 204, 0.25);
-    --gradient-2: rgba(0, 128, 255, 0.2);
+    --accent-primary: #00aaff;
+    --accent-hover: #00ccff;
+    --gradient-1: rgba(0, 170, 255, 0.25);
+    --gradient-2: rgba(0, 204, 255, 0.2);
     --shadow-primary: rgba(0, 0, 0, 0.4);
     --shadow-secondary: rgba(0, 0, 0, 0.3);
 
