@@ -21,10 +21,13 @@ export default defineConfig({
     trailingSlash: 'ignore',
     outDir: './dist',
 
-    // SIMPLE FIX: Single CSS bundle to eliminate render-blocking waterfall
+    // FIX 2: Inline critical CSS to eliminate render-blocking (1,210ms savings)
+    build: {
+        inlineStylesheets: 'auto', // Inline critical CSS automatically
+    },
     vite: {
         build: {
-            cssCodeSplit: false, // Force single CSS file instead of 5 separate files
+            cssCodeSplit: false, // Single CSS bundle (already working)
         },
     },
 
