@@ -1,28 +1,4 @@
 {
-    "build": {
-        "env": {
-            "NODE_ENV": "production"
-        }
-    },
-    "functions": {
-        "app/**/*.js": {
-            "includeFiles": "dist/**"
-        }
-    },
-    "routes": [
-        {
-            "src": "/robots.txt",
-            "dest": "/robots.txt"
-        },
-        {
-            "src": "/sitemap-index.xml",
-            "dest": "/sitemap-index.xml"
-        },
-        {
-            "src": "/blog/rss.xml",
-            "dest": "/blog/rss.xml"
-        }
-    ],
     "headers": [
         {
             "source": "/fonts/(.*)",
