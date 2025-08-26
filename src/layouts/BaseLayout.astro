@@ -55,8 +55,34 @@ const {
       type="font/woff2"
       crossorigin
     />
-    <!-- Theme initialization only -->
+    <!-- Cross-platform font loading and theme initialization -->
     <script is:inline>
+      // Detect correct base path for fonts (GitHub Pages vs Vercel)
+      const basePath = window.location.pathname.includes('/bruuce/') ? '/bruuce/' : '/';
+      
+      // Create and inject font-face CSS with correct paths
+      const fontCSS = `
+        @font-face {
+          font-family: adobe-clean;
+          src: url('${basePath}fonts/adobe-clean-400.woff2') format('woff2');
+          font-display: optional;
+          font-style: normal;
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: adobe-clean;
+          src: url('${basePath}fonts/adobe-clean-700.woff2') format('woff2');
+          font-display: optional;
+          font-style: normal;
+          font-weight: 700;
+        }
+      `;
+      
+      const style = document.createElement('style');
+      style.textContent = fontCSS;
+      document.head.appendChild(style);
+      
+      // Theme initialization
       if (localStorage.getItem('theme') === 'light') {
         document.documentElement.classList.add('light');
       }
