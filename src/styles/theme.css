@@ -229,13 +229,13 @@
 }
 
 .post-tag {
-    background: rgba(167, 139, 250, 0.1);
-    color: var(--accent-primary);
-    padding: 2px 8px;
-    border-radius: 8px;
+    background: var(--accent-content);
+    color: var(--accent-content-text);
+    padding: 4px 10px;
+    border-radius: 12px;
     font-size: 11px;
     font-weight: 600;
-    border: 1px solid rgba(167, 139, 250, 0.2);
+    border: none;
 }
 
 .doc-status {
@@ -423,6 +423,8 @@
     --border-secondary: rgba(148, 163, 184, 0.15);
     --accent-primary: #00aaff;
     --accent-hover: #00ccff;
+    --accent-content: #1a365d;
+    --accent-content-text: #ffffff;
     --gradient-1: rgba(0, 170, 255, 0.25);
     --gradient-2: rgba(0, 204, 255, 0.2);
     --shadow-primary: rgba(0, 0, 0, 0.4);
@@ -465,6 +467,8 @@
     --border-secondary: rgba(138, 143, 151, 0.25);
     --accent-primary: #0066cc;
     --accent-hover: #0080ff;
+    --accent-content: #1a365d;
+    --accent-content-text: #ffffff;
     --gradient-1: rgba(0, 102, 204, 0.08);
     --gradient-2: rgba(0, 128, 255, 0.06);
     --shadow-primary: rgba(45, 55, 72, 0.12);
@@ -662,7 +666,7 @@ h1 {
 }
 
 h1 span {
-    color: var(--accent-primary);
+    color: #0066cc;
 }
 
 h2 {
