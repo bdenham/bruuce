@@ -21,12 +21,12 @@ export default defineConfig({
     trailingSlash: 'ignore',
     outDir: './dist',
 
-    // ULTIMATE 0.9s Speed Index: inline critical CSS to eliminate 610ms render-blocking
+    // EMERGENCY REVERT: External CSS with aggressive caching for 0.9s Speed Index
     build: {
-        inlineStylesheets: 'auto', // Inline critical CSS to eliminate render-blocking
+        inlineStylesheets: 'never', // External CSS with caching beats bloated HTML
         assets: '_astro',
         assetsInlineLimit: 0, // No asset inlining
-        cssCodeSplit: false, // Single CSS bundle for inlining
+        cssCodeSplit: false, // Single CSS bundle
         rollupOptions: {
             output: {
                 entryFileNames: '_astro/[name].[hash].js',
