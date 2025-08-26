@@ -520,7 +520,6 @@ body {
         Roboto,
         Helvetica,
         Arial,
-        adobe-clean,
         sans-serif;
     line-height: 1.6;
     color: var(--text-secondary);
@@ -668,7 +667,7 @@ h1 {
     letter-spacing: -0.02em;
     color: var(--text-primary);
     font-weight: 700;
-    font-family: adobe-clean, ui-sans-serif, system-ui, sans-serif;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 h1 span {
@@ -679,7 +678,7 @@ h2 {
     color: var(--text-primary);
     font-size: 32px;
     margin: 32px 0 16px 0;
-    font-family: adobe-clean, ui-sans-serif, system-ui, sans-serif;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 700;
 }
 
@@ -687,7 +686,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: adobe-clean, ui-sans-serif, system-ui, sans-serif;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     color: var(--text-primary);
     font-weight: 700;
 }
@@ -883,22 +882,9 @@ footer a:hover {
 }
 
 /* GitHub Pages-style font loading */
-/* FIX 3: Remove fonts from critical path entirely - should save 171ms */
-@font-face {
-    font-family: adobe-clean;
-    src: url('/fonts/adobe-clean-400.woff2') format('woff2');
-    font-display: optional; /* Don't block rendering - only load if fast */
-    font-style: normal;
-    font-weight: 400;
-}
-
-@font-face {
-    font-family: adobe-clean;
-    src: url('/fonts/adobe-clean-700.woff2') format('woff2');
-    font-display: optional; /* Don't block rendering - only load if fast */
-    font-style: normal;
-    font-weight: 700;
-}
+/* FIX 4: Use system fonts only - eliminate 275ms critical path latency completely */
+/* Custom fonts removed temporarily for optimal performance */
+/* Adobe Clean font declarations disabled - using system fonts for critical path optimization */
 
 /* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
