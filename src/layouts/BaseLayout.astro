@@ -38,12 +38,29 @@ const {
     <!-- Performance optimizations -->
     <meta name="robots" content="index, follow" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
-    <!-- Performance: Font preloads now handled in astro.config.mjs for immediate loading -->
+    <!-- Critical font preloads for LCP optimization -->
+    <link
+      rel="preload"
+      href="/fonts/adobe-clean-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      href="/fonts/adobe-clean-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <!-- Critical resource hints for performance -->
     <link rel="dns-prefetch" href="//_astro/" />
     <link rel="preconnect" href="//_astro/" />
     <link rel="dns-prefetch" href="//static.cloudflareinsights.com" />
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+
     <!-- Prevent white flash by setting theme early -->
     <script is:inline>
       // Set theme immediately to prevent white flash
@@ -60,20 +77,6 @@ const {
           if (colorScheme) colorScheme.setAttribute('content', 'dark light');
         }
       })();
-    </script>
-    <!-- Lazy load search scripts only when needed -->
-    <script>
-      // Determine correct script path for GitHub Pages vs custom domain
-      const scriptPath =
-        window.location.hostname === 'bdenham.github.io' &&
-        window.location.pathname.startsWith('/bruuce/')
-          ? '/bruuce/scripts/search-loader.js'
-          : '/scripts/search-loader.js';
-
-      const script = document.createElement('script');
-      script.src = scriptPath;
-      script.type = 'module';
-      document.head.appendChild(script);
     </script>
   </head>
   <body>

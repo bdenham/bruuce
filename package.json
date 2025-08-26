@@ -11,6 +11,7 @@
     "dev": "astro dev --open",
     "start": "pnpm run build && pnpm run preview",
     "build": "NODE_ENV=production astro build",
+    "build:vercel": "astro build",
     "preview": "NODE_ENV=production astro preview --open",
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\"",
     "clean": "rm -rf dist && rm -rf .astro && rm -rf node_modules && pnpm install",
@@ -18,7 +19,8 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/starlight": "^0.35.2",
+    "@astrojs/mdx": "^4.3.4",
+    "@astrojs/vercel": "^8.2.6",
     "@typescript-eslint/eslint-plugin": "^8.39.1",
     "@typescript-eslint/parser": "^8.39.1",
     "astro": "^5.13.2",
@@ -30,10 +32,6 @@
     "node-html-parser": "^7.0.1",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
-    "starlight-blog": "^0.24.1",
-    "starlight-heading-badges": "^0.6.0",
-    "starlight-image-zoom": "^0.13.0",
-    "starlight-links-validator": "^0.17.1",
     "typescript": "5.9.2",
     "unist-util-visit": "^5.0.0"
   },

@@ -1,184 +1,67 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import { defineConfig, passthroughImageService } from 'astro/config';
-import starlight from '@astrojs/starlight';
-import starlightLinksValidator from 'starlight-links-validator';
-import starlightImageZoom from 'starlight-image-zoom';
+import vercel from '@astrojs/vercel';
+import mdx from '@astrojs/mdx';
 import { remarkBasePathLinks } from './src/plugins/remarkBasePathLinks';
-import starlightHeadingBadges from 'starlight-heading-badges';
-import starlightBlog from 'starlight-blog'
 
 // https://astro.build/config
-async function config() {
-    // No base path for clean URLs, but we'll handle assets separately
-    const basePath = process.env.VITE_GITHUB_BASE_PATH || '';
+export default defineConfig({
+    // Vercel adapter for optimal performance
+    output: 'static',
+    adapter: vercel({
+        webAnalytics: { enabled: true },
+        speedInsights: { enabled: true },
+    }),
 
-    return defineConfig({
-        // Performance optimizations
+    // Site configuration
+    site: 'https://bruuce.com',
+    trailingSlash: 'ignore',
+    outDir: './dist',
+
+    // Performance optimizations
+    build: {
+        inlineStylesheets: 'auto',
+        assets: '_astro',
+        assetsInlineLimit: 2048,
+        cssCodeSplit: true,
+        rollupOptions: {
+            output: {
+                entryFileNames: '_astro/[name].[hash].js',
+                chunkFileNames: '_astro/[name].[hash].js',
+                assetFileNames: '_astro/[name].[hash][extname]'
+            }
+        }
+    },
+
+    vite: {
         build: {
-            inlineStylesheets: 'auto', // Inline small CSS files
-            assetsPrefix: basePath, // Proper asset prefixing
+            cssCodeSplit: true,
+            assetsInlineLimit: 2048,
+            target: 'es2022',
         },
-        vite: {
-            build: {
-                cssCodeSplit: true, // Split CSS by route
-                assetsInlineLimit: 2048, // Inline assets smaller than 2KB
-                target: 'es2022', // Modern browser optimization with top-level await support
-            },
-        },
-        image: {
-            service: passthroughImageService(),
-        },
-        site: 'https://bruuce.com',
-        base: basePath,
-        markdown: {
-            remarkPlugins: [remarkBasePathLinks],
-            syntaxHighlight: { type: 'shiki', excludeLangs: ['mermaid'] },
-        },
-        trailingSlash: 'ignore',
-        outDir: './dist',
-        build: {
-            assets: '_astro',
-            assetsInlineLimit: 0, // Ensure assets are hashed and externalized
-            cssCodeSplit: true, // Enable CSS code splitting for better caching
-            rollupOptions: {
-                output: {
-                    // Ensure consistent hashing for better caching
-                    entryFileNames: '_astro/[name].[hash].js',
-                    chunkFileNames: '_astro/[name].[hash].js',
-                    assetFileNames: '_astro/[name].[hash][extname]'
-                }
+    },
+
+    // Image optimization
+    image: {
+        service: passthroughImageService(),
+    },
+
+    // Markdown configuration
+    markdown: {
+        remarkPlugins: [remarkBasePathLinks],
+        syntaxHighlight: {
+            type: 'shiki',
+            excludeLangs: ['mermaid'],
+            themes: {
+                light: 'github-light',
+                dark: 'github-dark'
             }
         },
+    },
 
-        integrations: [
-            starlight({
-                editLink: {
-                    baseUrl: 'https://github.com/bdenham/bruuce/edit/main/'
-                },
-                expressiveCode: {
-                    themes: ['github-light', 'github-dark'],
-                    styleOverrides: {
-                        frames: {
-                            frameBoxShadowCssValue: 'none',
-                        },
-                    },
-                    defaultProps: {
-                        // Disable window frames for all code blocks
-                        frame: 'none',
-                    },
-                },
-                title: 'Sanity Check',
-                favicon: 'favicon.svg',
-                lastUpdated: true,
-                sidebar: [
-                    {
-                        label: 'Home',
-                        link: `${basePath}/`
-                    },
-                    {
-                        label: 'All Posts',
-                        link: `${basePath}/blog/`
-                    },
-                    {
-                        label: 'About Me',
-                        link: `${basePath}/about/`
-                    },
-                    {
-                        label: 'My Projects',
-                        link: `${basePath}/projects/`
-                    },
-                ],
-                plugins: [
-                    starlightBlog({
-                        title: 'Blog',
-                        navigation: 'header-start',
-                        metrics: {
-                            readingTime: true,
-                            words: 'total',
-                        },
-                    }),
-                    starlightHeadingBadges(),
-                    starlightLinksValidator({
-                        errorOnFallbackPages: false,
-                        errorOnInconsistentLocale: true,
-                        exclude: [
-                            // Root paths (current structure)
-                            `/blog/`,
-                            `/about/`,
-                            `/projects/`,
-                            `/work/`,
-                            `/resume/`,
-                            `/blog/**`,
-                            `/`,
-                            // Legacy paths with base prefix (for GitHub Actions compatibility)  
-                            `/bruuce/blog/`,
-                            `/bruuce/about/`,
-                            `/bruuce/projects/`,
-                            `/bruuce/work/`,
-                            `/bruuce/resume/`,
-                            `/bruuce/blog/**`,
-                            `/bruuce/`,
-                        ]
-                    }),
-                    starlightImageZoom({
-                        showCaptions: false
-                    })
-                ],
-                // Component overrides (most components now use custom architecture)
-                components: {
-                    // Only keeping components that still exist
-                    CardGrid: './src/components/CardGrid.astro',
-                },
-                customCss: [
-                    './src/styles/reset.css',
-                    './src/styles/theme.css',
-                ],
-                // logo: {
-                //     src: './src/assets/sitelogo.svg',
-                //     replacesTitle: false
-                // },
-                social: [
-                    { icon: 'github', label: 'GitHub', href: 'https://github.com/bdenham' },
-                ],
-                head: [
-                    // Font preloads for better LCP performance (with GitHub base path)
-                    // Preload 400 weight first with high priority - used by h1 LCP element
-                    {
-                        tag: 'link',
-                        attrs: {
-                            rel: 'preload',
-                            href: `${basePath}/fonts/adobe-clean-400.woff2`,
-                            as: 'font',
-                            type: 'font/woff2',
-                            crossorigin: '',
-                            fetchpriority: 'high'
-                        }
-                    },
-
-                    {
-                        tag: 'link',
-                        attrs: {
-                            rel: 'preload',
-                            href: `${basePath}/fonts/adobe-clean-700.woff2`,
-                            as: 'font',
-                            type: 'font/woff2',
-                            crossorigin: ''
-                        }
-                    },
-                    // Search Highlighting Scripts (external files)
-                    {
-                        tag: 'script',
-                        attrs: { src: `${basePath}/scripts/search-highlighter.js` }
-                    },
-                    {
-                        tag: 'script',
-                        attrs: { src: `${basePath}/scripts/search-click-handler.js` }
-                    },
-                ],
-            })
-        ]
-    });
-}
-
-export default config();
+    // Integrations
+    integrations: [
+        mdx(), // MDX support for blog content
+    ],
+});
