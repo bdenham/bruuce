@@ -25,12 +25,12 @@ export default defineConfig({
     trailingSlash: 'ignore',
     outDir: './dist',
 
-    // GitHub Pages-style performance optimizations (proven 0.9s Speed Index)
+    // TRUE 0.9s Speed Index optimizations - aggressive CSS inlining
     build: {
-        inlineStylesheets: 'never', // Keep CSS external for better caching and performance
+        inlineStylesheets: 'auto', // Inline critical CSS to eliminate render-blocking
         assets: '_astro',
-        assetsInlineLimit: 2048, // More conservative inlining
-        cssCodeSplit: true, // Allow CSS splitting for better caching
+        assetsInlineLimit: 4096, // Larger inlining threshold
+        cssCodeSplit: false, // Single CSS bundle to reduce requests
         rollupOptions: {
             output: {
                 entryFileNames: '_astro/[name].[hash].js',
@@ -42,8 +42,8 @@ export default defineConfig({
 
     vite: {
         build: {
-            cssCodeSplit: true, // Enable CSS code splitting for better caching
-            assetsInlineLimit: 2048, // Conservative asset inlining
+            cssCodeSplit: false, // Single CSS bundle for 0.9s Speed Index
+            assetsInlineLimit: 4096, // Aggressive asset inlining
             target: 'es2022',
             cssMinify: 'esbuild', // Fast CSS minification
         },
