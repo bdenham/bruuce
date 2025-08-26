@@ -628,7 +628,7 @@ body {
         0 10px 30px var(--shadow-primary),
         inset 0 1px 0 rgba(255, 255, 255, 0.03);
     backdrop-filter: saturate(120%) blur(8px);
-    padding: 40px 32px;
+    padding: 12px 40px 32px 16px;
 }
 
 /* Navigation links */
