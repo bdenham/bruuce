@@ -151,10 +151,10 @@ function getShortenedTitle(title: string): string {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 24px 20px 24px;
+    padding: 12px 24px; /* Match main header padding exactly */
     border-bottom: 1px solid var(--border-secondary);
     margin-bottom: 24px;
-    min-height: 60px; /* Match header height for alignment */
+    /* No min-height - let content determine height naturally */
   }
 
   .nav-header h2 {
