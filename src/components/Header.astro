@@ -83,8 +83,8 @@ import ThemeToggle from './ThemeToggle.astro';
   }
 
   .social-icon {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     opacity: 0.8;
     transition: opacity 0.2s ease;
   }
@@ -94,18 +94,6 @@ import ThemeToggle from './ThemeToggle.astro';
   }
 
   .social-text {
-    font-size: 14px;
-  }
-
-  /* Hide text on smaller screens, show icons only */
-  @media (max-width: 640px) {
-    .social-text {
-      display: none;
-    }
-
-    .social-icon {
-      width: 18px;
-      height: 18px;
-    }
+    display: none; /* Icons only - no text labels */
   }
 </style>
