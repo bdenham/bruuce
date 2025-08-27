@@ -1,7 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import SidebarSimple from '../components/SidebarSimple.astro';
+import SidebarOptimized from '../components/SidebarOptimized.astro';
 import '../styles/theme.css';
 
 export interface Props {
@@ -109,7 +109,7 @@ const {
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <div id="root">
-      <SidebarSimple />
+      <SidebarOptimized />
       <div class="app-content">
         <Header />
         <main class="main-container" id="main-content">
@@ -212,7 +212,8 @@ const {
 
   .app-content {
     flex: 1;
-    margin-left: 200px;
+    margin-left: 280px;
+    transition: margin-left 0.3s ease;
   }
 
   .main-container {
@@ -262,6 +263,11 @@ const {
     .content-panel {
       padding: 24px 20px;
     }
+  }
+
+  /* Sidebar collapsed state on mobile */
+  .sidebar.collapsed ~ .app-content {
+    margin-left: 0;
   }
 </style>
 // Force rebuild - CSS assets missing on Vercel

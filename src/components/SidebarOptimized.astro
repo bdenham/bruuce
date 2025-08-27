@@ -1,0 +1,287 @@
+---
+import { getCollection } from 'astro:content';
+
+// Get all blog posts and sort by date (newest first)
+const blogPosts = await getCollection('blog');
+const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Get current URL for active state highlighting
+const currentPath = Astro.url.pathname;
+
+// Simplified title shortening - much faster processing
+function getShortenedTitle(title: string): string {
+  if (title.length <= 30) return title;
+  
+  // Simple truncation with smart word boundary
+  const truncated = title.substring(0, 30);
+  const lastSpace = truncated.lastIndexOf(' ');
+  return lastSpace > 15 ? truncated.substring(0, lastSpace) + '...' : truncated + '...';
+}
+---
+
+<aside class="sidebar" id="sidebar">
+  <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation">
+    <span class="toggle-icon">☰</span>
+  </button>
+
+  <nav class="sidebar-nav" id="sidebar-nav">
+    <div class="nav-header">
+      <h2><a href="/" class="nav-header-link">Bruce Denham</a></h2>
+      <button class="sidebar-close" id="sidebar-close" aria-label="Close navigation">×</button>
+    </div>
+
+    <!-- Main Pages Section - simplified structure -->
+    <div class="nav-section">
+      <h3>Portfolio</h3>
+      <ul>
+        <li><a href="/" class={currentPath === '/' ? 'active' : ''}><span class="nav-icon">🏠</span>Home</a></li>
+        <li><a href="/about/" class={currentPath.startsWith('/about') ? 'active' : ''}><span class="nav-icon">👨‍💻</span>About Me</a></li>
+        <li><a href="/resume/" class={currentPath.startsWith('/resume') ? 'active' : ''}><span class="nav-icon">📋</span>Resume</a></li>
+        <li><a href="/work/" class={currentPath.startsWith('/work') ? 'active' : ''}><span class="nav-icon">🛠️</span>My Work</a></li>
+        <li><a href="/projects/" class={currentPath.startsWith('/projects') ? 'active' : ''}><span class="nav-icon">🚀</span>Projects</a></li>
+      </ul>
+    </div>
+
+    <!-- Blog Section - optimized -->
+    <div class="nav-section">
+      <h3><a href="/blog/" class={currentPath === '/blog/' ? 'active' : ''}>Blog <span class="clickable-indicator">→</span></a></h3>
+      <ul class="blog-posts">
+        {sortedPosts.map((post) => (
+          <li>
+            <a href={`/blog/${post.slug}/`} class={currentPath === `/blog/${post.slug}/` ? 'active' : ''} title={post.data.excerpt}>
+              <span class="post-date">{post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+              <span class="post-title">{getShortenedTitle(post.data.title)}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Connect Section - flattened structure -->
+    <div class="nav-section">
+      <h3>Connect</h3>
+      <ul class="external-links">
+        <li><a href="https://linkedin.com/in/brucedenham/" target="_blank" rel="noopener noreferrer"><span class="nav-icon">💼</span>LinkedIn <span class="external-icon">↗</span></a></li>
+        <li><a href="https://github.com/bdenham" target="_blank" rel="noopener noreferrer"><span class="nav-icon">💻</span>GitHub <span class="external-icon">↗</span></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Overlay for mobile -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+</aside>
+
+<style>
+  /* Core sidebar structure - simplified */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    z-index: 200;
+    font-family: inherit;
+  }
+
+  .sidebar-toggle {
+    position: fixed;
+    top: 60px;
+    left: 16px;
+    width: 36px;
+    height: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar-nav {
+    background: var(--bg-secondary);
+    height: 100%;
+    overflow-y: auto;
+    padding: 20px 0;
+    border-right: 1px solid var(--border-primary);
+  }
+
+  .nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px 24px 24px;
+    border-bottom: 1px solid var(--border-secondary);
+    margin-bottom: 24px;
+  }
+
+  .nav-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .nav-header-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+  }
+
+  .sidebar-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: none;
+  }
+
+  /* Navigation sections - streamlined */
+  .nav-section {
+    margin-bottom: 32px;
+    padding: 0 24px;
+  }
+
+  .nav-section h3 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-section h3 a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .clickable-indicator {
+    opacity: 0.5;
+  }
+
+  .nav-section h3 a:hover {
+    color: var(--accent-primary);
+  }
+
+  .nav-section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-section li {
+    margin-bottom: 4px;
+  }
+
+  /* Simplified link styling */
+  .nav-section a {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  .nav-section a:hover,
+  .nav-section a.active {
+    color: var(--accent-primary);
+    background: var(--bg-card);
+  }
+
+  /* Icons - simplified */
+  .nav-icon {
+    margin-right: 8px;
+    font-size: 14px;
+  }
+
+  .external-icon {
+    margin-left: auto;
+    opacity: 0.5;
+    font-size: 12px;
+  }
+
+  /* Blog posts - optimized */
+  .blog-posts li a {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 12px;
+  }
+
+  .post-date {
+    font-size: 11px;
+    opacity: 0.6;
+    margin-bottom: 2px;
+  }
+
+  .post-title {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  /* Mobile responsive - essential only */
+  @media (max-width: 1023px) {
+    .sidebar-toggle {
+      display: flex;
+    }
+
+    .sidebar-nav {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar.open .sidebar-nav {
+      transform: translateX(0);
+    }
+
+    .sidebar-close {
+      display: block;
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 150;
+    }
+
+    .sidebar.open .sidebar-overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+</style>
+
+<script>
+  // Minimal JavaScript - essential functionality only
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('sidebar-toggle');
+  const close = document.getElementById('sidebar-close');
+  const overlay = document.getElementById('sidebar-overlay');
+
+  function toggleSidebar() {
+    sidebar?.classList.toggle('open');
+  }
+
+  toggle?.addEventListener('click', toggleSidebar);
+  close?.addEventListener('click', toggleSidebar);
+  overlay?.addEventListener('click', toggleSidebar);
+
+  // Close on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar?.classList.contains('open')) {
+      toggleSidebar();
+    }
+  });
+</script>
