@@ -908,6 +908,19 @@ footer a:hover {
     .blog-post-link:hover {
         transform: none;
     }
+    
+    /* Exception: Allow ActionCard animations for better UX */
+    .action-card {
+        transition-duration: 0.2s !important;
+    }
+    
+    .action-card::before {
+        transition-duration: 0.2s !important;
+    }
+    
+    .action-card .card-arrow {
+        transition-duration: 0.2s !important;
+    }
 }
 
 /* Search Highlight Styles */
