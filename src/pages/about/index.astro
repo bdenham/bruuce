@@ -307,7 +307,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.03));
   }
 
-  .timeline-entry::before {
+  /* .timeline-entry::before {
     content: '';
     position: absolute;
     left: -24px;
@@ -316,7 +316,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     height: 12px;
     background: var(--accent-primary);
     border-radius: 50%;
-  }
+  } */
 
   .timeline-entry.current::before {
     background: var(--accent-primary);
@@ -326,8 +326,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   .timeline-period {
     position: absolute;
     left: -80px;
-    top: 16px;
-    background: var(--bg-card);
+    background: rgba(15, 23, 42, 0.8);
     color: var(--accent-primary);
     padding: 4px 8px;
     border-radius: 4px;
