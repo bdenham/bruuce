@@ -39,6 +39,80 @@ const {
     <meta name="robots" content="index, follow" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
+    <!-- === COMPREHENSIVE SEO FOR BRUCE DENHAM === -->
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+
+    <!-- Enhanced SEO Meta Tags -->
+    <meta name="author" content="Bruce Denham" />
+    <meta
+      name="keywords"
+      content="Bruce Denham, Technical Writer, Developer Experience, Adobe, Documentation, API Documentation, SDK Documentation, React Developer, CLI Tools, Technical Communication"
+    />
+    <meta name="theme-color" content="#00aaff" />
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bruce Denham" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:image" content={new URL('/images/bruce-denham-og.jpg', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@brucedenham" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/images/bruce-denham-twitter.jpg', Astro.site)} />
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="generator" content={Astro.generator} />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- JSON-LD Structured Data for Bruce Denham -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bruce Denham",
+        "jobTitle": "Senior Technical Writer & Developer Experience Strategist",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Adobe",
+          "url": "https://adobe.com"
+        },
+        "description": "Senior Technical Writer & Developer Experience Strategist with 30+ years turning complex concepts into clear developer experiences.",
+        "url": "https://bruuce.com",
+        "sameAs": ["https://linkedin.com/in/brucedenham", "https://github.com/bdenham"],
+        "knowsAbout": [
+          "Technical Writing",
+          "Developer Experience",
+          "API Documentation",
+          "SDK Documentation",
+          "React Development",
+          "CLI Tools",
+          "Documentation Systems"
+        ],
+        "alumniOf": [
+          {
+            "@type": "Organization",
+            "name": "Schlumberger"
+          },
+          {
+            "@type": "Organization",
+            "name": "TOPAZ"
+          }
+        ],
+        "image": "https://bruuce.com/images/bruce-denham-profile.jpg"
+      }
+    </script>
+
     <!-- No font preloads - let CSS handle fonts for optimal performance -->
     <!-- Theme initialization only - fonts handled by static CSS -->
     <script is:inline>
