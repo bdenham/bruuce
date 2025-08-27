@@ -9,16 +9,30 @@ import ThemeToggle from './ThemeToggle.astro';
   <div class="header-right">
     <!-- Simplified social links - no complex SVGs blocking LCP -->
     <div class="social-links">
-      <a href="https://github.com/bdenham" target="_blank" rel="noopener" class="social-link"
-        >GitHub</a
+      <a
+        href="https://github.com/bdenham"
+        target="_blank"
+        rel="noopener"
+        class="social-link"
+        aria-label="GitHub"
       >
+        <span class="social-icon">🐙</span>
+        <span class="social-text">GitHub</span>
+      </a>
       <a
         href="https://linkedin.com/in/brucedenham"
         target="_blank"
         rel="noopener"
-        class="social-link">LinkedIn</a
+        class="social-link"
+        aria-label="LinkedIn"
       >
-      <a href="mailto:brucedenham@mac.com" class="social-link">Email</a>
+        <span class="social-icon">💼</span>
+        <span class="social-text">LinkedIn</span>
+      </a>
+      <a href="mailto:brucedenham@mac.com" class="social-link" aria-label="Email">
+        <span class="social-icon">✉️</span>
+        <span class="social-text">Email</span>
+      </a>
     </div>
 
     <ThemeToggle />
@@ -44,9 +58,32 @@ import ThemeToggle from './ThemeToggle.astro';
     font-size: 14px;
     padding: 4px 8px;
     border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 
   .social-link:hover {
     color: var(--accent-primary);
+  }
+
+  .social-icon {
+    font-size: 16px;
+    opacity: 0.8;
+  }
+
+  .social-text {
+    font-size: 14px;
+  }
+
+  /* Hide text on smaller screens, show icons only */
+  @media (max-width: 640px) {
+    .social-text {
+      display: none;
+    }
+
+    .social-icon {
+      font-size: 18px;
+    }
   }
 </style>

@@ -576,7 +576,7 @@ body {
     border-bottom: 1px solid var(--border-secondary);
     backdrop-filter: saturate(120%) blur(8px);
     z-index: 100;
-    padding: 12px 20px;
+    padding: 16px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
