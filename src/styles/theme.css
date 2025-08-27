@@ -430,6 +430,8 @@
     --accent-hover: #00ccff;
     --accent-content: #1a365d;
     --accent-content-text: #ffffff;
+    --accent-yellow: #ffd700;
+    /* Bright yellow for dark mode */
     --gradient-1: rgba(0, 170, 255, 0.25);
     --gradient-2: rgba(0, 204, 255, 0.2);
     --shadow-primary: rgba(0, 0, 0, 0.4);
@@ -475,6 +477,8 @@
     --accent-hover: #0080ff;
     --accent-content: #1a365d;
     --accent-content-text: #ffffff;
+    --accent-yellow: #b8860b;
+    /* Dark goldenrod for light mode */
     --gradient-1: rgba(0, 102, 204, 0.08);
     --gradient-2: rgba(0, 128, 255, 0.06);
     --shadow-primary: rgba(45, 55, 72, 0.12);
@@ -796,8 +800,8 @@ p {
 
 .blog-post .date {
     margin: 0;
-    color: #ffeb3b;
-    /* Light yellow */
+    color: var(--accent-yellow);
+    /* Theme-aware yellow: bright gold in dark mode, dark goldenrod in light mode */
     font-size: 13px;
 }
 
