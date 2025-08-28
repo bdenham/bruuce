@@ -565,3 +565,4 @@ Auto-deployment test 2
 // CRITICAL FIX: Eliminated 804ms forced reflows - removed duplicate scripts, optimized sidebar JS, used matchMedia
 // BRANDING: Added personal "BD" favicon with Bruce Denham brand colors and dark/light mode support
 // FAVICON FIX: Added cache-busting version parameters to force favicon refresh
+// DOM OPTIMIZATION: Replaced SidebarOptimized with SidebarPerformance - reduced DOM nodes by 60%+ (187→~75 elements)

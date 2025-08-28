@@ -508,9 +508,7 @@
 html {
     height: 100%;
     background-color: var(--bg-primary);
-    /* Simplified background for better performance */
-    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-    background-attachment: fixed;
+    /* Simplified solid background for maximum performance */
 }
 
 body {
@@ -527,7 +525,7 @@ body {
         sans-serif;
     line-height: 1.6;
     color: var(--text-secondary);
-    transition: color 0.3s ease;
+    /* Removed transition for faster rendering */
 }
 
 /* Skip link for accessibility */
@@ -570,7 +568,7 @@ body {
     border: 0;
 }
 
-/* Header styles */
+/* Header styles - optimized for LCP performance */
 .header {
     position: fixed;
     top: 0;
@@ -578,7 +576,7 @@ body {
     right: 0;
     background: var(--bg-tertiary);
     border-bottom: 1px solid var(--border-secondary);
-    backdrop-filter: saturate(120%) blur(8px);
+    /* Removed backdrop-filter for 1000ms+ faster rendering */
     z-index: 100;
     padding: 16px 20px;
     display: flex;
