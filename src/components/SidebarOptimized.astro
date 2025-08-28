@@ -327,6 +327,11 @@ function getShortenedTitle(title: string): string {
       z-index: 360;
     }
   }
+
+  /* Global body class for sidebar open state - avoids forced reflows */
+  :global(body.sidebar-open) {
+    overflow: hidden !important;
+  }
 </style>
 
 <script>
@@ -339,12 +344,12 @@ function getShortenedTitle(title: string): string {
 
     function openSidebar() {
       sidebar?.classList.add('open');
-      document.body.style.overflow = 'hidden'; // Prevent scrolling when open
+      document.body.classList.add('sidebar-open'); // Use CSS class instead of direct style
     }
 
     function closeSidebar() {
       sidebar?.classList.remove('open');
-      document.body.style.overflow = ''; // Restore scrolling
+      document.body.classList.remove('sidebar-open'); // Use CSS class instead of direct style
     }
 
     function toggleSidebar() {
@@ -382,10 +387,12 @@ function getShortenedTitle(title: string): string {
     });
 
     // Close sidebar when clicking internal links on mobile
+    // Use media query instead of window.innerWidth to avoid forced reflows
+    const mobileMediaQuery = window.matchMedia('(max-width: 1023px)');
     const sidebarLinks = sidebar?.querySelectorAll('a[href^="/"]');
     sidebarLinks?.forEach((link) => {
       link.addEventListener('click', function () {
-        if (window.innerWidth <= 1023) {
+        if (mobileMediaQuery.matches) {
           closeSidebar();
         }
       });
