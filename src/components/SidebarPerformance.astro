@@ -175,6 +175,11 @@ const latestPosts = blogPosts
     background: var(--bg-card);
   }
 
+  /* Hide overlay completely on desktop */
+  .overlay {
+    display: none;
+  }
+
   /* Mobile - fixed positioning and z-index */
   @media (max-width: 1023px) {
     .sidebar {
@@ -205,6 +210,7 @@ const latestPosts = blogPosts
     }
 
     .overlay {
+      display: block; /* Show overlay only on mobile */
       position: fixed;
       top: 0;
       left: 0;
