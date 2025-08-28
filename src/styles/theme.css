@@ -577,7 +577,8 @@ body {
     background: var(--bg-tertiary);
     border-bottom: 1px solid var(--border-secondary);
     /* Removed backdrop-filter for 1000ms+ faster rendering */
-    z-index: 100;
+    z-index: 500;
+    /* Higher than sidebar z-index: 200 */
     padding: 16px 20px;
     display: flex;
     justify-content: space-between;
@@ -807,7 +808,7 @@ p {
 .section {
     margin-top: 32px;
     padding-top: 24px;
-    border-top: 1px solid var(--border-secondary);
+    border-top: none;
 }
 
 .section h2 {
