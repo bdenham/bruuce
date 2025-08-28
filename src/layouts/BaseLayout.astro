@@ -28,7 +28,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" transition:auto>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>{title}</title>
@@ -286,7 +286,7 @@ const {
 
   .content-panel {
     background: var(--bg-tertiary);
-    backdrop-filter: saturate(120%) blur(8px);
+    /* Removed backdrop-filter for faster rendering */
     border-radius: 20px;
     padding: 40px;
     margin-bottom: 32px;

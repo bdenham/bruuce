@@ -566,3 +566,4 @@ Auto-deployment test 2
 // BRANDING: Added personal "BD" favicon with Bruce Denham brand colors and dark/light mode support
 // FAVICON FIX: Added cache-busting version parameters to force favicon refresh
 // DOM OPTIMIZATION: Replaced SidebarOptimized with SidebarPerformance - reduced DOM nodes by 60%+ (187→~75 elements)
+// LCP OPTIMIZATION: Removed ALL backdrop-filters (header + content-panel), background-attachment:fixed, body transitions
