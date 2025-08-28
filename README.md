@@ -563,3 +563,4 @@ Auto-deployment test 2
 // SEO Enhancement: Added comprehensive meta tags, structured data, sitemap.xml
 // PERFORMANCE FIX: Optimized SEO for 0.8s Speed Index - moved JSON-LD to bottom, streamlined meta tags
 // CRITICAL FIX: Eliminated 804ms forced reflows - removed duplicate scripts, optimized sidebar JS, used matchMedia
+// BRANDING: Added personal "BD" favicon with Bruce Denham brand colors and dark/light mode support
