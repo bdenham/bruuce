@@ -6,7 +6,7 @@
     border: 1px solid var(--border-secondary);
     border-radius: 16px;
     padding: 24px;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -26,14 +26,14 @@
     border: 1px solid var(--border-secondary);
     border-radius: 16px;
     padding: 24px;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-2px);
     background: var(--bg-card-hover);
     border-color: var(--border-primary);
-    box-shadow: 0 12px 40px var(--shadow-secondary);
+    box-shadow: 0 8px 24px var(--shadow-secondary);
 }
 
 /* Documentation cards */
@@ -42,7 +42,7 @@
     border: 1px solid var(--border-secondary);
     border-radius: 16px;
     padding: 24px;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .doc-card:hover {
@@ -62,7 +62,7 @@
     border: 1px solid var(--border-secondary);
     border-radius: 16px;
     padding: 20px;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .linkedin-post:hover {
@@ -164,7 +164,7 @@
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .doc-link:hover,
@@ -212,7 +212,7 @@
     border-radius: 8px;
     font-weight: 600;
     font-size: 14px;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .linkedin-follow-btn:hover {

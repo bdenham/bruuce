@@ -247,7 +247,7 @@ const captionId = caption ? `pdf-caption-${Math.random().toString(36).substr(2, 
         transform-origin: center center;
         transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         overflow: hidden;
-        backdrop-filter: blur(8px);
+        /* backdrop-filter: blur(8px); */ /* Disabled for performance */
       `;
 
       // Add screen reader titles
