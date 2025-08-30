@@ -1,7 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Sidebar from '../components/Sidebar.astro';
+import SidebarPerformance from '../components/SidebarPerformance.astro';
 import '../styles/theme.css';
 
 export interface Props {
@@ -28,7 +28,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" transition:auto>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>{title}</title>
@@ -36,58 +36,104 @@ const {
     <meta name="description" content={description} />
     <meta name="color-scheme" content="dark light" />
 
-    <!-- Performance and caching optimization headers -->
-    <meta http-equiv="Cache-Control" content="public, max-age=3600, must-revalidate" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <!-- Bruce Denham Personal Branding Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2024" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2024" />
+    <meta name="theme-color" content="#00aaff" />
+    <!-- Performance optimizations -->
+    <meta name="robots" content="index, follow" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
 
-    <!-- Resource hints for better performance -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- === OPTIMIZED SEO FOR BRUCE DENHAM === -->
 
-    <!-- Critical resource preloads to break request chains -->
-    <link
-      rel="preload"
-      href="/fonts/adobe-clean-400.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/adobe-clean-300.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
+    <!-- Essential SEO Meta Tags -->
+    <meta name="author" content="Bruce Denham" />
+    <meta
+      name="keywords"
+      content="Bruce Denham, Technical Writer, Developer Experience, Adobe, Documentation, API Documentation, SDK Documentation, CLI Tools"
     />
 
-    <!-- Preload critical CSS and JS to reduce chain latency -->
-    <link rel="dns-prefetch" href="//_astro/" />
-    <link rel="preconnect" href="//_astro/" />
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bruce Denham" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
 
-    <!-- Prevent white flash by setting theme early -->
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@brucedenham" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="generator" content={Astro.generator} />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- No font preloads - let CSS handle fonts for optimal performance -->
+    <!-- Theme initialization only - fonts handled by static CSS -->
     <script is:inline>
-      // Set theme immediately to prevent white flash
-      (function () {
-        const savedTheme = localStorage.getItem('theme');
-        const root = document.documentElement;
-        const colorScheme = document.querySelector('meta[name="color-scheme"]');
-
-        if (savedTheme === 'light') {
-          root.classList.add('light');
-          if (colorScheme) colorScheme.setAttribute('content', 'light dark');
-        } else {
-          root.classList.remove('light');
-          if (colorScheme) colorScheme.setAttribute('content', 'dark light');
-        }
-      })();
+      if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.classList.add('light');
+      }
     </script>
+
+    <style>
+      :root {
+        --bg-primary: #0f1419;
+        --text-primary: #ffffff;
+        --accent-primary: #00aaff;
+      }
+      :root.light {
+        --bg-primary: #f7f3f0;
+        --text-primary: #2d3748;
+        --accent-primary: #0066cc;
+      }
+      body {
+        margin: 0;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        line-height: 1.6;
+        font-size: 16px;
+      }
+      h1 {
+        font-size: clamp(2.5rem, 8vw, 3.5rem);
+        font-weight: 900;
+        margin: 0 0 16px 0;
+        line-height: 1.1;
+        color: var(--text-primary); /* Ensure h1 titles are white */
+      }
+      h1 span {
+        color: var(--accent-primary);
+      }
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: var(--accent-primary);
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+      .skip-link:focus {
+        top: 6px;
+      }
+    </style>
+
+    <!-- CSS will be inlined by Astro for zero render-blocking -->
   </head>
   <body>
     <!-- Skip link for keyboard navigation -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <div id="root">
-      <Sidebar />
+      <SidebarPerformance />
       <div class="app-content">
         <Header />
         <main class="main-container" id="main-content">
@@ -178,6 +224,44 @@ const {
       // Re-initialize theme after View Transitions
       document.addEventListener('astro:after-swap', initTheme);
     </script>
+
+    <!-- JSON-LD Structured Data (non-blocking at bottom) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bruce Denham",
+        "jobTitle": "Senior Technical Writer & Developer Experience Strategist",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Adobe",
+          "url": "https://adobe.com"
+        },
+        "description": "Senior Technical Writer & Developer Experience Strategist with 30+ years turning complex concepts into clear developer experiences.",
+        "url": "https://bruuce.com",
+        "sameAs": ["https://linkedin.com/in/brucedenham", "https://github.com/bdenham"],
+        "knowsAbout": [
+          "Technical Writing",
+          "Developer Experience",
+          "API Documentation",
+          "SDK Documentation",
+          "React Development",
+          "CLI Tools",
+          "Documentation Systems"
+        ],
+        "alumniOf": [
+          {
+            "@type": "Organization",
+            "name": "Schlumberger"
+          },
+          {
+            "@type": "Organization",
+            "name": "TOPAZ"
+          }
+        ],
+        "image": "https://bruuce.com/images/bruce-denham-profile.jpg"
+      }
+    </script>
   </body>
 </html>
 
@@ -190,23 +274,61 @@ const {
 
   .app-content {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    margin-left: 280px;
     transition: margin-left 0.3s ease;
   }
 
-  /* Desktop: Make room for sidebar */
-  @media (min-width: 1024px) {
-    .app-content {
-      margin-left: 280px;
-    }
+  .main-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 32px 32px 32px;
   }
 
-  /* Mobile: Full width */
+  .content-panel {
+    background: var(--bg-tertiary);
+    /* Removed backdrop-filter for faster rendering */
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 32px;
+    border: 1px solid var(--border-secondary);
+    box-shadow: 0 8px 32px var(--shadow-secondary);
+  }
+
+  .nav-back {
+    margin-bottom: 24px;
+  }
+
+  .nav-back a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+  }
+
+  .nav-back a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+  }
+
+  /* Mobile and tablet responsive - align with sidebar breakpoint */
   @media (max-width: 1023px) {
     .app-content {
       margin-left: 0;
     }
+
+    .main-container {
+      padding: 80px 20px 20px 20px; /* Keep same top padding as desktop for header clearance */
+    }
+
+    .content-panel {
+      padding: 18px 20px;
+    }
+  }
+
+  /* Sidebar collapsed state on mobile */
+  .sidebar.collapsed ~ .app-content {
+    margin-left: 0;
   }
 </style>

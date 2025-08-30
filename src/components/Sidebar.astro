@@ -62,41 +62,40 @@ function getShortenedTitle(title: string): string {
 
   <nav class="sidebar-nav" id="sidebar-nav">
     <div class="nav-header">
-      <h2>Bruce Denham</h2>
+      <h2><a href="/" class="nav-header-link">Bruce Denham</a></h2>
       <button class="sidebar-close" id="sidebar-close" aria-label="Close navigation">×</button>
     </div>
 
     <!-- Main Pages Section -->
     <div class="nav-section">
-      <h3>Portfolio</h3>
       <ul>
         <li>
           <a href="/" class={currentPath === '/' ? 'active' : ''}>
-            <span class="nav-icon">🏠</span>
+            <span class="nav-icon" aria-hidden="true">🏠</span>
             <span class="nav-text">Home</span>
           </a>
         </li>
         <li>
           <a href="/about/" class={currentPath.startsWith('/about') ? 'active' : ''}>
-            <span class="nav-icon">👨‍💻</span>
+            <span class="nav-icon" aria-hidden="true">👨‍💻</span>
             <span class="nav-text">About Me</span>
           </a>
         </li>
         <li>
           <a href="/resume/" class={currentPath.startsWith('/resume') ? 'active' : ''}>
-            <span class="nav-icon">📋</span>
+            <span class="nav-icon" aria-hidden="true">📋</span>
             <span class="nav-text">Resume</span>
           </a>
         </li>
         <li>
           <a href="/work/" class={currentPath.startsWith('/work') ? 'active' : ''}>
-            <span class="nav-icon">🛠️</span>
+            <span class="nav-icon" aria-hidden="true">🛠️</span>
             <span class="nav-text">My Work</span>
           </a>
         </li>
         <li>
           <a href="/projects/" class={currentPath.startsWith('/projects') ? 'active' : ''}>
-            <span class="nav-icon">🚀</span>
+            <span class="nav-icon" aria-hidden="true">🚀</span>
             <span class="nav-text">Projects</span>
           </a>
         </li>
@@ -108,7 +107,7 @@ function getShortenedTitle(title: string): string {
       <h3>
         <a href="/blog/" class={currentPath === '/blog/' ? 'active' : ''}>
           <span>Blog</span>
-          <span class="clickable-indicator">→</span>
+          <span class="clickable-indicator" aria-hidden="true">→</span>
         </a>
       </h3>
       <ul class="blog-posts">
@@ -137,16 +136,16 @@ function getShortenedTitle(title: string): string {
       <ul class="external-links">
         <li>
           <a href="https://linkedin.com/in/brucedenham/" target="_blank" rel="noopener noreferrer">
-            <span class="nav-icon">💼</span>
+            <span class="nav-icon" aria-hidden="true">💼</span>
             <span class="nav-text">LinkedIn</span>
-            <span class="external-icon">↗</span>
+            <span class="external-icon" aria-hidden="true">↗</span>
           </a>
         </li>
         <li>
           <a href="https://github.com/bdenham" target="_blank" rel="noopener noreferrer">
-            <span class="nav-icon">💻</span>
+            <span class="nav-icon" aria-hidden="true">💻</span>
             <span class="nav-text">GitHub</span>
-            <span class="external-icon">↗</span>
+            <span class="external-icon" aria-hidden="true">↗</span>
           </a>
         </li>
       </ul>
@@ -197,7 +196,7 @@ function getShortenedTitle(title: string): string {
     height: 100vh;
     background: var(--bg-card);
     border-right: 1px solid var(--border-secondary);
-    padding: 0;
+    padding: 0 0 40px 0;
     overflow-y: auto;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
@@ -223,6 +222,16 @@ function getShortenedTitle(title: string): string {
     font-size: 18px;
     margin: 0;
     font-weight: 600;
+  }
+
+  .nav-header-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .nav-header-link:hover {
+    color: var(--accent-primary);
   }
 
   .sidebar-close {
@@ -322,7 +331,7 @@ function getShortenedTitle(title: string): string {
   }
 
   .nav-section a.active {
-    background: rgba(167, 139, 250, 0.1);
+    background: var(--bg-card);
     color: var(--accent-primary);
     border-right: 2px solid var(--accent-primary);
     font-weight: 500;

@@ -468,7 +468,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     border-radius: 20px;
     font-size: 12px;
     font-weight: 600;
-    background: rgba(167, 139, 250, 0.1);
+    background: var(--bg-card);
     color: var(--accent-primary);
     border: 1px solid var(--accent-primary);
   }
@@ -490,9 +490,9 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .tag.primary {
-    background: var(--accent-primary);
-    color: var(--bg-primary);
-    border-color: var(--accent-primary);
+    background: var(--accent-content);
+    color: var(--accent-content-text);
+    border-color: var(--accent-content);
   }
 
   .tag.internal {
@@ -526,7 +526,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   .project-features,
   .project-achievements,
   .community-impact {
-    background: rgba(167, 139, 250, 0.05);
+    background: var(--bg-card);
     border-radius: 12px;
     padding: 20px;
     border-left: 3px solid var(--accent-primary);
@@ -576,7 +576,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .cli-tools {
-    background: rgba(167, 139, 250, 0.05);
+    background: var(--bg-card);
     border-radius: 12px;
     padding: 20px;
     border-left: 3px solid var(--accent-primary);

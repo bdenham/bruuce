@@ -1,9 +1,18 @@
-# Robots.txt for Bruce Denham's Portfolio
+# Bruce Denham - Personal Portfolio & Blog
+# Optimized for search engine indexing and personal branding
+
 User-agent: *
 Allow: /
+Sitemap: https://bruuce.com/sitemap.xml
 
-# Sitemap location
-Sitemap: https://bdenham.github.io/sanity-check/sitemap-index.xml
-
-# Crawl delay for politeness (optional)
+# Optimize for Google indexing
+User-agent: Googlebot
+Allow: /
 Crawl-delay: 1
+
+# Block AI training bots (optional - uncomment if desired)
+# User-agent: ChatGPT-User
+# Disallow: /
+
+# User-agent: Google-Extended
+# Disallow: /

@@ -78,35 +78,45 @@
 
 /* Card headers */
 .card-header,
-.doc-header,
 .post-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
+}
+
+.doc-header {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-bottom: 16px;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 12px;
 }
 
 @media (max-width: 768px) {
 
     .card-header,
-    .doc-header,
     .post-header {
         flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .doc-header {
+        justify-content: left;
         align-items: flex-start;
     }
 }
 
 /* Tags and badges */
 .post-tag {
-    background: rgba(167, 139, 250, 0.1);
-    color: var(--accent-primary);
-    padding: 2px 8px;
-    border-radius: 8px;
+    background: var(--accent-content);
+    color: var(--accent-content-text);
+    padding: 4px 10px;
+    border-radius: 12px;
     font-size: 11px;
     font-weight: 600;
-    border: 1px solid rgba(167, 139, 250, 0.2);
+    border: none;
 }
 
 .doc-status {
@@ -114,19 +124,19 @@
     border-radius: 12px;
     font-size: 12px;
     font-weight: 600;
-    background: rgba(167, 139, 250, 0.1);
+    background: var(--bg-card);
     color: var(--accent-primary);
     border: 1px solid var(--accent-primary);
 }
 
 .project-tag {
-    background: rgba(167, 139, 250, 0.1);
+    background: var(--bg-card);
     color: var(--accent-primary);
     padding: 4px 8px;
     border-radius: 12px;
     font-size: 12px;
     font-weight: 600;
-    border: 1px solid rgba(167, 139, 250, 0.2);
+    border: 1px solid var(--accent-primary);
 }
 
 /* CTAs and links */
@@ -194,7 +204,8 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: var(--accent-primary);
+    background: #0077b5;
+    /* LinkedIn brand blue - WCAG AAA compliant with white text */
     color: #ffffff;
     text-decoration: none;
     padding: 12px 24px;
@@ -205,7 +216,8 @@
 }
 
 .linkedin-follow-btn:hover {
-    background: var(--accent-hover);
+    background: #005885;
+    /* Darker LinkedIn blue for hover */
     transform: translateY(-1px);
 }
 

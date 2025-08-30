@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { text = 'Default tooltip text', position = 'bottom', maxWidth = '200px' } = Astro.props;
+const tooltipId = `tooltip-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
 <div
@@ -13,10 +14,17 @@ const { text = 'Default tooltip text', position = 'bottom', maxWidth = '200px' }
   tabindex="0"
   role="button"
   aria-label={`Show tooltip: ${text}`}
+  aria-describedby={tooltipId}
   data-position={position}
 >
   <slot />
-  <div class="tooltip-text" role="tooltip" style={`max-width: ${maxWidth}`} aria-hidden="true">
+  <div
+    class="tooltip-text"
+    role="tooltip"
+    style={`max-width: ${maxWidth}`}
+    aria-hidden="true"
+    id={tooltipId}
+  >
     <span class="tooltip-text-content">{text}</span>
   </div>
 </div>
@@ -180,22 +188,31 @@ const { text = 'Default tooltip text', position = 'bottom', maxWidth = '200px' }
         tooltipText.setAttribute('aria-hidden', 'true');
       };
 
-      // Add event listeners
+      // Add event listeners for mouse
       container.addEventListener('mouseenter', showTooltip);
-      container.addEventListener('focus', showTooltip);
       container.addEventListener('mouseleave', hideTooltip);
+
+      // Add event listeners for keyboard focus
+      container.addEventListener('focus', showTooltip);
       container.addEventListener('blur', hideTooltip);
 
-      // Handle Enter/Space key activation
+      // Handle Enter/Space key activation for toggle behavior
       container.addEventListener('keydown', (e) => {
         const keyEvent = e as KeyboardEvent;
         if (keyEvent.key === 'Enter' || keyEvent.key === ' ') {
           e.preventDefault();
           if (tooltipText.getAttribute('aria-hidden') === 'true') {
             showTooltip();
+            // Auto-hide after 5 seconds for keyboard users
+            setTimeout(hideTooltip, 5000);
           } else {
             hideTooltip();
           }
+        }
+        // Handle Escape key to hide tooltip
+        if (keyEvent.key === 'Escape') {
+          hideTooltip();
+          container.blur();
         }
       });
     });

@@ -23,12 +23,12 @@ const {
 ---
 
 <a class={`action-card ${variant}`} href={href} target={target} rel={rel} aria-label={ariaLabel}>
-  <div class="card-icon">{icon}</div>
+  <div class="card-icon" aria-hidden="true">{icon}</div>
   <div class="card-content">
     <h2 class="card-title">{title}</h2>
     <p class="card-description">{description}</p>
   </div>
-  <div class="card-arrow">→</div>
+  <div class="card-arrow" aria-hidden="true">→</div>
 </a>
 
 <style>
@@ -42,9 +42,16 @@ const {
     color: inherit;
     background: var(--bg-card);
     border: 1px solid var(--border-secondary);
-    transition: all 0.3s ease;
+    /* Force animations to work - override any reduced-motion settings */
+    transition:
+      transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important,
+      background-color 0.2s ease !important,
+      border-color 0.2s ease !important,
+      box-shadow 0.2s ease !important;
     position: relative;
     overflow: hidden;
+    /* Hint browser for better performance */
+    will-change: transform;
   }
 
   .action-card::before {
@@ -56,8 +63,9 @@ const {
     bottom: 0;
     background: linear-gradient(135deg, transparent 0%, var(--accent-primary) 100%);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease !important;
     z-index: 1;
+    will-change: opacity;
   }
 
   .action-card.primary::before {
@@ -74,10 +82,11 @@ const {
   }
 
   .action-card:hover {
-    transform: translateY(-4px) scale(1.02);
-    background: var(--bg-card-hover);
-    border-color: var(--border-primary);
-    box-shadow: 0 12px 40px var(--shadow-secondary);
+    /* Force animation to work - override any global settings */
+    transform: translateY(-2px) !important;
+    background: var(--bg-card-hover) !important;
+    border-color: var(--border-primary) !important;
+    box-shadow: 0 8px 24px var(--shadow-secondary) !important;
   }
 
   .action-card > * {
@@ -125,12 +134,13 @@ const {
     font-size: 1.2rem;
     color: var(--accent-primary);
     flex-shrink: 0;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
     font-weight: bold;
+    will-change: transform;
   }
 
   .action-card:hover .card-arrow {
-    transform: translateX(4px);
+    transform: translateX(3px) !important;
   }
 
   /* Mobile responsive */
