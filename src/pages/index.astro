@@ -29,7 +29,7 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
     <ActionCard
       variant="primary"
       icon="📋"
-      title="View My Resume"
+      title="My Resume"
       description="Explore my 30+ years of experience in technical writing and developer experience"
       href="/resume/"
       ariaLabel="View my complete resume"
@@ -44,25 +44,20 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
     />
 
     <ActionCard
+      icon="📝"
+      title="My Blog"
+      description="Insights on developer experience, API documentation, and making complex concepts clear"
+      href="/blog/"
+      ariaLabel="Read my blog"
+    />
+
+    <ActionCard
       icon="👨‍💻"
       title="About Me"
       description="Learn about my journey from Schlumberger to TOPAZ to Adobe as a developer experience strategist"
       href="/about/"
       ariaLabel="Learn more about my background"
     />
-
-    <ActionCard
-      icon="📝"
-      title="Technical Writing Blog"
-      description="Insights on developer experience, API documentation, and making complex concepts clear"
-      href="/blog/"
-      ariaLabel="Read my technical writing blog"
-    />
-  </div>
-
-  <div class="section">
-    <h2>Latest Posts</h2>
-    {latestPost && <BlogPostCard post={latestPost} />}
   </div>
 
   <div class="section">
@@ -74,8 +69,13 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
     </p>
   </div>
 
+  <div class="section">
+    <h2>Latest BlogPosts</h2>
+    {latestPost && <BlogPostCard post={latestPost} />}
+  </div>
+
   <div class="recent-posts-section">
-    <h2>Recent Posts & Insights</h2>
+    <h2>LinkedIn Posts & Insights</h2>
     <p class="posts-intro">
       Sharing thoughts on developer experience, visual communication, and the intersection of
       technology and humanity.
@@ -211,7 +211,144 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
   </div>
 </BaseLayout>
 
+<!-- DEBUG: Monitor what's changing the layout -->
+<script>
+  function debugLayout() {
+    const appContent = document.querySelector('.app-content');
+    const mainContainer = document.querySelector('.main-container');
+    const contentPanel = document.querySelector('.content-panel');
+
+    if (appContent) {
+      const rect = appContent.getBoundingClientRect();
+      console.log('App content position:', {
+        top: rect.top,
+        left: rect.left,
+        transform: getComputedStyle(appContent).transform,
+        marginTop: getComputedStyle(appContent).marginTop,
+        paddingTop: getComputedStyle(appContent).paddingTop,
+        position: getComputedStyle(appContent).position,
+      });
+    }
+
+    if (mainContainer) {
+      const rect = mainContainer.getBoundingClientRect();
+      console.log('Main container position:', {
+        top: rect.top,
+        left: rect.left,
+        transform: getComputedStyle(mainContainer).transform,
+        marginTop: getComputedStyle(mainContainer).marginTop,
+        paddingTop: getComputedStyle(mainContainer).paddingTop,
+        position: getComputedStyle(mainContainer).position,
+      });
+    }
+
+    if (contentPanel) {
+      const rect = contentPanel.getBoundingClientRect();
+      console.log('Content panel position:', {
+        top: rect.top,
+        left: rect.left,
+        transform: getComputedStyle(contentPanel).transform,
+        marginTop: getComputedStyle(contentPanel).marginTop,
+        paddingTop: getComputedStyle(contentPanel).paddingTop,
+        position: getComputedStyle(contentPanel).position,
+      });
+    }
+  }
+
+  // Log immediately
+  debugLayout();
+
+  // Log after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('After DOMContentLoaded:');
+      debugLayout();
+    });
+  }
+
+  // ELEGANT FIX: Disable browser scroll restoration and reset position once
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+    console.log('Disabled scroll restoration');
+  }
+
+  // Ensure we start at the top
+  window.scrollTo(0, 0);
+
+  // Single clean fix after page loads
+  function cleanPositionFix() {
+    console.log('Running clean position fix');
+    debugLayout();
+
+    // Only fix if needed
+    const appContent = document.querySelector('.app-content');
+    if (appContent) {
+      const rect = appContent.getBoundingClientRect();
+      if (rect.top < -10) {
+        // Only fix if significantly off
+        console.log('Applying minimal position correction');
+        appContent.style.position = 'relative';
+        appContent.style.top = '0';
+        appContent.style.marginTop = '0';
+      }
+    }
+  }
+
+  // Run once after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', cleanPositionFix);
+  } else {
+    cleanPositionFix();
+  }
+</script>
+
 <style>
+  /* FIX THE ROOT CAUSE: app-content is positioned at top: -40 */
+  .app-content {
+    margin-left: 280px !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    position: relative !important;
+    top: 0 !important;
+    transform: none !important;
+  }
+
+  .main-container {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    padding: 80px 32px 32px 32px !important;
+    position: relative !important;
+    top: 0 !important;
+    transform: none !important;
+  }
+
+  .content-panel {
+    background: var(--bg-tertiary) !important;
+    border-radius: 20px !important;
+    padding: 40px !important;
+    margin: 0 0 32px 0 !important;
+    border: 1px solid var(--border-secondary) !important;
+    box-shadow: 0 8px 32px var(--shadow-secondary) !important;
+    position: relative !important;
+    top: 0 !important;
+    transform: none !important;
+  }
+
+  /* Mobile override */
+  @media (max-width: 1023px) {
+    .app-content {
+      margin-left: 0 !important;
+    }
+
+    .main-container {
+      padding: 80px 20px 20px 20px !important;
+    }
+
+    .content-panel {
+      padding: 18px 20px !important;
+    }
+  }
+
   /* Homepage-specific styles only */
   .platform-info {
     display: flex;

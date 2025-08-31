@@ -462,10 +462,11 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   .project-impact {
     color: var(--text-secondary);
     font-size: 14px;
-    padding: 12px;
+    color: var(--accent-yellow);
+    /* padding: 12px; */
     background: var(--bg-card);
-    border-radius: 8px;
-    border-left: 3px solid var(--accent-primary);
+    /* border-radius: 8px; */
+    /* border-left: 3px solid var(--accent-primary); */
   }
 
   .speaking-card {
@@ -507,12 +508,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .speaking-impact {
-    color: var(--text-secondary);
+    color: var(--accent-yellow);
     font-size: 14px;
-    padding: 12px;
+    /* padding: 12px; */
     background: var(--bg-card);
-    border-radius: 8px;
-    border-left: 3px solid var(--accent-primary);
+    /* border-radius: 8px; */
+    /* border-left: 3px solid var(--accent-primary); */
   }
 
   .timeline {
@@ -572,7 +573,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
   .timeline-content h3 {
     color: var(--text-primary);
-    margin: 0 0 8px 0;
+    margin: 0;
     font-size: 22px;
   }
 
@@ -589,16 +590,14 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .timeline-project {
-    padding: 16px;
     background: var(--bg-card);
-    border-radius: 12px;
-    border-left: 3px solid var(--accent-primary);
+    color: var(--accent-yellow);
   }
 
   .timeline-project strong {
     color: var(--text-primary);
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
     font-size: 16px;
   }
 
@@ -702,9 +701,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   .doc-highlights {
     background: var(--bg-card);
     border-radius: 12px;
-    padding: 16px;
     margin-bottom: 20px;
-    border-left: 3px solid var(--accent-primary);
   }
 
   .doc-highlights ul {
@@ -714,12 +711,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .doc-highlights li {
-    color: var(--text-tertiary);
+    color: var(--text-primary);
     margin-bottom: 6px;
     padding-left: 16px;
     position: relative;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .doc-highlights li:last-child {

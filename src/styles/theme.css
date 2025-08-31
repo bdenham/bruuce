@@ -3,7 +3,7 @@
 /* Typography Components */
 .subtitle {
     font-size: 18px;
-    color: var(--text-primary);
+    color: var(--accent-primary);
     font-weight: 400;
     margin-bottom: 24px;
 }
@@ -628,26 +628,7 @@ body {
     outline-offset: 2px;
 }
 
-/* Main layout styles */
-.main-container {
-    min-height: 100svh;
-    display: grid;
-    place-items: center;
-    padding: 100px 20px 40px 20px;
-}
-
-.content-panel {
-    width: 100%;
-    max-width: 880px;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-primary);
-    border-radius: 16px;
-    box-shadow:
-        0 10px 30px var(--shadow-primary),
-        inset 0 1px 0 rgba(255, 255, 255, 0.03);
-    backdrop-filter: saturate(120%) blur(8px);
-    padding: 12px 40px 32px 16px;
-}
+/* Main layout styles - REMOVED DUPLICATES (now defined in BaseLayout.astro) */
 
 /* Navigation links - moved to BaseLayout.astro to avoid conflicts */
 
@@ -1050,7 +1031,7 @@ footer a:hover {
     }
 }
 
-/* View Transitions - optimized for performance */
+/* View Transitions - re-enabled (testing if this causes sliding) */
 ::view-transition-old(root),
 ::view-transition-new(root) {
     animation-duration: 100ms;
@@ -1128,6 +1109,18 @@ footer a:hover {
     }
 }
 
+@keyframes actionCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @keyframes staggerIn {
     from {
         opacity: 0;
@@ -1140,34 +1133,38 @@ footer a:hover {
     }
 }
 
-/* Apply entrance animations */
-.main-container {
-    animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
-}
+/* Main container animation - DISABLED (causes cumulative sliding issue) */
+/* .main-container {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+} */
 
 .action-cards>* {
-    animation: staggerIn 200ms ease-out both;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: actionCardIn 400ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .action-cards>*:nth-child(1) {
-    animation-delay: 50ms;
-}
-
-.action-cards>*:nth-child(2) {
-    animation-delay: 75ms;
-}
-
-.action-cards>*:nth-child(3) {
     animation-delay: 100ms;
 }
 
+.action-cards>*:nth-child(2) {
+    animation-delay: 200ms;
+}
+
+.action-cards>*:nth-child(3) {
+    animation-delay: 300ms;
+}
+
 .action-cards>*:nth-child(4) {
-    animation-delay: 125ms;
+    animation-delay: 400ms;
 }
 
 /* Blog post cards staggered animation */
 .blog-post {
-    animation: slideInLeft 200ms ease-out both;
+    animation: slideInLeft 200ms ease-out forwards;
     animation-delay: 100ms;
 }
 
@@ -1178,6 +1175,8 @@ footer a:hover {
 #projects-title,
 #work-title,
 #resume-title {
-    animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
     animation-delay: 50ms;
 }
