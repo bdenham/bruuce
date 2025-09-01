@@ -34,22 +34,10 @@ const latestPosts = blogPosts
       <p>World-class site optimization achieving top 1% web performance</p>
     </div>
     <div class="metrics-grid">
-      <div class="metric-item">
-        <div class="metric-value">0.3s</div>
-        <div class="metric-label">Desktop Load Time</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">0.9s</div>
-        <div class="metric-label">Mobile Load Time</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">0ms</div>
-        <div class="metric-label">Blocking Time</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">0</div>
-        <div class="metric-label">Layout Shift</div>
-      </div>
+      <div class="metric-item"><span class="metric-value">0.3s</span><br />Desktop Load</div>
+      <div class="metric-item"><span class="metric-value">0.9s</span><br />Mobile Load</div>
+      <div class="metric-item"><span class="metric-value">0ms</span><br />Blocking Time</div>
+      <div class="metric-item"><span class="metric-value">0</span><br />Layout Shift</div>
     </div>
     <div class="performance-cta">
       <small>
@@ -303,12 +291,6 @@ const latestPosts = blogPosts
     transition: all 0.3s ease;
   }
 
-  .performance-highlight:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0, 170, 255, 0.1);
-    border-color: rgba(0, 170, 255, 0.4);
-  }
-
   .performance-header h2 {
     color: var(--text-primary);
     margin: 0 0 8px 0;
@@ -341,43 +323,21 @@ const latestPosts = blogPosts
     background: rgba(0, 170, 255, 0.05);
     border-radius: 12px;
     border: 1px solid rgba(0, 170, 255, 0.1);
-    transition: all 0.2s ease;
-  }
-
-  .metric-item:hover {
-    background: rgba(0, 170, 255, 0.08);
-    border-color: rgba(0, 170, 255, 0.2);
   }
 
   .metric-value {
     font-size: 24px;
     font-weight: 700;
     color: #00aaff;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .metric-label {
-    font-size: 12px;
-    color: var(--text-tertiary);
-    font-weight: 500;
-    line-height: 1.2;
   }
 
   .performance-cta {
     text-align: center;
     padding: 16px 20px 12px 20px;
     margin-top: 16px;
-    background: linear-gradient(135deg, rgba(0, 170, 255, 0.06), rgba(0, 170, 255, 0.02));
+    background: rgba(0, 170, 255, 0.04);
     border: 1px solid rgba(0, 170, 255, 0.15);
     border-radius: 20px;
-    transition: all 0.3s ease;
-  }
-
-  .performance-cta:hover {
-    background: linear-gradient(135deg, rgba(0, 170, 255, 0.1), rgba(0, 170, 255, 0.04));
-    border-color: rgba(0, 170, 255, 0.25);
-    box-shadow: 0 4px 20px rgba(0, 170, 255, 0.08);
   }
 
   .performance-cta small {
@@ -391,27 +351,16 @@ const latestPosts = blogPosts
   .performance-cta .percentile-text {
     color: #00aaff;
     font-size: 18px;
-    font-weight: 400;
   }
 
   .performance-cta a {
     color: #00aaff;
     text-decoration: none;
-    font-weight: 500;
-  }
-
-  .performance-cta a:hover {
-    color: #00ccff;
-    text-decoration: underline;
   }
 
   @media (max-width: 640px) {
     .metrics-grid {
       grid-template-columns: repeat(2, 1fr);
-    }
-
-    .metric-value {
-      font-size: 20px;
     }
   }
 
@@ -420,17 +369,11 @@ const latestPosts = blogPosts
 
 <!-- Performance-optimized lazy loading for blog posts -->
 <script>
-  // Lazy load second blog post for better Speed Index
-  document.addEventListener('DOMContentLoaded', function () {
-    const lazyElements = document.querySelectorAll('.blog-post-wrapper.lazy-load');
-
-    if (lazyElements.length > 0) {
-      // Delay loading of second post to improve initial render
-      setTimeout(() => {
-        lazyElements.forEach((el) => {
-          el.classList.add('loaded');
-        });
-      }, 100); // Small delay to prioritize above-the-fold content
-    }
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document
+        .querySelectorAll('.blog-post-wrapper.lazy-load')
+        .forEach((el) => el.classList.add('loaded'));
+    }, 100);
   });
 </script>
