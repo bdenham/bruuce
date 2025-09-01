@@ -22,17 +22,18 @@ const latestPosts = blogPosts
     <!-- Ultra-minimal navigation - no nested spans -->
     <div class="section">
       <a href="/" class={currentPath === '/' ? 'active' : ''}>🏠 Home</a>
-      <a href="/about/" class={currentPath.startsWith('/about') ? 'active' : ''}>👨‍💻 About</a>
-      <a href="/resume/" class={currentPath.startsWith('/resume') ? 'active' : ''}>📋 Resume</a>
-      <a href="/work/" class={currentPath.startsWith('/work') ? 'active' : ''}>🛠️ Work</a>
+      <a href="/blog/" class={currentPath.startsWith('/blog/') ? 'active' : ''}>👨‍💻 My Blog</a>
+      <a href="/about/" class={currentPath.startsWith('/about') ? 'active' : ''}>👋 About Me</a>
+      <a href="/resume/" class={currentPath.startsWith('/resume') ? 'active' : ''}>📄 My Resume</a>
+      <a href="/work/" class={currentPath.startsWith('/work') ? 'active' : ''}>🛠️ My Work</a>
       <a href="/projects/" class={currentPath.startsWith('/projects') ? 'active' : ''}
-        >🚀 Projects</a
+        >🚀 My Projects</a
       >
     </div>
 
     <!-- Minimal blog section - max 2 posts -->
     <div class="section">
-      <h3><a href="/blog/" class={currentPath === '/blog/' ? 'active' : ''}>Blog →</a></h3>
+      <h3>Recent Posts</h3>
       {
         latestPosts.map((post) => (
           <a
@@ -49,7 +50,7 @@ const latestPosts = blogPosts
 
     <!-- Minimal connect -->
     <div class="section">
-      <h3>Connect</h3>
+      <h3>Let's Connect!</h3>
       <a href="https://linkedin.com/in/brucedenham/" target="_blank" rel="noopener">💼 LinkedIn</a>
       <a href="https://github.com/bdenham" target="_blank" rel="noopener">💻 GitHub</a>
     </div>
@@ -147,7 +148,7 @@ const latestPosts = blogPosts
     color: var(--text-secondary);
     text-decoration: none;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 0;
   }
 

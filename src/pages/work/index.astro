@@ -5,7 +5,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
 <BaseLayout
   title="My Work - Bruce Denham"
-  description="Professional work and projects by Bruce Denham: SDK documentation, CLI tools, React apps, and developer experience solutions at Adobe and beyond."
+  description="My professional work: Technical leadership, developer experience design, interactive documentation, and community engagement at Adobe and beyond."
   showBackLink={true}
   backLinkText="← Back to Home"
   backLinkHref="/"
@@ -14,11 +14,14 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
   <PageHeader primary="My" accent="Work" id="work-title" />
-  <p class="subtitle">SDK docs, CLI tools, React apps, and developer experience solutions</p>
+  <p class="subtitle">
+    My professional work: Technical leadership, developer experience design, interactive
+    documentation, and community engagement at Adobe and beyond.
+  </p>
 
   <div class="work-content">
     <div class="current-work">
-      <h2>Current Work at Adobe (2018–Present)</h2>
+      <h2>Current Work at Adobe (2018-Present)</h2>
       <p class="work-intro">
         Leading developer experience initiatives across multiple teams, building tools and
         documentation that help thousands of developers integrate with Adobe Commerce and related
@@ -353,7 +356,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
     <div class="philosophy-section">
       <h2>My Approach</h2>
-      <div class="philosophy-grid grid-small">
+      <div class="philosophy-grid">
         <div class="philosophy-card">
           <div class="philosophy-icon">🎯</div>
           <h3>User-Centric Design</h3>
@@ -642,6 +645,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     font-weight: 300;
   }
 
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
   /* Featured Documentation Styles */
   .featured-documentation {
     margin-bottom: 48px;
@@ -794,6 +803,10 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
     .timeline-year {
       left: -80px;
+    }
+
+    .philosophy-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

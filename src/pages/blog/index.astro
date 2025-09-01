@@ -10,8 +10,8 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
 ---
 
 <BaseLayout
-  title="Technical Writing Blog - Bruce Denham"
-  description="Insights on developer experience, API documentation, technical writing, and making complex concepts clear by Bruce Denham."
+  title="My Blog - Bruce Denham"
+  description="Reflections on technology, personal growth, life's complexities, and the human experience in our modern world."
   showBackLink={true}
   backLinkText="← Back to Home"
   backLinkHref="/"
@@ -19,14 +19,235 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
   footerLinkText="Connect with me on LinkedIn"
   footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
-  <PageHeader accent="Technical Writing" primary="Blog" id="blog-title" />
+  <PageHeader primary="My" accent="Blog" id="blog-title" />
   <p class="subtitle">
-    Insights on developer experience, API documentation, and making complex concepts clear
+    Reflections on technology, writing, personal growth, life's existential challenges, and
+    navigating the complexities of our modern world.
   </p>
 
   {sortedPosts.map((post) => <BlogPostCard post={post} />)}
+
+  <!-- LinkedIn Posts & Insights Section -->
+  <div class="linkedin-insights-section">
+    <div class="section-divider"></div>
+    <h2>LinkedIn Posts</h2>
+    <p class="posts-intro">
+      Thoughtful reflections I share on LinkedIn about kindness, personal growth, and authentic
+      human connection — exploring how we grow, how we connect, and how our vulnerabilities can
+      become our greatest strengths.
+    </p>
+
+    <div class="linkedin-posts grid-large grid-with-bottom-margin">
+      <div class="linkedin-post featured">
+        <div class="post-header">
+          <div class="platform-info">
+            <div class="platform-icon">💼</div>
+            <div class="platform-text">
+              <span class="platform-name">LinkedIn</span>
+              <span class="post-type">Creative Post</span>
+            </div>
+          </div>
+          <div class="post-date">Recent</div>
+        </div>
+        <div class="post-content">
+          <h3>The Science of Kindness</h3>
+          <p>
+            What if kindness moved like diffusion—not with force, but with grace, filling absence
+            with abundance, and longing with love? Let what's full in you flow where it's needed.
+            That's how the world softens.
+          </p>
+          <div class="post-details">
+            <span class="post-tag">Animation</span>
+            <span class="post-tag">Kindness</span>
+            <span class="post-tag">Visual Communication</span>
+          </div>
+        </div>
+        <div class="post-link">
+          <a
+            href="https://www.linkedin.com/feed/update/urn:li:activity:7329128517764337665/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="post-cta"
+          >
+            View on LinkedIn →
+          </a>
+        </div>
+      </div>
+
+      <div class="linkedin-post">
+        <div class="post-header">
+          <div class="platform-info">
+            <div class="platform-icon">💼</div>
+            <div class="platform-text">
+              <span class="platform-name">LinkedIn</span>
+              <span class="post-type">Professional Update</span>
+            </div>
+          </div>
+          <div class="post-date">Recent</div>
+        </div>
+        <div class="post-content">
+          <h3>What is Personal Growth?</h3>
+          <p>
+            Why does personal growth often feel so elusive? One step forward, two steps back. Ten
+            steps forward, wrong direction. Am I missing something? Maybe...Probably.
+          </p>
+          <div class="post-details">
+            <span class="post-tag">Growth</span>
+            <span class="post-tag">Animation</span>
+            <span class="post-tag">Visual Communication</span>
+          </div>
+        </div>
+        <div class="post-link">
+          <a
+            href="https://www.linkedin.com/feed/update/urn:li:activity:7326230647159619585/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="post-cta"
+          >
+            View on LinkedIn →
+          </a>
+        </div>
+      </div>
+
+      <div class="linkedin-post">
+        <div class="post-header">
+          <div class="platform-info">
+            <div class="platform-icon">💼</div>
+            <div class="platform-text">
+              <span class="platform-name">LinkedIn</span>
+              <span class="post-type">Community Engagement</span>
+            </div>
+          </div>
+          <div class="post-date">Recent</div>
+        </div>
+        <div class="post-content">
+          <h3>Cracks let the light in</h3>
+          <p>
+            We grow up thinking polish makes us lovable. So we shine the surface, hoping to be seen.
+            But it's our presence, not perfection, that opens hearts. And it's our cracks that let
+            the light in.
+          </p>
+          <div class="post-details">
+            <span class="post-tag">Growth</span>
+            <span class="post-tag">Animation</span>
+            <span class="post-tag">Visual Communication</span>
+          </div>
+        </div>
+        <div class="post-link">
+          <a
+            href="https://www.linkedin.com/feed/update/urn:li:activity:7326968144617492480/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="post-cta"
+          >
+            View on LinkedIn →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="linkedin-cta">
+      <p>
+        Follow my journey on LinkedIn for more insights on technical writing, developer experience,
+        and visual communication.
+      </p>
+      <a
+        href="https://linkedin.com/in/brucedenham/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="linkedin-follow-btn"
+      >
+        Follow on LinkedIn →
+      </a>
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
-  /* Blog listing specific styles - none needed, using common styles */
+  /* LinkedIn Insights section specific styles */
+  .linkedin-insights-section {
+    margin-top: 0;
+    padding-top: 32px;
+  }
+
+  .section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-primary), transparent);
+    border-radius: 1px;
+    margin-bottom: 32px;
+    max-width: 200px;
+  }
+
+  .posts-intro {
+    color: var(--text-tertiary);
+    font-size: 16px;
+    margin-bottom: 32px;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* Platform info styles - from homepage */
+  .platform-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .platform-icon {
+    font-size: 1.2rem;
+  }
+
+  .platform-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .platform-name {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .post-type {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .post-date {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .post-content h3 {
+    color: var(--text-primary);
+    font-size: 18px;
+    margin: 0 0 12px 0;
+  }
+
+  .post-content p {
+    color: var(--text-tertiary);
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+    font-weight: 300;
+  }
+
+  .post-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .post-link {
+    margin-top: auto;
+  }
+
+  /* Mobile responsive for LinkedIn posts */
+  @media (max-width: 640px) {
+    .post-details {
+      gap: 4px;
+    }
+  }
 </style>
