@@ -53,7 +53,7 @@ const latestPosts = blogPosts
     </div>
     <div class="performance-cta">
       <small>
-        <strong>99.9th percentile performance</strong> •
+        <span class="percentile-text">99.9th percentile performance</span> •
         <a
           href="https://pagespeed.web.dev/analysis?url=https://bruuce.com"
           target="_blank"
@@ -366,8 +366,18 @@ const latestPosts = blogPosts
 
   .performance-cta {
     text-align: center;
-    padding-top: 12px;
-    border-top: 1px solid rgba(0, 170, 255, 0.1);
+    padding: 16px 20px 12px 20px;
+    margin-top: 16px;
+    background: linear-gradient(135deg, rgba(0, 170, 255, 0.06), rgba(0, 170, 255, 0.02));
+    border: 1px solid rgba(0, 170, 255, 0.15);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .performance-cta:hover {
+    background: linear-gradient(135deg, rgba(0, 170, 255, 0.1), rgba(0, 170, 255, 0.04));
+    border-color: rgba(0, 170, 255, 0.25);
+    box-shadow: 0 4px 20px rgba(0, 170, 255, 0.08);
   }
 
   .performance-cta small {
@@ -378,9 +388,10 @@ const latestPosts = blogPosts
     line-height: 1.4;
   }
 
-  .performance-cta strong {
+  .performance-cta .percentile-text {
     color: #00aaff;
     font-size: 18px;
+    font-weight: 400;
   }
 
   .performance-cta a {
