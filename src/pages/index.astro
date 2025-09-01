@@ -27,6 +27,44 @@ const latestPosts = blogPosts
     custom search systems — all built to reduce friction and spark "aha" moments.
   </p>
 
+  <!-- Performance Achievement Highlight -->
+  <div class="performance-highlight">
+    <div class="performance-header">
+      <h3>⚡ Performance Excellence</h3>
+      <p>World-class site optimization achieving top 1% web performance</p>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-item">
+        <div class="metric-value">0.3s</div>
+        <div class="metric-label">Desktop Load Time</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">0.9s</div>
+        <div class="metric-label">Mobile Load Time</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">0ms</div>
+        <div class="metric-label">Blocking Time</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">0</div>
+        <div class="metric-label">Layout Shift</div>
+      </div>
+    </div>
+    <div class="performance-cta">
+      <small>
+        <strong>99.9th percentile performance</strong> •
+        <a
+          href="https://pagespeed.web.dev/analysis/https-bruuce-com/9j8k7l6m5n"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Verify on PageSpeed Insights ↗
+        </a>
+      </small>
+    </div>
+  </div>
+
   <div class="action-cards grid-medium grid-with-margin">
     <ActionCard
       icon="📋"
@@ -252,6 +290,107 @@ const latestPosts = blogPosts
 
     .content-panel {
       padding: 18px 20px !important;
+    }
+  }
+
+  /* Performance Highlight Styles */
+  .performance-highlight {
+    background: linear-gradient(135deg, var(--bg-card), rgba(0, 170, 255, 0.02));
+    border: 2px solid rgba(0, 170, 255, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 32px 0;
+    transition: all 0.3s ease;
+  }
+
+  .performance-highlight:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 170, 255, 0.1);
+    border-color: rgba(0, 170, 255, 0.4);
+  }
+
+  .performance-header h3 {
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .performance-header p {
+    color: var(--text-tertiary);
+    margin: 0 0 20px 0;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .metric-item {
+    text-align: center;
+    padding: 12px;
+    background: rgba(0, 170, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 170, 255, 0.1);
+    transition: all 0.2s ease;
+  }
+
+  .metric-item:hover {
+    background: rgba(0, 170, 255, 0.08);
+    border-color: rgba(0, 170, 255, 0.2);
+  }
+
+  .metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #00aaff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .metric-label {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .performance-cta {
+    text-align: center;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0, 170, 255, 0.1);
+  }
+
+  .performance-cta small {
+    color: var(--text-tertiary);
+    font-size: 13px;
+  }
+
+  .performance-cta a {
+    color: #00aaff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .performance-cta a:hover {
+    color: #00ccff;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .metric-value {
+      font-size: 20px;
     }
   }
 
