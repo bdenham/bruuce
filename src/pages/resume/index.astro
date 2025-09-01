@@ -16,40 +16,37 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   <PageHeader primary="My" accent="Resume" id="resume-title" />
 
   <div class="resume-content">
-    <div class="contact-section">
-      <div class="contact-info">
-        <h2>Contact Information</h2>
-        <div class="contact-details">
-          <div class="contact-item">
-            <strong>Email:</strong>
-            <a href="mailto:brucedenham@mac.com">brucedenham@mac.com</a>
-          </div>
-          <div class="contact-item">
-            <strong>Phone:</strong>
-            <a href="tel:+15129660265">(512) 966-0265</a>
-          </div>
-          <div class="contact-item">
-            <strong>Location:</strong> Austin, Texas Metropolitan Area
-          </div>
-          <div class="contact-item">
-            <strong>LinkedIn:</strong>
-            <a href="https://linkedin.com/in/brucedenham/" target="_blank" rel="noopener noreferrer"
-              >linkedin.com/in/brucedenham/</a
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="summary-section">
       <h2>Professional Summary</h2>
       <p>
-        Senior Developer Experience (DX) writer, developer advocate, and technical educator with 30+
-        years of experience at the crossroads of technical writing, frontend development, visual
-        design, and UX. Known for turning complex concepts and APIs into clear tutorials,
-        infographics, animations, and video content. I help dev teams ship fast using docs, tools,
-        and visuals that make tutorials and API references click.
+        Senior Developer Experience (DX) writer and developer advocate specializing in transforming
+        complex enterprise APIs into adoption-driving documentation. 30+ years of experience
+        building developer tools, interactive tutorials, and comprehensive documentation ecosystems
+        that reduce time-to-first-success and increase API adoption rates. Expert at the
+        intersection of technical writing, frontend development, visual design, and UX—helping dev
+        teams ship faster with docs, tools, and visuals that drive measurable engagement.
       </p>
+    </div>
+
+    <div class="awards-section featured-section">
+      <h2>🏆 Awards & Recognition</h2>
+      <ul class="awards-list">
+        <li>
+          <strong>Adobe Founders Award</strong> – Nominee for excellence in technical writing and developer
+          experience innovation
+        </li>
+        <li>
+          <strong>Adobe Extreme Ownership Award</strong> – Nominee for outstanding leadership and accountability
+        </li>
+        <li>
+          <strong>International Speaking</strong> – Presented PageBuilder best practices at Meet Magento
+          Indonesia 2019
+        </li>
+        <li>
+          <strong>Community Impact</strong> – PageBuilder Examples repository: 106 GitHub stars, 78 forks
+          (highest engagement in ecosystem)
+        </li>
+      </ul>
     </div>
 
     <div class="skills-section">
@@ -239,7 +236,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           <h3>Schlumberger</h3>
           <div class="job-meta">
             <span class="job-title">Senior Technical Writer / API Documentation Specialist</span>
-            <span class="job-period">2000–2005</span>
+            <span class="job-period">2000-2005</span>
           </div>
         </div>
         <ul class="achievements">
@@ -277,12 +274,29 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="awards-section">
-      <h2>Awards & Recognition</h2>
-      <ul class="awards-list">
-        <li><strong>Adobe Founders Award</strong> – Nominee</li>
-        <li><strong>Adobe Extreme Ownership Award</strong> – Nominee</li>
-      </ul>
+    <div class="contact-section">
+      <div class="contact-info">
+        <h2>Contact Information</h2>
+        <div class="contact-details">
+          <div class="contact-item">
+            <strong>Email:</strong>
+            <a href="mailto:brucedenham@mac.com">brucedenham@mac.com</a>
+          </div>
+          <div class="contact-item">
+            <strong>Phone:</strong>
+            <a href="tel:+15129660265">(512) 966-0265</a>
+          </div>
+          <div class="contact-item">
+            <strong>Location:</strong> Austin, Texas Metropolitan Area
+          </div>
+          <div class="contact-item">
+            <strong>LinkedIn:</strong>
+            <a href="https://linkedin.com/in/brucedenham/" target="_blank" rel="noopener noreferrer"
+              >linkedin.com/in/brucedenham/</a
+            >
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="endorsements-section">
@@ -308,11 +322,18 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .contact-section {
-    background: var(--bg-card);
-    border: 1px solid var(--border-secondary);
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    border: 2px solid rgba(148, 163, 184, 0.4);
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 32px;
+    transition: all 0.3s ease;
+  }
+
+  .contact-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--shadow-secondary);
+    border-color: var(--accent-primary);
   }
 
   .contact-section h2 {
@@ -367,6 +388,20 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     padding-bottom: 8px;
   }
 
+  .featured-section {
+    border: 2px solid var(--accent-primary);
+    border-radius: 16px;
+    padding: 32px;
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    transition: all 0.3s ease;
+  }
+
+  .featured-section h2 {
+    color: var(--accent-primary);
+    border-bottom: 2px solid var(--accent-primary);
+    margin-top: 0;
+  }
+
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -374,10 +409,17 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .skill-category {
-    background: var(--bg-card);
-    border: 1px solid var(--border-secondary);
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    border: 2px solid rgba(148, 163, 184, 0.4);
     border-radius: 12px;
     padding: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .skill-category:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--shadow-secondary);
+    border-color: var(--accent-primary);
   }
 
   .skill-category h3 {
@@ -407,11 +449,18 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .job {
-    background: var(--bg-card);
-    border: 1px solid var(--border-secondary);
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    border: 2px solid rgba(148, 163, 184, 0.4);
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 24px;
+    transition: all 0.3s ease;
+  }
+
+  .job:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--shadow-secondary);
+    border-color: var(--accent-primary);
   }
 
   .job-header {
@@ -475,12 +524,19 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .degree {
-    background: var(--bg-card);
-    border: 1px solid var(--border-secondary);
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    border: 2px solid rgba(148, 163, 184, 0.4);
     border-radius: 12px;
     padding: 20px;
     text-align: center;
     color: var(--text-tertiary);
+    transition: all 0.3s ease;
+  }
+
+  .degree:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--shadow-secondary);
+    border-color: var(--accent-primary);
   }
 
   .degree strong {

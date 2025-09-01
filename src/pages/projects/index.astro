@@ -421,8 +421,8 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .project-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-secondary);
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    border: 2px solid rgba(148, 163, 184, 0.4);
     border-radius: 16px;
     padding: 32px;
     margin-bottom: 32px;
@@ -432,12 +432,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   .project-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 32px var(--shadow-secondary);
-    border-color: var(--border-primary);
+    border-color: var(--accent-primary);
   }
 
   .project-card.featured {
     border: 2px solid var(--accent-primary);
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.03));
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
   }
 
   .project-header {

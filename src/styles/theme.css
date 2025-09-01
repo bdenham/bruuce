@@ -737,8 +737,8 @@ p {
 }
 
 .blog-post {
-    background: var(--bg-card);
-    border: 1px solid var(--border-secondary);
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    border: 2px solid rgba(148, 163, 184, 0.4);
     border-radius: 12px;
     padding: 20px;
     margin: 16px 0;
@@ -748,7 +748,7 @@ p {
 
 .blog-post-link:hover .blog-post {
     background: var(--bg-card-hover);
-    border-color: var(--border-primary);
+    border-color: var(--accent-primary);
     transform: translateY(-1px);
     box-shadow: 0 6px 20px var(--shadow-secondary);
 }

@@ -4,9 +4,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPostCard from '../components/ui/BlogPostCard.astro';
 import ActionCard from '../components/ui/ActionCard.astro';
 
-// Get the latest blog post for the homepage
+// Get the latest 2 blog posts for the homepage
 const blogPosts = await getCollection('blog');
-const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
+const latestPosts = blogPosts
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2);
 ---
 
 <BaseLayout
@@ -17,8 +19,8 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
   <h1 id="main-title"><span>Bruce</span> Denham</h1>
   <p class="subtitle homepage">Senior Technical Writer & Developer Experience Strategist</p>
   <p class="lead">
-    I turn complex concepts into clear, human experiences. With 30+ years in docs, dev, and design,
-    I help developers learn fast, build smart, and ship with confidence.
+    🏆 <strong>Adobe award nominee</strong> with 30+ years turning complex concepts into clear, human
+    experiences. I help developers learn fast, build smart, and ship with confidence.
   </p>
   <p class="lead">
     At Adobe, I've built developer and SDK docs, CLI tools, React apps, interactive playgrounds and
@@ -27,7 +29,6 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
 
   <div class="action-cards grid-medium grid-with-margin">
     <ActionCard
-      variant="primary"
       icon="📋"
       title="My Resume"
       description="Explore my 30+ years of experience in technical writing and developer experience"
@@ -70,8 +71,8 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
   </div>
 
   <div class="section">
-    <h2>Latest BlogPosts</h2>
-    {latestPost && <BlogPostCard post={latestPost} />}
+    <h2>Recent Posts</h2>
+    {latestPosts.map((post) => <BlogPostCard post={post} />)}
   </div>
 
   <div class="footer-links">
@@ -194,15 +195,21 @@ const latestPost = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
   }
 
   .content-panel {
-    background: var(--bg-tertiary) !important;
+    background: linear-gradient(135deg, var(--bg-tertiary), rgba(167, 139, 250, 0.02)) !important;
     border-radius: 20px !important;
     padding: 40px !important;
     margin: 0 0 32px 0 !important;
-    border: 1px solid var(--border-secondary) !important;
+    border: 2px solid rgba(148, 163, 184, 0.4) !important;
     box-shadow: 0 8px 32px var(--shadow-secondary) !important;
     position: relative !important;
     top: 0 !important;
     transform: none !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .content-panel:hover {
+    transform: translateY(-2px) !important;
+    border-color: var(--accent-primary) !important;
   }
 
   /* Mobile override */

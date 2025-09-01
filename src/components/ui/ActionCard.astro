@@ -40,8 +40,8 @@ const {
     border-radius: 16px;
     text-decoration: none;
     color: inherit;
-    background: var(--bg-card);
-    border: 1px solid var(--border-secondary);
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    border: 2px solid rgba(148, 163, 184, 0.4);
     transition:
       transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important,
       background-color 0.2s ease !important,
@@ -82,7 +82,7 @@ const {
   .action-card:hover {
     transform: translateY(-2px) !important;
     background: var(--bg-card-hover) !important;
-    border-color: var(--border-primary) !important;
+    border-color: var(--accent-primary) !important;
     box-shadow: 0 8px 24px var(--shadow-secondary) !important;
   }
 
