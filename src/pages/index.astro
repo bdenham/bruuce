@@ -30,7 +30,7 @@ const latestPosts = blogPosts
   <!-- Performance Achievement Highlight -->
   <div class="performance-highlight">
     <div class="performance-header">
-      <h3>⚡ Performance Excellence</h3>
+      <h2>⚡ Performance Excellence</h2>
       <p>World-class site optimization achieving top 1% web performance</p>
     </div>
     <div class="metrics-grid">
@@ -55,7 +55,7 @@ const latestPosts = blogPosts
       <small>
         <strong>99.9th percentile performance</strong> •
         <a
-          href="https://pagespeed.web.dev/analysis/https-bruuce-com/9j8k7l6m5n"
+          href="https://pagespeed.web.dev/analysis?url=https://bruuce.com"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -309,7 +309,7 @@ const latestPosts = blogPosts
     border-color: rgba(0, 170, 255, 0.4);
   }
 
-  .performance-header h3 {
+  .performance-header h2 {
     color: var(--text-primary);
     margin: 0 0 8px 0;
     font-size: 20px;
@@ -317,6 +317,8 @@ const latestPosts = blogPosts
     display: flex;
     align-items: center;
     gap: 8px;
+    border-bottom: none;
+    padding-bottom: 0;
   }
 
   .performance-header p {
@@ -369,8 +371,16 @@ const latestPosts = blogPosts
   }
 
   .performance-cta small {
-    color: var(--text-tertiary);
-    font-size: 13px;
+    color: var(--text-secondary);
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+    line-height: 1.4;
+  }
+
+  .performance-cta strong {
+    color: #00aaff;
+    font-size: 18px;
   }
 
   .performance-cta a {
