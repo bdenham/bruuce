@@ -53,7 +53,7 @@ const latestPosts = blogPosts
     </div>
   </div>
 
-  <div class="action-cards grid-medium grid-with-margin">
+  <div class="action-cards grid-medium grid-with-margin lazy-cards">
     <ActionCard
       icon="📋"
       title="My Resume"
@@ -312,32 +312,37 @@ const latestPosts = blogPosts
 
   .metrics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
     margin-bottom: 16px;
   }
 
   .metric-item {
     text-align: center;
-    padding: 12px;
-    background: rgba(0, 170, 255, 0.05);
-    border-radius: 12px;
-    border: 1px solid rgba(0, 170, 255, 0.1);
+    padding: 8px;
+    background: rgba(0, 170, 255, 0.02);
+    border-radius: 8px;
+    font-size: 13px;
   }
 
   .metric-value {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     color: #00aaff;
   }
 
   .performance-cta {
     text-align: center;
-    padding: 16px 20px 12px 20px;
-    margin-top: 16px;
+    padding: 12px 16px 8px 16px;
+    margin-top: 12px;
     background: rgba(0, 170, 255, 0.04);
     border: 1px solid rgba(0, 170, 255, 0.15);
-    border-radius: 20px;
+    border-radius: 16px;
+  }
+
+  .lazy-cards {
+    opacity: 0;
+    transition: opacity 0.2s ease;
   }
 
   .performance-cta small {
@@ -367,13 +372,17 @@ const latestPosts = blogPosts
   /* Homepage-specific styles only - LinkedIn styles moved to blog page */
 </style>
 
-<!-- Performance-optimized lazy loading for blog posts -->
+<!-- Performance-optimized lazy loading -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Lazy load action cards after critical content
     setTimeout(() => {
+      const cards = document.querySelector('.lazy-cards');
+      if (cards) cards.style.opacity = '1';
+
       document
         .querySelectorAll('.blog-post-wrapper.lazy-load')
         .forEach((el) => el.classList.add('loaded'));
-    }, 100);
+    }, 50);
   });
 </script>
