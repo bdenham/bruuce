@@ -72,7 +72,15 @@ const latestPosts = blogPosts
 
   <div class="section">
     <h2>Recent Posts</h2>
-    {latestPosts.map((post) => <BlogPostCard post={post} />)}
+    <div class="blog-posts-container">
+      {
+        latestPosts.map((post, index) => (
+          <div class={`blog-post-wrapper ${index > 0 ? 'lazy-load' : ''}`}>
+            <BlogPostCard post={post} />
+          </div>
+        ))
+      }
+    </div>
   </div>
 
   <div class="footer-links">
@@ -212,6 +220,26 @@ const latestPosts = blogPosts
     border-color: var(--accent-primary) !important;
   }
 
+  /* Performance optimizations for blog posts */
+  .blog-posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .blog-post-wrapper.lazy-load {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .blog-post-wrapper.lazy-load.loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* Mobile override */
   @media (max-width: 1023px) {
     .app-content {
@@ -229,3 +257,20 @@ const latestPosts = blogPosts
 
   /* Homepage-specific styles only - LinkedIn styles moved to blog page */
 </style>
+
+<!-- Performance-optimized lazy loading for blog posts -->
+<script>
+  // Lazy load second blog post for better Speed Index
+  document.addEventListener('DOMContentLoaded', function () {
+    const lazyElements = document.querySelectorAll('.blog-post-wrapper.lazy-load');
+
+    if (lazyElements.length > 0) {
+      // Delay loading of second post to improve initial render
+      setTimeout(() => {
+        lazyElements.forEach((el) => {
+          el.classList.add('loaded');
+        });
+      }, 100); // Small delay to prioritize above-the-fold content
+    }
+  });
+</script>
