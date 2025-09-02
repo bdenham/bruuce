@@ -669,7 +669,7 @@ h6 {
 
 p {
     margin: 0 0 20px 0;
-    color: var(--text-tertiary);
+    /* color: var(--text-tertiary); */
     font-weight: 400;
     line-height: 1.7;
 }
@@ -828,7 +828,7 @@ footer a:hover {
 
 .content p {
     margin: 0 0 20px 0;
-    color: var(--text-tertiary);
+    /* color: var(--text-tertiary); */
 }
 
 .content ol,
@@ -893,6 +893,25 @@ footer a:hover {
     .action-card .card-arrow {
         transition-duration: 0.2s !important;
     }
+}
+
+/* Utility class for yellow headings */
+.heading-yellow h1,
+.heading-yellow h2,
+.heading-yellow h3,
+.heading-yellow h4,
+.heading-yellow h5,
+.heading-yellow h6 {
+    color: var(--accent-yellow) !important;
+}
+
+/* Utility class for yellow text */
+.content p .text-yellow,
+.content .text-yellow,
+p .text-yellow,
+.text-yellow {
+    color: var(--accent-yellow) !important;
+    font-weight: 600 !important;
 }
 
 /* Search Highlight Styles */
