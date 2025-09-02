@@ -397,8 +397,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
   .projects-intro {
     background: var(--bg-card);
-    font-size: 22px;
-    margin-top: -24px;
+    font-size: 18px;
   }
 
   .projects-intro p {
@@ -406,6 +405,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     color: var(--text-tertiary);
     line-height: 1.7;
     font-weight: 300;
+    margin-top: 0;
   }
 
   .projects-section {
@@ -438,6 +438,11 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   .project-card.featured {
     border: 2px solid var(--accent-primary);
     background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    /* Animation for featured card (above fold) */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 100ms;
   }
 
   .project-header {

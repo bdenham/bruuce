@@ -76,12 +76,12 @@
 .endorsements-section h2,
 .featured-documentation h2 {
     color: var(--text-primary);
-    font-size: 28px;
+    font-size: 24px;
     margin-bottom: 20px;
     border-bottom: 2px solid var(--border-primary);
     padding-bottom: 8px;
 
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .section h2.large {
@@ -1143,32 +1143,30 @@ footer a:hover {
     animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 } */
 
-.action-cards>* {
+/* Action cards - no animation for optimal performance at fold edge */
+
+/* Blog post cards staggered animation - applied to blog-post-link for proper targeting */
+.blog-post-link {
     opacity: 0;
     transform: translateY(20px);
-    animation: actionCardIn 400ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.action-cards>*:nth-child(1) {
+/* Staggered animation delays - using more specific targeting */
+.blog-post-link:first-of-type {
     animation-delay: 100ms;
 }
 
-.action-cards>*:nth-child(2) {
+.blog-post-link:nth-of-type(2) {
     animation-delay: 200ms;
 }
 
-.action-cards>*:nth-child(3) {
+.blog-post-link:nth-of-type(3) {
     animation-delay: 300ms;
 }
 
-.action-cards>*:nth-child(4) {
+.blog-post-link:nth-of-type(4) {
     animation-delay: 400ms;
-}
-
-/* Blog post cards staggered animation */
-.blog-post {
-    animation: slideInLeft 200ms ease-out forwards;
-    animation-delay: 100ms;
 }
 
 /* Page headers */
