@@ -594,12 +594,23 @@ body {
 .header .site-name {
     font-size: 28px;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--accent-primary);
     text-decoration: none;
+    position: relative;
+}
+
+.header .site-name::before {
+    content: '< ';
+    color: var(--accent-yellow);
+}
+
+.header .site-name::after {
+    content: ' />';
+    color: var(--accent-yellow);
 }
 
 .header .site-name:hover {
-    color: var(--accent-primary);
+    color: var(--accent-yellow);
 }
 
 /* Theme toggle styles */
