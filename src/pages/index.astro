@@ -31,17 +31,17 @@ const latestPosts = blogPosts
   <div class="performance-highlight">
     <div class="performance-header">
       <h2>⚡ Performance Excellence</h2>
-      <p>World-class site optimization achieving top 1% web performance</p>
+      <p>Consistently optimized for sub-second loads and exceptional user experience</p>
     </div>
     <div class="metrics-grid">
-      <div class="metric-item"><span class="metric-value">0.3s</span><br />Desktop Load</div>
-      <div class="metric-item"><span class="metric-value">0.9s</span><br />Mobile Load</div>
+      <div class="metric-item"><span class="metric-value">&lt;0.5s</span><br />Desktop Load</div>
+      <div class="metric-item"><span class="metric-value">&lt;1.0s</span><br />Mobile Load</div>
       <div class="metric-item"><span class="metric-value">0ms</span><br />Blocking Time</div>
       <div class="metric-item"><span class="metric-value">0</span><br />Layout Shift</div>
     </div>
     <div class="performance-cta">
       <small>
-        <span class="percentile-text">99.9th percentile performance</span> •
+        <span class="percentile-text">Consistently top 1% web performance</span> •
         <a
           href="https://pagespeed.web.dev/analysis?url=https://bruuce.com"
           target="_blank"
@@ -117,95 +117,15 @@ const latestPosts = blogPosts
   </div>
 </BaseLayout>
 
-<!-- DEBUG: Monitor what's changing the layout -->
+<!-- Minimal scroll position optimization -->
 <script>
-  function debugLayout() {
-    const appContent = document.querySelector('.app-content');
-    const mainContainer = document.querySelector('.main-container');
-    const contentPanel = document.querySelector('.content-panel');
-
-    if (appContent) {
-      const rect = appContent.getBoundingClientRect();
-      console.log('App content position:', {
-        top: rect.top,
-        left: rect.left,
-        transform: getComputedStyle(appContent).transform,
-        marginTop: getComputedStyle(appContent).marginTop,
-        paddingTop: getComputedStyle(appContent).paddingTop,
-        position: getComputedStyle(appContent).position,
-      });
-    }
-
-    if (mainContainer) {
-      const rect = mainContainer.getBoundingClientRect();
-      console.log('Main container position:', {
-        top: rect.top,
-        left: rect.left,
-        transform: getComputedStyle(mainContainer).transform,
-        marginTop: getComputedStyle(mainContainer).marginTop,
-        paddingTop: getComputedStyle(mainContainer).paddingTop,
-        position: getComputedStyle(mainContainer).position,
-      });
-    }
-
-    if (contentPanel) {
-      const rect = contentPanel.getBoundingClientRect();
-      console.log('Content panel position:', {
-        top: rect.top,
-        left: rect.left,
-        transform: getComputedStyle(contentPanel).transform,
-        marginTop: getComputedStyle(contentPanel).marginTop,
-        paddingTop: getComputedStyle(contentPanel).paddingTop,
-        position: getComputedStyle(contentPanel).position,
-      });
-    }
-  }
-
-  // Log immediately
-  debugLayout();
-
-  // Log after DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log('After DOMContentLoaded:');
-      debugLayout();
-    });
-  }
-
-  // ELEGANT FIX: Disable browser scroll restoration and reset position once
+  // Disable browser scroll restoration for better UX
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
-    console.log('Disabled scroll restoration');
   }
 
-  // Ensure we start at the top
+  // Ensure page starts at top without forced reflows
   window.scrollTo(0, 0);
-
-  // Single clean fix after page loads
-  function cleanPositionFix() {
-    console.log('Running clean position fix');
-    debugLayout();
-
-    // Only fix if needed
-    const appContent = document.querySelector('.app-content');
-    if (appContent) {
-      const rect = appContent.getBoundingClientRect();
-      if (rect.top < -10) {
-        // Only fix if significantly off
-        console.log('Applying minimal position correction');
-        appContent.style.position = 'relative';
-        appContent.style.top = '0';
-        appContent.style.marginTop = '0';
-      }
-    }
-  }
-
-  // Run once after DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', cleanPositionFix);
-  } else {
-    cleanPositionFix();
-  }
 </script>
 
 <style>
