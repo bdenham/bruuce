@@ -670,7 +670,7 @@ h6 {
 p {
     margin: 0 0 20px 0;
     /* color: var(--text-tertiary); */
-    font-weight: 400;
+    /* font-weight: 400; */
     line-height: 1.7;
 }
 
@@ -906,11 +906,12 @@ footer a:hover {
 }
 
 /* Utility class for yellow text */
-.content p .text-yellow,
-.content .text-yellow,
-p .text-yellow,
 .text-yellow {
     color: var(--accent-yellow) !important;
+}
+
+/* Utility class for bold text */
+.font-bold {
     font-weight: 600 !important;
 }
 
