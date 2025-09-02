@@ -167,6 +167,7 @@ const latestPosts = blogPosts
   @media (max-width: 1023px) {
     .sidebar {
       z-index: 0; /* Fix: Don't block back button */
+      display: contents; /* Make container transparent to layout - fixes Back to Home clicking! */
     }
 
     .sidebar-toggle {
@@ -238,8 +239,15 @@ const latestPosts = blogPosts
 </style>
 
 <script>
-  // Ultra-minimal JavaScript - maximum performance
-  document.addEventListener('DOMContentLoaded', function () {
+  // Performance-optimized sidebar with proper cleanup to prevent TBT spikes
+  let sidebarCleanup = null;
+
+  function initSidebar() {
+    // Clean up previous listeners to prevent accumulation (fixes 240ms TBT spikes)
+    if (sidebarCleanup) {
+      sidebarCleanup();
+    }
+
     // Ensure body class is clean on page load
     document.body.classList.remove('sidebar-open');
 
@@ -248,10 +256,7 @@ const latestPosts = blogPosts
     const close = document.getElementById('close');
     const overlay = document.getElementById('overlay');
 
-    function open() {
-      sidebar?.classList.add('open');
-      document.body.classList.add('sidebar-open');
-    }
+    if (!sidebar || !toggle) return;
 
     function closeNav() {
       sidebar?.classList.remove('open');
@@ -262,27 +267,50 @@ const latestPosts = blogPosts
       if (sidebar?.classList.contains('open')) {
         closeNav();
       } else {
-        open();
+        sidebar?.classList.add('open');
+        document.body.classList.add('sidebar-open');
       }
     }
 
-    // Minimal event listeners
-    toggle?.addEventListener('click', toggleSidebar);
-    close?.addEventListener('click', closeNav);
-    overlay?.addEventListener('click', closeNav);
-
-    // Escape key
-    document.addEventListener('keydown', function (e) {
+    // Create named handlers for cleanup tracking
+    const handleEscape = (e) => {
       if (e.key === 'Escape' && sidebar?.classList.contains('open')) {
         closeNav();
       }
-    });
+    };
 
-    // Auto-close on link click (mobile)
+    // Add listeners
+    toggle?.addEventListener('click', toggleSidebar);
+    close?.addEventListener('click', closeNav);
+    overlay?.addEventListener('click', closeNav);
+    document.addEventListener('keydown', handleEscape);
+
+    // Mobile link handling with cleanup tracking
+    const mobileLinks = [];
     if (window.matchMedia('(max-width: 1023px)').matches) {
       document.querySelectorAll('.section a[href^="/"]').forEach((link) => {
         link.addEventListener('click', closeNav);
+        mobileLinks.push(link);
       });
     }
-  });
+
+    // Store cleanup function to remove ALL listeners
+    sidebarCleanup = () => {
+      toggle?.removeEventListener('click', toggleSidebar);
+      close?.removeEventListener('click', closeNav);
+      overlay?.removeEventListener('click', closeNav);
+      document.removeEventListener('keydown', handleEscape);
+      mobileLinks.forEach((link) => link.removeEventListener('click', closeNav));
+    };
+  }
+
+  // Initialize once on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSidebar);
+  } else {
+    initSidebar();
+  }
+
+  // Clean re-initialization after view transitions
+  document.addEventListener('astro:after-swap', initSidebar);
 </script>

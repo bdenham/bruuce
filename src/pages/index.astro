@@ -12,7 +12,7 @@ const latestPosts = blogPosts
 ---
 
 <BaseLayout
-  title="Bruce Denham - Senior Technical Writer & Developer Experience Strategist"
+  title="Bruuce - Senior Technical Writer & Developer Experience Strategist"
   description="Senior Technical Writer & Developer Experience Strategist at Adobe with 30+ years turning complex concepts into clear developer experiences."
   footerText="Thanks for visiting! Let's build better developer experiences together."
 >
@@ -119,8 +119,8 @@ const latestPosts = blogPosts
 
 <!-- Minimal scroll position optimization -->
 <script>
-  // Disable browser scroll restoration for better UX
-  if ('scrollRestoration' in history) {
+  // Only set scroll restoration once to prevent accumulation
+  if ('scrollRestoration' in history && history.scrollRestoration !== 'manual') {
     history.scrollRestoration = 'manual';
   }
 
@@ -292,17 +292,31 @@ const latestPosts = blogPosts
   /* Homepage-specific styles only - LinkedIn styles moved to blog page */
 </style>
 
-<!-- Performance-optimized lazy loading -->
+<!-- Performance-optimized lazy loading with cleanup -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Lazy load action cards after critical content
-    setTimeout(() => {
+  let lazyLoadExecuted = false;
+
+  function initLazyLoad() {
+    // Prevent multiple executions that could cause TBT spikes
+    if (lazyLoadExecuted) return;
+    lazyLoadExecuted = true;
+
+    // Use requestAnimationFrame instead of setTimeout for better performance
+    requestAnimationFrame(() => {
       const cards = document.querySelector('.lazy-cards');
       if (cards) cards.style.opacity = '1';
 
       document
         .querySelectorAll('.blog-post-wrapper.lazy-load')
         .forEach((el) => el.classList.add('loaded'));
-    }, 50);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initLazyLoad);
+
+  // Reset flag on view transitions to allow re-execution on new pages
+  document.addEventListener('astro:after-swap', () => {
+    lazyLoadExecuted = false;
+    initLazyLoad();
   });
 </script>

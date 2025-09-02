@@ -224,8 +224,24 @@ const {
         initTheme();
       }
 
-      // Re-initialize theme after View Transitions
-      document.addEventListener('astro:after-swap', initTheme);
+      // Re-initialize theme after View Transitions (with cleanup)
+      let themeCleanup = null;
+
+      function initThemeWithCleanup() {
+        initTheme();
+
+        // Store cleanup for theme listeners if needed
+        if (themeCleanup) {
+          themeCleanup();
+        }
+
+        // No additional cleanup needed for theme toggle as it's global
+        themeCleanup = () => {
+          // Theme toggle cleanup if needed in future
+        };
+      }
+
+      document.addEventListener('astro:after-swap', initThemeWithCleanup);
     </script>
 
     <!-- JSON-LD Structured Data (non-blocking at bottom) -->
