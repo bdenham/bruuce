@@ -31,9 +31,17 @@ const latestPosts = blogPosts
   <div class="performance-highlight">
     <div class="performance-header">
       <h2>⚡ Performance Excellence</h2>
-      <p>Consistently optimized for sub-second loads and exceptional user experience</p>
+      <p>Sub-second performance with exceptional user experience across all devices.</p>
     </div>
     <div class="metrics-grid">
+      <div class="lighthouse-score"><span class="lighthouse-value">100</span><br />Performance</div>
+      <div class="lighthouse-score">
+        <span class="lighthouse-value">100</span><br />Accessibility
+      </div>
+      <div class="lighthouse-score">
+        <span class="lighthouse-value">100</span><br />Best Practices
+      </div>
+      <div class="lighthouse-score"><span class="lighthouse-value">100</span><br />SEO</div>
       <div class="metric-item"><span class="metric-value">~0.3s</span><br />Desktop Load</div>
       <div class="metric-item"><span class="metric-value">~1.0s</span><br />Mobile Load</div>
       <div class="metric-item"><span class="metric-value">0ms</span><br />Blocking Time</div>
@@ -242,12 +250,36 @@ const latestPosts = blogPosts
     background: rgba(0, 170, 255, 0.1);
     border-radius: 8px;
     font-size: 13px;
+    line-height: 1.1;
+  }
+
+  .lighthouse-score {
+    text-align: center;
+    padding: 8px;
+    background: rgba(12, 186, 96, 0.1);
+    border: 1px solid rgba(12, 186, 96, 0.2);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .lighthouse-value {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: #0cba60;
+    line-height: 1;
+    margin-bottom: 2px;
   }
 
   .metric-value {
+    display: block;
     font-size: 20px;
     font-weight: 700;
     color: #00aaff;
+    line-height: 1;
+    margin-bottom: 2px;
   }
 
   .performance-cta {
@@ -294,6 +326,16 @@ const latestPosts = blogPosts
   @media (max-width: 640px) {
     .metrics-grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .lighthouse-value {
+      font-size: 20px;
+      margin-bottom: 1px;
+    }
+
+    .metric-value {
+      margin-bottom: 1px;
     }
   }
 
