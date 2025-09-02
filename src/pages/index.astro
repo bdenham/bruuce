@@ -39,18 +39,17 @@ const latestPosts = blogPosts
       <div class="metric-item"><span class="metric-value">0ms</span><br />Blocking Time</div>
       <div class="metric-item"><span class="metric-value">0</span><br />Layout Shift</div>
     </div>
-    <div class="performance-cta">
+    <a
+      href="https://pagespeed.web.dev/analysis?url=https://bruuce.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="performance-cta"
+    >
       <small>
         <span class="percentile-text">Consistently top 1% web performance</span> •
-        <a
-          href="https://pagespeed.web.dev/analysis?url=https://bruuce.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Verify on PageSpeed Insights ↗
-        </a>
+        <span class="verify-text">Verify on PageSpeed Insights ↗</span>
       </small>
-    </div>
+    </a>
   </div>
 
   <div class="action-cards grid-medium grid-with-margin lazy-cards">
@@ -240,7 +239,7 @@ const latestPosts = blogPosts
   .metric-item {
     text-align: center;
     padding: 8px;
-    background: rgba(0, 170, 255, 0.02);
+    background: rgba(0, 170, 255, 0.1);
     border-radius: 8px;
     font-size: 13px;
   }
@@ -252,12 +251,23 @@ const latestPosts = blogPosts
   }
 
   .performance-cta {
+    display: block;
+    text-decoration: none;
     text-align: center;
     padding: 12px 16px 8px 16px;
     margin-top: 12px;
-    background: rgba(0, 170, 255, 0.04);
+    background: rgba(0, 170, 255, 0.1);
     border: 1px solid rgba(0, 170, 255, 0.15);
     border-radius: 16px;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .performance-cta:hover {
+    background: rgba(0, 170, 255, 0.08);
+    border-color: rgba(0, 170, 255, 0.25);
   }
 
   .lazy-cards {
@@ -275,12 +285,10 @@ const latestPosts = blogPosts
 
   .performance-cta .percentile-text {
     color: #00aaff;
-    font-size: 18px;
   }
 
-  .performance-cta a {
+  .performance-cta .verify-text {
     color: #00aaff;
-    text-decoration: none;
   }
 
   @media (max-width: 640px) {
