@@ -38,7 +38,12 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
     </p>
 
     <div class="linkedin-posts grid-large grid-with-bottom-margin">
-      <div class="linkedin-post featured">
+      <a
+        href="https://www.linkedin.com/feed/update/urn:li:activity:7329128517764337665/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="linkedin-post featured"
+      >
         <div class="post-header">
           <div class="platform-info">
             <div class="platform-icon">💼</div>
@@ -62,19 +67,14 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
             <span class="post-tag">Visual Communication</span>
           </div>
         </div>
-        <div class="post-link">
-          <a
-            href="https://www.linkedin.com/feed/update/urn:li:activity:7329128517764337665/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="post-cta"
-          >
-            View on LinkedIn →
-          </a>
-        </div>
-      </div>
+      </a>
 
-      <div class="linkedin-post">
+      <a
+        href="https://www.linkedin.com/feed/update/urn:li:activity:7326230647159619585/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="linkedin-post"
+      >
         <div class="post-header">
           <div class="platform-info">
             <div class="platform-icon">💼</div>
@@ -97,19 +97,14 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
             <span class="post-tag">Visual Communication</span>
           </div>
         </div>
-        <div class="post-link">
-          <a
-            href="https://www.linkedin.com/feed/update/urn:li:activity:7326230647159619585/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="post-cta"
-          >
-            View on LinkedIn →
-          </a>
-        </div>
-      </div>
+      </a>
 
-      <div class="linkedin-post">
+      <a
+        href="https://www.linkedin.com/feed/update/urn:li:activity:7326968144617492480/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="linkedin-post"
+      >
         <div class="post-header">
           <div class="platform-info">
             <div class="platform-icon">💼</div>
@@ -133,17 +128,7 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
             <span class="post-tag">Visual Communication</span>
           </div>
         </div>
-        <div class="post-link">
-          <a
-            href="https://www.linkedin.com/feed/update/urn:li:activity:7326968144617492480/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="post-cta"
-          >
-            View on LinkedIn →
-          </a>
-        </div>
-      </div>
+      </a>
     </div>
 
     <div class="linkedin-cta">
@@ -240,8 +225,11 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
     margin-bottom: 16px;
   }
 
-  .post-link {
-    margin-top: auto;
+  /* LinkedIn post as clickable links */
+  .linkedin-post {
+    display: block;
+    text-decoration: none;
+    color: inherit;
   }
 
   /* Mobile responsive for LinkedIn posts */
