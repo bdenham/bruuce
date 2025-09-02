@@ -70,13 +70,13 @@ const {
     <meta name="format-detection" content="telephone=no" />
 
     <!-- No font preloads - let CSS handle fonts for optimal performance -->
+
     <!-- Theme initialization only - fonts handled by static CSS -->
     <script is:inline>
       if (localStorage.getItem('theme') === 'light') {
         document.documentElement.classList.add('light');
       }
     </script>
-
     <style>
       :root {
         --bg-primary: #0f1419;
@@ -88,6 +88,7 @@ const {
         --text-primary: #2d3748;
         --accent-primary: #0066cc;
       }
+
       body {
         margin: 0;
         background: var(--bg-primary);
@@ -101,16 +102,18 @@ const {
         line-height: 1.6;
         font-size: 16px;
       }
+
       h1 {
         font-size: clamp(2.5rem, 8vw, 3.5rem);
         font-weight: 900;
         margin: 0 0 16px 0;
         line-height: 1.1;
-        color: var(--text-primary); /* Ensure h1 titles are white */
+        color: var(--text-primary);
       }
       h1 span {
         color: var(--accent-primary);
       }
+
       .skip-link {
         position: absolute;
         top: -40px;
