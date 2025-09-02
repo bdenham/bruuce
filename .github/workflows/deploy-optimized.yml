@@ -1,4 +1,4 @@
-name: Deploy Main Branch
+name: Deploy to Production
 
 on:
   push:
@@ -10,40 +10,13 @@ permissions:
   pages: write
   id-token: write
 
+# Prevent multiple deployments running simultaneously
 concurrency:
-  group: "deploy-main"
+  group: "pages"
   cancel-in-progress: false
 
 jobs:
-  test:
-    name: Test & Lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-          cache-dependency-path: 'pnpm-lock.yaml'
-
-      - name: Install dependencies
-        run: pnpm install --registry https://registry.npmjs.org/ --no-frozen-lockfile
-
-      - name: Run linting
-        run: pnpm run lint
-
-      - name: Build project
-        run: pnpm run build
-
   deploy:
-    name: Deploy to GitHub Pages
-    needs: test
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -67,10 +40,17 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
-        run: pnpm install --registry https://registry.npmjs.org/ --no-frozen-lockfile
+        run: pnpm install --registry https://registry.npmjs.org/ --frozen-lockfile
+
+      - name: Lint & Test
+        run: |
+          pnpm run lint
+          echo "✅ Linting passed"
 
       - name: Build with Astro
-        run: GITHUB_PAGES=true pnpm run build
+        run: |
+          GITHUB_PAGES=true pnpm run build
+          echo "✅ Build completed"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
