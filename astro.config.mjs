@@ -18,7 +18,7 @@ export default defineConfig({
     base: process.env.GITHUB_PAGES
         ? '/bruuce/'
         : undefined,
-    trailingSlash: 'ignore',
+    trailingSlash: 'always',
     outDir: './dist',
 
     // FIX 2: Force CSS inlining to eliminate render-blocking (1,210ms savings)
