@@ -48,26 +48,55 @@ const {
 
     <!-- Essential SEO Meta Tags -->
     <meta name="author" content="Bruce Denham" />
-    <meta
-      name="keywords"
-      content="Bruce Denham, Technical Writer, Developer Experience, Adobe, Documentation, API Documentation, SDK Documentation, CLI Tools"
-    />
 
     <!-- Open Graph Meta Tags for Social Sharing -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Bruce Denham" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:url" content={`https://bruuce.com${Astro.url.pathname}`} />
+    <meta property="og:image" content="https://bruuce.com/images/bruce-denham-og-card.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Bruce Denham - Adobe Award-Nominated Technical Writer & Developer Experience Engineer"
+    />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@brucedenham" />
+    <meta name="twitter:site" content="@brucedenham" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://bruuce.com/images/bruce-denham-og-card.jpg" />
+    <meta
+      name="twitter:image:alt"
+      content="Bruce Denham - Adobe Award-Nominated Technical Writer"
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={`https://bruuce.com${Astro.url.pathname}`} />
 
     <!-- Additional SEO Meta Tags -->
     <meta name="generator" content={Astro.generator} />
     <meta name="format-detection" content="telephone=no" />
+    <meta name="geo.region" content="US" />
+    <meta name="geo.position" content="30.2672;-97.7431" />
+    <meta name="ICBM" content="30.2672, -97.7431" />
+    <meta name="geo.placename" content="Austin, Texas" />
+
+    <!-- Language and Content -->
+    <meta name="language" content="en-US" />
+    <meta name="content-language" content="en-US" />
+    <meta name="rating" content="general" />
+
+    <!-- Enhanced Keywords -->
+    <meta
+      name="keywords"
+      content="Bruce Denham, Technical Writer, Developer Experience, Adobe, Documentation, API Documentation, SDK Documentation, CLI Tools, React, JavaScript, Node.js, Astro, Developer Tools, Austin Texas, Remote Work"
+    />
 
     <!-- No font preloads - let CSS handle fonts for optimal performance -->
 
@@ -248,17 +277,24 @@ const {
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
+        "@type": ["Person", "ProfilePage"],
         "name": "Bruce Denham",
-        "jobTitle": "Senior Technical Writer & Developer Experience Strategist",
+        "alternateName": "Bruuce",
+        "jobTitle": "Senior Technical Writer & Developer Experience Engineer",
         "worksFor": {
           "@type": "Organization",
           "name": "Adobe",
-          "url": "https://adobe.com"
+          "url": "https://adobe.com",
+          "sameAs": "https://en.wikipedia.org/wiki/Adobe_Inc."
         },
-        "description": "Senior Technical Writer & Developer Experience Strategist with 30+ years turning complex concepts into clear developer experiences.",
+        "description": "Adobe award-nominated Senior Technical Writer & Developer Experience Engineer with 30+ years transforming complex technical concepts into clear developer experiences.",
         "url": "https://bruuce.com",
-        "sameAs": ["https://linkedin.com/in/brucedenham", "https://github.com/bdenham"],
+        "mainEntityOfPage": "https://bruuce.com",
+        "sameAs": [
+          "https://linkedin.com/in/brucedenham",
+          "https://github.com/bdenham",
+          "https://twitter.com/brucedenham"
+        ],
         "knowsAbout": [
           "Technical Writing",
           "Developer Experience",
@@ -266,19 +302,47 @@ const {
           "SDK Documentation",
           "React Development",
           "CLI Tools",
-          "Documentation Systems"
+          "Documentation Systems",
+          "JavaScript",
+          "Node.js",
+          "Astro",
+          "Developer Tools"
         ],
+        "hasOccupation": {
+          "@type": "Occupation",
+          "name": "Technical Writer",
+          "occupationLocation": {
+            "@type": "Place",
+            "name": "Remote"
+          },
+          "skills": ["Technical Writing", "Developer Experience", "API Documentation", "JavaScript"]
+        },
         "alumniOf": [
           {
             "@type": "Organization",
-            "name": "Schlumberger"
+            "name": "Schlumberger",
+            "url": "https://www.slb.com"
           },
           {
             "@type": "Organization",
             "name": "TOPAZ"
           }
         ],
-        "image": "https://bruuce.com/images/bruce-denham-profile.jpg"
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://bruuce.com/images/bruce-denham-profile.jpg",
+          "width": "400",
+          "height": "400"
+        },
+        "award": "Adobe Award Nominee",
+        "yearsOfExperience": "30+",
+        "expertise": [
+          "API Documentation",
+          "SDK Documentation",
+          "Developer Experience Strategy",
+          "Technical Communication",
+          "Documentation Architecture"
+        ]
       }
     </script>
   </body>
