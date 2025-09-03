@@ -20,12 +20,12 @@ const latestPosts = blogPosts
   <p class="subtitle homepage">Senior Technical Writer & Developer Experience Strategist</p>
   <p class="lead">
     🏆 <strong>Adobe award nominee</strong> with 30+ years turning complex concepts into clear, human
-    experiences. I help developers learn fast, build smart, and ship with confidence.
+    experiences. I help developers learn fast, build smart, and focus on what matters.
   </p>
-  <p class="lead">
+  <!-- <p class="lead">
     At Adobe, I've built developer and SDK docs, CLI tools, React apps, interactive playgrounds and
     custom search systems — all built to reduce friction and spark "aha" moments.
-  </p>
+  </p> -->
 
   <!-- Performance Achievement Highlight -->
   <div class="performance-highlight">
@@ -34,14 +34,82 @@ const latestPosts = blogPosts
       <p>Sub-second performance with exceptional user experience across all devices.</p>
     </div>
     <div class="metrics-grid">
-      <div class="lighthouse-score"><span class="lighthouse-value">100</span><br />Performance</div>
       <div class="lighthouse-score">
-        <span class="lighthouse-value">100</span><br />Accessibility
+        <div class="lh-gauge__wrapper lh-gauge__wrapper--pass">
+          <div class="lh-gauge__svg-wrapper">
+            <svg class="lh-gauge" viewBox="0 0 120 120">
+              <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
+              <circle
+                class="lh-gauge-arc"
+                r="56"
+                cx="60"
+                cy="60"
+                stroke-width="8"
+                style="transform: rotate(-87.9537deg); stroke-dasharray: 351.858, 351.858;"
+              ></circle>
+            </svg>
+            <div class="lh-gauge__percentage">100</div>
+          </div>
+          <div class="lh-gauge__label">Performance</div>
+        </div>
       </div>
       <div class="lighthouse-score">
-        <span class="lighthouse-value">100</span><br />Best Practices
+        <div class="lh-gauge__wrapper lh-gauge__wrapper--pass">
+          <div class="lh-gauge__svg-wrapper">
+            <svg class="lh-gauge" viewBox="0 0 120 120">
+              <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
+              <circle
+                class="lh-gauge-arc"
+                r="56"
+                cx="60"
+                cy="60"
+                stroke-width="8"
+                style="transform: rotate(-87.9537deg); stroke-dasharray: 351.858, 351.858;"
+              ></circle>
+            </svg>
+            <div class="lh-gauge__percentage">100</div>
+          </div>
+          <div class="lh-gauge__label">Accessibility</div>
+        </div>
       </div>
-      <div class="lighthouse-score"><span class="lighthouse-value">100</span><br />SEO</div>
+      <div class="lighthouse-score">
+        <div class="lh-gauge__wrapper lh-gauge__wrapper--pass">
+          <div class="lh-gauge__svg-wrapper">
+            <svg class="lh-gauge" viewBox="0 0 120 120">
+              <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
+              <circle
+                class="lh-gauge-arc"
+                r="56"
+                cx="60"
+                cy="60"
+                stroke-width="8"
+                style="transform: rotate(-87.9537deg); stroke-dasharray: 351.858, 351.858;"
+              ></circle>
+            </svg>
+            <div class="lh-gauge__percentage">100</div>
+          </div>
+          <div class="lh-gauge__label">Best Practices</div>
+        </div>
+      </div>
+      <div class="lighthouse-score">
+        <div class="lh-gauge__wrapper lh-gauge__wrapper--pass">
+          <div class="lh-gauge__svg-wrapper">
+            <svg class="lh-gauge" viewBox="0 0 120 120">
+              <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
+              <circle
+                class="lh-gauge-arc"
+                r="56"
+                cx="60"
+                cy="60"
+                stroke-width="8"
+                style="transform: rotate(-87.9537deg); stroke-dasharray: 351.858, 351.858;"
+              ></circle>
+            </svg>
+            <div class="lh-gauge__percentage">100</div>
+          </div>
+          <div class="lh-gauge__label">SEO</div>
+        </div>
+      </div>
       <div class="metric-item"><span class="metric-value">~0.3s</span><br />Desktop Load</div>
       <div class="metric-item"><span class="metric-value">~0.9s</span><br />Mobile Load</div>
       <div class="metric-item"><span class="metric-value">0ms</span><br />Blocking Time</div>
@@ -274,19 +342,21 @@ const latestPosts = blogPosts
   .lighthouse-value {
     display: block;
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 500;
     color: #0cba60;
     line-height: 1;
     margin-bottom: 2px;
+    font-family: monospace;
   }
 
   .metric-value {
     display: block;
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 500;
     color: #00aaff;
     line-height: 1;
     margin-bottom: 2px;
+    font-family: monospace;
   }
 
   .performance-cta {
@@ -317,7 +387,7 @@ const latestPosts = blogPosts
   .performance-cta small {
     color: var(--text-secondary);
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     display: block;
     line-height: 1.4;
   }
@@ -343,6 +413,97 @@ const latestPosts = blogPosts
 
     .metric-value {
       margin-bottom: 1px;
+    }
+  }
+
+  /* Lighthouse gauge styles */
+  .lh-gauge__wrapper {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .lh-gauge__wrapper--pass {
+    color: var(--text-primary);
+  }
+
+  .lh-gauge__svg-wrapper {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 8px auto;
+  }
+
+  .lh-gauge {
+    width: 100%;
+    height: 100%;
+  }
+
+  .lh-gauge-base {
+    fill: none;
+    stroke: var(--border-color);
+    stroke-linecap: round;
+  }
+
+  .lh-gauge-arc {
+    fill: none;
+    stroke: #0cce6b;
+    stroke-linecap: round;
+    transform-origin: 50% 50%;
+    transition: stroke-dasharray 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Pure CSS animation - no JavaScript needed */
+  @keyframes gaugeProgress {
+    from {
+      stroke-dasharray: 0, 351.858;
+    }
+    to {
+      stroke-dasharray: 351.858, 351.858;
+    }
+  }
+
+  .lh-gauge-arc {
+    animation: gaugeProgress 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.6s; /* All start together after page load */
+  }
+
+  .lh-gauge__percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 1;
+    font-family: monospace;
+  }
+
+  .lh-gauge__label {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  .lighthouse-score {
+    position: relative;
+  }
+
+  @media (max-width: 640px) {
+    .lh-gauge__svg-wrapper {
+      width: 50px;
+      height: 50px;
+    }
+
+    .lh-gauge__percentage {
+      font-size: 12px;
+    }
+
+    .lh-gauge__label {
+      font-size: 11px;
     }
   }
 
