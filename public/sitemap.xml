@@ -3,7 +3,7 @@
   <!-- Bruce Denham - Homepage (Highest Priority) -->
   <url>
     <loc>https://bruuce.com/</loc>
-    <lastmod>2025-01-27</lastmod>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -48,7 +48,7 @@
   <!-- Individual Blog Posts -->
   <url>
     <loc>https://bruuce.com/blog/making-complex-simple/</loc>
-    <lastmod>2025-01-22</lastmod>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

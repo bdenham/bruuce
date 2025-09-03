@@ -1,5 +1,6 @@
 # Bruce Denham - Personal Portfolio & Blog
 # Optimized for search engine indexing and personal branding
+# Last updated: 2025-09-03
 
 User-agent: *
 Allow: /
@@ -7,6 +8,11 @@ Sitemap: https://bruuce.com/sitemap.xml
 
 # Optimize for Google indexing
 User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Additional search engines
+User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 

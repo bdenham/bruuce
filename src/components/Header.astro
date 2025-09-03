@@ -6,6 +6,13 @@ import ThemeToggle from './ThemeToggle.astro';
   <!-- LCP element optimized for immediate rendering -->
   <a href="/" class="site-name">Bruuce</a>
 
+  <!-- Navigation for better crawlability -->
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="/about/" class="nav-link">About</a>
+    <a href="/work/" class="nav-link">Work</a>
+    <a href="/blog/" class="nav-link">Blog</a>
+  </nav>
+
   <div class="header-right">
     <!-- Simplified social links - no complex SVGs blocking LCP -->
     <div class="social-links">
@@ -77,6 +84,28 @@ import ThemeToggle from './ThemeToggle.astro';
 
 <style>
   /* Minimal styles for fast LCP rendering */
+  .main-nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  .nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+  }
+
   .header-right {
     display: flex;
     align-items: center;

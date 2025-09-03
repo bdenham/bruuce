@@ -4,8 +4,8 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 ---
 
 <BaseLayout
-  title="About - Bruce Denham"
-  description="Learn about Bruce Denham's 30+ year journey as a Senior Technical Writer & Developer Experience Strategist at Adobe, TOPAZ Technologies, and Schlumberger."
+  title="About Bruce Denham | Adobe Award-Nominated Technical Writer & DX Engineer"
+  description="Meet Bruce Denham: Adobe award-nominated Senior Technical Writer & Developer Experience Engineer with 30+ years transforming complex APIs into clear developer experiences at Adobe, TOPAZ, and Schlumberger."
   showBackLink={true}
   backLinkText="← Back to Home"
   backLinkHref="/"
@@ -16,12 +16,26 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   <PageHeader primary="About" accent="Me" id="about-title" />
 
   <div class="intro-section">
-    <p class="lead">
-      👋 Hi there! I'm Bruce Denham, and I've spent 30+ years discovering that the secret to great
-      documentation isn't just explaining how things work—it's understanding why developers need
-      them to work. I turn complex concepts and APIs into clear, human experiences that drive
-      adoption.
-    </p>
+    <div class="intro-content">
+      <div class="intro-text">
+        <p class="lead">
+          👋 Hi there! I'm Bruce Denham, and I've spent 30+ years discovering that the secret to
+          great documentation is becoming a member of your audience. When you become them, you
+          experience all the pains and struggles they have. Then you can write your way out of it.
+          That's the key. Turns out, most developers would rather write regex from scratch than read
+          documentation—which is why I've made a career in making the inevitable less painful.
+        </p>
+      </div>
+      <div class="intro-image">
+        <img
+          src="/images/bruce-denham-og-card.jpg"
+          alt="Bruce Denham - Adobe Award-Nominated Technical Writer & Developer Experience Engineer"
+          width="300"
+          height="157"
+          loading="eager"
+        />
+      </div>
+    </div>
   </div>
 
   <div class="recognition-section">
@@ -244,12 +258,51 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     margin-bottom: 40px;
   }
 
+  .intro-content {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  .intro-image {
+    flex-shrink: 0;
+  }
+
+  .intro-image img {
+    border-radius: 12px;
+    border: 2px solid var(--border-primary);
+    box-shadow: 0 8px 32px var(--shadow-secondary);
+    max-width: 100%;
+    height: auto;
+  }
+
+  .intro-text {
+    flex: 1;
+  }
+
   .lead {
     font-size: 18px;
     color: var(--text-tertiary);
     line-height: 1.7;
     margin-bottom: 20px;
     font-weight: 300;
+  }
+
+  @media (max-width: 768px) {
+    .intro-content {
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .intro-text {
+      text-align: left;
+    }
+
+    .intro-image img {
+      width: 280px;
+      height: auto;
+    }
   }
 
   .journey-section,

@@ -9,6 +9,60 @@ const { text, linkText, linkHref } = Astro.props;
 ---
 
 <footer>
-  {text}
-  {linkText && linkHref && <a href={linkHref}>{linkText}</a>}
+  <div class="footer-content">
+    <div class="footer-text">
+      {text}
+      {linkText && linkHref && <a href={linkHref}>{linkText}</a>}
+    </div>
+
+    <!-- Additional navigation for crawlability -->
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/work/">Work</a>
+      <a href="/resume/">Resume</a>
+      <a href="/projects/">Projects</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+  </div>
 </footer>
+
+<style>
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .footer-nav {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer-nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: color 0.2s ease;
+  }
+
+  .footer-nav a:hover {
+    color: var(--accent-primary);
+  }
+
+  @media (max-width: 640px) {
+    .footer-nav {
+      gap: 12px;
+    }
+
+    .footer-nav a {
+      font-size: 13px;
+      padding: 4px 6px;
+    }
+  }
+</style>
