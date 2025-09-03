@@ -17,7 +17,7 @@ const latestPosts = blogPosts
   footerText="Thanks for visiting! Let's build better developer experiences together."
 >
   <h1 id="main-title"><span>Bruce</span> Denham</h1>
-  <p class="subtitle homepage">Senior Technical Writer & Developer Experience Strategist</p>
+  <p class="subtitle homepage">Senior Technical Writer & DX Engineer</p>
   <p class="lead">
     🏆 <strong>Adobe award nominee</strong> with 30+ years turning complex concepts into clear, human
     experiences. I help developers learn fast, build smart, and focus on what matters.
@@ -34,10 +34,10 @@ const latestPosts = blogPosts
       <p>Sub-second performance with exceptional user experience across all devices.</p>
     </div>
     <div class="metrics-grid">
-      <div class="lighthouse-score">
-        <div class="lh-gauge__wrapper lh-gauge__wrapper--pass">
-          <div class="lh-gauge__svg-wrapper">
-            <svg class="lh-gauge" viewBox="0 0 120 120">
+      <div class="lighthouse-scores">
+        <div class="lighthouse-score">
+          <div class="lh-gauge">
+            <svg viewBox="0 0 120 120">
               <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
               <circle
                 class="lh-gauge-arc"
@@ -52,11 +52,9 @@ const latestPosts = blogPosts
           </div>
           <div class="lh-gauge__label">Performance</div>
         </div>
-      </div>
-      <div class="lighthouse-score">
-        <div class="lh-gauge__wrapper lh-gauge__wrapper--pass">
-          <div class="lh-gauge__svg-wrapper">
-            <svg class="lh-gauge" viewBox="0 0 120 120">
+        <div class="lighthouse-score">
+          <div class="lh-gauge">
+            <svg viewBox="0 0 120 120">
               <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
               <circle
                 class="lh-gauge-arc"
@@ -71,11 +69,9 @@ const latestPosts = blogPosts
           </div>
           <div class="lh-gauge__label">Accessibility</div>
         </div>
-      </div>
-      <div class="lighthouse-score">
-        <div class="lh-gauge__wrapper lh-gauge__wrapper--pass">
-          <div class="lh-gauge__svg-wrapper">
-            <svg class="lh-gauge" viewBox="0 0 120 120">
+        <div class="lighthouse-score">
+          <div class="lh-gauge">
+            <svg viewBox="0 0 120 120">
               <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
               <circle
                 class="lh-gauge-arc"
@@ -90,11 +86,9 @@ const latestPosts = blogPosts
           </div>
           <div class="lh-gauge__label">Best Practices</div>
         </div>
-      </div>
-      <div class="lighthouse-score">
-        <div class="lh-gauge__wrapper lh-gauge__wrapper--pass">
-          <div class="lh-gauge__svg-wrapper">
-            <svg class="lh-gauge" viewBox="0 0 120 120">
+        <div class="lighthouse-score">
+          <div class="lh-gauge">
+            <svg viewBox="0 0 120 120">
               <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
               <circle
                 class="lh-gauge-arc"
@@ -110,10 +104,12 @@ const latestPosts = blogPosts
           <div class="lh-gauge__label">SEO</div>
         </div>
       </div>
-      <div class="metric-item"><span class="metric-value">~0.3s</span><br />Desktop Load</div>
-      <div class="metric-item"><span class="metric-value">~1.0s</span><br />Mobile Load</div>
-      <div class="metric-item"><span class="metric-value">0ms</span><br />Blocking Time</div>
-      <div class="metric-item"><span class="metric-value">0</span><br />Layout Shift</div>
+      <div class="performance-metrics">
+        <div class="metric-item"><span class="metric-value">~0.3s</span><br />Desktop Load</div>
+        <div class="metric-item"><span class="metric-value">~1.0s</span><br />Mobile Load</div>
+        <div class="metric-item"><span class="metric-value">0ms</span><br />Blocking Time</div>
+        <div class="metric-item"><span class="metric-value">0</span><br />Layout Shift</div>
+      </div>
     </div>
     <a
       href="https://pagespeed.web.dev/analysis?url=https://bruuce.com"
@@ -417,24 +413,15 @@ const latestPosts = blogPosts
   }
 
   /* Lighthouse gauge styles */
-  .lh-gauge__wrapper {
-    display: inline-block;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .lh-gauge__wrapper--pass {
-    color: var(--text-primary);
-  }
-
-  .lh-gauge__svg-wrapper {
+  .lh-gauge {
     position: relative;
     width: 60px;
     height: 60px;
     margin: 0 auto 8px auto;
+    display: block;
   }
 
-  .lh-gauge {
+  .lh-gauge svg {
     width: 100%;
     height: 100%;
   }
@@ -488,12 +475,20 @@ const latestPosts = blogPosts
     margin-top: 4px;
   }
 
+  .lighthouse-scores {
+    display: contents; /* Makes this container invisible to layout */
+  }
+
+  .performance-metrics {
+    display: contents; /* Makes this container invisible to layout */
+  }
+
   .lighthouse-score {
     position: relative;
   }
 
   @media (max-width: 640px) {
-    .lh-gauge__svg-wrapper {
+    .lh-gauge {
       width: 50px;
       height: 50px;
     }
