@@ -22,12 +22,12 @@ const latestPosts = blogPosts
     <!-- Ultra-minimal navigation - no nested spans -->
     <div class="section">
       <a href="/" class={currentPath === '/' ? 'active' : ''}>🏠 Home</a>
+      <a href="/about/" class={currentPath.startsWith('/about') ? 'active' : ''}>👋 About Me</a>
       <a href="/work/" class={currentPath.startsWith('/work') ? 'active' : ''}>🛠️ My Work</a>
       <a href="/resume/" class={currentPath.startsWith('/resume') ? 'active' : ''}>📄 My Resume</a>
       <a href="/projects/" class={currentPath.startsWith('/projects') ? 'active' : ''}
         >🚀 My Projects</a
       >
-      <a href="/about/" class={currentPath.startsWith('/about') ? 'active' : ''}>👋 About Me</a>
       <a href="/blog/" class={currentPath.startsWith('/blog/') ? 'active' : ''}>👨‍💻 My Blog</a>
     </div>
 
