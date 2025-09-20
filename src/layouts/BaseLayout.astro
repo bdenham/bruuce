@@ -130,7 +130,7 @@ const {
           BlinkMacSystemFont,
           sans-serif;
         line-height: 1.6;
-        font-size: 18px; /* Increased from 16px for better readability like AstroWind */
+        font-size: 1.125rem; /* 18px converted to rem */
       }
 
       h1 {
@@ -365,6 +365,7 @@ const {
   .main-container {
     max-width: 1280px; /* AstroWind's max-w-7xl equivalent */
     margin: 0 auto;
+    margin-left: 3rem; /* Better separation from sidebar */
     padding: 80px 1rem 2rem 1rem; /* Responsive padding like AstroWind */
   }
   
@@ -414,6 +415,7 @@ const {
     }
 
     .main-container {
+      margin-left: 0 !important; /* Remove left margin on mobile */
       padding: 80px 1rem 1.25rem 1rem; /* Responsive padding like AstroWind */
     }
 

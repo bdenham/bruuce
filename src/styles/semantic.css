@@ -113,12 +113,12 @@
 }
 
 /* Force single column for ALL grid classes - better readability */
+/* Note: .action-cards excluded as it uses custom two-column layout */
 .grid-small,
 .grid-medium,
 .grid-large,
 .grid-extra-large,
 .grid-projects,
-.action-cards,
 .linkedin-posts,
 .blog-posts-container,
 .philosophy-grid,
@@ -147,13 +147,13 @@
 }
 
 /* Override any responsive breakpoints - keep everything single column */
+/* Note: .action-cards excluded as it uses custom two-column layout */
 @media (min-width: 768px) {
     .grid-small,
     .grid-medium,
     .grid-large,
     .grid-extra-large,
     .grid-projects,
-    .action-cards,
     .linkedin-posts,
     .philosophy-grid,
     .expertise-grid,
@@ -172,7 +172,6 @@
     .grid-large,
     .grid-extra-large,
     .grid-projects,
-    .action-cards,
     .linkedin-posts,
     .philosophy-grid,
     .expertise-grid,
@@ -300,7 +299,7 @@ h1, h2, h3, h4, h5, h6,
 .section-intro,
 .posts-intro {
     /* Inherit all content-intro styles */
-    color: var(--text-tertiary);
+    color: var(--text-primary);
     font-size: 1.125rem;
     font-weight: 400;
     line-height: 1.6;

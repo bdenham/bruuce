@@ -83,6 +83,15 @@
     max-width: none; /* Allow full width for grid layouts */
 }
 
+/* Action cards - two columns for better space utilization */
+/* Higher specificity to override .grid-medium class */
+.action-cards.grid-medium {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+    align-items: stretch !important;
+}
+
 /* Responsive line length adjustments */
 @media (max-width: 640px) {
     .content-panel,
@@ -91,6 +100,11 @@
     .prose {
         max-width: 45ch; /* Mobile: 35-45 CPL optimal */
         margin-left: auto; /* Center on mobile for better balance */
+    }
+
+    /* Action cards - single column on mobile */
+    .action-cards.grid-medium {
+        grid-template-columns: 1fr !important;
     }
 }
 
@@ -105,14 +119,14 @@
 
 /* Typography Components - AstroWind-sized for better readability */
 .subtitle {
-    font-size: 20px; /* Increased from 18px */
+    font-size: 1.25rem; /* 20px converted to rem */
     color: var(--accent-primary);
     font-weight: 400;
     margin-bottom: 24px;
 }
 
 .subtitle.homepage {
-    font-size: 24px; /* Increased from 20px - matches AstroWind text-xl */
+    font-size: 1.5rem; /* 24px converted to rem */
     margin-bottom: 8px;
 }
 
@@ -121,8 +135,8 @@
 }
 
 .lead {
-    font-size: 20px; /* Increased from 18px - matches AstroWind text-xl */
-    color: var(--text-tertiary);
+    font-size: 1.25rem; /* 20px converted to rem */
+    color: var(--text-lead); /* Use dedicated lead text color for impact */
     font-weight: 400;
     margin-bottom: 24px;
     line-height: 1.6;
@@ -130,8 +144,8 @@
 
 .section-intro,
 .posts-intro {
-    color: var(--text-tertiary);
-    font-size: 18px; /* Increased from 16px */
+    color: var(--text-primary);
+    font-size: 1.125rem; /* 18px converted to rem */
     margin-bottom: 32px;
     font-weight: 400;
     line-height: 1.6;
@@ -179,7 +193,7 @@
 .endorsements-section h2,
 .featured-documentation h2 {
     color: var(--text-primary);
-    font-size: 28px; /* Increased from 24px - matches AstroWind text-2xl+ */
+    font-size: 1.75rem; /* Increased from 24px - matches AstroWind text-2xl+ */
     margin-bottom: 20px;
     border-bottom: 2px solid var(--border-primary);
     padding-bottom: 8px;
@@ -207,7 +221,7 @@
     .awards-section h2,
     .endorsements-section h2,
     .featured-documentation h2 {
-        font-size: 32px; /* AstroWind text-3xl equivalent (30px) but slightly larger */
+        font-size: 2rem; /* AstroWind text-3xl equivalent (30px) but slightly larger */
     }
 }
 
@@ -263,7 +277,7 @@
     color: var(--accent-primary);
     text-decoration: none;
     margin: 0 12px;
-    font-size: 16px; /* Increased from 14px for better readability */
+    font-size: 1rem; /* Increased from 14px for better readability */
 }
 
 .footer-links a:hover {
@@ -344,7 +358,7 @@
     content: '💼';
     font-size: 1.25rem;
     flex-shrink: 0;
-    margin-top: 0.125rem;
+    margin-top: -0.2rem;
 }
 
 .linkedin-post:hover {
@@ -384,7 +398,7 @@
     color: var(--accent-content-text);
     padding: 4px 10px;
     border-radius: 12px;
-    font-size: 11px;
+    font-size: 0.6875rem;
     font-weight: 600;
     border: none;
 }
@@ -392,7 +406,7 @@
 .doc-status {
     padding: 4px 8px;
     border-radius: 12px;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 600;
     background: var(--bg-card);
     color: var(--accent-primary);
@@ -404,7 +418,7 @@
     color: var(--accent-primary);
     padding: 4px 8px;
     border-radius: 12px;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 600;
     border: 1px solid var(--accent-primary);
 }
@@ -420,7 +434,7 @@
 .cta-section h2 {
     color: var(--text-primary);
     margin: 0 0 16px 0;
-    font-size: 24px;
+    font-size: 1.5rem;
 
     font-weight: 700;
 }
@@ -432,7 +446,7 @@
     gap: 4px;
     color: var(--accent-primary);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 600;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -480,7 +494,7 @@
     padding: 12px 24px;
     border-radius: 8px;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 1rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -528,7 +542,7 @@
     margin-bottom: 6px;
     padding-left: 16px;
     position: relative;
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 400;
 }
 
@@ -560,23 +574,27 @@
     color: var(--accent-primary);
 }
 
-/* CSS Variables for theming - Softer dark mode */
+/* CSS Variables for theming - Modern 2024 dark mode */
 :root {
-    --bg-primary: #1a1b23; /* Softer dark gray, no harsh blacks */
-    --bg-secondary: #242530; /* Warmer dark gray */
-    --bg-tertiary: rgba(36, 37, 48, 0.9); /* Softer tertiary */
-    --bg-card: rgba(42, 43, 55, 0.4); /* Warmer card background */
-    --bg-card-hover: rgba(42, 43, 55, 0.6); /* Warmer hover */
-    --text-primary: #f1f3f4; /* Softer white, not pure white */
-    --text-secondary: #d1d5db; /* Warmer secondary text */
-    --text-tertiary: #bbbbbb; /* Softer, more readable tertiary text */
+    --bg-primary: #0f0f0f; /* Deep modern black */
+    --bg-secondary: #1a1a1a; /* Rich charcoal */
+    --bg-tertiary: rgba(26, 26, 26, 0.95); /* Sophisticated overlay */
+    --bg-card: rgba(38, 38, 38, 0.6); /* Modern card surface */
+    --bg-card-hover: rgba(45, 45, 45, 0.8); /* Elevated hover state */
+    --text-primary: #fafafa; /* Modern high-contrast white */
+    --text-secondary: #e4e4e7; /* Clean secondary text */
+    --text-tertiary: #a1a1aa; /* Modern neutral gray */
+    --text-lead: #dddddd; /* Enhanced lead text for visual impact */
     /* Improved contrast for WCAG AA compliance */
-    --text-muted: #d1d5db;
+    --text-muted: #e4e4e7;
     /* Improved contrast for dates and secondary text */
-    --text-dim: #d1d5db;
-    /* Fixed contrast for WCAG AA compliance */
-    --border-primary: rgba(156, 163, 175, 0.2); /* Softer borders */
-    --border-secondary: rgba(156, 163, 175, 0.1); /* Even softer secondary borders */
+    --text-dim: #e4e4e7;
+    /* Tag colors for WCAG AA compliance */
+    --tag-bg: rgba(161, 161, 170, 0.2); /* Visible tag background */
+    --tag-text: #fafafa; /* High contrast tag text */
+    /* Modern border colors for 2024 dark mode */
+    --border-primary: rgba(161, 161, 170, 0.3); /* Modern zinc borders */
+    --border-secondary: rgba(161, 161, 170, 0.15); /* Subtle secondary borders */
     --accent-hover: #ffed70; /* Lighter yellow for hover in dark mode */
     --accent-content: #1a365d;
     --accent-content-text: #ffffff;
@@ -584,8 +602,8 @@
     /* Bright yellow for dark mode */
     --gradient-1: rgba(0, 170, 255, 0.25);
     --gradient-2: rgba(0, 204, 255, 0.2);
-    --shadow-primary: rgba(0, 0, 0, 0.25); /* Softer shadows */
-    --shadow-secondary: rgba(0, 0, 0, 0.15); /* Much softer secondary shadows */
+    --shadow-primary: rgba(0, 0, 0, 0.5); /* Modern deep shadows */
+    --shadow-secondary: rgba(0, 0, 0, 0.3); /* Rich secondary shadows */
 
     /* Button variables for WCAG AA compliance */
     --button-bg: #334155;
@@ -608,21 +626,25 @@
     background-attachment: fixed;
 }
 
-/* Light theme - Softer, easier on the eyes */
+/* Light theme - Modern 2024 neutral palette */
 :root.light {
-    --bg-primary: #f7f3f0;
-    --bg-secondary: #f0f4f8;
-    --bg-tertiary: rgba(255, 255, 255, 1);
-    --bg-card: rgba(255, 255, 255, 0.75);
-    --bg-card-hover: rgba(248, 244, 241, 0.95);
+    --bg-primary: #fafafa;
+    --bg-secondary: #f4f4f5;
+    --bg-tertiary: rgba(255, 255, 255, 0.95);
+    --bg-card: rgba(255, 255, 255, 0.8);
+    --bg-card-hover: rgba(244, 244, 245, 0.95);
     --text-primary: #2d3748;
     --text-secondary: #4a5568;
     --text-tertiary: #666666; /* Softer gray for light mode, equivalent to #bbbbbb in dark mode */
+    --text-lead: #374151; /* Enhanced lead text for visual impact in light mode */
     --text-muted: #374151;
     --text-dim: #374151;
-    /* Fixed contrast for light mode WCAG AA compliance */
-    --border-primary: rgba(141, 148, 157, 0.498);
-    --border-secondary: rgba(138, 143, 151, 0.25);
+    /* Tag colors for WCAG AA compliance */
+    --tag-bg: rgba(161, 161, 170, 0.15); /* Subtle but visible tag background */
+    --tag-text: #374151; /* High contrast tag text */
+    /* Modern border colors for 2024 design trends */
+    --border-primary: rgba(161, 161, 170, 0.4);
+    --border-secondary: rgba(161, 161, 170, 0.2);
     --accent-hover: #0080ff; /* Lighter blue for hover in light mode */
     --accent-content: rgba(0, 102, 204, 0.1);
     --accent-content-text: #0066cc;
@@ -630,8 +652,8 @@
     /* Blue for light mode */
     --gradient-1: rgba(0, 102, 204, 0.08);
     --gradient-2: rgba(0, 128, 255, 0.06);
-    --shadow-primary: rgba(45, 55, 72, 0.12);
-    --shadow-secondary: rgba(45, 55, 72, 0.06);
+    --shadow-primary: rgba(0, 0, 0, 0.08);
+    --shadow-secondary: rgba(0, 0, 0, 0.04);
 
     /* Button variables for WCAG AA compliance in softer light mode */
     --button-bg: #d1d5db;
@@ -735,7 +757,7 @@ body {
 }
 
 .header .site-name {
-    font-size: 28px;
+    font-size: 1.75rem;
     font-weight: 600;
     color: var(--text-primary);
     text-decoration: none;
@@ -753,7 +775,7 @@ body {
     padding: 8px 12px;
     color: var(--text-secondary);
     cursor: pointer;
-    font-size: 14px;
+    font-size: 1rem;
     transition: color 0.2s ease, background-color 0.2s ease;
     display: flex;
     align-items: center;
@@ -778,7 +800,7 @@ body {
 /* Typography */
 h1 {
     margin: 0 0 6px 0;
-    font-size: 34px;
+    font-size: 2.125rem;
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: var(--text-primary);
@@ -792,10 +814,10 @@ h1 span {
 
 h2 {
     color: var(--text-primary);
-    font-size: 32px;
+    font-size: 2rem;
     margin: 32px 0 0 0;
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 h3,
@@ -806,7 +828,7 @@ h6 {
     color: var(--text-primary);
     font-weight: 500;
     margin: 0 0 0 0;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: var(--accent-primary);
 }
 
@@ -929,14 +951,14 @@ p {
     margin: 0 0 0.25rem 0;
     color: var(--text-tertiary);
     line-height: 1.5;
-    font-size: 0.9rem;
+    font-size: 1.125rem;
 }
 
 .blog-post .date {
     margin: 0;
     color: var(--accent-primary);
     /* Theme-aware accent: bright yellow in dark mode, blue in light mode */
-    font-size: 13px;
+    font-size: 0.8125rem;
 }
 
 /* Sections */
@@ -948,7 +970,7 @@ p {
 
 .section h2 {
     margin: 0 0 16px 0;
-    font-size: 24px;
+    font-size: 1.5rem;
     color: var(--text-primary);
 }
 
@@ -961,7 +983,7 @@ p {
 footer {
     margin-top: 28px;
     color: var(--text-muted);
-    font-size: 13px;
+    font-size: 0.8125rem;
     text-align: center;
 }
 
@@ -984,18 +1006,18 @@ footer a:hover {
 
 .content h2 {
     color: var(--text-primary);
-    font-size: 22px;
+    font-size: 1.375rem;
     margin: 32px 0 0 0;
 }
 
 .content p {
     margin: 0 0 20px 0;
-    /* color: var(--text-tertiary); */
+    color: var(--text-secondary);
 }
 
 .content ol,
 .content ul {
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     margin: 0 0 20px 0;
     padding-left: 24px;
 }
@@ -1194,7 +1216,7 @@ footer a:hover {
 
 @media (max-width: 520px) {
     h1 {
-        font-size: 32px;
+        font-size: 2rem;
     }
 
     .content-panel {

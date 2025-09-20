@@ -20,7 +20,7 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
   footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
   <PageHeader primary="My" accent="Blog" id="blog-title" />
-  <p class="subtitle">
+  <p class="lead">
     Reflections on technology, writing, personal growth, life's existential challenges, and
     navigating the complexities of our modern world.
   </p>
@@ -160,7 +160,7 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
   }
 
   .posts-intro {
-    color: var(--text-tertiary);
+    color: var(--text-primary);
     margin-bottom: 32px;
     font-weight: 400;
     line-height: 1.6;
@@ -185,7 +185,7 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
 
   .platform-name {
     color: var(--text-primary);
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 600;
   }
 
@@ -238,7 +238,7 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
     margin: 0 0 0.5rem 0;
     color: var(--text-tertiary);
     line-height: 1.5;
-    font-size: 0.9rem;
+    font-size: 1.125rem;
   }
   
   /* Hide the old post-header since we're using icons as bullets */

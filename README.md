@@ -434,7 +434,7 @@ The site features a comprehensive dark/light theme system controlled by CSS cust
 
 /* Light theme */
 :root.light {
-  --bg-primary: #fef7ff;
+  --bg-primary: #eeeeee;
   --text-primary: #1e293b;
   --accent-primary: #7c3aed;
   /* ... */
@@ -567,4 +567,3 @@ Auto-deployment test 2
 // FAVICON FIX: Added cache-busting version parameters to force favicon refresh
 // DOM OPTIMIZATION: Replaced SidebarOptimized with SidebarPerformance - reduced DOM nodes by 60%+ (187→~75 elements)
 // LCP OPTIMIZATION: Removed ALL backdrop-filters (header + content-panel), background-attachment:fixed, body transitions
-
