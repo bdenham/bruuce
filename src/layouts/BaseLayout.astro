@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SidebarPerformance from '../components/SidebarPerformance.astro';
 import '../styles/theme.css';
+import '../styles/semantic.css';
 
 export interface Props {
   title: string;
@@ -28,7 +29,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="2xl:text-[20px]">
   <head>
     <meta charset="utf-8" />
     <title>{title}</title>
@@ -108,8 +109,8 @@ const {
     </script>
     <style>
       :root {
-        --bg-primary: #0f1419;
-        --text-primary: #ffffff;
+        --bg-primary: #1a1b23; /* Softer dark gray, matches theme.css */
+        --text-primary: #f1f3f4; /* Softer white, not harsh pure white */
         --accent-primary: #00aaff;
       }
       :root.light {
@@ -129,11 +130,11 @@ const {
           BlinkMacSystemFont,
           sans-serif;
         line-height: 1.6;
-        font-size: 16px;
+        font-size: 18px; /* Increased from 16px for better readability like AstroWind */
       }
 
       h1 {
-        font-size: clamp(2.5rem, 8vw, 3.5rem);
+        font-size: clamp(3rem, 8vw, 4.5rem); /* Increased from 2.5rem-3.5rem to 3rem-4.5rem */
         font-weight: 900;
         margin: 0 0 16px 0;
         line-height: 1.1;
@@ -362,19 +363,30 @@ const {
   }
 
   .main-container {
-    max-width: 900px;
+    max-width: 1280px; /* AstroWind's max-w-7xl equivalent */
     margin: 0 auto;
-    padding: 80px 32px 32px 32px;
+    padding: 80px 1rem 2rem 1rem; /* Responsive padding like AstroWind */
+  }
+  
+  /* AstroWind-style responsive padding */
+  @media (min-width: 768px) {
+    .main-container {
+      padding: 80px 1.5rem 2rem 1.5rem; /* md:px-6 equivalent */
+    }
   }
 
   .content-panel {
-    background: var(--bg-tertiary);
-    /* Removed backdrop-filter for faster rendering */
-    border-radius: 20px;
-    padding: 40px;
+    /* Clean, borderless design - content flows naturally */
+    background: transparent; /* No background - use page background */
+    border: none; /* Remove border */
+    border-radius: 0; /* Remove rounded corners */
+    padding: 0; /* Remove padding - let content breathe naturally */
     margin-bottom: 32px;
-    border: 1px solid var(--border-secondary);
-    box-shadow: 0 8px 32px var(--shadow-secondary);
+    box-shadow: none; /* Remove shadow */
+    /* Optimal line length for readability - left-aligned */
+    max-width: 75ch; /* ~75 characters per line - more generous */
+    margin-left: 0; /* Left-aligned, closer to sidebar */
+    margin-right: auto;
   }
 
   .nav-back {
@@ -402,11 +414,11 @@ const {
     }
 
     .main-container {
-      padding: 80px 20px 20px 20px; /* Keep same top padding as desktop for header clearance */
+      padding: 80px 1rem 1.25rem 1rem; /* Responsive padding like AstroWind */
     }
 
     .content-panel {
-      padding: 18px 20px;
+      padding: 0; /* No padding - clean design */
     }
   }
 

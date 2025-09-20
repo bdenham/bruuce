@@ -28,15 +28,14 @@ const {
     <h2 class="card-title">{title}</h2>
     <p class="card-description">{description}</p>
   </div>
-  <div class="card-arrow" aria-hidden="true">→</div>
 </a>
 
 <style>
   .action-card {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 20px;
+    gap: 20px; /* Increased from 16px for more breathing room */
+    padding: 24px; /* Increased from 20px since we removed the arrow */
     border-radius: 16px;
     text-decoration: none;
     color: inherit;
@@ -121,30 +120,18 @@ const {
 
   .card-description {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-tertiary);
-    font-weight: 300;
-    line-height: 1.4;
+    font-weight: 400;
+    line-height: 1.5;
   }
 
-  .card-arrow {
-    font-size: 1.2rem;
-    color: var(--accent-primary);
-    flex-shrink: 0;
-    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-    font-weight: bold;
-    will-change: transform;
-  }
-
-  .action-card:hover .card-arrow {
-    transform: translateX(3px) !important;
-  }
 
   /* Mobile responsive */
   @media (max-width: 640px) {
     .action-card {
-      padding: 16px;
-      gap: 12px;
+      padding: 20px; /* Increased from 16px for better mobile spacing */
+      gap: 16px; /* Increased from 12px for better mobile spacing */
     }
 
     .card-icon {

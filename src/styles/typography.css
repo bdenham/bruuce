@@ -20,7 +20,7 @@
 .lead {
     font-size: 18px;
     color: var(--text-tertiary);
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 24px;
     line-height: 1.6;
 }
@@ -29,8 +29,30 @@
 .section-intro,
 .posts-intro {
     color: var(--text-tertiary);
-    font-size: 16px;
     margin-bottom: 32px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.6;
+}
+
+/* =============================================================================
+   UNIVERSAL TEXT BALANCING
+   Applied to all text content for consistent, professional typography
+   ============================================================================= */
+
+/* Apply text balancing to ALL text content - no exceptions needed */
+* {
+    /* Modern text balancing - prevents awkward line breaks */
+    text-wrap: pretty;
+    
+    /* Prevent orphans and widows in print/long content */
+    orphans: 2;
+    widows: 2;
+    
+    /* Avoid breaking inside elements when possible */
+    break-inside: avoid-orphans;
+}
+
+/* Enhanced balancing for headings - distributes text evenly across lines */
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
 }

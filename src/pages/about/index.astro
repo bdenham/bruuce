@@ -287,7 +287,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     color: var(--text-tertiary);
     line-height: 1.7;
     margin-bottom: 20px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   @media (max-width: 768px) {
@@ -330,28 +330,15 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .career-timeline {
-    position: relative;
-    padding-left: 32px;
-  }
-
-  .career-timeline::before {
-    content: '';
-    position: absolute;
-    left: 16px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--border-primary);
+    /* Clean timeline container - no left padding or borders needed */
   }
 
   .timeline-entry {
-    position: relative;
     margin-bottom: 40px;
     background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
     border: 2px solid rgba(148, 163, 184, 0.4);
     border-radius: 16px;
     padding: 24px;
-    margin-left: 16px;
     transition: all 0.3s ease;
   }
 
@@ -366,33 +353,21 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     border-color: var(--accent-primary);
   }
 
-  /* .timeline-entry::before {
-    content: '';
-    position: absolute;
-    left: -24px;
-    top: 24px;
-    width: 12px;
-    height: 12px;
-    background: var(--accent-primary);
-    border-radius: 50%;
-  } */
-
-  .timeline-entry.current::before {
-    background: var(--accent-primary);
-    box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.2);
-  }
+  /* Timeline dots and left-side elements removed - periods now appear above content */
 
   .timeline-period {
-    position: absolute;
-    left: -80px;
-    background: var(--bg-primary);
-    color: var(--accent-yellow);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
+    display: inline-block;
+    background: var(--bg-card);
+    color: var(--accent-primary);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
     font-weight: 600;
-    border: 1px solid var(--accent-yellow);
-    white-space: nowrap;
+    border: 2px solid var(--accent-primary);
+    box-shadow: 0 2px 8px var(--shadow-secondary);
+    margin-bottom: 16px;
+    text-align: center;
+    min-width: 90px;
   }
 
   .timeline-content h3 {
@@ -412,7 +387,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     color: var(--text-tertiary);
     line-height: 1.7;
     margin-bottom: 16px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .timeline-content p:last-child {
@@ -421,8 +396,23 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
   .philosophy-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 24px;
+    align-items: stretch;
+  }
+
+  .recognition-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px;
+    align-items: stretch;
   }
 
   .philosophy-item {
@@ -432,6 +422,9 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     padding: 24px;
     text-align: center;
     transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   .philosophy-item:hover {
@@ -456,14 +449,33 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     color: var(--text-tertiary);
     margin: 0;
     line-height: 1.6;
-    font-weight: 300;
+    font-weight: 400;
+    flex-grow: 1;
   }
 
-  .expertise-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
+  /* Recognition items - ensure equal heights */
+  .recognition-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
+
+  .recognition-item p {
+    flex-grow: 1;
+  }
+
+  /* Expertise items - ensure equal heights */
+  .expertise-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .expertise-item p {
+    flex-grow: 1;
+  }
+
+  /* Expertise grid styling moved above with other grids */
 
   .expertise-category {
     background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
@@ -496,7 +508,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     margin-bottom: 8px;
     padding-left: 16px;
     position: relative;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .expertise-category li::before {
@@ -547,7 +559,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     color: var(--text-tertiary);
     margin: 0;
     line-height: 1.6;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   /* Staggered animation delays */
@@ -572,7 +584,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     color: var(--text-tertiary);
     line-height: 1.7;
     margin-bottom: 20px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .personal-section p:last-child,
@@ -581,24 +593,19 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   @media (max-width: 768px) {
-    .career-timeline {
-      padding-left: 16px;
-    }
-
-    .timeline-entry {
-      margin-left: 8px;
-    }
+    /* Mobile timeline - no left padding/margins needed */
 
     .timeline-period {
-      left: -100px;
-      font-size: 10px;
-      padding: 2px 4px;
+      font-size: 12px;
+      padding: 6px 10px;
+      min-width: 80px;
+      margin-bottom: 12px;
     }
 
     .philosophy-grid,
     .expertise-grid,
     .recognition-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr !important;
     }
   }
 </style>

@@ -16,17 +16,19 @@ const { post, showEmoji = true } = Astro.props;
 
 <a href={`/blog/${post.slug}/`} class="blog-post-link">
   <div class="blog-post">
-    <p class="date">
-      Published:{' '}
-      {
-        post.data.date.toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })
-      }
-    </p>
-    <h3>{showEmoji ? '🚀 ' : ''}{post.data.title}</h3>
-    <p>{post.data.excerpt}</p>
+    <div class="blog-post-content">
+      <h3>{post.data.title}</h3>
+      <p>{post.data.excerpt}</p>
+      <p class="date">
+        Published:{' '}
+        {
+          post.data.date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+        }
+      </p>
+    </div>
   </div>
 </a>

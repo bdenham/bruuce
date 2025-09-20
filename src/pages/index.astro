@@ -20,7 +20,7 @@ const latestPosts = blogPosts
   <p class="subtitle homepage">Senior Technical Writer & DX Engineer</p>
   <p class="lead">
     🏆 <strong>Adobe award nominee</strong> with 30+ years turning complex concepts into clear, human
-    experiences. I help developers learn fast, build smart, and focus on what matters.
+    experiences. I try tohelp developers learn fast, build smart, and focus on what matters.
   </p>
   <!-- <p class="lead">
     At Adobe, I've built developer and SDK docs, CLI tools, React apps, interactive playgrounds and
@@ -109,9 +109,6 @@ const latestPosts = blogPosts
         <span class="verify-text">Verify on PageSpeed Insights ↗</span>
       </small>
     </a>
-    <small class="incognito-tip"
-      >💡 Tip: Open in an incognito window for the most accurate results</small
-    >
   </div>
 
   <div class="action-cards grid-medium grid-with-margin lazy-cards">
@@ -201,30 +198,35 @@ const latestPosts = blogPosts
   }
 
   .main-container {
-    max-width: 900px !important;
+    max-width: 1280px !important; /* AstroWind's max-w-7xl equivalent */
     margin: 0 auto !important;
-    padding: 80px 32px 32px 32px !important;
+    padding: 80px 1rem 2rem 1rem !important; /* Responsive padding like AstroWind */
     position: relative !important;
     top: 0 !important;
     transform: none !important;
+  }
+  
+  /* AstroWind-style responsive padding for homepage */
+  @media (min-width: 768px) {
+    .main-container {
+      padding: 80px 1.5rem 2rem 1.5rem !important; /* md:px-6 equivalent */
+    }
   }
 
   .content-panel {
-    background: linear-gradient(135deg, var(--bg-tertiary), rgba(167, 139, 250, 0.02)) !important;
-    border-radius: 20px !important;
-    padding: 40px !important;
-    margin: 0 0 32px 0 !important;
-    border: 2px solid rgba(148, 163, 184, 0.4) !important;
-    box-shadow: 0 8px 32px var(--shadow-secondary) !important;
+    /* Clean, borderless design - content flows naturally */
+    background: transparent !important; /* No background - use page background */
+    border: none !important; /* Remove border */
+    border-radius: 0 !important; /* Remove rounded corners */
+    padding: 0 !important; /* Remove padding - let content breathe naturally */
+    margin: 0 auto 32px 0 !important; /* Left-aligned, closer to sidebar */
+    box-shadow: none !important; /* Remove shadow */
     position: relative !important;
     top: 0 !important;
     transform: none !important;
-    transition: all 0.3s ease !important;
-  }
-
-  .content-panel:hover {
-    transform: translateY(-2px) !important;
-    border-color: var(--accent-primary) !important;
+    transition: none !important; /* Remove hover effects */
+    /* Optimal line length for readability - left-aligned */
+    max-width: 75ch !important; /* ~75 characters per line - more generous */
   }
 
   /* Performance optimizations for blog posts */
@@ -254,11 +256,12 @@ const latestPosts = blogPosts
     }
 
     .main-container {
-      padding: 80px 20px 20px 20px !important;
+      padding: 80px 1rem 1.25rem 1rem !important; /* Responsive padding like AstroWind */
     }
 
     .content-panel {
-      padding: 18px 20px !important;
+      padding: 0 !important; /* No padding - clean design */
+      margin: 0 auto 32px auto !important; /* Center on mobile for better balance */
     }
   }
 
@@ -274,6 +277,8 @@ const latestPosts = blogPosts
     transform: translateY(20px);
     animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
     animation-delay: 75ms;
+    /* Allow full width for performance metrics display */
+    max-width: none !important;
   }
 
   .performance-header h2 {

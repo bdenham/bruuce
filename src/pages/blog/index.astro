@@ -132,17 +132,13 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
     </div>
 
     <div class="linkedin-cta">
-      <p>
-        Follow my journey on LinkedIn for more insights on technical writing, developer experience,
-        and visual communication.
-      </p>
       <a
         href="https://linkedin.com/in/brucedenham/"
         target="_blank"
         rel="noopener noreferrer"
         class="linkedin-follow-btn"
       >
-        Follow on LinkedIn →
+        Follow me on LinkedIn →
       </a>
     </div>
   </div>
@@ -165,9 +161,8 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
 
   .posts-intro {
     color: var(--text-tertiary);
-    font-size: 16px;
     margin-bottom: 32px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.6;
   }
 
@@ -215,7 +210,7 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
     color: var(--text-tertiary);
     line-height: 1.6;
     margin: 0 0 16px 0;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .post-details {
@@ -225,11 +220,30 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
     margin-bottom: 16px;
   }
 
-  /* LinkedIn post as clickable links */
-  .linkedin-post {
-    display: block;
-    text-decoration: none;
-    color: inherit;
+  /* LinkedIn post content styling */
+  .linkedin-post .post-content {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .linkedin-post .post-content h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  
+  .linkedin-post .post-content p {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+    font-size: 0.9rem;
+  }
+  
+  /* Hide the old post-header since we're using icons as bullets */
+  .linkedin-post .post-header {
+    display: none;
   }
 
   /* Mobile responsive for LinkedIn posts */

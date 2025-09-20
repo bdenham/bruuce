@@ -511,7 +511,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     color: var(--text-tertiary);
     line-height: 1.7;
     margin-bottom: 32px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .project-card {
@@ -570,7 +570,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     color: var(--text-tertiary);
     line-height: 1.6;
     margin-bottom: 16px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .project-impact {
@@ -678,7 +678,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     color: var(--text-tertiary);
     line-height: 1.6;
     margin-bottom: 16px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .speaking-impact {
@@ -779,7 +779,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     color: var(--text-tertiary);
     margin: 0;
     line-height: 1.6;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   /* Tools & Technologies Section */
@@ -797,8 +797,9 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
   .tools-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr) !important; /* Two columns for better space utilization */
     gap: 24px;
+    align-items: stretch;
   }
 
   .tool-category {
@@ -807,6 +808,9 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     border-radius: 16px;
     padding: 24px;
     transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   .tool-category:hover {
@@ -860,7 +864,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
   .case-studies-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: 1fr; /* Single column for better readability with larger fonts */
     gap: 32px;
   }
 
@@ -890,7 +894,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     gap: 16px;
   }
 
@@ -935,7 +939,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     color: var(--text-tertiary);
     margin: 0;
     line-height: 1.6;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .results ul {
@@ -1029,9 +1033,8 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
   .section-intro {
     color: var(--text-tertiary);
-    font-size: 16px;
     margin-bottom: 32px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.6;
   }
 
@@ -1067,7 +1070,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     color: var(--text-tertiary);
     line-height: 1.6;
     margin-bottom: 16px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .doc-highlights {
@@ -1168,18 +1171,17 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       left: -80px;
     }
 
-    .tools-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .case-studies-grid {
-      grid-template-columns: 1fr;
-    }
+    /* Grid overrides no longer needed - already single column */
 
     .case-study-header {
       flex-direction: column;
       align-items: flex-start;
       gap: 8px;
+    }
+
+    /* Tools grid mobile responsive */
+    .tools-grid {
+      grid-template-columns: 1fr !important;
     }
   }
 </style>

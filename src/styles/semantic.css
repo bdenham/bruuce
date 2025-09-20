@@ -1,0 +1,348 @@
+/* =============================================================================
+   SEMANTIC COMPONENT SYSTEM
+   A consolidated, maintainable approach to content styling
+   ============================================================================= */
+
+/* =============================================================================
+   BASE SEMANTIC CLASSES
+   ============================================================================= */
+
+/* Content Sections - Universal container for any content area */
+.content-section {
+    margin-bottom: 3rem;
+    padding: 0;
+}
+
+.content-section:last-child {
+    margin-bottom: 0;
+}
+
+/* Content Headers - Universal heading styling */
+.content-section > h2,
+.section-heading {
+    color: var(--text-primary);
+    font-size: 1.75rem; /* 28px default */
+    font-weight: 600;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.3;
+}
+
+/* Responsive heading sizes */
+@media (min-width: 640px) {
+    .content-section > h2,
+    .section-heading {
+        font-size: 2rem; /* 32px on larger screens */
+    }
+}
+
+@media (min-width: 1536px) {
+    .content-section > h2,
+    .section-heading {
+        font-size: 2.5rem; /* 50px at 2xl (20px * 2.5) */
+    }
+}
+
+/* Content Introductions - Universal intro text styling */
+.content-intro {
+    color: var(--text-tertiary);
+    font-size: 1.125rem; /* 18px - increased from 16px */
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* Responsive intro sizes */
+@media (min-width: 1536px) {
+    .content-intro {
+        font-size: 1.2rem; /* Scales to 24px at 2xl (20px * 1.2) */
+    }
+}
+
+/* =============================================================================
+   CONTENT ITEMS - Universal item containers
+   ============================================================================= */
+
+/* Base item styling - works for cards, list items, etc. */
+.content-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.content-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--shadow-secondary);
+    border-color: var(--border-primary);
+}
+
+.content-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Item headers */
+.content-item > h3,
+.item-heading {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.4;
+}
+
+/* Item content */
+.content-item > p,
+.item-content {
+    color: var(--text-tertiary);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* =============================================================================
+   LAYOUT PATTERNS
+   ============================================================================= */
+
+/* Grid layouts - ALL SINGLE COLUMN for better readability with larger fonts */
+.content-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr; /* Always single column */
+}
+
+/* Force single column for ALL grid classes - better readability */
+.grid-small,
+.grid-medium,
+.grid-large,
+.grid-extra-large,
+.grid-projects,
+.action-cards,
+.linkedin-posts,
+.blog-posts-container,
+.philosophy-grid,
+.expertise-grid,
+.recognition-grid,
+.project-details,
+.contact-details,
+.skills-grid,
+.education-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr !important; /* Force single column */
+}
+
+/* Exception: Keep metrics grid compact since it's just performance numbers */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px;
+}
+
+@media (max-width: 640px) {
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Override any responsive breakpoints - keep everything single column */
+@media (min-width: 768px) {
+    .grid-small,
+    .grid-medium,
+    .grid-large,
+    .grid-extra-large,
+    .grid-projects,
+    .action-cards,
+    .linkedin-posts,
+    .philosophy-grid,
+    .expertise-grid,
+    .recognition-grid,
+    .project-details,
+    .contact-details,
+    .skills-grid,
+    .education-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-small,
+    .grid-medium,
+    .grid-large,
+    .grid-extra-large,
+    .grid-projects,
+    .action-cards,
+    .linkedin-posts,
+    .philosophy-grid,
+    .expertise-grid,
+    .recognition-grid,
+    .project-details,
+    .contact-details,
+    .skills-grid,
+    .education-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* =============================================================================
+   TEXT BALANCING - UNIVERSAL APPLICATION
+   ============================================================================= */
+
+/* Apply text balancing to ALL text content */
+p,
+h1, h2, h3, h4, h5, h6,
+.content-intro,
+.item-content,
+.content-item p,
+.content-section p,
+li {
+    /* Modern text balancing - prevents awkward line breaks */
+    text-wrap: pretty;
+    
+    /* Prevent orphans and widows in print/long content */
+    orphans: 2;
+    widows: 2;
+    
+    /* Avoid breaking inside elements when possible */
+    break-inside: avoid-orphans;
+}
+
+/* Enhanced balancing for headings */
+h1, h2, h3, h4, h5, h6,
+.section-heading,
+.item-heading {
+    /* Balance text across lines for headings */
+    text-wrap: balance;
+}
+
+/* =============================================================================
+   SPECIALTY MODIFIERS
+   ============================================================================= */
+
+/* Featured content */
+.content-section.featured,
+.content-item.featured {
+    border: 2px solid var(--accent-primary);
+    background: linear-gradient(135deg, var(--bg-card), rgba(255, 228, 77, 0.02));
+}
+
+/* Compact spacing */
+.content-section.compact {
+    margin-bottom: 1.5rem;
+}
+
+.content-item.compact {
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Large content */
+.content-section.large .section-heading,
+.content-section.large > h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+    .content-section.large .section-heading,
+    .content-section.large > h2 {
+        font-size: 3rem;
+    }
+}
+
+/* =============================================================================
+   LEGACY COMPATIBILITY - Gradual Migration Support
+   ============================================================================= */
+
+/* Map old classes to new semantic system */
+.section,
+.projects-section,
+.recent-posts-section,
+.speaking-section,
+.philosophy-section,
+.journey-section,
+.expertise-section,
+.recognition-section,
+.personal-section,
+.summary-section,
+.skills-section,
+.experience-section,
+.education-section,
+.awards-section,
+.endorsements-section,
+.featured-documentation {
+    /* Inherit all content-section styles */
+    margin-bottom: 3rem;
+    padding: 0;
+}
+
+.section:last-child,
+.projects-section:last-child,
+.recent-posts-section:last-child,
+.speaking-section:last-child,
+.philosophy-section:last-child,
+.journey-section:last-child,
+.expertise-section:last-child,
+.recognition-section:last-child,
+.personal-section:last-child,
+.summary-section:last-child,
+.skills-section:last-child,
+.experience-section:last-child,
+.education-section:last-child,
+.awards-section:last-child,
+.endorsements-section:last-child,
+.featured-documentation:last-child {
+    margin-bottom: 0;
+}
+
+/* Intro text mappings */
+.section-intro,
+.posts-intro {
+    /* Inherit all content-intro styles */
+    color: var(--text-tertiary);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 1536px) {
+    .section-intro,
+    .posts-intro {
+        font-size: 1.2rem;
+    }
+}
+
+/* Item mappings */
+.recognition-item,
+.philosophy-item,
+.journey-item,
+.awards-item,
+.skill-item {
+    /* Inherit all content-item styles */
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.recognition-item:hover,
+.philosophy-item:hover,
+.journey-item:hover,
+.awards-item:hover,
+.skill-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--shadow-secondary);
+    border-color: var(--border-primary);
+}
+
+.recognition-item:last-child,
+.philosophy-item:last-child,
+.journey-item:last-child,
+.awards-item:last-child,
+.skill-item:last-child {
+    margin-bottom: 0;
+}
