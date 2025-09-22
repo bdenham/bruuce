@@ -12,8 +12,6 @@ const latestPosts = blogPosts
 ---
 
 <aside class="sidebar" id="sidebar">
-  <!-- Simplified mobile toggle - single element -->
-  <button class="sidebar-toggle" id="toggle" aria-label="Menu">☰</button>
 
   <nav class="nav" id="nav">
     <!-- Close button for mobile (positioned at top right) -->
@@ -72,24 +70,6 @@ const latestPosts = blogPosts
     box-shadow: 1px 0 8px rgba(0, 0, 0, 0.1); /* Faint shadow on right side */
   }
 
-  .sidebar-toggle {
-    position: fixed;
-    top: 70px; /* Just below header (60px header + 10px spacing) */
-    left: 16px;
-    width: 36px;
-    height: 36px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-secondary);
-    border-top: none;
-    border-radius: 6px;
-    cursor: pointer;
-    z-index: 300;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-primary);
-    font-size: 1rem;
-  }
 
   .nav {
     background: var(--bg-tertiary);
@@ -171,10 +151,6 @@ const latestPosts = blogPosts
       display: contents; /* Make container transparent to layout - fixes Back to Home clicking! */
     }
 
-    .sidebar-toggle {
-      display: flex;
-      z-index: 400; /* Above everything */
-    }
 
     .nav {
       transform: translateX(-100%);
@@ -253,7 +229,7 @@ const latestPosts = blogPosts
     document.body.classList.remove('sidebar-open');
 
     const sidebar = document.getElementById('sidebar');
-    const toggle = document.getElementById('toggle');
+    const toggle = document.getElementById('mobile-menu-toggle'); // Updated to use header toggle
     const close = document.getElementById('close');
     const overlay = document.getElementById('overlay');
 

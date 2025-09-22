@@ -188,6 +188,13 @@ const CardElement = isClickable ? 'a' : 'div';
   .unified-card-link.medium { padding: 24px; }
   .unified-card-link.large { padding: 32px; }
 
+  /* Mobile responsive padding - reduce internal padding on small screens */
+  @media (max-width: 640px) {
+    .unified-card-link.small { padding: 12px; }
+    .unified-card-link.medium { padding: 16px; }
+    .unified-card-link.large { padding: 20px; }
+  }
+
   /* Hover styles - matching BlogPostCard exactly */
   .unified-card-link:hover {
     background: var(--bg-card-hover);

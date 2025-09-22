@@ -424,7 +424,14 @@ const {
     }
 
     .content-panel {
-      padding: 0; /* No padding - clean design */
+      padding: 0 20px 0 20px; /* Add horizontal padding on mobile when sidebar is hidden */
+    }
+  }
+
+  /* Smaller mobile screens - reduce padding for more content space */
+  @media (max-width: 640px) {
+    .content-panel {
+      padding: 0 10px 0 10px; /* Half padding on small mobile screens */
     }
   }
 
