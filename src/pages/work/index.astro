@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
+import '../../styles/animations.css';
 ---
 
 <BaseLayout
@@ -14,13 +15,13 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
   <PageHeader primary="My" accent="Work" id="work-title" />
-  <p class="lead">
+  <p class="lead animate-in animate-delay-100">
     My professional work: Technical leadership, developer experience design, interactive
     documentation, and community engagement at Adobe and beyond.
   </p>
 
   <div class="work-content">
-    <div class="case-studies-section">
+    <div class="case-studies-section animate-in animate-delay-150">
       <h2>Case Studies</h2>
       <p class="section-intro">
         Detailed looks at successful projects that demonstrate measurable impact on developer
@@ -192,7 +193,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="current-work">
+    <div class="current-work animate-in animate-delay-200">
       <h2>Current Work, Adobe (2018-Now)</h2>
       <p class="work-intro">
         Leading developer experience initiatives across multiple teams, building tools and
@@ -301,7 +302,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="featured-documentation">
+    <div class="featured-documentation animate-in animate-delay-250">
       <h2>Featured Live Documentation</h2>
       <p class="section-intro">
         Direct links to live documentation and interactive tools I've created and maintain at Adobe
@@ -407,7 +408,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="speaking-section">
+    <div class="speaking-section animate-in animate-delay-300">
       <h2>Speaking & Community</h2>
       <div class="speaking-card">
         <div class="speaking-header">
@@ -425,7 +426,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="tools-section">
+    <div class="tools-section animate-in animate-delay-350">
       <h2>Tools & Technologies</h2>
       <p class="section-intro">
         The modern tech stack I use to create exceptional developer experiences and documentation.
@@ -579,7 +580,6 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     font-size: 1rem;
     color: var(--accent-yellow);
     /* padding: 12px; */
-    background: var(--bg-card);
     /* border-radius: 8px; */
     /* border-left: 3px solid var(--accent-primary); */
   }
@@ -922,7 +922,6 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     gap: 20px;
   }
 
-  .challenge,
   .solution,
   .results {
     background: var(--bg-card);
@@ -1075,7 +1074,6 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .doc-highlights {
-    background: var(--bg-card);
     border-radius: 12px;
     margin-bottom: 20px;
   }
@@ -1185,4 +1183,5 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       grid-template-columns: 1fr !important;
     }
   }
+
 </style>

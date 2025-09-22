@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
+import '../../styles/animations.css';
 ---
 
 <BaseLayout
@@ -16,7 +17,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   <PageHeader primary="My" accent="Resume" id="resume-title" />
 
   <div class="resume-content">
-    <div class="summary-section">
+    <div class="summary-section animate-in animate-delay-100">
       <h2>Professional Summary</h2>
       <p>
         Senior Developer Experience (DX) writer and developer advocate specializing in transforming
@@ -28,7 +29,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </p>
     </div>
 
-    <div class="awards-section featured-section">
+    <div class="awards-section featured-section animate-in animate-delay-150">
       <h2>🏆 Awards & Recognition</h2>
       <ul class="awards-list">
         <li>
@@ -49,7 +50,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </ul>
     </div>
 
-    <div class="skills-section">
+    <div class="skills-section animate-in animate-delay-200">
       <h2>Core Skills</h2>
 
       <div class="skills-grid">
@@ -127,7 +128,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="experience-section">
+    <div class="experience-section animate-in animate-delay-250">
       <h2>Professional Experience</h2>
 
       <div class="job">
@@ -260,7 +261,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="education-section">
+    <div class="education-section animate-in animate-delay-300">
       <h2>Education</h2>
       <div class="education-grid">
         <div class="degree">
@@ -275,7 +276,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     </div>
 
     <div class="contact-section">
-      <div class="contact-info">
+      <div class="contact-info animate-in animate-delay-350">
         <h2>Contact Information</h2>
         <div class="contact-details">
           <div class="contact-item">
@@ -299,7 +300,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="endorsements-section">
+    <div class="endorsements-section animate-in animate-delay-400">
       <h2>Professional Endorsements</h2>
       <p>
         See detailed LinkedIn recommendations from colleagues and leadership:
@@ -604,4 +605,5 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       align-items: flex-start;
     }
   }
+
 </style>

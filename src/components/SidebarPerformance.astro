@@ -51,8 +51,8 @@ const latestPosts = blogPosts
     <!-- Minimal connect -->
     <div class="section">
       <h3>Let's Connect!</h3>
-      <a href="https://linkedin.com/in/brucedenham/" target="_blank" rel="noopener">💼 LinkedIn</a>
-      <a href="https://github.com/bdenham" target="_blank" rel="noopener">💻 GitHub</a>
+      <a href="https://linkedin.com/in/brucedenham/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/bdenham" target="_blank" rel="noopener">GitHub</a>
     </div>
   </nav>
 
@@ -64,7 +64,7 @@ const latestPosts = blogPosts
   /* Minimal sidebar styles - maximum performance */
   .sidebar {
     position: fixed;
-    top: 60px; /* Standard header height */
+    top: 70px; /* Standard header height */
     left: 0;
     height: calc(100vh - 60px); /* Adjust height to account for header */
     width: 280px;
@@ -92,7 +92,7 @@ const latestPosts = blogPosts
   }
 
   .nav {
-    background: var(--bg-secondary);
+    background: var(--bg-tertiary);
     height: 100%;
     overflow-y: auto;
     padding: 0;
@@ -124,12 +124,12 @@ const latestPosts = blogPosts
   }
 
   .section h3 {
-    margin: 0 0 6px 0;
-    font-size: 1rem;
+    margin: 0 0 6px;
+    font-size: 1.1rem;
     font-weight: 600;
-    color: var(--accent-yellow); /* Match blog post date color */
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: var(--accent-yellow);
+    /* text-transform: uppercase; */
+    /* letter-spacing: .5px; */
   }
 
   .section h3 a {

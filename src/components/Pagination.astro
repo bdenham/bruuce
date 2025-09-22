@@ -1,0 +1,185 @@
+---
+export interface Props {
+  prevUrl?: string;
+  nextUrl?: string;
+  prevText?: string;
+  nextText?: string;
+  currentPage?: number;
+  totalPages?: number;
+  class?: string;
+}
+
+const { 
+  prevUrl, 
+  nextUrl, 
+  prevText = 'Newer Posts', 
+  nextText = 'Older Posts',
+  currentPage,
+  totalPages,
+  class: className = ''
+} = Astro.props;
+---
+
+{(prevUrl || nextUrl) && (
+  <nav class={`pagination ${className}`} aria-label="Blog pagination">
+    <div class="pagination-container">
+      
+      <!-- Previous button -->
+      <a 
+        href={prevUrl || '#'} 
+        class={`pagination-btn prev ${!prevUrl ? 'disabled' : ''}`}
+        aria-label={prevText}
+        {!prevUrl ? { 'aria-disabled': 'true', tabindex: '-1' } : {}}
+      >
+        <span class="pagination-icon">←</span>
+        <span class="pagination-text">{prevText}</span>
+      </a>
+
+      <!-- Page info (optional) -->
+      {currentPage && totalPages && (
+        <div class="pagination-info">
+          <span class="page-current">{currentPage}</span>
+          <span class="page-separator">of</span>
+          <span class="page-total">{totalPages}</span>
+        </div>
+      )}
+
+      <!-- Next button -->
+      <a 
+        href={nextUrl || '#'} 
+        class={`pagination-btn next ${!nextUrl ? 'disabled' : ''}`}
+        aria-label={nextText}
+        {!nextUrl ? { 'aria-disabled': 'true', tabindex: '-1' } : {}}
+      >
+        <span class="pagination-text">{nextText}</span>
+        <span class="pagination-icon">→</span>
+      </a>
+      
+    </div>
+  </nav>
+)}
+
+<style>
+  .pagination {
+    margin: 3rem 0 2rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border-secondary);
+  }
+
+  .pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    gap: 1rem;
+  }
+
+  .pagination-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 1px solid var(--border-secondary);
+    border-radius: 0.75rem;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    transition: all 0.2s ease;
+    min-width: 120px;
+  }
+
+  .pagination-btn:hover:not(.disabled) {
+    background: var(--bg-card-hover);
+    border-color: var(--accent-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow-secondary);
+  }
+
+  .pagination-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .pagination-btn.prev {
+    justify-content: flex-start;
+  }
+
+  .pagination-btn.next {
+    justify-content: flex-end;
+  }
+
+  .pagination-icon {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+  }
+
+  .pagination-text {
+    color: var(--text-secondary);
+  }
+
+  .pagination-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--bg-secondary);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+  }
+
+  .page-current {
+    font-weight: 600;
+    color: var(--accent-primary);
+  }
+
+  .page-separator {
+    opacity: 0.6;
+  }
+
+  .page-total {
+    font-weight: 500;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 640px) {
+    .pagination-container {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .pagination-btn {
+      width: 100%;
+      justify-content: center;
+      min-width: auto;
+    }
+
+    .pagination-info {
+      order: -1;
+    }
+
+    .pagination-text {
+      display: none;
+    }
+
+    .pagination-btn .pagination-icon {
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .pagination {
+      margin: 2rem 0 1rem 0;
+      padding: 1rem 0;
+    }
+
+    .pagination-btn {
+      padding: 0.625rem 1rem;
+      font-size: 0.875rem;
+    }
+  }
+</style>

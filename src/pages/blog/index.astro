@@ -3,10 +3,21 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogPostCard from '../../components/ui/BlogPostCard.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
+import SEO from '../../components/SEO.astro';
+import '../../styles/animations.css';
 
 // Get all blog posts and sort by date (newest first)
 const blogPosts = await getCollection('blog');
-const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+// Filter out draft posts in production
+const publishedPosts = blogPosts.filter(post => !post.data.draft);
+const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Get featured posts
+const featuredPosts = sortedPosts.filter(post => post.data.featured);
+
+// Get all categories and tags for filtering
+const allCategories = [...new Set(sortedPosts.map(post => post.data.category).filter(Boolean))];
+const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
 ---
 
 <BaseLayout
@@ -20,15 +31,17 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
   footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
   <PageHeader primary="My" accent="Blog" id="blog-title" />
-  <p class="lead">
+  <p class="lead animate-in animate-delay-100">
     Reflections on technology, writing, personal growth, life's existential challenges, and
     navigating the complexities of our modern world.
   </p>
 
-  {sortedPosts.map((post) => <BlogPostCard post={post} />)}
+  <div class="blog-posts-container animate-in animate-delay-150">
+    {sortedPosts.map((post) => <BlogPostCard post={post} />)}
+  </div>
 
   <!-- LinkedIn Posts & Insights Section -->
-  <div class="linkedin-insights-section">
+  <div class="linkedin-insights-section animate-in animate-delay-200">
     <div class="section-divider"></div>
     <h2>LinkedIn Posts</h2>
     <p class="posts-intro">
@@ -46,7 +59,7 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
       >
         <div class="post-header">
           <div class="platform-info">
-            <div class="platform-icon">💼</div>
+            <div class="platform-icon"></div>
             <div class="platform-text">
               <span class="platform-name">LinkedIn</span>
               <span class="post-type">Creative Post</span>
@@ -77,7 +90,7 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
       >
         <div class="post-header">
           <div class="platform-info">
-            <div class="platform-icon">💼</div>
+            <div class="platform-icon">🔗</div>
             <div class="platform-text">
               <span class="platform-name">LinkedIn</span>
               <span class="post-type">Professional Update</span>
@@ -107,7 +120,7 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
       >
         <div class="post-header">
           <div class="platform-info">
-            <div class="platform-icon">💼</div>
+            <div class="platform-icon">🔗</div>
             <div class="platform-text">
               <span class="platform-name">LinkedIn</span>
               <span class="post-type">Community Engagement</span>
@@ -252,4 +265,5 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.valueOf() - a.data.date
       gap: 4px;
     }
   }
+
 </style>

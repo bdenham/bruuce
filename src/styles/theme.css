@@ -64,25 +64,6 @@
   }
 }
 
-/* Optimal Line Length for Readability - Left-aligned, not centered */
-.content-panel,
-.section,
-.blog-post,
-.prose {
-    /* Default: 75ch for comfortable reading */
-    max-width: 75ch;
-    margin-left: 0; /* Left-aligned, closer to sidebar */
-    margin-right: auto; /* Allow natural flow */
-}
-
-/* Wider content for specific layouts */
-.action-cards,
-.grid-medium,
-.grid-large,
-.performance-highlight {
-    max-width: none; /* Allow full width for grid layouts */
-}
-
 /* Action cards - two columns for better space utilization */
 /* Higher specificity to override .grid-medium class */
 .action-cards.grid-medium {
@@ -90,31 +71,6 @@
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 1.5rem !important;
     align-items: stretch !important;
-}
-
-/* Responsive line length adjustments */
-@media (max-width: 640px) {
-    .content-panel,
-    .section,
-    .blog-post,
-    .prose {
-        max-width: 45ch; /* Mobile: 35-45 CPL optimal */
-        margin-left: auto; /* Center on mobile for better balance */
-    }
-
-    /* Action cards - single column on mobile */
-    .action-cards.grid-medium {
-        grid-template-columns: 1fr !important;
-    }
-}
-
-@media (min-width: 1200px) {
-    .content-panel,
-    .section,
-    .blog-post,
-    .prose {
-        max-width: 80ch; /* Desktop long-form: generous but not excessive */
-    }
 }
 
 /* Typography Components - AstroWind-sized for better readability */
@@ -270,7 +226,7 @@
 
 .footer-links {
     margin-top: 24px;
-    text-align: center;
+    text-align: left;
 }
 
 .footer-links a {
@@ -288,16 +244,62 @@
 /* Component Styles */
 .card {
     background: var(--bg-card);
-    border: 1px solid var(--border-secondary);
+    border: none;
     border-radius: 16px;
     padding: 24px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px var(--shadow-secondary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* WCAG Focus Indicators */
+.card:focus-visible,
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* Global WCAG-compliant link styling */
+a {
+    color: var(--accent-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-primary);
+    text-underline-offset: 2px;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-hover);
+    text-decoration-color: var(--accent-hover);
+}
+
+a:visited {
+    color: var(--accent-primary);
+    opacity: 0.8;
+}
+
+a:active {
+    color: var(--accent-hover);
+}
+
+/* Override for specific components that have their own link styling */
+.header a,
+.footer-links a,
+.sidebar a,
+.section a,
+.nav-back a,
+.doc-link,
+.post-cta,
+.performance-cta,
+.linkedin-follow-btn {
+    /* These components maintain their existing custom styling */
+    all: revert;
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px var(--shadow-secondary);
-    border-color: var(--accent-primary);
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--shadow-primary);
 }
 
 .card.featured {
@@ -307,31 +309,32 @@
 
 .project-card {
     background: var(--bg-card);
-    border: 1px solid var(--border-secondary);
+    border: none;
     border-radius: 16px;
     padding: 24px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px var(--shadow-secondary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card:hover {
-    transform: translateY(-2px);
     background: var(--bg-card-hover);
-    border-color: var(--border-primary);
-    box-shadow: 0 8px 24px var(--shadow-secondary);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--shadow-primary);
 }
 
 .doc-card {
     background: var(--bg-card);
-    border: 1px solid var(--border-secondary);
+    border: none;
     border-radius: 16px;
     padding: 24px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px var(--shadow-secondary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .doc-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px var(--shadow-secondary);
-    border-color: var(--accent-primary);
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--shadow-primary);
 }
 
 .doc-card.featured {
@@ -355,7 +358,7 @@
 }
 
 .linkedin-post::before {
-    content: '💼';
+    content: '🔗';
     font-size: 1.25rem;
     flex-shrink: 0;
     margin-top: -0.2rem;
@@ -583,7 +586,7 @@
     --bg-card-hover: rgba(45, 45, 45, 0.8); /* Elevated hover state */
     --text-primary: #fafafa; /* Modern high-contrast white */
     --text-secondary: #e4e4e7; /* Clean secondary text */
-    --text-tertiary: #a1a1aa; /* Modern neutral gray */
+    --text-tertiary: #c4c4c7; /* Improved contrast - WCAG AA compliant */
     --text-lead: #dddddd; /* Enhanced lead text for visual impact */
     /* Improved contrast for WCAG AA compliance */
     --text-muted: #e4e4e7;
@@ -628,14 +631,14 @@
 
 /* Light theme - Modern 2024 neutral palette */
 :root.light {
-    --bg-primary: #fafafa;
-    --bg-secondary: #f4f4f5;
+    --bg-primary: ##f1f1f1;
+    --bg-secondary: #f1f1f1;
     --bg-tertiary: rgba(255, 255, 255, 0.95);
-    --bg-card: rgba(255, 255, 255, 0.8);
-    --bg-card-hover: rgba(244, 244, 245, 0.95);
+    --bg-card: rgba(255, 255, 255, 1);
+    --bg-card-hover: rgba(255, 255, 255, 1);
     --text-primary: #2d3748;
     --text-secondary: #4a5568;
-    --text-tertiary: #666666; /* Softer gray for light mode, equivalent to #bbbbbb in dark mode */
+    --text-tertiary: #4a5568; /* Darker gray for better contrast - WCAG AA compliant */
     --text-lead: #374151; /* Enhanced lead text for visual impact in light mode */
     --text-muted: #374151;
     --text-dim: #374151;
@@ -647,9 +650,9 @@
     --border-secondary: rgba(161, 161, 170, 0.2);
     --accent-hover: #0080ff; /* Lighter blue for hover in light mode */
     --accent-content: rgba(0, 102, 204, 0.1);
-    --accent-content-text: #0066cc;
-    --accent-primary: #0066CC;
-    /* Blue for light mode */
+    --accent-content-text: #0052A3;
+    --accent-primary: #0052A3;
+    /* Darker blue for better contrast in light mode */
     --gradient-1: rgba(0, 102, 204, 0.08);
     --gradient-2: rgba(0, 128, 255, 0.06);
     --shadow-primary: rgba(0, 0, 0, 0.08);
@@ -748,6 +751,8 @@ body {
     background: var(--bg-tertiary);
     border-bottom: 1px solid var(--border-secondary);
     /* Removed backdrop-filter for 1000ms+ faster rendering */
+    box-shadow: 0 4px 12px var(--shadow-primary), 0 2px 4px var(--shadow-secondary);
+    /* Nice vertical drop shadow - theme aware */
     z-index: 500;
     /* Higher than sidebar z-index: 200 */
     padding: 16px 20px;
@@ -809,7 +814,7 @@ h1 {
 }
 
 h1 span {
-    color: #0066cc;
+    color: var(--accent-primary);
 }
 
 h2 {
@@ -984,7 +989,7 @@ footer {
     margin-top: 28px;
     color: var(--text-muted);
     font-size: 0.8125rem;
-    text-align: center;
+    text-align: left;
 }
 
 footer a {
@@ -1006,7 +1011,7 @@ footer a:hover {
 
 .content h2 {
     color: var(--text-primary);
-    font-size: 1.375rem;
+    /* font-size: 1.375rem; */
     margin: 32px 0 0 0;
 }
 
@@ -1395,5 +1400,5 @@ footer a:hover {
 }
 
 #main-title {
-  margin-top: 1rem;
+  margin-top: 1.25rem;
 }

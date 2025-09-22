@@ -24,6 +24,11 @@ const { text, linkText, linkHref } = Astro.props;
       <a href="/projects/">Projects</a>
       <a href="/blog/">Blog</a>
     </nav>
+
+    <!-- Copyright notice -->
+    <div class="copyright">
+      © {new Date().getFullYear()} Bruce Denham. All rights reserved.
+    </div>
   </div>
 </footer>
 
@@ -32,14 +37,14 @@ const { text, linkText, linkHref } = Astro.props;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .footer-nav {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .footer-nav a {
@@ -55,6 +60,12 @@ const { text, linkText, linkHref } = Astro.props;
     color: var(--accent-primary);
   }
 
+  .copyright {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+
   @media (max-width: 640px) {
     .footer-nav {
       gap: 12px;
@@ -63,6 +74,11 @@ const { text, linkText, linkHref } = Astro.props;
     .footer-nav a {
       font-size: 13px;
       padding: 4px 6px;
+    }
+
+    .copyright {
+      font-size: 0.8125rem;
+      margin-top: 12px;
     }
   }
 </style>

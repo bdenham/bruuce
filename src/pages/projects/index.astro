@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
+import '../../styles/animations.css';
 ---
 
 <BaseLayout
@@ -15,7 +16,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 >
   <PageHeader accent="Projects" primary="My" id="projects-title" />
 
-  <div class="lead">
+  <div class="lead animate-in animate-delay-100">
     <p>
       Over my 30+ year career, I've led initiatives that transform how developers learn, integrate,
       and build with complex systems. From comprehensive documentation sites to interactive learning
@@ -23,7 +24,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     </p>
   </div>
 
-  <div class="projects-section">
+  <div class="projects-section animate-in animate-delay-150">
     <h2>Current Adobe Projects</h2>
 
     <div class="project-card featured">
@@ -238,7 +239,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     </div>
   </div>
 
-  <div class="projects-section">
+  <div class="projects-section animate-in animate-delay-200">
     <h2>Open Source & Community</h2>
 
     <div class="project-card">
@@ -325,7 +326,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     </div>
   </div>
 
-  <div class="projects-section">
+  <div class="projects-section animate-in animate-delay-250">
     <h2>Legacy Innovations</h2>
 
     <div class="timeline-projects">
@@ -379,7 +380,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     </div>
   </div>
 
-  <div class="cta-section">
+  <div class="cta-section animate-in animate-delay-300">
     <h2>Let's Collaborate</h2>
     <p>
       Interested in working together on developer experience, technical writing, or documentation
@@ -524,7 +525,6 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   .project-features,
   .project-achievements,
   .community-impact {
-    background: var(--bg-card);
     /* border-radius: 12px; */
     /* padding: 20px; */
     /* border-left: 3px solid var(--accent-primary); */
@@ -734,4 +734,5 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       margin-top: 8px;
     }
   }
+
 </style>

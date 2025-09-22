@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
+import '../../styles/animations.css';
 ---
 
 <BaseLayout
@@ -15,7 +16,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 >
   <PageHeader primary="About" accent="Me" id="about-title" />
 
-  <div class="intro-section">
+  <div class="intro-section animate-in animate-delay-100">
     <div class="intro-content">
       <div class="intro-text">
         <p class="lead">
@@ -40,7 +41,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     </div>
   </div>
 
-  <div class="recognition-section">
+  <div class="recognition-section animate-in animate-delay-150">
     <h2>Recognition & Community Impact</h2>
     <div class="recognition-grid">
       <div class="recognition-item">
@@ -79,7 +80,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     </div>
   </div>
 
-  <div class="journey-section">
+  <div class="journey-section animate-in animate-delay-300">
     <h2>My Journey</h2>
 
     <div class="career-timeline">
@@ -142,7 +143,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     </div>
   </div>
 
-  <div class="expertise-section">
+  <div class="expertise-section animate-in animate-delay-250">
     <h2>What I Bring to the Table</h2>
 
     <div class="expertise-grid">
@@ -188,7 +189,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     </div>
   </div>
 
-  <div class="philosophy-section">
+  <div class="philosophy-section animate-in animate-delay-200">
     <h2>My Philosophy</h2>
     <div class="philosophy-grid">
       <div class="philosophy-item">
@@ -327,7 +328,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
   .timeline-entry {
     margin-bottom: 40px;
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    background: var(--bg-card);
     border: 2px solid rgba(148, 163, 184, 0.4);
     border-radius: 16px;
     padding: 24px;
@@ -336,14 +337,9 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
   .timeline-entry.current {
     border: 2px solid var(--accent-primary);
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    background: var(--bg-card);
   }
 
-  .timeline-entry:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px var(--shadow-secondary);
-    border-color: var(--accent-primary);
-  }
 
   /* Timeline dots and left-side elements removed - periods now appear above content */
 
@@ -408,7 +404,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .philosophy-item {
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    background: var(--bg-card);
     border: 2px solid rgba(148, 163, 184, 0.4);
     border-radius: 16px;
     padding: 24px;
@@ -419,11 +415,6 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     height: 100%;
   }
 
-  .philosophy-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px var(--shadow-secondary);
-    border-color: var(--accent-primary);
-  }
 
   .philosophy-icon {
     font-size: 2.5rem;
@@ -470,18 +461,13 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   /* Expertise grid styling moved above with other grids */
 
   .expertise-category {
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    background: var(--bg-card);
     border: 2px solid rgba(148, 163, 184, 0.4);
     border-radius: 16px;
     padding: 24px;
     transition: all 0.3s ease;
   }
 
-  .expertise-category:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px var(--shadow-secondary);
-    border-color: var(--accent-primary);
-  }
 
   .expertise-category h3 {
     color: var(--text-primary);
@@ -524,7 +510,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   .recognition-item {
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+    background: var(--bg-card);
     border: 2px solid rgba(148, 163, 184, 0.4);
     border-radius: 16px;
     padding: 24px;
@@ -535,11 +521,6 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
-  .recognition-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px var(--shadow-secondary);
-    border-color: var(--accent-primary);
-  }
 
   .recognition-item h3 {
     color: var(--text-primary);
@@ -600,4 +581,5 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       grid-template-columns: 1fr !important;
     }
   }
+
 </style>

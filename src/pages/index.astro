@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPostCard from '../components/ui/BlogPostCard.astro';
 import ActionCard from '../components/ui/ActionCard.astro';
+import '../styles/animations.css';
 
 // Get the latest 2 blog posts for the homepage
 const blogPosts = await getCollection('blog');
@@ -16,9 +17,9 @@ const latestPosts = blogPosts
   description="🏆 Adobe award nominee with 30+ years transforming complex technical concepts into clear developer experiences. Expert in API docs, SDK documentation, and developer tools at Adobe."
   footerText="Thanks for visiting! Let's build better developer experiences together."
 >
-  <h1 id="main-title"><span>Bruce</span> Denham</h1>
-  <p class="subtitle homepage">Senior Technical Writer & DX Engineer</p>
-  <p class="lead">
+  <h1 id="main-title">Bruce <span>Denham</span></h1>
+  <p class="subtitle homepage animate-in animate-delay-100">Senior Technical Writer & DX Engineer</p>
+  <p class="lead animate-in animate-delay-150">
     🏆 <strong>Adobe award nominee</strong> with 30+ years turning complex concepts into clear, human
     experiences. I try tohelp developers learn fast, build smart, and focus on what matters.
   </p>
@@ -111,7 +112,7 @@ const latestPosts = blogPosts
     </a>
   </div>
 
-  <div class="action-cards grid-medium grid-with-margin lazy-cards">
+  <div class="action-cards grid-medium grid-with-margin lazy-cards animate-in animate-delay-200">
     <ActionCard
       icon="📋"
       title="My Resume"
@@ -145,7 +146,7 @@ const latestPosts = blogPosts
     />
   </div>
 
-  <div class="section">
+  <div class="section animate-in animate-delay-250">
     <h2>My Philosophy</h2>
     <p>
       I don't just write the docs. I build tools, craft interfaces, and create explanations that
@@ -154,12 +155,12 @@ const latestPosts = blogPosts
     </p>
   </div>
 
-  <div class="section">
+  <div class="section animate-in animate-delay-300">
     <h2>Recent Posts</h2>
     <div class="blog-posts-container">
       {
         latestPosts.map((post, index) => (
-          <div class={`blog-post-wrapper ${index > 0 ? 'lazy-load' : ''}`}>
+          <div class={`blog-post-wrapper ${index > 0 ? 'lazy-load' : ''} scroll-animate animate-in ${index === 0 ? 'animate-delay-400' : 'animate-delay-450'}`}>
             <BlogPostCard post={post} />
           </div>
         ))
@@ -167,12 +168,6 @@ const latestPosts = blogPosts
     </div>
   </div>
 
-  <div class="footer-links">
-    <a href="/resume/">Resume</a>
-    <a href="/work/">My Work</a>
-    <a href="/about/">About</a>
-    <a href="/blog/">Blog</a>
-  </div>
 </BaseLayout>
 
 <!-- Minimal scroll position optimization -->
@@ -226,8 +221,7 @@ const latestPosts = blogPosts
     top: 0 !important;
     transform: none !important;
     transition: none !important; /* Remove hover effects */
-    /* Optimal line length for readability - left-aligned */
-    max-width: 75ch !important; /* ~75 characters per line - more generous */
+    /* Line length handled by typography-optimized.css */
   }
 
   /* Performance optimizations for blog posts */
@@ -248,6 +242,31 @@ const latestPosts = blogPosts
   .blog-post-wrapper.lazy-load.loaded {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* Simple CSS-only delayed animations for blog post cards */
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp 600ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Stagger the blog post animations after other content */
+  .scroll-animate:nth-child(1) {
+    animation-delay: 400ms;
+  }
+
+  .scroll-animate:nth-child(2) {
+    animation-delay: 450ms;
+  }
+
+  /* Respect user motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-animate {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
   }
 
   /* Mobile override */
@@ -344,7 +363,7 @@ const latestPosts = blogPosts
     display: block;
     font-size: 1.25rem;
     font-weight: 500;
-    color: #00aaff;
+    color: var(--accent-primary);
     line-height: 1;
     margin-bottom: -2px;
     font-family: monospace;
@@ -384,11 +403,13 @@ const latestPosts = blogPosts
   }
 
   .performance-cta .percentile-text {
-    color: #00aaff;
+    color: var(--accent-primary);
+    font-weight: 600;
   }
 
   .performance-cta .verify-text {
-    color: #00aaff;
+    color: var(--accent-primary);
+    font-weight: 600;
   }
 
   @media (max-width: 640px) {
@@ -495,6 +516,7 @@ const latestPosts = blogPosts
   }
 
   /* Homepage-specific styles only - LinkedIn styles moved to blog page */
+
 </style>
 
 <!-- Performance-optimized lazy loading with cleanup -->
