@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPostCard from '../components/ui/BlogPostCard.astro';
-import ActionCard from '../components/ui/ActionCard.astro';
 import UnifiedCard from '../components/ui/UnifiedCard.astro';
 import '../styles/animations.css';
 
@@ -195,47 +194,7 @@ const latestPosts = blogPosts
 </script>
 
 <style>
-  /* FIX THE ROOT CAUSE: app-content is positioned at top: -40 */
-  .app-content {
-    margin-left: 280px !important;
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-    position: relative !important;
-    top: 0 !important;
-    transform: none !important;
-  }
-
-  .main-container {
-    max-width: 1280px !important; /* AstroWind's max-w-7xl equivalent */
-    margin: 0 auto !important;
-    margin-left: 3rem !important; /* Better separation from sidebar */
-    padding: 80px 1rem 2rem 1rem !important; /* Responsive padding like AstroWind */
-    position: relative !important;
-    top: 0 !important;
-    transform: none !important;
-  }
-  
-  /* AstroWind-style responsive padding for homepage */
-  @media (min-width: 768px) {
-    .main-container {
-      padding: 80px 1.5rem 2rem 1.5rem !important; /* md:px-6 equivalent */
-    }
-  }
-
-  .content-panel {
-    /* Clean, borderless design - content flows naturally */
-    background: transparent !important; /* No background - use page background */
-    border: none !important; /* Remove border */
-    border-radius: 0 !important; /* Remove rounded corners */
-    padding: 0 !important; /* Remove padding - let content breathe naturally */
-    margin: 0 auto 32px 0 !important; /* Left-aligned, closer to sidebar */
-    box-shadow: none !important; /* Remove shadow */
-    position: relative !important;
-    top: 0 !important;
-    transform: none !important;
-    transition: none !important; /* Remove hover effects */
-    /* Line length handled by typography-optimized.css */
-  }
+  /* Homepage-specific layout adjustments only */
 
   /* Performance optimizations for blog posts */
   .blog-posts-container {
@@ -283,21 +242,7 @@ const latestPosts = blogPosts
   }
 
   /* Mobile override */
-  @media (max-width: 1023px) {
-    .app-content {
-      margin-left: 0 !important;
-    }
-
-    .main-container {
-      margin-left: 0 !important; /* Remove left margin on mobile */
-      padding: 80px 1rem 1.25rem 1rem !important; /* Responsive padding like AstroWind */
-    }
-
-    .content-panel {
-      padding: 0 !important; /* No padding - clean design */
-      margin: 0 auto 32px auto !important; /* Center on mobile for better balance */
-    }
-  }
+  /* Mobile responsive handled by BaseLayout */
 
   /* Performance Highlight Styles */
   .performance-highlight {
@@ -312,7 +257,7 @@ const latestPosts = blogPosts
     animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
     animation-delay: 75ms;
     /* Allow full width for performance metrics display */
-    max-width: none !important;
+    max-width: none;
   }
 
   .performance-header h2 {
@@ -544,7 +489,7 @@ const latestPosts = blogPosts
     // Use requestAnimationFrame instead of setTimeout for better performance
     requestAnimationFrame(() => {
       const cards = document.querySelector('.lazy-cards');
-      if (cards) cards.style.opacity = '1';
+      if (cards) (cards as HTMLElement).style.opacity = '1';
 
       document
         .querySelectorAll('.blog-post-wrapper.lazy-load')
