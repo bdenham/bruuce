@@ -73,9 +73,9 @@ const isClickable = href;
 const CardElement = isClickable ? 'a' : 'div';
 ---
 
-<div class={`unified-card-wrapper variant-${variant} ${featured ? 'featured' : ''} ${animateIn ? 'animate-in' : ''} ${animationDelay ? `animate-delay-${animationDelay}` : ''}`}>
+<div class={`card-wrapper variant-${variant} ${featured ? 'card-featured' : ''} ${animateIn ? 'card-animate' : ''} ${animationDelay ? `animate-delay-${animationDelay}` : ''}`}>
   <CardElement
-    class={`unified-card-link ${padding}`}
+    class={`card-base card-padding-${padding}`}
     href={isClickable ? href : undefined}
     target={isClickable ? target : undefined}
     rel={isClickable ? rel : undefined}
@@ -160,47 +160,7 @@ const CardElement = isClickable ? 'a' : 'div';
 </div>
 
 <style>
-  /* Wrapper styles */
-  .unified-card-wrapper {
-    position: relative;
-    margin-bottom: 1.5rem;
-    height: 100%; /* Allow wrapper to stretch to full grid height */
-    display: flex; /* Make wrapper a flex container */
-    flex-direction: column; /* Stack children vertically */
-  }
-
-  /* Card link styles - matching BlogPostCard exactly */
-  .unified-card-link {
-    display: flex; /* Make card link a flex container */
-    flex-direction: column; /* Stack children vertically */
-    flex: 1; /* Take up all available height in wrapper */
-    background: var(--bg-card);
-    border: none;
-    border-radius: 1rem;
-    box-shadow: 0 2px 8px var(--shadow-secondary);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-decoration: none;
-    color: inherit;
-  }
-
-  /* Padding variants */
-  .unified-card-link.small { padding: 16px; }
-  .unified-card-link.medium { padding: 24px 24px 0 24px; }
-  .unified-card-link.large { padding: 32px; }
-
-  /* Mobile responsive padding - reduce internal padding on small screens */
-  @media (max-width: 640px) {
-    .unified-card-link.small { padding: 12px; }
-    .unified-card-link.medium { padding: 16px; }
-    .unified-card-link.large { padding: 20px; }
-  }
-
-  /* Hover styles - matching BlogPostCard exactly */
-  .unified-card-link:hover {
-    background: var(--bg-card-hover);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px var(--shadow-primary);
-  }
+  /* Component-specific styles only - base card styles now in card-system.css */
 
 
   /* Variant: Content cards with large left icon */

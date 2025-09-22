@@ -29,8 +29,8 @@ const {
 } = Astro.props;
 ---
 
-<article class={`blog-post-card ${showFeatured && post.data.featured ? 'featured' : ''}`}>
-  <a href={`/blog/${post.slug}/`} class="card-link" aria-label={`Read: ${post.data.title}`}>
+<article class={`card-wrapper ${showFeatured && post.data.featured ? 'card-featured' : ''}`}>
+  <a href={`/blog/${post.slug}/`} class="card-base card-padding-medium" aria-label={`Read: ${post.data.title}`}>
     <div class="blog-post-content">
     <!-- Featured badge -->
     {showFeatured && post.data.featured && (
@@ -79,33 +79,7 @@ const {
 </article>
 
 <style>
-  .blog-post-card {
-    position: relative;
-    margin-bottom: 1.5rem;
-  }
-
-  .card-link {
-    display: block;
-    background: var(--bg-card);
-    border: none; /* Remove border, use shadow instead */
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px var(--shadow-secondary);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth easing */
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .card-link:hover {
-    background: var(--bg-card-hover);
-    transform: translateY(-4px); /* More pronounced lift */
-    box-shadow: 0 12px 24px var(--shadow-primary); /* Deeper shadow */
-  }
-
-  .blog-post-card.featured .card-link {
-    border-color: var(--accent-primary);
-    background: linear-gradient(135deg, var(--bg-card) 0%, var(--accent-content) 100%);
-  }
+  /* Component-specific styles only - base card styles now in card-system.css */
 
   .featured-badge {
     position: absolute;
