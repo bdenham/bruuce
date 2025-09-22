@@ -1,0 +1,233 @@
+/* =============================================================================
+   OPTIMAL LINE LENGTH SYSTEM
+   Ensures all text content has proper character count per line (45-75ch optimal)
+   ============================================================================= */
+
+/* =============================================================================
+   CORE LINE LENGTH CLASSES
+   ============================================================================= */
+
+/* Standard content - paragraphs, articles, main text */
+.content,
+.content p,
+.lead,
+.section-intro,
+.posts-intro,
+.summary-section p,
+.content-intro,
+.intro-text p,
+p:not([class]) {
+    max-width: 65ch; /* Optimal: 65 characters per line */
+    line-height: 1.6;
+}
+
+/* Long-form content - blog posts, articles */
+.content-panel,
+.section,
+.blog-post,
+.prose,
+.article-content {
+    max-width: 70ch; /* Slightly wider for long-form reading */
+}
+
+/* Wide content that should use full width */
+.action-cards,
+.grid-medium,
+.grid-large,
+.performance-highlight,
+.metrics-grid,
+.timeline-projects,
+.project-details,
+.contact-details,
+.skills-grid,
+.education-grid {
+    max-width: none; /* Allow full width for grid layouts */
+}
+
+/* =============================================================================
+   RESPONSIVE LINE LENGTH ADJUSTMENTS
+   ============================================================================= */
+
+/* Large screens - maximum comfortable reading width */
+@media (min-width: 1200px) {
+    .content,
+    .content p,
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .summary-section p,
+    .content-intro,
+    .intro-text p,
+    p:not([class]) {
+        max-width: 75ch; /* Maximum: 75 characters per line */
+    }
+
+    .content-panel,
+    .section,
+    .blog-post,
+    .prose,
+    .article-content {
+        max-width: 75ch; /* Consistent with other content */
+    }
+}
+
+/* Tablet screens - balanced reading experience */
+@media (max-width: 768px) and (min-width: 641px) {
+    .content,
+    .content p,
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .summary-section p,
+    .content-intro,
+    .intro-text p,
+    p:not([class]) {
+        max-width: 60ch; /* Tablet: 60 characters per line */
+    }
+
+    .content-panel,
+    .section,
+    .blog-post,
+    .prose,
+    .article-content {
+        max-width: 60ch;
+    }
+}
+
+/* Mobile screens - optimal for small devices */
+@media (max-width: 640px) {
+    .content,
+    .content p,
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .summary-section p,
+    .content-intro,
+    .intro-text p,
+    p:not([class]) {
+        max-width: 50ch; /* Mobile: 50 characters per line */
+        margin-left: 0; /* Keep left-aligned for readability */
+        margin-right: auto;
+        text-align: left; /* Ensure left alignment */
+    }
+
+    .content-panel,
+    .section,
+    .blog-post,
+    .prose,
+    .article-content {
+        max-width: 50ch;
+        margin-left: 0; /* Keep left-aligned */
+        margin-right: auto;
+        text-align: left;
+    }
+
+    /* Action cards - single column on mobile */
+    .action-cards.grid-medium {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Extra small mobile - tighten further */
+@media (max-width: 480px) {
+    .content,
+    .content p,
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .summary-section p,
+    .content-intro,
+    .intro-text p,
+    p:not([class]) {
+        max-width: 45ch; /* Small mobile: 45 characters per line */
+        text-align: left; /* Ensure left alignment on smallest screens */
+    }
+
+    .content-panel,
+    .section,
+    .blog-post,
+    .prose,
+    .article-content {
+        max-width: 45ch;
+        text-align: left;
+    }
+}
+
+/* =============================================================================
+   TYPOGRAPHY CONSISTENCY
+   ============================================================================= */
+
+/* Ensure text is always left-aligned for readability */
+.content,
+.content p,
+.lead,
+.section-intro,
+.posts-intro,
+.content-intro,
+.intro-text p,
+.summary-section p,
+p:not([class]) {
+    text-align: left !important; /* Force left alignment for all text content */
+}
+
+/* Ensure consistent font sizes for intro paragraphs */
+.lead,
+.section-intro,
+.posts-intro,
+.content-intro,
+.summary-section p {
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive font scaling */
+@media (min-width: 1536px) {
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .content-intro,
+    .summary-section p {
+        font-size: 1.25rem; /* 20px on large screens */
+    }
+}
+
+@media (max-width: 640px) {
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .content-intro,
+    .summary-section p {
+        font-size: 1rem; /* 16px on mobile */
+    }
+}
+
+/* =============================================================================
+   OVERRIDES FOR SPECIFIC CASES
+   ============================================================================= */
+
+/* Ensure blog content follows the system */
+.content :global(p) {
+    max-width: inherit; /* Inherit from parent .content */
+    font-size: 1.1875rem; /* 19px - balanced base size */
+    line-height: 1.7;
+    color: var(--text-tertiary);
+    font-weight: 400;
+}
+
+/* Homepage lead text - slightly larger */
+.lead.homepage {
+    font-size: 1.25rem;
+}
+
+@media (min-width: 1536px) {
+    .lead.homepage {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .lead.homepage {
+        font-size: 1.0625rem;
+    }
+}

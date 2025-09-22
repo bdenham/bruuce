@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPostCard from '../components/ui/BlogPostCard.astro';
 import ActionCard from '../components/ui/ActionCard.astro';
+import UnifiedCard from '../components/ui/UnifiedCard.astro';
 import '../styles/animations.css';
 
 // Get the latest 2 blog posts for the homepage
@@ -113,36 +114,48 @@ const latestPosts = blogPosts
   </div>
 
   <div class="action-cards grid-medium grid-with-margin lazy-cards animate-in animate-delay-200">
-    <ActionCard
+    <UnifiedCard
+      variant="content"
       icon="📋"
       title="My Resume"
       description="Explore my 30+ years of experience in technical writing and developer experience"
       href="/resume/"
       ariaLabel="View my complete resume"
+      animateIn={true}
+      animationDelay="50"
     />
 
-    <ActionCard
+    <UnifiedCard
+      variant="content"
       icon="🛠️"
       title="My Work"
       description="SDK docs, CLI tools, React apps, and developer experience projects at Adobe and beyond"
       href="/work/"
       ariaLabel="View my professional work and projects"
+      animateIn={true}
+      animationDelay="100"
     />
 
-    <ActionCard
+    <UnifiedCard
+      variant="content"
       icon="📝"
       title="My Blog"
       description="Insights on developer experience, API documentation, and making complex concepts clear"
       href="/blog/"
       ariaLabel="Read my blog"
+      animateIn={true}
+      animationDelay="150"
     />
 
-    <ActionCard
+    <UnifiedCard
+      variant="content"
       icon="👨‍💻"
       title="About Me"
       description="Learn about my journey from Schlumberger to TOPAZ to Adobe as a developer experience strategist"
       href="/about/"
       ariaLabel="Learn more about my background"
+      animateIn={true}
+      animationDelay="200"
     />
   </div>
 

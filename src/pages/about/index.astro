@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
+import UnifiedCard from '../../components/ui/UnifiedCard.astro';
 import '../../styles/animations.css';
 ---
 
@@ -44,39 +45,41 @@ import '../../styles/animations.css';
   <div class="recognition-section animate-in animate-delay-150">
     <h2>Recognition & Community Impact</h2>
     <div class="recognition-grid">
-      <div class="recognition-item">
-        <h3>🏆 Adobe Awards</h3>
-        <p>
-          Nominated for both the Adobe Founders Award and Extreme Ownership Award for excellence in
-          technical writing and developer experience innovation.
-        </p>
-      </div>
+      <UnifiedCard
+        variant="content"
+        icon="🏆"
+        title="Adobe Awards"
+        description="Nominated for both the Adobe Founders Award and Extreme Ownership Award for excellence in technical writing and developer experience innovation."
+        animateIn={true}
+        animationDelay="50"
+      />
 
-      <div class="recognition-item">
-        <h3>🎤 International Speaking</h3>
-        <p>
-          Presented PageBuilder best practices at Meet Magento Indonesia 2019, sharing insights with
-          the international open-source community.
-        </p>
-      </div>
+      <UnifiedCard
+        variant="content"
+        icon="🎤"
+        title="International Speaking"
+        description="Presented PageBuilder best practices at Meet Magento Indonesia 2019, sharing insights with the international open-source community."
+        animateIn={true}
+        animationDelay="100"
+      />
 
-      <div class="recognition-item">
-        <h3>⭐ Community Leadership</h3>
-        <p>
-          PageBuilder Examples repository: 106 GitHub stars, 78 forks—highest engagement in the
-          PageBuilder ecosystem. Deep community involvement with Magento, contributing to both code
-          and documentation that helps thousands of developers worldwide.
-        </p>
-      </div>
+      <UnifiedCard
+        variant="content"
+        icon="⭐"
+        title="Community Leadership"
+        description="Created the PageBuilder Examples repository: 106 GitHub stars, 78 forks—highest engagement in the PageBuilder ecosystem. I encouraged community involvement through an open Slack channel to help developers worldwide."
+        animateIn={true}
+        animationDelay="150"
+      />
 
-      <div class="recognition-item">
-        <h3>📚 Mentoring & Education</h3>
-        <p>
-          Passionate about lifting others through shared knowledge, actively mentoring aspiring
-          technical writers and students at Southwestern University. I also love to help teams
-          establish effective documentation practices.
-        </p>
-      </div>
+      <UnifiedCard
+        variant="content"
+        icon="📚"
+        title="Mentoring & Education"
+        description="Passionate about lifting others through shared knowledge, actively mentoring aspiring technical writers and students at Southwestern University. I also love to help teams establish effective documentation practices."
+        animateIn={true}
+        animationDelay="200"
+      />
     </div>
   </div>
 

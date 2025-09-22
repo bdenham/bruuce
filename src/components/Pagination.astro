@@ -29,7 +29,7 @@ const {
         href={prevUrl || '#'} 
         class={`pagination-btn prev ${!prevUrl ? 'disabled' : ''}`}
         aria-label={prevText}
-        {!prevUrl ? { 'aria-disabled': 'true', tabindex: '-1' } : {}}
+        {...(!prevUrl ? { 'aria-disabled': 'true', tabindex: '-1' } : {})}
       >
         <span class="pagination-icon">←</span>
         <span class="pagination-text">{prevText}</span>
@@ -49,7 +49,7 @@ const {
         href={nextUrl || '#'} 
         class={`pagination-btn next ${!nextUrl ? 'disabled' : ''}`}
         aria-label={nextText}
-        {!nextUrl ? { 'aria-disabled': 'true', tabindex: '-1' } : {}}
+        {...(!nextUrl ? { 'aria-disabled': 'true', tabindex: '-1' } : {})}
       >
         <span class="pagination-text">{nextText}</span>
         <span class="pagination-icon">→</span>
