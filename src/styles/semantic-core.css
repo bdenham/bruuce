@@ -17,28 +17,42 @@
     margin-bottom: 0;
 }
 
-/* Content Headers - Universal heading styling */
+/* Content Headers - Universal heading styling with mobile-first responsive scaling */
 .content-section > h2,
 .section-heading {
     color: var(--text-primary);
-    font-size: 1.75rem; /* 28px default */
+    font-size: 1.5rem; /* 24px on mobile - smaller for mobile screens */
     font-weight: 600;
     margin: 0 0 1.5rem 0;
     line-height: 1.3;
 }
 
-/* Responsive heading sizes */
+/* Responsive heading sizes - mobile first approach */
+@media (min-width: 480px) {
+    .content-section > h2,
+    .section-heading {
+        font-size: 1.625rem; /* 26px on larger mobile */
+    }
+}
+
 @media (min-width: 640px) {
     .content-section > h2,
     .section-heading {
-        font-size: 2rem; /* 32px on larger screens */
+        font-size: 1.675rem; /* 26.8px on tablet */
+    }
+}
+
+@media (min-width: 768px) {
+    .content-section > h2,
+    .section-heading {
+        font-size: 1.75rem; /* 28px on desktop */
     }
 }
 
 @media (min-width: 1536px) {
     .content-section > h2,
     .section-heading {
-        font-size: 2.5rem; /* 50px at 2xl (20px * 2.5) */
+        font-size: 2.25rem; /* 36px at 2xl - reduced from 40px for better balance */
     }
 }
 
