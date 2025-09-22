@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
-import '../../styles/animations.css';
+import '../../styles/semantic-pages.css';
+import '../../styles/theme-pages.css';
 ---
 
 <BaseLayout
@@ -410,7 +411,7 @@ import '../../styles/animations.css';
 
     <div class="section-container animate-in animate-delay-300">
       <h2 class="section-heading">Speaking & Community</h2>
-      <div class="speaking-card">
+      <div class="card">
         <div class="speaking-header">
           <h3>Meet Magento Indonesia 2019</h3>
           <span class="speaking-type">Conference Presentation</span>
@@ -515,19 +516,6 @@ import '../../styles/animations.css';
     font-weight: 400;
   }
 
-  .project-card {
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
-    border: 2px solid rgba(148, 163, 184, 0.4);
-    border-radius: 16px;
-    padding: 24px;
-    transition: all 0.3s ease;
-  }
-
-  .project-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px var(--shadow-secondary);
-    border-color: var(--accent-primary);
-  }
 
   .project-header {
     margin-bottom: 16px;
@@ -637,19 +625,6 @@ import '../../styles/animations.css';
     opacity: 1;
   }
 
-  .speaking-card {
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
-    border: 2px solid rgba(148, 163, 184, 0.4);
-    border-radius: 16px;
-    padding: 24px;
-    transition: all 0.3s ease;
-  }
-
-  .speaking-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px var(--shadow-secondary);
-    border-color: var(--accent-primary);
-  }
 
   .speaking-header {
     display: flex;
@@ -1009,19 +984,6 @@ import '../../styles/animations.css';
     margin-bottom: 48px;
   }
 
-  .doc-card {
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
-    border: 2px solid rgba(148, 163, 184, 0.4);
-    border-radius: 16px;
-    padding: 24px;
-    transition: all 0.3s ease;
-  }
-
-  .doc-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px var(--shadow-secondary);
-    border-color: var(--accent-primary);
-  }
 
   .featured-documentation h2 {
     color: var(--text-primary);

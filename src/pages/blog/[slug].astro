@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SEO from '../../components/SEO.astro';
 import Tags from '../../components/Tags.astro';
-import '../../styles/animations.css';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');

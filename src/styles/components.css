@@ -1,42 +1,8 @@
 /* Reusable Components */
 
-/* Base card styling */
-.card {
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
-    border: 2px solid rgba(148, 163, 184, 0.4);
-    border-radius: 16px;
-    padding: 24px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px var(--shadow-secondary);
-    border-color: var(--accent-primary);
-}
-
-.card.featured {
-    border: 2px solid var(--accent-primary);
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
-}
-
-/* Project cards */
-.project-card {
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
-    border: 2px solid rgba(148, 163, 184, 0.4);
-    border-radius: 16px;
-    padding: 24px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-2px);
-    background: var(--bg-card-hover);
-    border-color: var(--accent-primary);
-    box-shadow: 0 8px 24px var(--shadow-secondary);
-}
-
-/* Documentation cards */
+/* Base card styling - single source of truth for all card types */
+.card,
+.project-card,
 .doc-card {
     background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
     border: 2px solid rgba(148, 163, 184, 0.4);
@@ -45,15 +11,25 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.card:hover,
+.project-card:hover,
 .doc-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 32px var(--shadow-secondary);
     border-color: var(--accent-primary);
 }
 
+/* Project cards get special hover background */
+.project-card:hover {
+    background: var(--bg-card-hover);
+    box-shadow: 0 8px 24px var(--shadow-secondary);
+}
+
+/* Featured card styling */
+.card.featured,
+.project-card.featured,
 .doc-card.featured {
     border: 2px solid var(--accent-primary);
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
 }
 
 /* LinkedIn post cards - bullet style */
@@ -229,8 +205,8 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #0077b5;
-    /* LinkedIn brand blue - WCAG AAA compliant with white text */
+    background: #004471;
+    /* Darker blue for WCAG AAA compliance (7:1 contrast ratio with white) */
     color: #ffffff;
     text-decoration: none;
     padding: 12px 24px;
@@ -241,8 +217,8 @@
 }
 
 .linkedin-follow-btn:hover {
-    background: #005885;
-    /* Darker LinkedIn blue for hover */
+    background: #003659;
+    /* Even darker for hover state - maintains WCAG AAA compliance */
     transform: translateY(-1px);
 }
 

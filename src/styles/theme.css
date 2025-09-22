@@ -1,5 +1,34 @@
 /* Consolidated CSS for better performance - eliminates import chain */
 
+/* CSS Reset */
+html,
+body {
+  scrollbar-gutter: stable;
+}
+
+/* =============================================================================
+   UNIVERSAL TEXT BALANCING
+   Applied to all text content for consistent, professional typography
+   ============================================================================= */
+
+/* Apply text balancing to ALL text content - no exceptions needed */
+* {
+    /* Modern text balancing - prevents awkward line breaks */
+    text-wrap: pretty;
+    
+    /* Prevent orphans and widows in print/long content */
+    orphans: 2;
+    widows: 2;
+    
+    /* Avoid breaking inside elements when possible */
+    break-inside: avoid-orphans;
+}
+
+/* Enhanced balancing for headings - distributes text evenly across lines */
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+
 /* Custom Text Selection Colors */
 ::selection {
     background-color: rgba(0, 170, 255, 0.2); /* Light blue with transparency */
@@ -221,10 +250,21 @@ a:active {
 .nav-back a,
 .doc-link,
 .post-cta,
-.performance-cta,
-.linkedin-follow-btn {
-    /* These components maintain their existing custom styling */
-    all: revert;
+.performance-cta {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition-base);
+    border-radius: var(--radius-md);
+    padding: 0.5rem;
+    margin: -0.5rem;
+    display: inline-block;
+}
+
+.doc-link:hover,
+.post-cta:hover,
+.performance-cta:hover {
+    color: var(--accent-hover);
 }
 
 .card:hover {
@@ -238,40 +278,6 @@ a:active {
     background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.03));
 }
 
-.project-card {
-    background: var(--bg-card);
-    border: none;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 2px 8px var(--shadow-secondary);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.project-card:hover {
-    background: var(--bg-card-hover);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px var(--shadow-primary);
-}
-
-.doc-card {
-    background: var(--bg-card);
-    border: none;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 2px 8px var(--shadow-secondary);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.doc-card:hover {
-    background: var(--bg-card-hover);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px var(--shadow-primary);
-}
-
-.doc-card.featured {
-    border: 2px solid var(--accent-primary);
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.03));
-}
 
 .linkedin-post {
     background: transparent;
@@ -421,8 +427,8 @@ a:active {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #0077b5;
-    /* LinkedIn brand blue - WCAG AAA compliant with white text */
+    background: #004471;
+    /* Darker blue for WCAG AAA compliance (7:1 contrast ratio with white) */
     color: #ffffff;
     text-decoration: none;
     padding: 12px 24px;
@@ -433,8 +439,8 @@ a:active {
 }
 
 .linkedin-follow-btn:hover {
-    background: #005885;
-    /* Darker LinkedIn blue for hover */
+    background: #003659;
+    /* Even darker for hover state - maintains WCAG AAA compliance */
     transform: translateY(-1px);
 }
 
@@ -1191,4 +1197,331 @@ footer a:hover {
 
 #main-title {
   margin-top: 1.25rem;
+}/* =============================================================================
+   OPTIMAL LINE LENGTH SYSTEM
+   Ensures all text content has proper character count per line (45-75ch optimal)
+   ============================================================================= */
+
+/* =============================================================================
+   CORE LINE LENGTH CLASSES
+   ============================================================================= */
+
+/* Standard content - paragraphs, articles, main text */
+.content,
+.content p,
+.lead,
+.section-intro,
+.posts-intro,
+.content-intro,
+.intro-text p,
+p:not([class]) {
+    max-width: 65ch; /* Optimal: 65 characters per line */
+    line-height: 1.6;
+}
+
+/* Long-form content - blog posts, articles */
+.content-panel,
+.section,
+.blog-post,
+.prose,
+.article-content {
+    max-width: 70ch; /* Slightly wider for long-form reading */
+}
+
+/* Wide content that should use full width */
+.action-cards,
+.grid-medium,
+.grid-large,
+.performance-highlight,
+.metrics-grid,
+.timeline-projects,
+.project-details,
+.contact-details {
+    max-width: none; /* Allow full width for grid layouts */
+}
+
+/* =============================================================================
+   RESPONSIVE LINE LENGTH ADJUSTMENTS
+   ============================================================================= */
+
+/* Large screens - maximum comfortable reading width */
+@media (min-width: 1200px) {
+    .content,
+    .content p,
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .content-intro,
+    .intro-text p,
+    p:not([class]) {
+        max-width: 75ch; /* Maximum: 75 characters per line */
+    }
+
+    .content-panel,
+    .section,
+    .blog-post,
+    .prose,
+    .article-content {
+        max-width: 75ch; /* Consistent with other content */
+    }
+}
+
+/* Tablet screens - balanced reading experience */
+@media (max-width: 768px) and (min-width: 641px) {
+    .content,
+    .content p,
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .content-intro,
+    .intro-text p,
+    p:not([class]) {
+        max-width: 60ch; /* Tablet: 60 characters per line */
+    }
+
+    .content-panel,
+    .section,
+    .blog-post,
+    .prose,
+    .article-content {
+        max-width: 60ch;
+    }
+}
+
+/* Mobile screens - optimal for small devices */
+@media (max-width: 640px) {
+    .content,
+    .content p,
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .content-intro,
+    .intro-text p,
+    p:not([class]) {
+        max-width: 50ch; /* Mobile: 50 characters per line */
+        margin-left: 0; /* Keep left-aligned for readability */
+        margin-right: auto;
+        text-align: left; /* Ensure left alignment */
+    }
+
+    .content-panel,
+    .section,
+    .blog-post,
+    .prose,
+    .article-content {
+        max-width: 50ch;
+        margin-left: 0; /* Keep left-aligned */
+        margin-right: auto;
+        text-align: left;
+    }
+
+    /* Action cards - single column on mobile */
+    .action-cards.grid-medium {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Extra small mobile - tighten further */
+@media (max-width: 480px) {
+    .content,
+    .content p,
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .content-intro,
+    .intro-text p,
+    p:not([class]) {
+        max-width: 45ch; /* Small mobile: 45 characters per line */
+        text-align: left; /* Ensure left alignment on smallest screens */
+    }
+
+    .content-panel,
+    .section,
+    .blog-post,
+    .prose,
+    .article-content {
+        max-width: 45ch;
+        text-align: left;
+    }
+}
+
+/* =============================================================================
+   TYPOGRAPHY CONSISTENCY
+   ============================================================================= */
+
+/* Ensure text is always left-aligned for readability */
+.content,
+.content p,
+.lead,
+.section-intro,
+.posts-intro,
+.content-intro,
+.intro-text p,
+p:not([class]) {
+    text-align: left !important; /* Force left alignment for all text content */
+}
+
+/* Ensure consistent font sizes for intro paragraphs */
+.lead,
+.section-intro,
+.posts-intro,
+.content-intro,
+.summary-section p {
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive font scaling */
+@media (min-width: 1536px) {
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .content-intro,
+    .summary-section p {
+        font-size: 1.25rem; /* 20px on large screens */
+    }
+}
+
+@media (max-width: 640px) {
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .content-intro,
+    .summary-section p {
+        font-size: 1rem; /* 16px on mobile */
+    }
+}
+
+/* =============================================================================
+   OVERRIDES FOR SPECIFIC CASES
+   ============================================================================= */
+
+/* Ensure blog content follows the system */
+.content :global(p) {
+    max-width: inherit; /* Inherit from parent .content */
+    font-size: 1.1875rem; /* 19px - balanced base size */
+    line-height: 1.7;
+    color: var(--text-tertiary);
+    font-weight: 400;
+}
+
+/* Homepage lead text - slightly larger */
+.lead.homepage {
+    font-size: 1.25rem;
+}
+
+@media (min-width: 1536px) {
+    .lead.homepage {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .lead.homepage {
+        font-size: 1.0625rem;
+    }
+}
+
+/* =============================================================================
+   ANIMATION SYSTEM - Consolidated for Performance
+   ============================================================================= */
+
+/* Base animation class - hardware accelerated */
+.animate-in {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0); /* Hardware acceleration */
+  will-change: transform, opacity; /* Optimize for animations */
+  animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Staggered animation delay utility classes */
+.animate-delay-50 {
+  animation-delay: 50ms;
+}
+
+.animate-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animate-delay-150 {
+  animation-delay: 150ms;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-250 {
+  animation-delay: 250ms;
+}
+
+.animate-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animate-delay-350 {
+  animation-delay: 350ms;
+}
+
+.animate-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animate-delay-450 {
+  animation-delay: 450ms;
+}
+
+/* Keyframe definitions */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0); /* Hardware acceleration */
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0); /* Hardware acceleration */
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-20px, 0, 0); /* Hardware acceleration */
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0); /* Hardware acceleration */
+  }
+}
+
+@keyframes actionCardIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0); /* Hardware acceleration */
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0); /* Hardware acceleration */
+  }
+}
+
+@keyframes staggerIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0); /* Hardware acceleration */
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0); /* Hardware acceleration */
+  }
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-in {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
 }

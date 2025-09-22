@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
-import '../../styles/animations.css';
+import '../../styles/semantic-pages.css';
+import '../../styles/theme-pages.css';
 ---
 
 <BaseLayout
@@ -412,19 +413,10 @@ import '../../styles/animations.css';
     padding-bottom: 8px;
   }
 
+  /* Project-specific card modifications */
   .project-card {
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
-    border: 2px solid rgba(148, 163, 184, 0.4);
-    border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 32px;
-    transition: all 0.3s ease;
-  }
-
-  .project-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px var(--shadow-secondary);
-    border-color: var(--accent-primary);
+    padding: 32px; /* Larger padding for projects */
+    margin-bottom: 32px; /* Spacing between project cards */
   }
 
   .project-card.featured {

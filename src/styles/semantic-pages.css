@@ -1,0 +1,140 @@
+/* =============================================================================
+   SEMANTIC PAGES SYSTEM - Blog, Projects, Resume, Work Page Styles
+   Page-specific semantic styles loaded only where needed
+   ============================================================================= */
+
+/* =============================================================================
+   PAGE-SPECIFIC LAYOUT PATTERNS
+   ============================================================================= */
+
+/* Force single column for ALL page-specific grid classes - better readability */
+.grid-small,
+.grid-medium,
+.grid-large,
+.grid-extra-large,
+.grid-projects,
+.linkedin-posts,
+.philosophy-grid,
+.expertise-grid,
+.recognition-grid,
+.project-details,
+.contact-details,
+.skills-grid,
+.education-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr !important; /* Force single column */
+}
+
+/* Override any responsive breakpoints - keep everything single column */
+@media (min-width: 768px) {
+    .grid-small,
+    .grid-medium,
+    .grid-large,
+    .grid-extra-large,
+    .grid-projects,
+    .linkedin-posts,
+    .philosophy-grid,
+    .expertise-grid,
+    .recognition-grid,
+    .project-details,
+    .contact-details,
+    .skills-grid,
+    .education-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-small,
+    .grid-medium,
+    .grid-large,
+    .grid-extra-large,
+    .grid-projects,
+    .linkedin-posts,
+    .philosophy-grid,
+    .expertise-grid,
+    .recognition-grid,
+    .project-details,
+    .contact-details,
+    .skills-grid,
+    .education-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* =============================================================================
+   PAGE-SPECIFIC MODIFIERS
+   ============================================================================= */
+
+/* Large content for special pages */
+.content-section.large .section-heading,
+.content-section.large > h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+    .content-section.large .section-heading,
+    .content-section.large > h2 {
+        font-size: 3rem;
+    }
+}
+
+/* =============================================================================
+   PAGE LEGACY COMPATIBILITY - Non-Homepage Pages
+   ============================================================================= */
+
+/* Map page-specific classes to new semantic system */
+.projects-section,
+.speaking-section,
+.philosophy-section,
+.journey-section,
+.expertise-section,
+.recognition-section,
+.personal-section,
+.summary-section,
+.skills-section,
+.experience-section,
+.education-section,
+.awards-section,
+.endorsements-section,
+.featured-documentation {
+    /* Inherit all content-section styles */
+    margin-bottom: 3rem;
+    padding: 0;
+}
+
+.projects-section:last-child,
+.speaking-section:last-child,
+.philosophy-section:last-child,
+.journey-section:last-child,
+.expertise-section:last-child,
+.recognition-section:last-child,
+.personal-section:last-child,
+.summary-section:last-child,
+.skills-section:last-child,
+.experience-section:last-child,
+.education-section:last-child,
+.awards-section:last-child,
+.endorsements-section:last-child,
+.featured-documentation:last-child {
+    margin-bottom: 0;
+}
+
+/* =============================================================================
+   RESPONSIVE TYPOGRAPHY FOR PAGES
+   ============================================================================= */
+
+/* Responsive intro text for pages */
+@media (min-width: 640px) {
+    .content-intro {
+        font-size: 1.25rem;
+    }
+}
+
+@media (min-width: 1536px) {
+    .content-intro {
+        font-size: 1.5rem;
+    }
+}

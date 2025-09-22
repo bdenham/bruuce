@@ -4,7 +4,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPostCard from '../components/ui/BlogPostCard.astro';
 import UnifiedCard from '../components/ui/UnifiedCard.astro';
 import LighthouseGauge from '../components/ui/LighthouseGauge.astro';
-import '../styles/animations.css';
 
 // Get the latest 2 blog posts for the homepage
 const blogPosts = await getCollection('blog');
@@ -22,7 +21,7 @@ const latestPosts = blogPosts
   <p class="subtitle homepage animate-in animate-delay-100">Senior Tech Writer / DX Engineer</p>
   <p class="lead animate-in animate-delay-150">
     🏆 <strong>Adobe award nominee</strong> with 30+ years turning complex concepts into clear, human
-    experiences. I try tohelp developers learn fast, build smart, and focus on what matters.
+    experiences. I try to help developers learn fast, build smart, and focus on what matters.
   </p>
   <!-- <p class="lead">
     At Adobe, I've built developer and SDK docs, CLI tools, React apps, interactive playgrounds and

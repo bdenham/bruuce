@@ -1,0 +1,112 @@
+/* =============================================================================
+   THEME PAGES SYSTEM - Page-Specific Theme Styles
+   Theme styles that are only used on specific pages (not homepage)
+   ============================================================================= */
+
+/* =============================================================================
+   PAGE-SPECIFIC CARD STYLES
+   ============================================================================= */
+
+/* Project cards - used on projects and work pages */
+.project-card {
+    background: var(--bg-card);
+    border: none;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 8px var(--shadow-secondary);
+}
+
+.project-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--shadow-primary);
+}
+
+/* Documentation cards - used on work page */
+.doc-card {
+    background: var(--bg-card);
+    border: none;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 8px var(--shadow-secondary);
+}
+
+.doc-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--shadow-primary);
+}
+
+.doc-card.featured {
+    border: 2px solid var(--accent-primary);
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.03));
+}
+
+/* =============================================================================
+   PAGE-SPECIFIC TYPOGRAPHY RESPONSIVE RULES
+   ============================================================================= */
+
+/* Resume page summary sections */
+.summary-section p {
+    max-width: 65ch;
+    line-height: 1.6;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    text-align: left !important;
+}
+
+/* Page-specific grid layouts */
+.skills-grid,
+.education-grid {
+    max-width: none; /* Allow full width for grid layouts */
+}
+
+/* =============================================================================
+   RESPONSIVE TYPOGRAPHY FOR PAGE-SPECIFIC ELEMENTS
+   ============================================================================= */
+
+/* Large screens - page-specific elements */
+@media (min-width: 1200px) {
+    .summary-section p {
+        max-width: 75ch;
+    }
+}
+
+/* Tablet screens - page-specific elements */
+@media (max-width: 768px) and (min-width: 641px) {
+    .summary-section p {
+        max-width: 60ch;
+    }
+}
+
+/* Mobile screens - page-specific elements */
+@media (max-width: 640px) {
+    .summary-section p {
+        max-width: 50ch;
+        margin-left: 0;
+        margin-right: auto;
+        text-align: left;
+    }
+}
+
+/* Extra small mobile - page-specific elements */
+@media (max-width: 480px) {
+    .summary-section p {
+        max-width: 45ch;
+        text-align: left;
+    }
+}
+
+/* Responsive font scaling for page-specific elements */
+@media (min-width: 1536px) {
+    .summary-section p {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .summary-section p {
+        font-size: 1rem;
+    }
+}
+
