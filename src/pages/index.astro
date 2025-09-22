@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPostCard from '../components/ui/BlogPostCard.astro';
 import UnifiedCard from '../components/ui/UnifiedCard.astro';
+import LighthouseGauge from '../components/ui/LighthouseGauge.astro';
 import '../styles/animations.css';
 
 // Get the latest 2 blog posts for the homepage
@@ -31,73 +32,23 @@ const latestPosts = blogPosts
   <!-- Performance Achievement Highlight -->
   <div class="performance-highlight">
     <div class="performance-header">
-      <h2>⚡ Performance Excellence</h2>
+      <h2 class="section-heading">⚡ Performance Excellence</h2>
       <p>Sub-second performance with exceptional user experience across all devices.</p>
     </div>
-    <div class="metrics-grid">
-      <!-- Flattened DOM structure for performance -->
-      <div class="lh-score" data-score="100" data-label="Performance">
-        <svg viewBox="0 0 120 120">
-          <circle class="lh-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
-          <circle
-            class="lh-arc"
-            r="56"
-            cx="60"
-            cy="60"
-            stroke-width="8"
-            style="stroke-dasharray: 351.858, 351.858;"></circle>
-        </svg>
-        <span class="lh-num">100</span>
-        <span class="lh-label">Performance</span>
-      </div>
-      <div class="lh-score" data-score="100" data-label="Accessibility">
-        <svg viewBox="0 0 120 120">
-          <circle class="lh-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
-          <circle
-            class="lh-arc"
-            r="56"
-            cx="60"
-            cy="60"
-            stroke-width="8"
-            style="stroke-dasharray: 351.858, 351.858;"></circle>
-        </svg>
-        <span class="lh-num">100</span>
-        <span class="lh-label">Accessibility</span>
-      </div>
-      <div class="lh-score" data-score="100" data-label="Best Practices">
-        <svg viewBox="0 0 120 120">
-          <circle class="lh-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
-          <circle
-            class="lh-arc"
-            r="56"
-            cx="60"
-            cy="60"
-            stroke-width="8"
-            style="stroke-dasharray: 351.858, 351.858;"></circle>
-        </svg>
-        <span class="lh-num">100</span>
-        <span class="lh-label">Best Practices</span>
-      </div>
-      <div class="lh-score" data-score="100" data-label="SEO">
-        <svg viewBox="0 0 120 120">
-          <circle class="lh-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
-          <circle
-            class="lh-arc"
-            r="56"
-            cx="60"
-            cy="60"
-            stroke-width="8"
-            style="stroke-dasharray: 351.858, 351.858;"></circle>
-        </svg>
-        <span class="lh-num">100</span>
-        <span class="lh-label">SEO</span>
-      </div>
-      <div class="performance-metrics">
-        <div class="metric-item"><span class="metric-value">~0.3s</span><br />Desktop Load</div>
-        <div class="metric-item"><span class="metric-value">~1.0s</span><br />Mobile Load</div>
-        <div class="metric-item"><span class="metric-value">0ms</span><br />Blocking Time</div>
-        <div class="metric-item"><span class="metric-value">0</span><br />Layout Shift</div>
-      </div>
+    <!-- Lighthouse Scores Grid -->
+    <div class="lighthouse-grid">
+      <LighthouseGauge score={100} label="Performance" />
+      <LighthouseGauge score={100} label="Accessibility" />
+      <LighthouseGauge score={100} label="Best Practices" />
+      <LighthouseGauge score={100} label="SEO" />
+    </div>
+    
+    <!-- Performance Metrics Grid -->
+    <div class="performance-metrics">
+      <div class="metric-item"><span class="metric-value">~0.3s</span><br />Desktop Load</div>
+      <div class="metric-item"><span class="metric-value">~1.0s</span><br />Mobile Load</div>
+      <div class="metric-item"><span class="metric-value">0ms</span><br />Blocking Time</div>
+      <div class="metric-item"><span class="metric-value">0</span><br />Layout Shift</div>
     </div>
     <a
       href="https://pagespeed.web.dev/analysis?url=https://bruuce.com"
@@ -158,8 +109,8 @@ const latestPosts = blogPosts
     />
   </div>
 
-  <div class="section animate-in animate-delay-250">
-    <h2>My Philosophy</h2>
+  <div class="section-container animate-in animate-delay-250">
+    <h2 class="section-heading">My Philosophy</h2>
     <p>
       I don't just write the docs. I build tools, craft interfaces, and create explanations that
       click. I code. I design. I connect. My mission is helping developers have those "aha" moments
@@ -167,8 +118,8 @@ const latestPosts = blogPosts
     </p>
   </div>
 
-  <div class="section animate-in animate-delay-300">
-    <h2>Recent Posts</h2>
+  <div class="section-container animate-in animate-delay-300">
+    <h2 class="section-heading">Recent Posts</h2>
     <div class="blog-posts-container">
       {
         latestPosts.map((post, index) => (
@@ -205,7 +156,8 @@ const latestPosts = blogPosts
 
   .blog-post-wrapper.lazy-load {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0); /* Hardware acceleration */
+    will-change: transform, opacity; /* Optimize for animations */
     transition:
       opacity 0.3s ease,
       transform 0.3s ease;
@@ -213,13 +165,14 @@ const latestPosts = blogPosts
 
   .blog-post-wrapper.lazy-load.loaded {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0); /* Hardware acceleration */
   }
 
   /* Simple CSS-only delayed animations for blog post cards */
   .scroll-animate {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0); /* Hardware acceleration */
+    will-change: transform, opacity; /* Optimize for animations */
     animation: slideInUp 600ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 
@@ -279,11 +232,11 @@ const latestPosts = blogPosts
     font-weight: 400;
   }
 
-  .metrics-grid {
+  .lighthouse-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 16px;
+    margin-bottom: 24px;
   }
 
   .metric-item {
@@ -386,91 +339,12 @@ const latestPosts = blogPosts
     }
   }
 
-  /* Optimized Lighthouse gauge styles - flattened DOM */
-  .lh-score {
-    position: relative;
-    text-align: center;
-    padding: 8px;
-    background: rgba(12, 186, 96, 0.1);
-    border: 1px solid rgba(12, 186, 96, 0.2);
-    border-radius: 8px;
-    display: inline-block;
-  }
-
-  .lh-score svg {
-    width: 60px;
-    height: 60px;
-    display: block;
-    margin: 0 auto;
-  }
-
-  .lh-base {
-    fill: none;
-    stroke: var(--border-color);
-    stroke-linecap: round;
-  }
-
-  .lh-arc {
-    fill: none;
-    stroke: #0cce6b;
-    stroke-linecap: round;
-    transform-origin: 50% 50%;
-  }
-
-  /* Pure CSS animation - no JavaScript needed */
-  @keyframes gaugeProgress {
-    from {
-      stroke-dasharray: 0, 351.858;
-    }
-    to {
-      stroke-dasharray: 351.858, 351.858;
-    }
-  }
-
-  .lh-arc {
-    animation: gaugeProgress 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: 0.6s;
-  }
-
-  .lh-num {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1rem;
-    color: var(--text-primary);
-    line-height: 1;
-    z-index: 1;
-    pointer-events: none;
-    font-family: monospace;
-  }
-
-  .lh-label {
-    text-align: center;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    margin-top: 4px;
-    display: block;
-  }
-
+  /* Performance metrics container */
   .performance-metrics {
-    display: contents;
-  }
-
-  @media (max-width: 640px) {
-    .lh-score svg {
-      width: 50px;
-      height: 50px;
-    }
-
-    .lh-num {
-      font-size: 0.75rem;
-    }
-
-    .lh-label {
-      font-size: 0.6875rem;
-    }
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
   }
 
   /* Homepage-specific styles only - LinkedIn styles moved to blog page */

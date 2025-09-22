@@ -24,14 +24,13 @@ import '../../styles/animations.css';
     </p>
   </div>
 
-  <div class="projects-section animate-in animate-delay-150">
-    <h2>Current Adobe Projects</h2>
+  <div class="section-container animate-in animate-delay-150">
+    <h2 class="section-heading">Current Adobe Projects</h2>
 
     <div class="project-card featured">
       <div class="project-header">
         <div class="project-title-section">
           <h3>Adobe Commerce Documentation Ecosystem</h3>
-          <div class="project-status">🚀 Active</div>
         </div>
         <div class="project-tags">
           <span class="tag primary">Technical Writing</span>
@@ -86,7 +85,6 @@ import '../../styles/animations.css';
       <div class="project-header">
         <div class="project-title-section">
           <h3>Commerce API Interactive Playground</h3>
-          <div class="project-status">✅ Deployed</div>
         </div>
         <div class="project-tags">
           <span class="tag">React</span>
@@ -129,7 +127,6 @@ import '../../styles/animations.css';
       <div class="project-header">
         <div class="project-title-section">
           <h3>SDK Documentation with Storybook 8</h3>
-          <div class="project-status">✅ Deployed</div>
         </div>
         <div class="project-tags">
           <span class="tag internal">Adobe Internal</span>
@@ -172,7 +169,6 @@ import '../../styles/animations.css';
       <div class="project-header">
         <div class="project-title-section">
           <h3>Developer Productivity CLI Tools</h3>
-          <div class="project-status">🚀 Active</div>
         </div>
         <div class="project-tags">
           <span class="tag">Node.js</span>
@@ -239,14 +235,13 @@ import '../../styles/animations.css';
     </div>
   </div>
 
-  <div class="projects-section animate-in animate-delay-200">
-    <h2>Open Source & Community</h2>
+  <div class="section-container animate-in animate-delay-200">
+    <h2 class="section-heading">Open Source & Community</h2>
 
     <div class="project-card">
       <div class="project-header">
         <div class="project-title-section">
           <h3>PageBuilder Development Examples</h3>
-          <div class="project-status">🌟 Public Repository</div>
         </div>
         <div class="project-tags">
           <span class="tag">Open Source</span>
@@ -296,7 +291,6 @@ import '../../styles/animations.css';
       <div class="project-header">
         <div class="project-title-section">
           <h3>Meet Magento Indonesia Presentation</h3>
-          <div class="project-status">📢 2019</div>
         </div>
         <div class="project-tags">
           <span class="tag">Speaking</span>
@@ -326,8 +320,8 @@ import '../../styles/animations.css';
     </div>
   </div>
 
-  <div class="projects-section animate-in animate-delay-250">
-    <h2>Legacy Innovations</h2>
+  <div class="section-container animate-in animate-delay-250">
+    <h2 class="section-heading">Legacy Innovations</h2>
 
     <div class="timeline-projects">
       <div class="timeline-project">
@@ -380,8 +374,8 @@ import '../../styles/animations.css';
     </div>
   </div>
 
-  <div class="cta-section animate-in animate-delay-300">
-    <h2>Let's Collaborate</h2>
+  <div class="section-container animate-in animate-delay-300">
+    <h2 class="section-heading">Let's Collaborate</h2>
     <p>
       Interested in working together on developer experience, technical writing, or documentation
       strategy? I'm always excited to tackle new challenges and help teams create better developer
@@ -448,12 +442,7 @@ import '../../styles/animations.css';
   }
 
   .project-title-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 16px;
-    flex-wrap: wrap;
-    gap: 12px;
   }
 
   .project-title-section h3 {
@@ -462,15 +451,6 @@ import '../../styles/animations.css';
     font-size: 1.5rem;
   }
 
-  .project-status {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    background: var(--bg-card);
-    color: var(--accent-primary);
-    border: 1px solid var(--accent-primary);
-  }
 
   .project-tags {
     display: flex;

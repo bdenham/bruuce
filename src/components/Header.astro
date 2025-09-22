@@ -3,22 +3,25 @@ import ThemeToggle from './ThemeToggle.astro';
 ---
 
 <header class="header">
-  <!-- Left section with menu toggle and site name -->
+  <!-- Left section with menu toggle, site name, and navigation -->
   <div class="header-left">
     <!-- Mobile menu toggle - only for very small screens -->
     <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Menu">☰</button>
     
     <!-- LCP element optimized for immediate rendering -->
     <a href="/" class="site-name">Bruce Denham</a>
+    
+    <!-- Visual separator between site name and navigation -->
+    <div class="nav-separator"></div>
+    
+    <!-- Navigation - visible until 640px, aligned with site name -->
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="/about/" class="nav-link">About</a>
+      <a href="/work/" class="nav-link">Work</a>
+      <a href="/projects/" class="nav-link">Projects</a>
+      <a href="/blog/" class="nav-link">Blog</a>
+    </nav>
   </div>
-
-  <!-- Navigation - visible until 640px -->
-  <nav class="main-nav" aria-label="Main navigation">
-    <a href="/about/" class="nav-link">About</a>
-    <a href="/work/" class="nav-link">Work</a>
-    <a href="/projects/" class="nav-link">Projects</a>
-    <a href="/blog/" class="nav-link">Blog</a>
-  </nav>
 
   <div class="header-right">
     <!-- Simplified social links - no complex SVGs blocking LCP -->
@@ -97,17 +100,26 @@ import ThemeToggle from './ThemeToggle.astro';
     gap: 16px;
   }
 
-  /* Create a flex layout that keeps site name left-aligned */
+  /* Create a flex layout that keeps site name and nav left-aligned */
   .header-left {
     display: flex;
     align-items: center;
-    gap: 8px; /* Reduced from 16px to 8px for tighter spacing */
+    gap: 8px; /* Base gap for menu toggle */
     flex: 1; /* Take up available space */
   }
 
+  /* Site name styling */
   .site-name {
     flex-shrink: 0; /* Prevent site name from shrinking */
     font-size: 1.5rem; /* Smaller than default 1.75rem */
+  }
+
+  /* Visual separator between site name and navigation */
+  .nav-separator {
+    width: 1px;
+    height: 28px;
+    background: var(--text-tertiary);
+    margin: 0 16px; /* Equal spacing on both sides */
   }
 
   /* Mobile menu toggle */
@@ -131,6 +143,7 @@ import ThemeToggle from './ThemeToggle.astro';
   .main-nav {
     display: flex;
     gap: 18px; /* Slightly tighter for 4 links */
+    padding-top: 0.25rem;
   }
 
   .nav-link {
@@ -208,6 +221,9 @@ import ThemeToggle from './ThemeToggle.astro';
     }
     .main-nav {
       display: none; /* Hide nav links on small screens */
+    }
+    .nav-separator {
+      display: none; /* Hide separator when nav is hidden */
     }
   }
 

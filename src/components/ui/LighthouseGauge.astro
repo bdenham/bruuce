@@ -1,0 +1,162 @@
+---
+interface Props {
+  score: number;
+  label: string;
+  size?: 'small' | 'medium' | 'large';
+}
+
+const { score, label, size = 'medium' } = Astro.props;
+
+// Calculate stroke-dasharray for the progress arc
+const circumference = 2 * Math.PI * 56; // radius = 56
+const progress = (score / 100) * circumference;
+---
+
+<div class={`lh-score lh-score-${size} animate-in`} data-score={score} data-label={label} style={`--progress: ${progress};`}>
+  <div class="lh-gauge-container">
+    <svg viewBox="0 0 120 120">
+      <circle class="lh-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
+      <circle
+        class="lh-arc"
+        r="56"
+        cx="60"
+        cy="60"
+        stroke-width="8"
+      ></circle>
+    </svg>
+    <span class="lh-num">{score}</span>
+  </div>
+  <span class="lh-label">{label}</span>
+</div>
+
+<style>
+  /* Optimized Lighthouse gauge component */
+  .lh-score {
+    position: relative;
+    text-align: center;
+    padding: 8px;
+    background: rgba(12, 186, 96, 0.1);
+    border: 1px solid rgba(12, 186, 96, 0.2);
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  .lh-gauge-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .lh-score svg {
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Size variants */
+  .lh-score-small svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .lh-score-medium svg {
+    width: 60px;
+    height: 60px;
+  }
+
+  .lh-score-large svg {
+    width: 80px;
+    height: 80px;
+  }
+
+  .lh-base {
+    fill: none;
+    stroke: var(--border-primary, #333);
+    stroke-linecap: round;
+  }
+
+  .lh-arc {
+    fill: none;
+    stroke: #0cce6b;
+    stroke-linecap: round;
+    transform-origin: 50% 50%;
+    transform: rotate(-90deg); /* Start from top */
+    stroke-dasharray: 0, 351.858; /* Start with no progress */
+    transition: stroke-dasharray 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .lh-num {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-primary, #333);
+    line-height: 1;
+    z-index: 1;
+    pointer-events: none;
+    font-family: monospace;
+    font-weight: 600;
+  }
+
+  .lh-label {
+    text-align: center;
+    font-weight: 500;
+    color: var(--text-secondary, #666);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* Size-specific text scaling */
+  .lh-score-small .lh-num {
+    font-size: 0.75rem;
+  }
+
+  .lh-score-small .lh-label {
+    font-size: 0.625rem;
+  }
+
+  .lh-score-medium .lh-num {
+    font-size: 1rem;
+  }
+
+  .lh-score-medium .lh-label {
+    font-size: 0.75rem;
+  }
+
+  .lh-score-large .lh-num {
+    font-size: 1.25rem;
+  }
+
+  .lh-score-large .lh-label {
+    font-size: 0.875rem;
+  }
+
+  /* Animation on load */
+  .lh-score.animate-in .lh-arc {
+    animation: gaugeProgress 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.3s;
+  }
+
+  @keyframes gaugeProgress {
+    from {
+      stroke-dasharray: 0, 351.858;
+    }
+    to {
+      stroke-dasharray: var(--progress, 351.858), 351.858;
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .lh-score-medium svg {
+      width: 50px;
+      height: 50px;
+    }
+
+    .lh-score-medium .lh-num {
+      font-size: 0.875rem;
+    }
+
+    .lh-score-medium .lh-label {
+      font-size: 0.6875rem;
+    }
+  }
+</style>

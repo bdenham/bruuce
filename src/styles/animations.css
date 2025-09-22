@@ -1,9 +1,10 @@
 /* Shared Animation Styles - Consolidated from all pages */
 
-/* Base animation class */
+/* Base animation class - hardware accelerated */
 .animate-in {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translate3d(0, 20px, 0); /* Hardware acceleration */
+  will-change: transform, opacity; /* Optimize for animations */
   animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
@@ -48,44 +49,44 @@
 @keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0); /* Hardware acceleration */
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0); /* Hardware acceleration */
   }
 }
 
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translate3d(-20px, 0, 0); /* Hardware acceleration */
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0); /* Hardware acceleration */
   }
 }
 
 @keyframes actionCardIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0); /* Hardware acceleration */
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0); /* Hardware acceleration */
   }
 }
 
 @keyframes staggerIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translate3d(0, 10px, 0); /* Hardware acceleration */
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0); /* Hardware acceleration */
   }
 }
 
