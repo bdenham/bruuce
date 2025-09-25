@@ -19,14 +19,14 @@ const latestPosts = blogPosts
 
     <!-- Ultra-minimal navigation - no nested spans -->
     <div class="section">
-      <a href="/" class={currentPath === '/' ? 'active' : ''}>🏠 Home</a>
-      <a href="/about/" class={currentPath.startsWith('/about') ? 'active' : ''}>👋 About Me</a>
-      <a href="/work/" class={currentPath.startsWith('/work') ? 'active' : ''}>🛠️ My Work</a>
-      <a href="/resume/" class={currentPath.startsWith('/resume') ? 'active' : ''}>📄 My Resume</a>
+      <a href="/" class={currentPath === '/' ? 'active' : ''}>Home</a>
+      <a href="/about/" class={currentPath.startsWith('/about') ? 'active' : ''}>About Me</a>
+      <a href="/work/" class={currentPath.startsWith('/work') ? 'active' : ''}>My Work</a>
+      <a href="/resume/" class={currentPath.startsWith('/resume') ? 'active' : ''}>My Resume</a>
       <a href="/projects/" class={currentPath.startsWith('/projects') ? 'active' : ''}
-        >🚀 My Projects</a
+        >My Projects</a
       >
-      <a href="/blog/" class={currentPath.startsWith('/blog/') ? 'active' : ''}>👨‍💻 My Blog</a>
+      <a href="/blog/" class={currentPath.startsWith('/blog/') ? 'active' : ''}>My Blog</a>
     </div>
 
     <!-- Minimal blog section - max 2 posts -->
@@ -126,7 +126,7 @@ const latestPosts = blogPosts
   /* Minimal link styling - single element */
   .section a {
     display: block;
-    padding: 12px 24px; /* Increased vertical padding for better touch targets */
+    padding: 12px 24px 12px 32px; /* Extra left padding for better visual spacing */
     color: var(--text-secondary);
     text-decoration: none;
     border-radius: 6px;
@@ -219,7 +219,7 @@ const latestPosts = blogPosts
 
     /* Mobile touch target improvements */
     .section a {
-      padding: 16px 24px; /* Larger touch targets on mobile (44px minimum) */
+      padding: 16px 24px 16px 32px; /* Larger touch targets on mobile with extra left padding */
       margin-bottom: 8px; /* More space between links on mobile */
       font-size: 1.1rem; /* Slightly larger text on mobile for better readability */
     }
