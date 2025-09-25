@@ -204,23 +204,23 @@ import ThemeToggle from './ThemeToggle.astro';
 
   /* Mobile responsive - smart navigation strategy */
   
-  /* Show nav links on larger screens, hide menu toggle */
-  @media (min-width: 641px) {
+  /* Show nav links on larger screens (desktop with sidebar), hide menu toggle */
+  @media (min-width: 1024px) {
     .mobile-menu-toggle {
-      display: none; /* Hide hamburger menu above 640px */
+      display: none; /* Hide hamburger menu above 1024px */
     }
     .main-nav {
       display: flex; /* Show nav links */
     }
   }
 
-  /* Hide nav links on small screens, show menu toggle */
-  @media (max-width: 640px) {
+  /* Hide nav links on smaller screens (tablet/mobile without sidebar), show menu toggle */
+  @media (max-width: 1023px) {
     .mobile-menu-toggle {
-      display: block; /* Show hamburger menu below 640px */
+      display: block; /* Show hamburger menu below 1024px */
     }
     .main-nav {
-      display: none; /* Hide nav links on small screens */
+      display: none; /* Hide nav links on smaller screens */
     }
     .nav-separator {
       display: none; /* Hide separator when nav is hidden */
