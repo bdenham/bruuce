@@ -138,13 +138,13 @@ const latestPosts = blogPosts
 
   .section a:hover {
     color: var(--accent-primary);
-    background: rgba(0, 170, 255, 0.1); /* Light hover background */
+    background: var(--bg-card-hover);
     border-radius: 6px;
   }
 
   .section a.active {
     color: var(--accent-primary);
-    background: rgba(0, 170, 255, 0.2); /* Stronger active background */
+    background: var(--bg-card-hover);
     border-radius: 6px;
   }
 
@@ -301,11 +301,20 @@ const latestPosts = blogPosts
     };
   }
 
-  // Initialize once on page load
+  // Defer initialization to reduce main thread blocking
+  function deferredInit() {
+    if (window.requestIdleCallback) {
+      window.requestIdleCallback(initSidebar);
+    } else {
+      setTimeout(initSidebar, 0);
+    }
+  }
+
+  // Initialize once on page load (deferred)
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSidebar);
+    document.addEventListener('DOMContentLoaded', deferredInit);
   } else {
-    initSidebar();
+    deferredInit();
   }
 
   // Clean re-initialization after view transitions
