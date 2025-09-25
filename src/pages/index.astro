@@ -344,38 +344,20 @@ const latestPosts = blogPosts
     }
   }
 
-  /* Extra small mobile - prevent overflow */
+  /* Extra small mobile - prevent overflow with single optimized query */
   @media (max-width: 480px) {
     .metrics-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 6px;
-      font-size: 0.75rem;
+      grid-template-columns: 1fr; /* Single column for better mobile performance */
+      gap: 8px;
     }
     
-    .metric-item {
+    .metric-item, .lighthouse-score {
       padding: 8px 4px;
       font-size: 0.75rem;
     }
     
-    .lighthouse-score {
-      padding: 6px 4px;
-      font-size: 0.75rem;
-    }
-    
-    .lighthouse-value {
+    .lighthouse-value, .metric-value {
       font-size: 1rem;
-    }
-    
-    .metric-value {
-      font-size: 1rem;
-    }
-  }
-
-  /* Very small screens - single column if needed */
-  @media (max-width: 360px) {
-    .metrics-grid {
-      grid-template-columns: 1fr;
-      gap: 8px;
     }
   }
 
