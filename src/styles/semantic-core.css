@@ -123,15 +123,11 @@
 /* Homepage metrics grid - keep compact */
 .metrics-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-columns: repeat(4, 1fr);
     gap: 12px;
 }
 
-@media (max-width: 640px) {
-    .metrics-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-}
+/* Removed conflicting mobile grid definition - handled in index.astro */
 
 /* =============================================================================
    TEXT BALANCING - UNIVERSAL APPLICATION

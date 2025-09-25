@@ -76,12 +76,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Action cards - two columns for better space utilization */
-/* Higher specificity to override .grid-medium class */
+/* Simplified action cards grid - no !important conflicts */
 .action-cards.grid-medium {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1.5rem !important;
-    align-items: stretch !important;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    align-items: stretch;
 }
 
 /* Typography Components - AstroWind-sized for better readability */
@@ -1231,7 +1231,7 @@ p:not([class]) {
 
     /* Action cards - single column on mobile */
     .action-cards.grid-medium {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: 1fr;
     }
 }
 
