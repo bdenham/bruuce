@@ -775,11 +775,7 @@ p {
     padding: 24px; 
 }
 
-@media (max-width: 640px) {
-    .card-padding-medium { 
-        padding: 16px; 
-    }
-}
+/* Removed duplicate 640px rule - consolidated above */
 
 /* Blog post cards */
 .blog-post-link {
@@ -1331,11 +1327,7 @@ p:not([class]) {
     }
 }
 
-@media (max-width: 640px) {
-    .lead.homepage {
-        font-size: 1.0625rem;
-    }
-}
+/* Removed duplicate 640px rule - consolidated above */
 
 /* =============================================================================
    ANIMATION SYSTEM - Consolidated for Performance
@@ -1482,7 +1474,7 @@ p:not([class]) {
     max-width: none; /* Allow full width for grid layouts */
 }
 
-/* Mobile screens - optimal for small devices */
+/* Mobile screens - consolidated mobile rules */
 @media (max-width: 640px) {
     .content,
     .content p,
@@ -1502,6 +1494,23 @@ p:not([class]) {
     /* Action cards - single column on mobile */
     .action-cards.grid-medium {
         grid-template-columns: 1fr;
+    }
+    
+    /* Consolidate other 640px rules */
+    .card-padding-medium { 
+        padding: 16px; 
+    }
+    
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .content-intro,
+    .summary-section p {
+        font-size: 1rem; /* 16px on mobile */
+    }
+    
+    .lead.homepage {
+        font-size: 1.0625rem;
     }
 }
 
@@ -1530,17 +1539,4 @@ p:not([class]) {
     }
 }
 
-/* Mobile font size adjustments */
-@media (max-width: 640px) {
-    .lead,
-    .section-intro,
-    .posts-intro,
-    .content-intro,
-    .summary-section p {
-        font-size: 1rem; /* 16px on mobile */
-    }
-    
-    .lead.homepage {
-        font-size: 1.0625rem;
-    }
-}
+/* Mobile font size adjustments - consolidated above */
