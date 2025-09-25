@@ -319,4 +319,67 @@ const latestPosts = blogPosts
 
   // Clean re-initialization after view transitions
   document.addEventListener('astro:after-swap', initSidebar);
+
+  // PERFORMANCE OPTIMIZED: Active link highlighting with caching and minimal DOM queries
+  let cachedLinks = null;
+  let lastActivePath = null;
+
+  function highlightActiveLink() {
+    const currentPath = window.location.pathname;
+    
+    // Skip if same path (avoid unnecessary DOM work)
+    if (currentPath === lastActivePath) return;
+    
+    // Cache sidebar links on first run (avoid repeated querySelectorAll)
+    if (!cachedLinks) {
+      cachedLinks = Array.from(document.querySelectorAll('.sidebar a[href]'));
+    }
+    
+    // Find matching link efficiently
+    let activeLink = null;
+    for (const link of cachedLinks) {
+      const linkPath = link.getAttribute('href');
+      
+      // Exact match first (fastest)
+      if (linkPath === currentPath) {
+        activeLink = link;
+        break;
+      }
+      
+      // Partial match for nested pages (only if needed)
+      if (!activeLink && currentPath !== '/' && linkPath !== '/' && currentPath.startsWith(linkPath)) {
+        activeLink = link;
+      }
+    }
+    
+    // Single DOM update: remove previous active, add new active
+    if (lastActivePath) {
+      const prevActive = document.querySelector('.sidebar a.active');
+      if (prevActive) prevActive.classList.remove('active');
+    }
+    
+    if (activeLink) {
+      activeLink.classList.add('active');
+    }
+    
+    lastActivePath = currentPath;
+  }
+
+  // Combine with existing initialization to avoid duplicate event listeners
+  function initActiveLinksOptimized() {
+    // Reset cache on page changes (for view transitions)
+    cachedLinks = null;
+    lastActivePath = null;
+    highlightActiveLink();
+  }
+
+  // Integrate with existing deferred initialization
+  const originalDeferredInit = deferredInit;
+  deferredInit = function() {
+    originalDeferredInit();
+    initActiveLinksOptimized();
+  };
+
+  // Re-run after view transitions (reuse existing listener pattern)
+  document.addEventListener('astro:after-swap', initActiveLinksOptimized);
 </script>
