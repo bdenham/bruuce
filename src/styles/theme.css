@@ -1439,3 +1439,108 @@ p:not([class]) {
     animation: none;
   }
 }
+
+/* =============================================================================
+   MOBILE TYPOGRAPHY & LAYOUT FIXES - Restored from typography-optimized.css
+   Critical mobile CSS that was removed in commit 0632d6ae
+   ============================================================================= */
+
+/* Core line length classes - essential for layout stability */
+.content,
+.content p,
+.lead,
+.section-intro,
+.posts-intro,
+.summary-section p,
+.content-intro,
+.intro-text p,
+p:not([class]) {
+    max-width: 65ch; /* Optimal: 65 characters per line */
+    line-height: 1.6;
+}
+
+/* Long-form content - blog posts, articles */
+.content-panel,
+.section,
+.blog-post,
+.prose,
+.article-content {
+    max-width: 70ch; /* Slightly wider for long-form reading */
+}
+
+/* Wide content that should use full width */
+.action-cards,
+.grid-medium,
+.grid-large,
+.performance-highlight,
+.metrics-grid,
+.timeline-projects,
+.project-details,
+.contact-details,
+.skills-grid,
+.education-grid {
+    max-width: none; /* Allow full width for grid layouts */
+}
+
+/* Mobile screens - optimal for small devices */
+@media (max-width: 640px) {
+    .content,
+    .content p,
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .summary-section p,
+    .content-intro,
+    .intro-text p,
+    p:not([class]) {
+        max-width: 50ch; /* Mobile: 50 characters per line */
+        margin-left: 0; /* Keep left-aligned */
+        margin-right: auto;
+        text-align: left;
+    }
+
+    /* Action cards - single column on mobile */
+    .action-cards.grid-medium {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Extra small mobile - tighten further */
+@media (max-width: 480px) {
+    .content,
+    .content p,
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .summary-section p,
+    .content-intro,
+    .intro-text p,
+    p:not([class]) {
+        max-width: 45ch; /* Small mobile: 45 characters per line */
+        text-align: left; /* Ensure left alignment on smallest screens */
+    }
+
+    .content-panel,
+    .section,
+    .blog-post,
+    .prose,
+    .article-content {
+        max-width: 45ch;
+        text-align: left;
+    }
+}
+
+/* Mobile font size adjustments */
+@media (max-width: 640px) {
+    .lead,
+    .section-intro,
+    .posts-intro,
+    .content-intro,
+    .summary-section p {
+        font-size: 1rem; /* 16px on mobile */
+    }
+    
+    .lead.homepage {
+        font-size: 1.0625rem;
+    }
+}
