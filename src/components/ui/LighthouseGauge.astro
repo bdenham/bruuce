@@ -12,7 +12,7 @@ const circumference = 2 * Math.PI * 56; // radius = 56
 const progress = (score / 100) * circumference;
 ---
 
-<div class={`lh-score lh-score-${size}`} data-score={score} data-label={label} style={`--progress: ${progress};`}>
+<div class={`lh-score lh-score-${size} animate-in`} data-score={score} data-label={label} style={`--progress: ${progress};`}>
   <div class="lh-gauge-container">
     <svg viewBox="0 0 120 120">
       <circle class="lh-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
