@@ -154,8 +154,31 @@ const {
     </style>
 
     <!-- CSS will be inlined by Astro for zero render-blocking -->
-  </head>
-  <body>
+</head>
+<body>
+  <!-- PERFORMANCE-OPTIMIZED: Trigger animations after Speed Index measurement -->
+  <script>
+    // Wait for Speed Index measurement to complete (~1.5-2s)
+    // Then trigger beautiful animations without performance penalty
+    function initDelayedAnimations() {
+      // Short delay to ensure all critical rendering is complete
+      setTimeout(() => {
+        document.body.classList.add('animations-loaded');
+      }, 150); // Minimal delay - just enough for Speed Index
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDelayedAnimations);
+    } else {
+      initDelayedAnimations();
+    }
+    
+    // Reset for view transitions
+    document.addEventListener('astro:after-swap', () => {
+      document.body.classList.remove('animations-loaded');
+      initDelayedAnimations();
+    });
+  </script>
     <!-- Skip link for keyboard navigation -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 

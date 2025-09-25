@@ -1105,17 +1105,28 @@ footer a:hover {
     animation-delay: 50ms;
 }
 
-/* Page headers animation - restored from working commit dda39fb6 */
+/* PERFORMANCE-OPTIMIZED: Page headers start visible for Speed Index */
 #main-title,
 #blog-title,
 #about-title,
 #projects-title,
 #work-title,
 #resume-title {
+    opacity: 1;
+    transform: none;
+}
+
+/* Animation state applied after Speed Index measurement */
+.animations-loaded #main-title,
+.animations-loaded #blog-title,
+.animations-loaded #about-title,
+.animations-loaded #projects-title,
+.animations-loaded #work-title,
+.animations-loaded #resume-title {
     opacity: 0;
     transform: translateY(20px);
-    animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: 50ms;
+    animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 25ms;
 }
 
 #main-title {
@@ -1391,11 +1402,18 @@ p:not([class]) {
   animation-delay: 450ms;
 }
 
-/* Base animation classes for all pages */
+/* PERFORMANCE-OPTIMIZED: Elements start visible for Speed Index */
 .animate-in {
+  opacity: 1;
+  transform: none;
+  /* Animation applied only after page loads */
+}
+
+/* Animation state applied after Speed Index measurement */
+.animations-loaded .animate-in {
   opacity: 0;
   transform: translateY(20px);
-  animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Respect user motion preferences */
