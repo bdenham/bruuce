@@ -752,6 +752,35 @@ p {
 }
 
 
+/* Base Card Foundation - Essential for UnifiedCard components */
+.card-base {
+    background: var(--bg-card);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px var(--shadow-secondary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-base:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px var(--shadow-primary);
+}
+
+.card-padding-medium { 
+    padding: 24px; 
+}
+
+@media (max-width: 640px) {
+    .card-padding-medium { 
+        padding: 16px; 
+    }
+}
+
 /* Blog post cards */
 .blog-post-link {
     display: block;
