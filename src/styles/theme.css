@@ -1540,3 +1540,37 @@ p:not([class]) {
 }
 
 /* Mobile font size adjustments - consolidated above */
+
+/* =============================================================================
+   MOBILE HORIZONTAL OVERFLOW FIX
+   Prevent horizontal scrolling on mobile devices
+   ============================================================================= */
+
+/* Ensure no element can cause horizontal overflow */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Prevent any element from being wider than viewport */
+* {
+  max-width: 100%;
+}
+
+/* Exception for elements that need full width */
+.full-width-container,
+.full-width-content,
+svg,
+img {
+  max-width: none;
+}
+
+/* Ensure images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
