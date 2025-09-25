@@ -11,8 +11,8 @@ body {
    Applied to all text content for consistent, professional typography
    ============================================================================= */
 
-/* Apply text balancing to ALL text content - no exceptions needed */
-* {
+/* Apply text balancing to text content - optimized selectors instead of universal */
+p, li, blockquote, .lead, .subtitle, .section-intro, .posts-intro {
     /* Modern text balancing - prevents awkward line breaks */
     text-wrap: pretty;
     
@@ -990,32 +990,11 @@ footer a:hover {
 }
 
 
-@media (max-width: 520px) {
-    h1 {
-        font-size: 2rem;
-    }
-
-    .content-panel {
-        padding: 24px 20px;
-    }
-}
+/* Consolidated into @media (max-width: 640px) breakpoint for consistency */
 
 /* Print styles removed - empty media query eliminated */
 
-/* View Transitions - re-enabled (testing if this causes sliding) */
-::view-transition-old(root),
-::view-transition-new(root) {
-    animation-duration: 100ms;
-    animation-timing-function: ease-out;
-}
-
-::view-transition-old(root) {
-    animation-name: fade-out;
-}
-
-::view-transition-new(root) {
-    animation-name: fade-in;
-}
+/* View Transitions removed - was causing unexpected page reload behavior */
 
 /* Prevent white flash during transitions in dark mode */
 ::view-transition-group(root) {
