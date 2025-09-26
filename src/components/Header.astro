@@ -7,13 +7,13 @@ import ThemeToggle from './ThemeToggle.astro';
   <div class="header-left">
     <!-- Mobile menu toggle - only for very small screens -->
     <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Menu">☰</button>
-    
+
     <!-- LCP element optimized for immediate rendering -->
     <a href="/" class="site-name">Bruce Denham</a>
-    
+
     <!-- Visual separator between site name and navigation -->
     <div class="nav-separator"></div>
-    
+
     <!-- Navigation - visible until 640px, aligned with site name -->
     <nav class="main-nav" aria-label="Main navigation">
       <a href="/about/" class="nav-link">About</a>
@@ -152,8 +152,9 @@ import ThemeToggle from './ThemeToggle.astro';
     font-size: 0.9rem;
     font-weight: 500;
     padding: 8px 0;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
   }
 
   .nav-link:hover {
@@ -203,7 +204,7 @@ import ThemeToggle from './ThemeToggle.astro';
   }
 
   /* Mobile responsive - smart navigation strategy */
-  
+
   /* Show nav links on larger screens (desktop with sidebar), hide menu toggle */
   @media (min-width: 1024px) {
     .mobile-menu-toggle {
@@ -298,7 +299,7 @@ import ThemeToggle from './ThemeToggle.astro';
     }
 
     /* Hide email link on very small screens */
-    .social-links a[href^="mailto"] {
+    .social-links a[href^='mailto'] {
       display: none;
     }
 
