@@ -136,10 +136,143 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-.grid-medium {
+/* ONE UNIVERSAL GRID - replaces ALL grid classes site-wide */
+.grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
+    align-items: stretch;
+}
+
+/* Force 2-column max on larger screens for better layout */
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Single column variant - stays 1 column at all screen sizes */
+.grid-single {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: stretch;
+}
+
+/* Ensure equal height for all grid items */
+.grid > *,
+.grid-single > * {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Fix card components within grid */
+.grid .card-wrapper,
+.grid-single .card-wrapper {
+    height: 100%;
+}
+
+.grid .card-base,
+.grid-single .card-base {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Legacy grid class support - all inherit from .grid */
+.grid-medium,
+.philosophy-grid,
+.recognition-grid,
+.expertise-grid,
+.action-cards,
+.project-grid,
+.skills-grid,
+.education-grid,
+.card-grid-medium,
+.tools-grid,
+.case-studies-grid,
+.contact-details,
+.project-details,
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+
+@media (min-width: 768px) {
+    .grid-medium,
+    .philosophy-grid,
+    .recognition-grid,
+    .expertise-grid,
+    .action-cards,
+    .project-grid,
+    .skills-grid,
+    .education-grid,
+    .card-grid-medium,
+    .tools-grid,
+    .case-studies-grid,
+    .contact-details,
+    .project-details,
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.grid-medium > *,
+.philosophy-grid > *,
+.recognition-grid > *,
+.expertise-grid > *,
+.action-cards > *,
+.project-grid > *,
+.skills-grid > *,
+.education-grid > *,
+.card-grid-medium > *,
+.tools-grid > *,
+.case-studies-grid > *,
+.contact-details > *,
+.project-details > *,
+.card-grid > * {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-medium .card-wrapper,
+.philosophy-grid .card-wrapper,
+.recognition-grid .card-wrapper,
+.expertise-grid .card-wrapper,
+.action-cards .card-wrapper,
+.project-grid .card-wrapper,
+.skills-grid .card-wrapper,
+.education-grid .card-wrapper,
+.card-grid-medium .card-wrapper,
+.tools-grid .card-wrapper,
+.case-studies-grid .card-wrapper,
+.contact-details .card-wrapper,
+.project-details .card-wrapper,
+.card-grid .card-wrapper {
+    height: 100%;
+}
+
+.grid-medium .card-base,
+.philosophy-grid .card-base,
+.recognition-grid .card-base,
+.expertise-grid .card-base,
+.action-cards .card-base,
+.project-grid .card-base,
+.skills-grid .card-base,
+.education-grid .card-base,
+.card-grid-medium .card-base,
+.tools-grid .card-base,
+.case-studies-grid .card-base,
+.contact-details .card-base,
+.project-details .card-base,
+.card-grid .card-base {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -466,6 +599,7 @@ a:active {
 
 /* CSS Variables for theming - Modern 2024 dark mode */
 :root {
+    --sidebar-background: rgba(59, 130, 246, 0.15);
     --bg-primary: #1d1d1d; /* Dark gray background */
     --bg-secondary: #1a1a1a; /* Rich charcoal */
     --bg-tertiary: rgba(26, 26, 26, 0.95); /* Sophisticated overlay */
@@ -772,7 +906,7 @@ p {
 }
 
 .card-padding-medium { 
-    padding: 24px; 
+    padding: 24px;
 }
 
 /* Removed duplicate 640px rule - consolidated above */
@@ -1105,19 +1239,6 @@ footer a:hover {
     animation-delay: 50ms;
 }
 
-/* PERFORMANCE-OPTIMIZED: Page headers with professional animations */
-#main-title,
-#blog-title,
-#about-title,
-#projects-title,
-#work-title,
-#resume-title {
-    opacity: 0;
-    transform: translateY(15px); /* Reduced distance = less GPU work */
-    animation: slideInUp 450ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards; /* Smoother easing */
-    animation-delay: 25ms; /* Faster start = better perceived performance */
-}
-
 #main-title {
   margin-top: 1.25rem;
 }/* =============================================================================
@@ -1354,74 +1475,52 @@ p:not([class]) {
   animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* PERFORMANCE-OPTIMIZED: Shorter staggered delays for faster completion */
+/* Staggered animation delay utility classes */
 .animate-delay-50 {
-  animation-delay: 25ms;
+  animation-delay: 50ms;
 }
 
 .animate-delay-100 {
-  animation-delay: 75ms;
+  animation-delay: 100ms;
 }
 
 .animate-delay-150 {
-  animation-delay: 125ms;
+  animation-delay: 150ms;
 }
 
 .animate-delay-200 {
-  animation-delay: 175ms;
+  animation-delay: 200ms;
 }
 
 .animate-delay-250 {
-  animation-delay: 225ms;
+  animation-delay: 250ms;
 }
 
 .animate-delay-300 {
-  animation-delay: 275ms;
+  animation-delay: 300ms;
 }
 
 .animate-delay-350 {
-  animation-delay: 325ms;
+  animation-delay: 350ms;
 }
 
 .animate-delay-400 {
-  animation-delay: 375ms;
+  animation-delay: 400ms;
 }
 
 .animate-delay-450 {
-  animation-delay: 400ms; /* Max delay reduced from 450ms to 400ms */
+  animation-delay: 450ms;
 }
 
-/* PERFORMANCE-OPTIMIZED: Professional animations with minimal blocking */
-.animate-in {
-  opacity: 0;
-  transform: translateY(15px); /* Reduced distance = less GPU work */
-  animation: slideInUp 450ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards; /* Faster, smoother easing */
-}
-
-/* Respect user motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .animate-in,
-  #main-title,
-  #blog-title,
-  #about-title,
-  #projects-title,
-  #work-title,
-  #resume-title {
-    opacity: 1;
-    transform: none;
-    animation: none;
-  }
-}
-
-/* PERFORMANCE-OPTIMIZED: GPU-accelerated keyframes */
+/* Keyframe definitions */
 @keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translate3d(0, 15px, 0); /* Reduced distance, hardware accelerated */
+    transform: translate3d(0, 20px, 0); /* Hardware acceleration */
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0); /* Hardware accelerated */
+    transform: translate3d(0, 0, 0); /* Hardware acceleration */
   }
 }
 
@@ -1483,7 +1582,7 @@ p:not([class]) {
 .intro-text p,
 p:not([class]) {
     max-width: 65ch; /* Optimal: 65 characters per line */
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 /* Long-form content - blog posts, articles */

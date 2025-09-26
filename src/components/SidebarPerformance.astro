@@ -67,7 +67,6 @@ const latestPosts = blogPosts
     height: calc(100vh - 60px); /* Adjust height to account for header */
     width: 280px;
     z-index: 200;
-    box-shadow: 1px 0 8px rgba(0, 0, 0, 0.1); /* Faint shadow on right side */
   }
 
 
@@ -104,9 +103,8 @@ const latestPosts = blogPosts
   }
 
   .section h3 {
-    margin: 0 0 0.5rem 1rem; /* Left margin as specified */
-    padding: 0; /* No padding needed */
-    font-size: 1.1rem;
+    padding: 12px 24px 12px 32px;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--accent-primary); /* Use primary accent color instead of yellow */
     /* text-transform: uppercase; */
@@ -126,26 +124,24 @@ const latestPosts = blogPosts
   /* Minimal link styling - single element */
   .section a {
     display: block;
-    padding: 12px 24px 12px 32px; /* Extra left padding for better visual spacing */
+    padding: 0.5rem 1.5rem 0.5rem 2rem;/* Extra left padding for better visual spacing */
     color: var(--text-secondary);
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 0;
     font-size: 1rem;
-    font-weight: 300; /* Light font weight for sidebar links */
-    margin-bottom: 8px; /* Add space between links */
-    /* No transitions - removed animations */
+    font-weight: 300; 
+    margin: 0 0 0 0;
   }
 
   .section a:hover {
     color: var(--accent-primary);
-    background: var(--bg-card-hover);
-    border-radius: 6px;
+    background: var(--sidebar-background);
   }
 
   .section a.active {
     color: var(--accent-primary);
-    background: var(--bg-card-hover);
-    border-radius: 6px;
+    background: var(--sidebar-background);
+    font-weight: 500;
   }
 
   /* Hide overlay completely on desktop */

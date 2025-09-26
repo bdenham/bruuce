@@ -56,13 +56,12 @@ const latestPosts = blogPosts
       class="performance-cta"
     >
       <small>
-        <span class="percentile-text">Consistently top 1% web performance</span> •
-        <span class="verify-text">Verify on PageSpeed Insights ↗</span>
+        <div class="percentile-text">Verify on PageSpeed Insights ↗</div>
       </small>
     </a>
   </div>
 
-  <div class="action-cards card-grid-medium lazy-cards animate-in animate-delay-200">
+  <div class="grid lazy-cards animate-in animate-delay-200">
     <UnifiedCard
       variant="content"
       icon="📋"
@@ -151,6 +150,10 @@ const latestPosts = blogPosts
     display: flex;
     flex-direction: column;
     gap: 0;
+  }
+
+  .blog-post-wrapper {
+    margin-bottom: 1rem;
   }
 
   .blog-post-wrapper.lazy-load {
@@ -261,7 +264,7 @@ const latestPosts = blogPosts
     border: 1px solid rgba(12, 186, 96, 0.2);
     border-radius: 8px;
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.1;
   }
 
@@ -320,15 +323,19 @@ const latestPosts = blogPosts
 
   .performance-cta .percentile-text {
     color: var(--accent-primary);
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .performance-cta .verify-text {
     color: var(--accent-primary);
-    font-weight: 600;
+    font-weight: 500;
   }
 
   @media (max-width: 640px) {
+    .performance-cta .percentile-text {
+      font-size: 0.875rem;
+    }
+    
     .metrics-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 8px;
@@ -353,7 +360,7 @@ const latestPosts = blogPosts
     
     .metric-item, .lighthouse-score {
       padding: 8px 4px;
-      font-size: 0.75rem;
+      font-size: 0.5625rem;
     }
     
     .lighthouse-value, .metric-value {
@@ -366,7 +373,7 @@ const latestPosts = blogPosts
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 0.5rem;
   }
 
   /* Homepage-specific styles only - LinkedIn styles moved to blog page */

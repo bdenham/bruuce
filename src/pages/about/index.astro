@@ -43,7 +43,7 @@ import UnifiedCard from '../../components/ui/UnifiedCard.astro';
 
   <div class="section-container animate-in animate-delay-150">
     <h2 class="section-heading">Recognition & Community Impact</h2>
-    <div class="recognition-grid">
+    <div class="grid">
       <UnifiedCard
         variant="content"
         icon="🏆"
@@ -148,7 +148,7 @@ import UnifiedCard from '../../components/ui/UnifiedCard.astro';
   <div class="section-container animate-in animate-delay-250">
     <h2 class="section-heading">What I Bring to the Table</h2>
 
-    <div class="expertise-grid">
+    <div class="grid">
       <div class="expertise-category">
         <h3>Technical Writing & Documentation</h3>
         <ul>
@@ -193,7 +193,7 @@ import UnifiedCard from '../../components/ui/UnifiedCard.astro';
 
   <div class="section-container animate-in animate-delay-200">
     <h2 class="section-heading">My Philosophy</h2>
-    <div class="philosophy-grid">
+    <div class="grid">
       <div class="philosophy-item">
         <div class="philosophy-icon">🎯</div>
         <h3>I don't just write the docs</h3>
@@ -384,26 +384,7 @@ import UnifiedCard from '../../components/ui/UnifiedCard.astro';
     margin-bottom: 0;
   }
 
-  .philosophy-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 24px;
-    align-items: stretch;
-  }
-
-  .recognition-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 24px;
-    align-items: stretch;
-  }
-
-  .expertise-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 24px;
-    align-items: stretch;
-  }
+  /* Grid styles now handled globally in theme.css */
 
   .philosophy-item {
     background: var(--bg-card);
@@ -498,18 +479,6 @@ import UnifiedCard from '../../components/ui/UnifiedCard.astro';
     color: var(--accent-primary);
   }
 
-  .recognition-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 24px;
-  }
-
-  /* Match standard 2-card responsive behavior */
-  @media (min-width: 768px) {
-    .recognition-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
 
   .recognition-item {
     background: var(--bg-card);
@@ -577,11 +546,7 @@ import UnifiedCard from '../../components/ui/UnifiedCard.astro';
       margin-bottom: 12px;
     }
 
-    .philosophy-grid,
-    .expertise-grid,
-    .recognition-grid {
-      grid-template-columns: 1fr !important;
-    }
+    /* Grid responsiveness now handled globally in theme.css */
   }
 
 </style>

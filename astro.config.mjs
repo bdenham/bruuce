@@ -21,13 +21,17 @@ export default defineConfig({
     trailingSlash: 'always',
     outDir: './dist',
 
-    // FIX 2: Force CSS inlining to eliminate render-blocking (1,210ms savings)
+    // Development: Enable source maps for CSS debugging
     build: {
-        inlineStylesheets: 'always', // Force inline ALL CSS (even if large)
+        inlineStylesheets: 'never', // Keep CSS files separate for source maps
     },
     vite: {
+        css: {
+            devSourcemap: true, // Enable CSS source maps in development
+        },
         build: {
-            cssCodeSplit: false, // Single CSS bundle (already working)
+            cssCodeSplit: false, // Single CSS bundle
+            sourcemap: true, // Enable source maps for production
         },
     },
 

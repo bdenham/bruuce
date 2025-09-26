@@ -158,6 +158,7 @@ h1, h2, h3, h4, h5, h6,
 .item-heading {
     /* Balance text across lines for headings */
     text-wrap: balance;
+    margin-top: 2rem
 }
 
 /* =============================================================================

@@ -39,6 +39,8 @@ const progress = (score / 100) * circumference;
     border: 1px solid rgba(12, 186, 96, 0.2);
     border-radius: 8px;
     display: inline-block;
+    min-width: 0;
+    flex-shrink: 1;
   }
 
   .lh-gauge-container {
@@ -163,8 +165,8 @@ const progress = (score / 100) * circumference;
   /* Extra small mobile - single optimized query for better performance */
   @media (max-width: 480px) {
     .lh-score-medium svg {
-      width: 35px; /* More aggressive sizing for better mobile fit */
-      height: 35px;
+      width: 2.5rem;
+      height: 2.5rem;
     }
 
     .lh-score-medium .lh-num {
