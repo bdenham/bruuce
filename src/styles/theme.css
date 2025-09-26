@@ -198,99 +198,156 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
 }
 
-/* Legacy grid class support - all inherit from .grid */
-.grid-medium,
-.philosophy-grid,
-.recognition-grid,
-.expertise-grid,
-.action-cards,
-.project-grid,
-.skills-grid,
-.education-grid,
-.card-grid-medium,
-.tools-grid,
-.case-studies-grid,
-.contact-details,
-.project-details,
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    align-items: stretch;
+/* UNIVERSAL COMPONENT SYSTEM - replaces ALL page-specific classes */
+
+/* Universal Item - replaces project-card, case-study, doc-card, etc. */
+.item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px var(--shadow-secondary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 0.5rem;
 }
 
-@media (min-width: 768px) {
-    .grid-medium,
-    .philosophy-grid,
-    .recognition-grid,
-    .expertise-grid,
-    .action-cards,
-    .project-grid,
-    .skills-grid,
-    .education-grid,
-    .card-grid-medium,
-    .tools-grid,
-    .case-studies-grid,
-    .contact-details,
-    .project-details,
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+.item.large { padding: 32px; margin-bottom: 32px; }
+.item.featured { border: 2px solid var(--accent-primary); background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02)); }
 
-.grid-medium > *,
-.philosophy-grid > *,
-.recognition-grid > *,
-.expertise-grid > *,
-.action-cards > *,
-.project-grid > *,
-.skills-grid > *,
-.education-grid > *,
-.card-grid-medium > *,
-.tools-grid > *,
-.case-studies-grid > *,
-.contact-details > *,
-.project-details > *,
-.card-grid > * {
-    height: 100%;
+/* Universal Item Header - replaces project-header, case-study-header, doc-header */
+.item-header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    gap: 16px;
 }
 
-.grid-medium .card-wrapper,
-.philosophy-grid .card-wrapper,
-.recognition-grid .card-wrapper,
-.expertise-grid .card-wrapper,
-.action-cards .card-wrapper,
-.project-grid .card-wrapper,
-.skills-grid .card-wrapper,
-.education-grid .card-wrapper,
-.card-grid-medium .card-wrapper,
-.tools-grid .card-wrapper,
-.case-studies-grid .card-wrapper,
-.contact-details .card-wrapper,
-.project-details .card-wrapper,
-.card-grid .card-wrapper {
-    height: 100%;
+.item-header h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    line-height: 1.3;
 }
 
-.grid-medium .card-base,
-.philosophy-grid .card-base,
-.recognition-grid .card-base,
-.expertise-grid .card-base,
-.action-cards .card-base,
-.project-grid .card-base,
-.skills-grid .card-base,
-.education-grid .card-base,
-.card-grid-medium .card-base,
-.tools-grid .card-base,
-.case-studies-grid .card-base,
-.contact-details .card-base,
-.project-details .card-base,
-.card-grid .card-base {
-    height: 100%;
+.item-header.large h3 { font-size: 1.5rem; }
+
+/* Universal Item Content - replaces project-description, case-study-content */
+.item-content {
+    color: var(--text-tertiary);
+    line-height: 1.6;
+}
+
+.item-content p {
+    margin: 0 0 16px 0;
+}
+
+.item-content p:last-child {
+    margin-bottom: 0;
+}
+
+.item-content ul.no-padding {
+    padding-left: 0;
+    margin: 0 0 1rem 0;
+}
+
+.item-content ul.no-padding li {
+    margin-bottom: 0.25rem;
+    margin-left: 1rem;
+    font-size: 0.9375rem;
+}
+
+/* Universal Tags - replaces project-tags, tool-tags, etc. */
+.tags {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.tag {
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    border: 1px solid var(--border-primary);
+}
+
+.tag.primary {
+    background: var(--accent-content);
+    color: var(--accent-content-text);
+}
+
+/* Universal Links - replaces project-links, doc-links, case-study-links */
+.item-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-secondary);
+}
+
+.item-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-secondary);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+.item-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow-secondary);
+    border-color: var(--border-primary);
+    color: var(--text-primary);
+}
+
+.item-link.primary {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    border-color: var(--accent-primary);
+}
+
+.item-link.primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+/* Universal Content Sections - replaces challenge, solution, results, etc. */
+.section {
+    margin-bottom: 20px;
+}
+
+.section h4 {
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.section ul {
+    margin: 0 0 16px 0;
+    padding-left: 20px;
+}
+
+.section li {
+    color: var(--text-tertiary);
+    margin-bottom: 6px;
+    font-size: 0.9375rem;
+}
+
+.section p {
+    color: var(--text-tertiary);
+    margin: 0 0 16px 0;
 }
 
 
@@ -939,6 +996,11 @@ p {
 .pad-small { padding: 16px; }
 .pad-medium { padding: 24px; }
 .pad-large { padding: 32px; }
+
+/* Section Container */
+.section-container {
+    margin: 2rem 0;
+}
 
 /* CONSOLIDATED CARD SYSTEM - removed duplicate, enhanced original */
 

@@ -26,19 +26,17 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   <div class="section-container animate-in animate-delay-150">
     <h2 class="section-heading">Current Adobe Projects</h2>
 
-    <div class="project-card featured">
-      <div class="project-header">
-        <div class="project-title-section">
-          <h3>Adobe Commerce Documentation Ecosystem</h3>
-        </div>
-        <div class="project-tags">
-          <span class="tag primary">Technical Writing</span>
-          <span class="tag">Information Architecture</span>
-          <span class="tag">Developer Experience</span>
-        </div>
+    <div class="item large featured">
+      <div class="item-header large">
+        <h3>Adobe Commerce Documentation Ecosystem</h3>
+      </div>
+      <div class="tags">
+        <span class="tag primary">Technical Writing</span>
+        <span class="tag">Information Architecture</span>
+        <span class="tag">Developer Experience</span>
       </div>
 
-      <div class="project-description">
+      <div class="item-content">
         <p>
           Leading the comprehensive documentation strategy for Adobe Storefront Commerce, serving
           thousands of developers worldwide. This involves managing content architecture,
@@ -47,7 +45,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
         </p>
 
         <div class="grid">
-          <div class="project-impact">
+          <div class="section">
             <h4>Impact Metrics</h4>
             <ul>
               <li>Reduced developer onboarding time significantly</li>
@@ -56,7 +54,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
             </ul>
           </div>
 
-          <div class="project-tech">
+          <div class="section">
             <h4>Technologies</h4>
             <ul>
               <li>Markdown/MDX documentation systems</li>
@@ -67,12 +65,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           </div>
         </div>
 
-        <div class="project-links">
+        <div class="item-links">
           <a
             href="https://experienceleague.adobe.com/developer/commerce/storefront/"
             target="_blank"
             rel="noopener noreferrer"
-            class="project-link primary"
+            class="item-link primary"
           >
             View Documentation ↗
           </a>
@@ -80,26 +78,24 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title-section">
+    <div class="item large">
+      <div class="item-header large">
           <h3>Commerce API Interactive Playground</h3>
-        </div>
-        <div class="project-tags">
+      </div>
+      <div class="tags">
           <span class="tag">React</span>
           <span class="tag">API Integration</span>
           <span class="tag">Interactive Learning</span>
-        </div>
       </div>
 
-      <div class="project-description">
+      <div class="item-content">
         <p>
           Built React applications that allow developers to test Adobe Commerce APIs in real-time
           directly within the documentation. This hands-on approach dramatically improves API
           adoption by letting developers see immediate results from their integration attempts.
         </p>
 
-        <div class="project-features">
+        <div class="section">
           <h4>Key Features</h4>
           <ul>
             <li>Live API testing environment</li>
@@ -109,12 +105,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           </ul>
         </div>
 
-        <div class="project-links">
+        <div class="item-links">
           <a
             href="https://experienceleague.adobe.com/developer/commerce/storefront/playgrounds/commerce-services/"
             target="_blank"
             rel="noopener noreferrer"
-            class="project-link primary"
+            class="item-link primary"
           >
             Try the Playground ↗
           </a>
@@ -122,27 +118,25 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title-section">
+    <div class="item large">
+      <div class="item-header large">
           <h3>SDK Documentation with Storybook 8</h3>
-        </div>
-        <div class="project-tags">
+      </div>
+      <div class="tags">
           <span class="tag internal">Adobe Internal</span>
           <span class="tag">Storybook</span>
           <span class="tag">Component Documentation</span>
           <span class="tag">SDK</span>
-        </div>
       </div>
 
-      <div class="project-description">
+      <div class="item-content">
         <p>
           Developed advanced Storybook 8 customizations to create interactive SDK documentation that
           lets developers explore components, see live examples, and understand integration patterns
           through visual, hands-on exploration.
         </p>
 
-        <div class="project-achievements">
+        <div class="section">
           <h4>Achievements</h4>
           <ul>
             <li>Streamlined SDK adoption process</li>
@@ -151,12 +145,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           </ul>
         </div>
 
-        <div class="project-links">
+        <div class="item-links">
           <a
             href="https://storybook.js.org/"
             target="_blank"
             rel="noopener noreferrer"
-            class="project-link"
+            class="item-link"
           >
             Learn About Storybook ↗
           </a>
@@ -164,26 +158,24 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title-section">
+    <div class="item large">
+      <div class="item-header large">
           <h3>Developer Productivity CLI Tools</h3>
-        </div>
-        <div class="project-tags">
+      </div>
+      <div class="tags">
           <span class="tag">Node.js</span>
           <span class="tag">CLI Development</span>
           <span class="tag">Automation</span>
-        </div>
       </div>
 
-      <div class="project-description">
+      <div class="item-content">
         <p>
           Created custom CLI tools (jitnotes, pbmodules) that automate repetitive development tasks
           and streamline workflows. These tools help teams focus on creative problem-solving instead
           of manual processes.
         </p>
 
-        <div class="cli-tools">
+        <div class="section">
           <div class="tool">
             <strong>pbmodules:</strong> PageBuilder module scaffolding and management system
           </div>
@@ -192,12 +184,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           </div>
         </div>
 
-        <div class="project-links">
+        <div class="item-links">
           <a
             href="https://github.com/commerce-docs/pbmodules"
             target="_blank"
             rel="noopener noreferrer"
-            class="project-link primary"
+            class="item-link primary"
           >
             <svg
               width="16"
@@ -215,7 +207,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
             href="https://github.com/commerce-docs/jitnotes"
             target="_blank"
             rel="noopener noreferrer"
-            class="project-link primary"
+            class="item-link primary"
           >
             <svg
               width="16"
@@ -237,19 +229,17 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   <div class="section-container animate-in animate-delay-200">
     <h2 class="section-heading">Open Source & Community</h2>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title-section">
+    <div class="item large">
+      <div class="item-header large">
           <h3>PageBuilder Development Examples</h3>
-        </div>
-        <div class="project-tags">
+      </div>
+      <div class="tags">
           <span class="tag">Open Source</span>
           <span class="tag">Example Code</span>
           <span class="tag">Community</span>
-        </div>
       </div>
 
-      <div class="project-description">
+      <div class="item-content">
         <p>
           Maintain a comprehensive public GitHub repository featuring full-featured PageBuilder
           development examples. This resource provides the developer community with real-world
@@ -265,12 +255,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           </ul>
         </div>
 
-        <div class="project-links">
+        <div class="item-links">
           <a
             href="https://developer.adobe.com/commerce/frontend-core/page-builder/"
             target="_blank"
             rel="noopener noreferrer"
-            class="project-link primary"
+            class="item-link primary"
           >
             View PageBuilder Docs ↗
           </a>
@@ -278,7 +268,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
             href="https://developer.adobe.com/commerce/frontend-core/page-builder/styles/override-pagebuilder-styles/"
             target="_blank"
             rel="noopener noreferrer"
-            class="project-link primary"
+            class="item-link primary"
           >
             Style Customization ↗
           </a>
@@ -286,31 +276,29 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title-section">
+    <div class="item large">
+      <div class="item-header large">
           <h3>Meet Magento Indonesia Presentation</h3>
-        </div>
-        <div class="project-tags">
+      </div>
+      <div class="tags">
           <span class="tag">Speaking</span>
           <span class="tag">Education</span>
           <span class="tag">Best Practices</span>
-        </div>
       </div>
 
-      <div class="project-description">
+      <div class="item-content">
         <p>
           Presented PageBuilder best practices to the international Magento community in Indonesia,
           sharing insights on effective developer experience patterns and implementation strategies
           that benefit the global open-source community.
         </p>
 
-        <div class="project-links">
+        <div class="item-links">
           <a
             href="https://linkedin.com/in/brucedenham/"
             target="_blank"
             rel="noopener noreferrer"
-            class="project-link"
+            class="item-link"
           >
             Connect on LinkedIn ↗
           </a>
@@ -411,24 +399,10 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     padding-bottom: 8px;
   }
 
-  /* Project cards inherit from universal card system */
-  .project-card {
-    /* Base card properties from universal .card class */
-    background: var(--bg-card);
-    border: 1px solid var(--border-secondary);
-    border-radius: 16px;
-    box-shadow: 0 2px 8px var(--shadow-secondary);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
-    /* Project-specific modifications */
-    padding: 32px; /* Larger padding for projects */
-    margin-bottom: 32px; /* Spacing between project cards */
-  }
-
-  .project-card.featured {
-    border: 2px solid var(--accent-primary);
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
-    /* Animation for featured card (above fold) */
+  /* All project styling now handled by universal .item system */
+  
+  /* Featured item animation */
+  .item.featured {
     opacity: 0;
     transform: translateY(20px);
     animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
