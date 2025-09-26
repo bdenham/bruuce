@@ -4,18 +4,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogPostCard from '../../components/ui/BlogPostCard.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
 
-// Get all blog posts and sort by date (newest first)
 const blogPosts = await getCollection('blog');
 // Filter out draft posts in production
 const publishedPosts = blogPosts.filter((post) => !post.data.draft);
 const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-// Get featured posts
-const featuredPosts = sortedPosts.filter((post) => post.data.featured);
-
-// Get all categories and tags for filtering
-const allCategories = [...new Set(sortedPosts.map((post) => post.data.category).filter(Boolean))];
-const allTags = [...new Set(sortedPosts.flatMap((post) => post.data.tags || []))];
 ---
 
 <BaseLayout
@@ -34,7 +26,7 @@ const allTags = [...new Set(sortedPosts.flatMap((post) => post.data.tags || []))
     navigating the complexities of our modern world.
   </p>
 
-  <div class="blog-posts-container animate-in animate-delay-150">
+  <div class="grid-single animate-in animate-delay-150">
     {sortedPosts.map((post) => <BlogPostCard post={post} />)}
   </div>
 
@@ -48,16 +40,15 @@ const allTags = [...new Set(sortedPosts.flatMap((post) => post.data.tags || []))
       become our greatest strengths.
     </p>
 
-    <div class="linkedin-posts grid-large grid-with-bottom-margin">
+    <div class="grid-single">
       <a
         href="https://www.linkedin.com/feed/update/urn:li:activity:7329128517764337665/"
         target="_blank"
         rel="noopener noreferrer"
         class="linkedin-post featured"
       >
-        <div class="post-header">
+        <div class="header-layout">
           <div class="platform-info">
-            <div class="platform-icon"></div>
             <div class="platform-text">
               <span class="platform-name">LinkedIn</span>
               <span class="post-type">Creative Post</span>
@@ -65,17 +56,17 @@ const allTags = [...new Set(sortedPosts.flatMap((post) => post.data.tags || []))
           </div>
           <div class="post-date">Recent</div>
         </div>
-        <div class="post-content">
+        <div class="item-content">
           <h3>The Science of Kindness</h3>
           <p>
             What if kindness moved like diffusion—not with force, but with grace, filling absence
             with abundance, and longing with love? Let what's full in you flow where it's needed.
             That's how the world softens.
           </p>
-          <div class="post-details">
-            <span class="post-tag">Animation</span>
-            <span class="post-tag">Kindness</span>
-            <span class="post-tag">Visual Communication</span>
+          <div class="tags">
+            <span class="tag">Animation</span>
+            <span class="tag">Kindness</span>
+            <span class="tag">Visual Communication</span>
           </div>
         </div>
       </a>
@@ -86,9 +77,8 @@ const allTags = [...new Set(sortedPosts.flatMap((post) => post.data.tags || []))
         rel="noopener noreferrer"
         class="linkedin-post"
       >
-        <div class="post-header">
+        <div class="header-layout">
           <div class="platform-info">
-            <div class="platform-icon">🔗</div>
             <div class="platform-text">
               <span class="platform-name">LinkedIn</span>
               <span class="post-type">Professional Update</span>
@@ -96,16 +86,16 @@ const allTags = [...new Set(sortedPosts.flatMap((post) => post.data.tags || []))
           </div>
           <div class="post-date">Recent</div>
         </div>
-        <div class="post-content">
+        <div class="item-content">
           <h3>What is Personal Growth?</h3>
           <p>
             Why does personal growth often feel so elusive? One step forward, two steps back. Ten
             steps forward, wrong direction. Am I missing something? Maybe...Probably.
           </p>
-          <div class="post-details">
-            <span class="post-tag">Growth</span>
-            <span class="post-tag">Animation</span>
-            <span class="post-tag">Visual Communication</span>
+          <div class="tags">
+            <span class="tag">Growth</span>
+            <span class="tag">Animation</span>
+            <span class="tag">Visual Communication</span>
           </div>
         </div>
       </a>
@@ -116,9 +106,8 @@ const allTags = [...new Set(sortedPosts.flatMap((post) => post.data.tags || []))
         rel="noopener noreferrer"
         class="linkedin-post"
       >
-        <div class="post-header">
+        <div class="header-layout">
           <div class="platform-info">
-            <div class="platform-icon">🔗</div>
             <div class="platform-text">
               <span class="platform-name">LinkedIn</span>
               <span class="post-type">Community Engagement</span>
@@ -126,32 +115,29 @@ const allTags = [...new Set(sortedPosts.flatMap((post) => post.data.tags || []))
           </div>
           <div class="post-date">Recent</div>
         </div>
-        <div class="post-content">
+        <div class="item-content">
           <h3>Cracks Let the Light In</h3>
           <p>
             We grow up thinking polish makes us lovable. So we shine the surface, hoping to be seen.
             But it's our presence, not perfection, that opens hearts. And it's our cracks that let
             the light in.
           </p>
-          <div class="post-details">
-            <span class="post-tag">Growth</span>
-            <span class="post-tag">Animation</span>
-            <span class="post-tag">Visual Communication</span>
+          <div class="tags">
+            <span class="tag">Growth</span>
+            <span class="tag">Animation</span>
+            <span class="tag">Visual Communication</span>
           </div>
         </div>
       </a>
     </div>
-
-    <div class="linkedin-cta">
-      <a
-        href="https://linkedin.com/in/brucedenham/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="linkedin-follow-btn"
-      >
-        Follow me on LinkedIn →
-      </a>
-    </div>
+    <a
+      href="https://linkedin.com/in/brucedenham/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="linkedin-follow-btn"
+    >
+      Follow me on LinkedIn →
+    </a>
   </div>
 </BaseLayout>
 
@@ -253,7 +239,7 @@ const allTags = [...new Set(sortedPosts.flatMap((post) => post.data.tags || []))
   }
 
   /* Hide the old post-header since we're using icons as bullets */
-  .linkedin-post .post-header {
+  .linkedin-post .header-layout {
     display: none;
   }
 

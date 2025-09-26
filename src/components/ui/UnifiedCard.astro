@@ -20,27 +20,27 @@ interface Props {
   target?: string;
   rel?: string;
   ariaLabel?: string;
-  
+
   // Content
   icon?: string;
   title?: string;
   subtitle?: string;
   description?: string;
   content?: string; // For more complex HTML content
-  
+
   // Metadata
   tags?: Tag[];
   status?: string; // For project status badges
-  
+
   // Actions
   links?: Link[];
   primaryAction?: Link;
-  
+
   // Styling
   featured?: boolean;
   background?: string;
   padding?: 'small' | 'medium' | 'large';
-  
+
   // Animation
   animateIn?: boolean;
   animationDelay?: string; // e.g., "100", "200", "300" for animate-delay-{n} classes
@@ -73,7 +73,9 @@ const isClickable = href;
 const CardElement = isClickable ? 'a' : 'div';
 ---
 
-<div class={`card-wrapper variant-${variant} ${featured ? 'card-featured' : ''} ${animateIn ? 'card-animate' : ''} ${animationDelay ? `animate-delay-${animationDelay}` : ''}`}>
+<div
+  class={`card-wrapper variant-${variant} ${featured ? 'card-featured' : ''} ${animateIn ? 'card-animate' : ''} ${animationDelay ? `animate-delay-${animationDelay}` : ''}`}
+>
   <CardElement
     class={`card-base card-padding-${padding}`}
     href={isClickable ? href : undefined}
@@ -84,84 +86,94 @@ const CardElement = isClickable ? 'a' : 'div';
   >
     <div class="card-content">
       {/* Content variant: Large icon on left, content on right */}
-      {variant === 'content' && icon && (
-        <div class="card-icon-large" aria-hidden="true">{icon}</div>
-      )}
-      
+      {
+        variant === 'content' && icon && (
+          <div class="card-icon-large" aria-hidden="true">
+            {icon}
+          </div>
+        )
+      }
+
       <div class="card-main">
         <!-- Header section -->
-        {(title || subtitle || status || tags.length > 0) && (
-          <div class="card-header">
-            <div class="card-title-section">
-              {title && (
-                <h3 class="card-title">
-                  {/* Only show inline icon for non-content variants */}
-                  {icon && variant !== 'content' && (
-                    <span class="card-icon" aria-hidden="true">{icon}</span>
-                  )}
-                  {title}
-                </h3>
+        {
+          (title || subtitle || status || tags.length > 0) && (
+            <div class="header-layout">
+              <div class="card-title-section">
+                {title && (
+                  <h3 class="card-title">
+                    {/* Only show inline icon for non-content variants */}
+                    {icon && variant !== 'content' && (
+                      <span class="card-icon" aria-hidden="true">
+                        {icon}
+                      </span>
+                    )}
+                    {title}
+                  </h3>
+                )}
+                {subtitle && <div class="card-subtitle">{subtitle}</div>}
+              </div>
+
+              {status && <div class="card-status">{status}</div>}
+
+              {tags.length > 0 && (
+                <div class="card-tags">
+                  {tags.map((tag) => (
+                    <span class={`tag ${tag.variant || 'default'}`}>{tag.text}</span>
+                  ))}
+                </div>
               )}
-              {subtitle && <div class="card-subtitle">{subtitle}</div>}
             </div>
-          
-          {status && <div class="card-status">{status}</div>}
-          
-          {tags.length > 0 && (
-            <div class="card-tags">
-              {tags.map(tag => (
-                <span class={`tag ${tag.variant || 'default'}`}>{tag.text}</span>
+          )
+        }
+
+        <!-- Main content -->
+        <div class="card-body">
+          {description && <p class="card-description">{description}</p>}
+          {content && <div class="card-content-html" set:html={content} />}
+
+          <!-- Slot for custom content -->
+          <slot />
+        </div>
+
+        <!-- Actions/Links section -->
+        {
+          (links.length > 0 || primaryAction) && (
+            <div class="card-actions">
+              {primaryAction && (
+                <a
+                  href={primaryAction.href}
+                  class={`card-action primary ${primaryAction.variant || 'primary'}`}
+                  target={primaryAction.target}
+                  rel={primaryAction.rel}
+                >
+                  {primaryAction.icon && <span class="action-icon">{primaryAction.icon}</span>}
+                  {primaryAction.text}
+                </a>
+              )}
+
+              {links.map((link) => (
+                <a
+                  href={link.href}
+                  class={`card-action ${link.variant || 'secondary'}`}
+                  target={link.target}
+                  rel={link.rel}
+                >
+                  {link.icon && <span class="action-icon">{link.icon}</span>}
+                  {link.text}
+                </a>
               ))}
             </div>
-          )}
-        </div>
-      )}
-
-      <!-- Main content -->
-      <div class="card-body">
-        {description && <p class="card-description">{description}</p>}
-        {content && <div class="card-content-html" set:html={content} />}
-        
-        <!-- Slot for custom content -->
-        <slot />
+          )
+        }
       </div>
-
-      <!-- Actions/Links section -->
-      {(links.length > 0 || primaryAction) && (
-        <div class="card-actions">
-          {primaryAction && (
-            <a
-              href={primaryAction.href}
-              class={`card-action primary ${primaryAction.variant || 'primary'}`}
-              target={primaryAction.target}
-              rel={primaryAction.rel}
-            >
-              {primaryAction.icon && <span class="action-icon">{primaryAction.icon}</span>}
-              {primaryAction.text}
-            </a>
-          )}
-          
-          {links.map(link => (
-            <a
-              href={link.href}
-              class={`card-action ${link.variant || 'secondary'}`}
-              target={link.target}
-              rel={link.rel}
-            >
-              {link.icon && <span class="action-icon">{link.icon}</span>}
-              {link.text}
-            </a>
-          ))}
-        </div>
-      )}
-      </div> <!-- Close card-main -->
+      <!-- Close card-main -->
     </div>
   </CardElement>
 </div>
 
 <style>
   /* Component-specific styles only - base card styles now in card-system.css */
-
 
   /* Variant: Content cards with large left icon */
   .variant-content .card-content {
@@ -199,7 +211,7 @@ const CardElement = isClickable ? 'a' : 'div';
   }
 
   /* Variant: Project cards */
-  .variant-project .card-header {
+  .variant-project .header-layout {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -236,7 +248,6 @@ const CardElement = isClickable ? 'a' : 'div';
     box-shadow: none;
   }
 
-
   /* Featured cards */
   .featured {
     border-color: var(--accent-primary);
@@ -251,7 +262,7 @@ const CardElement = isClickable ? 'a' : 'div';
     flex-direction: column;
   }
 
-  .card-header {
+  .header-layout {
     margin-bottom: 8px;
   }
 
@@ -375,7 +386,7 @@ const CardElement = isClickable ? 'a' : 'div';
       font-size: 2rem;
     }
 
-    .variant-project .card-header {
+    .variant-project .header-layout {
       flex-direction: column;
       align-items: flex-start;
     }

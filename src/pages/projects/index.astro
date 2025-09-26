@@ -24,7 +24,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   <div class="section-container animate-in animate-delay-150">
     <h2 class="section-heading">Current Adobe Projects</h2>
 
-    <div class="item large featured">
+    <div class="item featured">
       <div class="item-header large">
         <h3>Adobe Commerce Documentation Ecosystem</h3>
       </div>
@@ -42,7 +42,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           evolving features.
         </p>
 
-        <div class="grid">
+        <div class="grid-single">
           <div class="section">
             <h4>Impact Metrics</h4>
             <ul>
@@ -76,7 +76,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="item large">
+    <div class="item">
       <div class="item-header large">
         <h3>Commerce API Interactive Playground</h3>
       </div>
@@ -116,7 +116,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="item large">
+    <div class="item">
       <div class="item-header large">
         <h3>SDK Documentation with Storybook 8</h3>
       </div>
@@ -156,7 +156,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="item large">
+    <div class="item">
       <div class="item-header large">
         <h3>Developer Productivity CLI Tools</h3>
       </div>
@@ -227,7 +227,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   <div class="section-container animate-in animate-delay-200">
     <h2 class="section-heading">Open Source & Community</h2>
 
-    <div class="item large">
+    <div class="item">
       <div class="item-header large">
         <h3>PageBuilder Development Examples</h3>
       </div>
@@ -244,7 +244,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           implementation patterns and best practices.
         </p>
 
-        <div class="community-impact">
+        <div class="section">
           <h4>Community Impact</h4>
           <ul>
             <li>Accelerated community adoption of PageBuilder</li>
@@ -274,7 +274,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       </div>
     </div>
 
-    <div class="item large">
+    <div class="item">
       <div class="item-header large">
         <h3>Meet Magento Indonesia Presentation</h3>
       </div>
@@ -308,11 +308,11 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   <div class="section-container animate-in animate-delay-250">
     <h2 class="section-heading">Legacy Innovations</h2>
 
-    <div class="timeline-projects">
-      <div class="timeline-project">
-        <div class="timeline-period">2006–2018</div>
-        <div class="timeline-company">TOPAZ Technologies</div>
-        <div class="timeline-achievements">
+    <div class="grid-single">
+      <div class="item">
+        <div class="tag">2006-2018</div>
+        <div class="item-header">TOPAZ Technologies</div>
+        <div class="section">
           <h4>Key Projects</h4>
           <ul>
             <li>
@@ -335,10 +335,10 @@ import PageHeader from '../../components/ui/PageHeader.astro';
         </div>
       </div>
 
-      <div class="timeline-project">
-        <div class="timeline-period">2000–2005</div>
-        <div class="timeline-company">Schlumberger</div>
-        <div class="timeline-achievements">
+      <div class="item">
+        <div class="tag">2000-2005</div>
+        <div class="item-header">Schlumberger</div>
+        <div class="section">
           <h4>Foundational Projects</h4>
           <ul>
             <li>
@@ -463,17 +463,9 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     font-weight: 400;
   }
 
-  .project-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 24px;
-  }
+  /* Project details now use universal .grid class */
 
-  .project-impact,
-  .project-tech,
-  .project-features,
-  .project-achievements,
-  .community-impact {
+  .section {
     /* border-radius: 12px; */
     /* padding: 20px; */
     /* border-left: 3px solid var(--accent-primary); */
@@ -588,10 +580,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     border-color: var(--accent-hover);
   }
 
-  .timeline-projects {
-    display: grid;
-    gap: 32px;
-  }
+  /* Timeline projects now use universal .grid class */
 
   .timeline-project {
     background: var(--bg-card);

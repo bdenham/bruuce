@@ -49,7 +49,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     <h2 class="section-heading">Core Skills</h2>
 
     <div class="grid-single">
-      <div class="skill-category">
+      <div class="item">
         <h3>Technical Skills</h3>
         <ul>
           <li>Git, GitHub, GitHub Actions for version control and workflow automation</li>
@@ -68,7 +68,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
         </ul>
       </div>
 
-      <div class="skill-category">
+      <div class="item">
         <h3>Documentation & Education</h3>
         <ul>
           <li>
@@ -89,7 +89,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
         </ul>
       </div>
 
-      <div class="skill-category">
+      <div class="item">
         <h3>Design & UX</h3>
         <ul>
           <li>UI design that balances beauty and usability for modern web apps</li>
@@ -100,7 +100,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
         </ul>
       </div>
 
-      <div class="skill-category">
+      <div class="item">
         <h3>Leadership & Communication</h3>
         <ul>
           <li>
@@ -268,31 +268,6 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     </div>
   </div>
 
-  <div class="section-container">
-    <div class="contact-info animate-in animate-delay-350">
-      <h2 class="section-heading">Contact Information</h2>
-      <div class="grid">
-        <div class="contact-item">
-          <strong>Email:</strong>
-          <a href="mailto:brucedenham@mac.com">brucedenham@mac.com</a>
-        </div>
-        <div class="contact-item">
-          <strong>Phone:</strong>
-          <a href="tel:+15129660265">(512) 966-0265</a>
-        </div>
-        <div class="contact-item">
-          <strong>Location:</strong> Austin, Texas Metropolitan Area
-        </div>
-        <div class="contact-item">
-          <strong>LinkedIn:</strong>
-          <a href="https://linkedin.com/in/brucedenham/" target="_blank" rel="noopener noreferrer"
-            >linkedin.com/in/brucedenham/</a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="section-container animate-in animate-delay-400">
     <h2 class="section-heading">Professional Endorsements</h2>
     <p>
@@ -335,13 +310,9 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     font-size: 24px;
   }
 
-  .contact-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 12px;
-  }
+  /* Contact details now use universal .grid class */
 
-  .contact-item {
+  .item {
     color: var(--text-tertiary);
   }
 
@@ -400,13 +371,9 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     margin-top: 0;
   }
 
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-  }
+  /* Skills grid now uses universal .grid class */
 
-  .skill-category {
+  .item {
     background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
     border: 2px solid rgba(148, 163, 184, 0.4);
     border-radius: 12px;

@@ -1,0 +1,53 @@
+name: Test Build Environments
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  test-builds:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        environment:
+          - name: 'Local'
+            github_pages: ''
+          - name: 'GitHub Pages'
+            github_pages: 'true'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test ${{ matrix.environment.name }} Build
+        env:
+          GITHUB_PAGES: ${{ matrix.environment.github_pages }}
+        run: |
+          echo "🧪 Testing ${{ matrix.environment.name }} environment"
+          npm run build
+
+          # Check for problematic paths
+          if grep -r "/bruuce/_astro" dist/ > /dev/null; then
+            echo "❌ Found /bruuce/ paths in HTML - this will break on custom domain"
+            grep -r "/bruuce/_astro" dist/ | head -5
+            exit 1
+          else
+            echo "✅ No /bruuce/ paths found - assets should load correctly"
+          fi
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.environment.name }}
+          path: dist/

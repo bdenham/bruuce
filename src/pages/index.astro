@@ -61,7 +61,7 @@ const latestPosts = blogPosts
     </a>
   </div>
 
-  <div class="grid lazy-cards animate-in animate-delay-200">
+  <div class="grid-single lazy-cards animate-in animate-delay-200">
     <UnifiedCard
       variant="content"
       icon="📋"
@@ -118,7 +118,7 @@ const latestPosts = blogPosts
 
   <div class="section-container animate-in animate-delay-300">
     <h2 class="section-heading">Recent Posts</h2>
-    <div class="blog-posts-container">
+    <div class="grid-single">
       {
         latestPosts.map((post, index) => (
           <div

@@ -14,27 +14,21 @@
     --text-secondary: #e4e4e7; /* Clean secondary text */
     --text-tertiary: #c4c4c7; /* Improved contrast - WCAG AA compliant */
     --text-lead: #dddddd; /* Enhanced lead text for visual impact */
-    /* Improved contrast for WCAG AA compliance */
     --text-muted: #e4e4e7;
-    /* Improved contrast for dates and secondary text */
     --text-dim: #e4e4e7;
-    /* Tag colors for WCAG AA compliance */
     --tag-bg: rgba(161, 161, 170, 0.2); /* Visible tag background */
     --tag-text: #fafafa; /* High contrast tag text */
-    /* Modern border colors for 2024 dark mode */
     --border-primary: rgba(161, 161, 170, 0.3); /* Modern zinc borders */
     --border-secondary: rgba(161, 161, 170, 0.15); /* Subtle secondary borders */
     --accent-hover: #0080ff; /* Lighter blue for hover in dark mode */
     --accent-content: #1a365d;
     --accent-content-text: #ffffff;
     --accent-primary: #00aaff;
-    /* Bright blue for dark mode */
     --gradient-1: rgba(0, 170, 255, 0.25);
     --gradient-2: rgba(0, 204, 255, 0.2);
     --shadow-primary: rgba(0, 0, 0, 0.5); /* Modern deep shadows */
     --shadow-secondary: rgba(0, 0, 0, 0.3); /* Rich secondary shadows */
 
-    /* Button variables for WCAG AA compliance */
     --button-bg: #334155;
     --button-text: #ffffff;
     --button-primary-bg: #0066cc;
@@ -51,7 +45,6 @@
        DESIGN SYSTEM TOKENS - Spacing, Sizing, and Animation
        ================================================================= */
     
-    /* Spacing Scale - Consistent spacing throughout the site */
     --space-xs: 4px;
     --space-sm: 8px;
     --space-md: 16px;
@@ -60,13 +53,11 @@
     --space-2xl: 48px;
     --space-3xl: 64px;
 
-    /* Border Radius Scale */
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
     --radius-xl: 16px;
 
-    /* Typography Scale */
     --text-xs: 0.75rem;    /* 12px */
     --text-sm: 0.875rem;   /* 14px */
     --text-base: 1rem;     /* 16px */
@@ -76,13 +67,11 @@
     --text-3xl: 2rem;      /* 32px */
     --text-4xl: 2.5rem;    /* 40px */
 
-    /* Line Heights */
     --leading-tight: 1.15;
     --leading-normal: 1.5;
     --leading-relaxed: 1.6;
     --leading-loose: 1.7;
 
-    /* Animation & Transitions */
     --transition-fast: 120ms ease;
     --transition-normal: 200ms ease;
     --transition-slow: 300ms ease;
@@ -91,7 +80,6 @@
     --animation-duration-normal: 0.3s;
     --animation-duration-slow: 0.5s;
 
-    /* Z-Index Scale */
     --z-dropdown: 100;
     --z-sticky: 200;
     --z-fixed: 300;
@@ -102,14 +90,12 @@
     --z-toast: 800;
 }
 
-/* Simplified light mode background */
 :root.light html {
     background-color: var(--bg-primary);
     background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
     background-attachment: fixed;
 }
 
-/* Light theme - Modern 2024 neutral palette */
 :root.light {
     --bg-primary: #f1f1f1;
     --bg-secondary: #f1f1f1;
@@ -122,23 +108,19 @@
     --text-lead: #374151; /* Enhanced lead text for visual impact in light mode */
     --text-muted: #374151;
     --text-dim: #374151;
-    /* Tag colors for WCAG AA compliance */
     --tag-bg: rgba(161, 161, 170, 0.15); /* Subtle but visible tag background */
     --tag-text: #374151; /* High contrast tag text */
-    /* Modern border colors for 2024 design trends */
     --border-primary: rgba(161, 161, 170, 0.4);
     --border-secondary: rgba(161, 161, 170, 0.2);
     --accent-hover: #0080ff; /* Lighter blue for hover in light mode */
     --accent-content: rgba(0, 102, 204, 0.1);
     --accent-content-text: #0052A3;
     --accent-primary: #0052A3;
-    /* Darker blue for better contrast in light mode */
     --gradient-1: rgba(0, 102, 204, 0.08);
     --gradient-2: rgba(0, 128, 255, 0.06);
     --shadow-primary: rgba(0, 0, 0, 0.08);
     --shadow-secondary: rgba(0, 0, 0, 0.04);
 
-    /* Button variables for WCAG AA compliance in softer light mode */
     --button-bg: #d1d5db;
     --button-text: #1f2937;
     --button-primary-bg: #0066cc;
@@ -157,7 +139,6 @@
    Universal styles applied to all elements
    ============================================================================= */
 
-/* Global base styles */
 *,
 *::before,
 *::after {
@@ -167,7 +148,6 @@
 html {
     height: 100%;
     background-color: var(--bg-primary);
-    /* Simplified solid background for maximum performance */
     scrollbar-gutter: stable;
 }
 
@@ -186,10 +166,8 @@ body {
     line-height: 1.6;
     color: var(--text-secondary);
     background-color: var(--bg-primary); /* Use theme variable */
-    /* Removed transition for faster rendering */
 }
 
-/* Skip link for accessibility */
 .skip-link {
     position: absolute;
     left: -10000px;
@@ -220,7 +198,6 @@ body {
    TEXT SELECTION & TYPOGRAPHY ENHANCEMENTS
    ============================================================================= */
 
-/* Custom Text Selection Colors */
 ::selection {
     background-color: rgba(0, 170, 255, 0.2); /* Light blue with transparency */
     color: inherit; /* Keep original text color */
@@ -231,7 +208,6 @@ body {
     color: inherit;
 }
 
-/* Light mode selection - even lighter */
 :root.light ::selection {
     background-color: rgba(0, 170, 255, 0.15); /* Even lighter blue in light mode */
 }
@@ -240,20 +216,15 @@ body {
     background-color: rgba(0, 170, 255, 0.15);
 }
 
-/* Apply text balancing to text content - optimized selectors instead of universal */
 p, li, blockquote, .lead, .subtitle, .section-intro, .posts-intro {
-    /* Modern text balancing - prevents awkward line breaks */
     text-wrap: pretty;
     
-    /* Prevent orphans and widows in print/long content */
     orphans: 2;
     widows: 2;
     
-    /* Avoid breaking inside elements when possible */
     break-inside: avoid-orphans;
 }
 
-/* Enhanced balancing for headings - distributes text evenly across lines */
 h1, h2, h3, h4, h5, h6 {
     text-wrap: balance;
 }
@@ -263,7 +234,6 @@ h1, h2, h3, h4, h5, h6 {
    Headings, buttons, and text elements
    ============================================================================= */
 
-/* Typography */
 h1 {
     margin: 0 0 6px 0;
     font-size: 2.5rem;
@@ -291,7 +261,7 @@ h4,
 h5,
 h6 {
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    color: var(--text-primary);
+    color: var(--accent-primary);
     font-weight: 500;
     margin: 0 0 0 0;
 }
@@ -303,7 +273,6 @@ p {
     line-height: 1.6;
 }
 
-/* Button base styles */
 .button {
     display: inline-flex;
     align-items: center;
@@ -323,9 +292,6 @@ p {
     cursor: pointer;
 }
 
-.button:hover {
-    transform: translateY(-1px);
-}
 
 .button:focus-visible {
     outline: 3px solid var(--accent-primary);
@@ -336,10 +302,7 @@ p {
    COMPONENT STYLES START HERE
    ============================================================================= */
 
-/* AstroWind-style Responsive Typography - scales with screen size */
 @media (min-width: 1536px) {
-  /* 2xl breakpoint - matches the html class="2xl:text-[20px]" */
-  /* At 2xl, root font is 20px, so these rem values scale up automatically */
   .subtitle {
     font-size: 1.4rem; /* Scales to 28px at 2xl (20px * 1.4) */
   }
@@ -352,8 +315,7 @@ p {
     font-size: 1.4rem; /* Scales to 28px at 2xl (20px * 1.4) */
   }
   
-  .section-intro,
-  .posts-intro {
+  .text-large {
     font-size: 1.2rem; /* Scales to 24px at 2xl (20px * 1.2) */
   }
   
@@ -362,8 +324,6 @@ p {
   }
 }
 
-/* Action cards - two columns for better space utilization */
-/* Simplified action cards grid - no !important conflicts */
 .action-cards.grid-medium {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -371,7 +331,6 @@ p {
     align-items: stretch;
 }
 
-/* Typography Components - AstroWind-sized for better readability */
 .subtitle {
     font-size: 1.25rem; /* 20px converted to rem */
     color: var(--accent-primary);
@@ -388,13 +347,13 @@ p {
     margin-bottom: 32px;
 }
 
-/* CONSOLIDATED TYPOGRAPHY - Single source of truth for all intro text styles */
 .text-large,
 .lead,
 .section-intro,
 .posts-intro,
 .content-intro,
-.intro-text p {
+.intro-text p,
+.summary-section p {
     font-size: 1.125rem; /* 18px base */
     color: var(--text-primary);
     font-weight: 400;
@@ -404,32 +363,24 @@ p {
     text-align: left;
 }
 
-/* Lead text variant - larger and different color */
 .text-large.lead,
 .lead {
     font-size: 1.25rem; /* 20px for lead text */
     color: var(--text-lead);
 }
 
-/* Intro sections get more space */
-.text-large.intro,
-.section-intro,
-.posts-intro,
-.content-intro {
+.text-large.intro {
     margin-bottom: 32px;
 }
 
-/* Layout Components */
-/* Consolidated section container styles */
+
 .section-container {
     margin-bottom: 48px;
 }
 
-/* Consolidated section heading styles - massive performance improvement */
 .section-heading {
     border-bottom: 2px solid var(--border-primary);
     padding-bottom: 8px;
-    /* Font size, color, weight, and margin handled in semantic-core.css */
 }
 
 .section h2.large {
@@ -437,7 +388,6 @@ p {
 }
 
 
-/* ONE UNIVERSAL GRID - replaces ALL grid classes site-wide */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -445,22 +395,19 @@ p {
     align-items: stretch;
 }
 
-/* Force 2-column max on larger screens for better layout */
 @media (min-width: 768px) {
     .grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* Single column variant - stays 1 column at all screen sizes */
 .grid-single {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 1.25rem;
     align-items: stretch;
 }
 
-/* Ensure equal height for all grid items */
 .grid > *,
 .grid-single > * {
     height: 100%;
@@ -468,7 +415,6 @@ p {
     flex-direction: column;
 }
 
-/* Fix card components within grid */
 .grid .card-wrapper,
 .grid-single .card-wrapper {
     height: 100%;
@@ -481,9 +427,94 @@ p {
     flex-direction: column;
 }
 
-/* UNIVERSAL COMPONENT SYSTEM - replaces ALL page-specific classes */
+/* =============================================================================
+   UNIVERSAL HOVER EFFECTS
+   Consistent hover behaviors across all interactive elements
+   ============================================================================= */
 
-/* Universal Item - replaces project-card, case-study, doc-card, etc. */
+.hover-lift:hover,
+.item:hover,
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--shadow-secondary);
+}
+
+.hover-lift-strong:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px var(--shadow-primary);
+}
+
+.hover-button:hover,
+.button:hover,
+.item-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow-secondary);
+}
+
+.featured,
+.item.featured,
+.card.featured {
+    border: 2px solid var(--accent-primary);
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+}
+
+/* =============================================================================
+   UNIVERSAL BORDER & BACKGROUND SYSTEM
+   Consistent borders and backgrounds across components
+   ============================================================================= */
+
+.bg-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 16px;
+}
+
+.border-accent { border: 1px solid var(--accent-primary); }
+.border-accent-thick { border: 2px solid var(--accent-primary); }
+
+.border-secondary { border: 1px solid var(--border-secondary); }
+
+.bg-gradient-card {
+    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+}
+
+/* =============================================================================
+   UTILITY CLASSES
+   Common patterns used across components
+   ============================================================================= */
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+
+.gap-xs { gap: var(--space-xs); }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+.gap-xl { gap: var(--space-xl); }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+.text-accent { color: var(--accent-primary); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+
+/* =============================================================================
+   UNIVERSAL COMPONENT SYSTEM
+   Replaces ALL page-specific classes
+   ============================================================================= */
+
 .item {
     background: var(--bg-card);
     border: 1px solid var(--border-secondary);
@@ -491,13 +522,22 @@ p {
     padding: 1.25rem;
     box-shadow: 0 2px 8px var(--shadow-secondary);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
+}
+
+.item ul {
+    margin-left: -1.25rem;
+}
+.item ul li {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin: 0.35rem 0 0.35rem -1.25rem;
+    margin-left: 0;
 }
 
 .item.large { padding: 32px; margin-bottom: 32px; }
-.item.featured { border: 2px solid var(--accent-primary); background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02)); }
 
-/* Universal Item Header - replaces project-header, case-study-header, doc-header */
 .item-header {
     display: flex;
     justify-content: space-between;
@@ -514,7 +554,6 @@ p {
 
 .item-header.large h3 { font-size: 1.5rem; }
 
-/* Universal Item Content - replaces project-description, case-study-content */
 .item-content {
     color: var(--text-tertiary);
     line-height: 1.6;
@@ -539,12 +578,11 @@ p {
     font-size: 0.9375rem;
 }
 
-/* Universal Tags - replaces project-tags, tool-tags, etc. */
 .tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 12px;
+    margin-bottom: 1rem;
 }
 
 .tag {
@@ -555,6 +593,7 @@ p {
     background: var(--tag-bg);
     color: var(--tag-text);
     border: 1px solid var(--border-primary);
+    max-width: fit-content;
 }
 
 .tag.primary {
@@ -562,7 +601,6 @@ p {
     color: var(--accent-content-text);
 }
 
-/* Universal Links - replaces project-links, doc-links, case-study-links */
 .item-links {
     display: flex;
     flex-wrap: wrap;
@@ -588,8 +626,6 @@ p {
 }
 
 .item-link:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px var(--shadow-secondary);
     border-color: var(--border-primary);
     color: var(--text-primary);
 }
@@ -605,20 +641,18 @@ p {
     border-color: var(--accent-hover);
 }
 
-/* Universal Content Sections - replaces challenge, solution, results, etc. */
 .section {
     margin-bottom: 20px;
 }
 
 .section h4 {
-    color: var(--text-primary);
-    margin: 0 0 12px 0;
+    color: var(--accent-primary);
     font-size: 1rem;
     font-weight: 600;
 }
 
 .section ul {
-    margin: 0 0 16px 0;
+    margin: 0;
     padding-left: 20px;
 }
 
@@ -628,21 +662,22 @@ p {
     font-size: 0.9375rem;
 }
 
+.section ul li {
+    color: var(--text-tertiary);
+    margin-bottom: 6px;
+    font-size: 0.9375rem;
+    margin: 0.35rem 0 0.35rem -1.25rem;
+    margin-left: 0;
+}
+
 .section p {
     color: var(--text-tertiary);
     margin: 0 0 16px 0;
 }
 
-
-
-
 .grid-with-margin {
     margin: 32px 0 24px 0;
 }
-
-
-
-/* UNIVERSAL CARD SYSTEM - replaces all card-like classes */
 .card {
     background: var(--bg-card);
     border: 1px solid var(--border-secondary);
@@ -664,7 +699,6 @@ p {
     border: none;
 }
 
-/* WCAG Focus Indicators */
 .card:focus-visible,
 a:focus-visible,
 button:focus-visible {
@@ -672,7 +706,6 @@ button:focus-visible {
     outline-offset: 2px;
 }
 
-/* Global WCAG-compliant link styling */
 a {
     color: var(--accent-primary);
     text-decoration: underline;
@@ -695,7 +728,6 @@ a:active {
     color: var(--accent-hover);
 }
 
-/* Override for specific components that have their own link styling */
 .header a,
 .footer-links a,
 .sidebar a,
@@ -722,14 +754,8 @@ a:active {
 
 .card:hover {
     background: var(--bg-card-hover);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px var(--shadow-primary);
 }
 
-.card.featured {
-    border: 2px solid var(--accent-primary);
-    background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.03));
-}
 
 
 .linkedin-post {
@@ -747,13 +773,6 @@ a:active {
     color: inherit;
 }
 
-.linkedin-post::before {
-    content: '🔗';
-    font-size: 1.25rem;
-    flex-shrink: 0;
-    margin-top: -0.2rem;
-}
-
 .linkedin-post:hover {
     background: rgba(var(--accent-primary-rgb, 0, 170, 255), 0.05);
     border-left-color: var(--accent-primary);
@@ -765,12 +784,7 @@ a:active {
     background: rgba(var(--accent-primary-rgb, 0, 170, 255), 0.03);
 }
 
-.linkedin-post.featured::before {
-    content: '⭐';
-}
-
-.card-header,
-.post-header {
+.header-layout {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -881,10 +895,10 @@ a:active {
     align-items: center;
     gap: 6px;
     background: #004471;
-    /* Darker blue for WCAG AAA compliance (7:1 contrast ratio with white) */
     color: #ffffff;
     text-decoration: none;
     padding: 12px 24px;
+    margin-top: 1rem;
     border-radius: 8px;
     font-weight: 600;
     font-size: 1rem;
@@ -893,7 +907,6 @@ a:active {
 
 .linkedin-follow-btn:hover {
     background: #003659;
-    /* Even darker for hover state - maintains WCAG AAA compliance */
     transform: translateY(-1px);
 }
 
@@ -912,25 +925,13 @@ a:active {
     font-weight: 400;
 }
 
-.doc-highlights ul,
-.project-features ul,
-.project-achievements ul,
-.community-impact ul,
-.timeline-achievements ul,
-.skill-category ul,
-.expertise-category ul {
+.list-clean {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.doc-highlights li,
-.project-features li,
-.project-achievements li,
-.community-impact li,
-.timeline-achievements li,
-.skill-category li,
-.expertise-category li {
+.list-clean li {
     color: var(--text-tertiary);
     margin-bottom: 6px;
     padding-left: 16px;
@@ -939,39 +940,24 @@ a:active {
     font-weight: 400;
 }
 
-.doc-highlights li:last-child,
-.project-features li:last-child,
-.project-achievements li:last-child,
-.community-impact li:last-child,
-.timeline-achievements li:last-child,
-.skill-category li:last-child,
-.expertise-category li:last-child {
+.list-clean li:last-child {
     margin-bottom: 0;
 }
 
-.doc-highlights li::before,
-.project-achievements li::before,
-.community-impact li::before,
-.skill-category li::before,
-.expertise-category li::before {
+.list-clean li::before {
     content: '▸';
     position: absolute;
     left: 0;
     color: var(--accent-primary);
 }
 
-.timeline-achievements li::before {
+.list-clean.timeline li::before {
     content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--accent-primary);
 }
 
-/* CSS Variables for theming - Modern 2024 dark mode */
 
-/* Screen reader only content */
 
-/* Header styles - optimized for LCP performance */
+
 .header {
     position: fixed;
     top: 0;
@@ -979,11 +965,8 @@ a:active {
     right: 0;
     background: var(--bg-tertiary);
     border-bottom: 1px solid var(--border-secondary);
-    /* Removed backdrop-filter for 1000ms+ faster rendering */
     box-shadow: 0 4px 12px var(--shadow-primary), 0 2px 4px var(--shadow-secondary);
-    /* Nice vertical drop shadow - theme aware */
     z-index: 500;
-    /* Higher than sidebar z-index: 200 */
     padding: 16px 20px;
     display: flex;
     justify-content: space-between;
@@ -1001,7 +984,6 @@ a:active {
     color: var(--accent-primary);
 }
 
-/* Theme toggle styles */
 .theme-toggle {
     background: var(--bg-card);
     border: 1px solid var(--border-secondary);
@@ -1027,84 +1009,13 @@ a:active {
     outline-offset: 2px;
 }
 
-/* Main layout styles - REMOVED DUPLICATES (now defined in BaseLayout.astro) */
-
-/* Navigation links - moved to BaseLayout.astro to avoid conflicts */
-
-/* Typography */
-h1 {
-    margin: 0 0 6px 0;
-    font-size: 2.5rem;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
-    font-weight: 700;
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-h1 span {
-    color: var(--accent-primary);
-}
-
-h2 {
-    color: var(--text-primary);
-    font-size: 2rem;
-    margin: 32px 0 0 0;
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    font-weight: 600;
-}
-
-h3,
-h4,
-h5,
-h6 {
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    color: var(--text-primary);
-    font-weight: 500;
-    margin: 0 0 0 0;
-    font-size: 1.125rem;
-    color: var(--accent-primary);
-}
-
-p {
-    margin: 0 0 20px 0;
-    /* color: var(--text-tertiary); */
-    /* font-weight: 400; */
-    line-height: 1.7;
-}
-
-/* Buttons */
-.button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 20px;
-    border-radius: 10px;
-    border: 1px solid transparent;
-    background: var(--button-bg);
-    color: var(--button-text);
-    text-decoration: none;
-    font-weight: 600;
-    transition:
-        transform 120ms ease,
-        background 120ms ease,
-        border-color 120ms ease,
-        color 120ms ease;
-    cursor: pointer;
-}
-
-.button:hover {
-    transform: translateY(-1px);
-}
-
-.button:focus-visible {
-    outline: 3px solid var(--accent-primary);
-    outline-offset: 2px;
-}
 
 
-/* Base Card Foundation - Essential for UnifiedCard components */
+/* Typography rules consolidated above in main typography section */
+
+/* Button rules consolidated above in main typography section */
+
+
 .card-base {
     background: var(--bg-card);
     border: none;
@@ -1123,32 +1034,23 @@ p {
     box-shadow: 0 12px 24px var(--shadow-primary);
 }
 
-/* CONSOLIDATED SPACING SYSTEM */
 .pad-small { padding: var(--space-md); }
 .pad-medium { padding: var(--space-lg); }
 .pad-large { padding: var(--space-xl); }
 
-/* Section Container */
-.section-container {
-    margin: 2rem 0;
-}
+/* Section container rules consolidated above */
 
-/* Reduce top margin when section-container follows a page title (direct or nested) */
 .page-title + .section-container,
 .page-title + * .section-container:first-child {
     margin-top: 1rem; /* Reduced from 2rem to match other pages */
 }
 
-/* CONSOLIDATED CARD SYSTEM - removed duplicate, enhanced original */
 
-/* Legacy support */
 .card-padding-medium { 
     padding: var(--space-lg);
 }
 
-/* Removed duplicate 640px rule - consolidated above */
 
-/* Blog post cards */
 .blog-post-link {
     display: block;
     text-decoration: none;
@@ -1171,13 +1073,6 @@ p {
     gap: 1rem;
     border-left: 3px solid transparent;
     padding-left: 1rem;
-}
-
-.blog-post::before {
-    content: '🚀';
-    font-size: 1.25rem;
-    flex-shrink: 0;
-    margin-top: 0.125rem;
 }
 
 .blog-post-link:hover .blog-post {
@@ -1214,13 +1109,10 @@ p {
 .blog-post .date {
     margin: 0;
     color: var(--accent-primary);
-    /* Theme-aware accent: bright yellow in dark mode, blue in light mode */
     font-size: 0.8125rem;
 }
 
-/* Sections */
 .section {
-    margin-top: 32px;
     padding-top: 0;
     border-top: none;
 }
@@ -1236,7 +1128,6 @@ p {
     color: var(--text-tertiary);
 }
 
-/* Footer */
 footer {
     margin-top: 28px;
     color: var(--text-muted);
@@ -1254,7 +1145,6 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* Content styling for blog posts */
 .content {
     color: var(--text-tertiary);
     font-weight: 400;
@@ -1263,7 +1153,6 @@ footer a:hover {
 
 .content h2 {
     color: var(--text-primary);
-    /* font-size: 1.375rem; */
     margin: 32px 0 0 0;
 }
 
@@ -1299,10 +1188,6 @@ footer a:hover {
     margin: 32px 0;
 }
 
-/* GitHub Pages-style font loading */
-/* FIX 4: Use system fonts only - eliminate 275ms critical path latency completely */
-/* Custom fonts removed temporarily for optimal performance */
-/* Adobe Clean font declarations disabled - using system fonts for critical path optimization */
 
 /* =============================================================================
    REDUCED MOTION ACCESSIBILITY - Consolidated
@@ -1326,7 +1211,6 @@ footer a:hover {
         transition: none;
     }
 
-    /* Exception: Allow ActionCard animations for better UX */
     .action-card {
         transition-duration: var(--transition-normal) !important;
     }
@@ -1339,7 +1223,6 @@ footer a:hover {
         transition-duration: var(--transition-normal) !important;
     }
 
-    /* Disable View Transitions for reduced motion */
     ::view-transition-old(root),
     ::view-transition-new(root) {
         animation: none;
@@ -1354,7 +1237,6 @@ footer a:hover {
     }
 }
 
-/* Utility class for accent headings */
 .heading-accent h1,
 .heading-accent h2,
 .heading-accent h3,
@@ -1364,23 +1246,16 @@ footer a:hover {
     color: var(--accent-primary) !important;
 }
 
-/* Utility class for accent text */
-
-/* Unused search highlight styles removed for performance */
 
 
 
 
-/* Duplicate reduced motion block removed - consolidated above */
 
 
-/* Consolidated into @media (max-width: 640px) breakpoint for consistency */
 
-/* Print styles removed - empty media query eliminated */
 
-/* View Transitions removed - was causing unexpected page reload behavior */
 
-/* Prevent white flash during transitions in dark mode */
+
 ::view-transition-group(root) {
     background-color: var(--bg-primary);
 }
@@ -1389,7 +1264,6 @@ footer a:hover {
     background-color: var(--bg-primary);
 }
 
-/* Ensure proper backgrounds during transitions */
 :root::view-transition {
     background-color: var(--bg-primary);
 }
@@ -1418,26 +1292,16 @@ footer a:hover {
     }
 }
 
-/* Enhanced entrance animations */
-/* Keyframe animations moved to animations.css for better organization */
 
-/* Main container animation - DISABLED (causes cumulative sliding issue) */
 /* .main-container {
     opacity: 0;
     transform: translateY(20px);
     animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 } */
 
-/* Action cards - no animation for optimal performance at fold edge */
 
-/* Blog post cards staggered animation - applied to blog-post-link for proper targeting */
-.blog-post-link {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
+/* Blog post link animation rules consolidated above */
 
-/* Staggered animation delays - using more specific targeting */
 .blog-post-link:first-of-type {
     animation-delay: 100ms;
 }
@@ -1454,14 +1318,12 @@ footer a:hover {
     animation-delay: 400ms;
 }
 
-/* Unused incognito-tip removed for performance */
 
 /* =============================================================================
    UNIVERSAL PAGE TITLE SYSTEM
    Replaces all page-specific title IDs with a single, reusable class
    ============================================================================= */
 
-/* Universal page title class - replaces #main-title, #work-title, #projects-title, #blog-title */
 .page-title {
     opacity: 0;
     transform: translateY(20px);
@@ -1479,8 +1341,6 @@ footer a:hover {
    CORE LINE LENGTH CLASSES
    ============================================================================= */
 
-/* Standard content - paragraphs, articles, main text */
-/* Typography styles consolidated above - keeping content-specific rules */
 .content,
 .content p,
 p:not([class]) {
@@ -1488,7 +1348,6 @@ p:not([class]) {
     line-height: 1.6;
 }
 
-/* Long-form content - blog posts, articles */
 .content-panel,
 .section,
 .blog-post,
@@ -1497,7 +1356,6 @@ p:not([class]) {
     max-width: 70ch; /* Slightly wider for long-form reading */
 }
 
-/* Wide content that should use full width */
 .action-cards,
 .grid-medium,
 .grid-large,
@@ -1513,9 +1371,7 @@ p:not([class]) {
    RESPONSIVE LINE LENGTH ADJUSTMENTS
    ============================================================================= */
 
-/* Large screens - maximum comfortable reading width */
 @media (min-width: 1200px) {
-    /* Typography classes now inherit from consolidated rule */
     .content,
     .content p,
     p:not([class]) {
@@ -1531,9 +1387,7 @@ p:not([class]) {
     }
 }
 
-/* Tablet screens - balanced reading experience */
 @media (max-width: 768px) and (min-width: 641px) {
-    /* Typography classes now inherit from consolidated rule */
     .content,
     .content p,
     p:not([class]) {
@@ -1549,36 +1403,7 @@ p:not([class]) {
     }
 }
 
-/* Mobile screens - optimal for small devices */
-@media (max-width: 640px) {
-    /* Typography classes now inherit from consolidated rule */
-    .content,
-    .content p,
-    p:not([class]) {
-        max-width: 50ch; /* Mobile: 50 characters per line */
-        margin-left: 0; /* Keep left-aligned for readability */
-        margin-right: auto;
-        text-align: left; /* Ensure left alignment */
-    }
 
-    .content-panel,
-    .section,
-    .blog-post,
-    .prose,
-    .article-content {
-        max-width: 50ch;
-        margin-left: 0; /* Keep left-aligned */
-        margin-right: auto;
-        text-align: left;
-    }
-
-    /* Action cards - single column on mobile */
-    .action-cards.grid-medium {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Extra small mobile - tighten further */
 @media (max-width: 480px) {
     .content,
     .content p,
@@ -1606,55 +1431,21 @@ p:not([class]) {
    TYPOGRAPHY CONSISTENCY
    ============================================================================= */
 
-/* Ensure text is always left-aligned for readability */
-.content,
-.content p,
-.lead,
-.section-intro,
-.posts-intro,
-.content-intro,
-.intro-text p,
-p:not([class]) {
-    text-align: left !important; /* Force left alignment for all text content */
-}
 
-/* Ensure consistent font sizes for intro paragraphs */
-.lead,
-.section-intro,
-.posts-intro,
-.content-intro,
-.summary-section p {
-    font-weight: 400;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
 
-/* Responsive font scaling */
 @media (min-width: 1536px) {
+    .text-large,
     .lead,
-    .section-intro,
-    .posts-intro,
-    .content-intro,
     .summary-section p {
         font-size: 1.25rem; /* 20px on large screens */
     }
 }
 
-@media (max-width: 640px) {
-    .lead,
-    .section-intro,
-    .posts-intro,
-    .content-intro,
-    .summary-section p {
-        font-size: 1rem; /* 16px on mobile */
-    }
-}
 
 /* =============================================================================
    OVERRIDES FOR SPECIFIC CASES
    ============================================================================= */
 
-/* Ensure blog content follows the system */
 .content :global(p) {
     max-width: inherit; /* Inherit from parent .content */
     font-size: 1.1875rem; /* 19px - balanced base size */
@@ -1663,7 +1454,6 @@ p:not([class]) {
     font-weight: 400;
 }
 
-/* Homepage lead text - slightly larger */
 .lead.homepage {
     font-size: 1.25rem;
 }
@@ -1674,13 +1464,11 @@ p:not([class]) {
     }
 }
 
-/* Removed duplicate 640px rule - consolidated above */
 
 /* =============================================================================
    ANIMATION SYSTEM - Consolidated for Performance
    ============================================================================= */
 
-/* Base animation class - hardware accelerated */
 .animate-in {
   opacity: 0;
   transform: translate3d(0, 20px, 0); /* Hardware acceleration */
@@ -1688,7 +1476,6 @@ p:not([class]) {
   animation: slideInUp var(--animation-duration-slow) var(--transition-bounce) forwards;
 }
 
-/* Staggered animation delay utility classes */
 .animate-delay-50 {
   animation-delay: calc(var(--animation-duration-fast) / 3);
 }
@@ -1725,52 +1512,50 @@ p:not([class]) {
   animation-delay: 450ms;
 }
 
-/* Keyframe definitions */
 @keyframes slideInUp {
-  from {
-    opacity: 0;
+    from {
+        opacity: 0;
     transform: translate3d(0, 20px, 0); /* Hardware acceleration */
-  }
-  to {
-    opacity: 1;
+    }
+    to {
+        opacity: 1;
     transform: translate3d(0, 0, 0); /* Hardware acceleration */
-  }
+    }
 }
 
 @keyframes slideInLeft {
-  from {
-    opacity: 0;
+    from {
+        opacity: 0;
     transform: translate3d(-20px, 0, 0); /* Hardware acceleration */
-  }
-  to {
-    opacity: 1;
+    }
+    to {
+        opacity: 1;
     transform: translate3d(0, 0, 0); /* Hardware acceleration */
-  }
+    }
 }
 
 @keyframes actionCardIn {
-  from {
-    opacity: 0;
+    from {
+        opacity: 0;
     transform: translate3d(0, 20px, 0); /* Hardware acceleration */
-  }
-  to {
-    opacity: 1;
+    }
+    to {
+        opacity: 1;
     transform: translate3d(0, 0, 0); /* Hardware acceleration */
-  }
+    }
 }
 
 @keyframes staggerIn {
-  from {
-    opacity: 0;
+    from {
+        opacity: 0;
     transform: translate3d(0, 10px, 0); /* Hardware acceleration */
-  }
-  to {
-    opacity: 1;
+    }
+    to {
+        opacity: 1;
     transform: translate3d(0, 0, 0); /* Hardware acceleration */
   }
 }
 
-/* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .animate-in {
     opacity: 1;
@@ -1784,30 +1569,10 @@ p:not([class]) {
    Critical mobile CSS that was removed in commit 0632d6ae
    ============================================================================= */
 
-/* Core line length classes - essential for layout stability */
-.content,
-.content p,
-.lead,
-.section-intro,
-.posts-intro,
-.summary-section p,
-.content-intro,
-.intro-text p,
-p:not([class]) {
-    max-width: 65ch; /* Optimal: 65 characters per line */
-    line-height: 1.7;
-}
+/* Content typography rules consolidated above in main typography section */
 
-/* Long-form content - blog posts, articles */
-.content-panel,
-.section,
-.blog-post,
-.prose,
-.article-content {
-    max-width: 70ch; /* Slightly wider for long-form reading */
-}
-
-/* Wide content that should use full width */
+/* Universal grid system - all grid classes consolidated into .grid above */
+.grid,
 .action-cards,
 .grid-medium,
 .grid-large,
@@ -1821,79 +1586,14 @@ p:not([class]) {
     max-width: none; /* Allow full width for grid layouts */
 }
 
-/* Mobile screens - consolidated mobile rules */
-@media (max-width: 640px) {
-    .content,
-    .content p,
-    .lead,
-    .section-intro,
-    .posts-intro,
-    .summary-section p,
-    .content-intro,
-    .intro-text p,
-    p:not([class]) {
-        max-width: 50ch; /* Mobile: 50 characters per line */
-        margin-left: 0; /* Keep left-aligned */
-        margin-right: auto;
-        text-align: left;
-    }
+/* Mobile typography rules consolidated above in main responsive section */
 
-    /* Action cards - single column on mobile */
-    .action-cards.grid-medium {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Consolidate other 640px rules */
-    .card-padding-medium { 
-        padding: var(--space-md); 
-    }
-    
-    .lead,
-    .section-intro,
-    .posts-intro,
-    .content-intro,
-    .summary-section p {
-        font-size: 1rem; /* 16px on mobile */
-    }
-    
-    .lead.homepage {
-        font-size: 1.0625rem;
-    }
-}
-
-/* Extra small mobile - tighten further */
-@media (max-width: 480px) {
-    .content,
-    .content p,
-    .lead,
-    .section-intro,
-    .posts-intro,
-    .summary-section p,
-    .content-intro,
-    .intro-text p,
-    p:not([class]) {
-        max-width: 45ch; /* Small mobile: 45 characters per line */
-        text-align: left; /* Ensure left alignment on smallest screens */
-    }
-
-    .content-panel,
-    .section,
-    .blog-post,
-    .prose,
-    .article-content {
-        max-width: 45ch;
-        text-align: left;
-    }
-}
-
-/* Mobile font size adjustments - consolidated above */
 
 /* =============================================================================
    MOBILE HORIZONTAL OVERFLOW FIX
    Prevent horizontal scrolling on mobile devices
    ============================================================================= */
 
-/* Ensure no element can cause horizontal overflow */
 * {
   box-sizing: border-box;
 }
@@ -1903,12 +1603,10 @@ html, body {
   max-width: 100%;
 }
 
-/* Prevent any element from being wider than viewport */
 * {
   max-width: 100%;
 }
 
-/* Exception for elements that need full width */
 .full-width-container,
 .full-width-content,
 svg,
@@ -1916,7 +1614,6 @@ img {
   max-width: none;
 }
 
-/* Ensure images are responsive */
 img {
   max-width: 100%;
   height: auto;
