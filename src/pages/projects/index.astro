@@ -13,15 +13,13 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   footerLinkText="Let's connect"
   footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
-  <PageHeader primary="My" accent="Projects" id="projects-title" />
+  <PageHeader primary="My" accent="Projects" class="page-title" />
 
-  <div class="text-large lead animate-in animate-delay-100">
-    <p>
-      Over my 30+ year career, I've led initiatives that transform how developers learn, integrate,
-      and build with complex systems. From comprehensive documentation sites to interactive learning
-      tools, here are some highlights from my work at Adobe and beyond.
-    </p>
-  </div>
+  <p class="text-large lead animate-in animate-delay-100">
+    Over my 30+ year career, I've led initiatives that transform how developers learn, integrate,
+    and build with complex systems. From comprehensive documentation sites to interactive learning
+    tools, here are some highlights from my work at Adobe and beyond.
+  </p>
 
   <div class="section-container animate-in animate-delay-150">
     <h2 class="section-heading">Current Adobe Projects</h2>
@@ -80,12 +78,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
     <div class="item large">
       <div class="item-header large">
-          <h3>Commerce API Interactive Playground</h3>
+        <h3>Commerce API Interactive Playground</h3>
       </div>
       <div class="tags">
-          <span class="tag">React</span>
-          <span class="tag">API Integration</span>
-          <span class="tag">Interactive Learning</span>
+        <span class="tag">React</span>
+        <span class="tag">API Integration</span>
+        <span class="tag">Interactive Learning</span>
       </div>
 
       <div class="item-content">
@@ -120,13 +118,13 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
     <div class="item large">
       <div class="item-header large">
-          <h3>SDK Documentation with Storybook 8</h3>
+        <h3>SDK Documentation with Storybook 8</h3>
       </div>
       <div class="tags">
-          <span class="tag internal">Adobe Internal</span>
-          <span class="tag">Storybook</span>
-          <span class="tag">Component Documentation</span>
-          <span class="tag">SDK</span>
+        <span class="tag internal">Adobe Internal</span>
+        <span class="tag">Storybook</span>
+        <span class="tag">Component Documentation</span>
+        <span class="tag">SDK</span>
       </div>
 
       <div class="item-content">
@@ -160,12 +158,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
     <div class="item large">
       <div class="item-header large">
-          <h3>Developer Productivity CLI Tools</h3>
+        <h3>Developer Productivity CLI Tools</h3>
       </div>
       <div class="tags">
-          <span class="tag">Node.js</span>
-          <span class="tag">CLI Development</span>
-          <span class="tag">Automation</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">CLI Development</span>
+        <span class="tag">Automation</span>
       </div>
 
       <div class="item-content">
@@ -231,12 +229,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
     <div class="item large">
       <div class="item-header large">
-          <h3>PageBuilder Development Examples</h3>
+        <h3>PageBuilder Development Examples</h3>
       </div>
       <div class="tags">
-          <span class="tag">Open Source</span>
-          <span class="tag">Example Code</span>
-          <span class="tag">Community</span>
+        <span class="tag">Open Source</span>
+        <span class="tag">Example Code</span>
+        <span class="tag">Community</span>
       </div>
 
       <div class="item-content">
@@ -278,12 +276,12 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
     <div class="item large">
       <div class="item-header large">
-          <h3>Meet Magento Indonesia Presentation</h3>
+        <h3>Meet Magento Indonesia Presentation</h3>
       </div>
       <div class="tags">
-          <span class="tag">Speaking</span>
-          <span class="tag">Education</span>
-          <span class="tag">Best Practices</span>
+        <span class="tag">Speaking</span>
+        <span class="tag">Education</span>
+        <span class="tag">Best Practices</span>
       </div>
 
       <div class="item-content">
@@ -400,7 +398,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   }
 
   /* All project styling now handled by universal .item system */
-  
+
   /* Featured item animation */
   .item.featured {
     opacity: 0;
@@ -422,7 +420,6 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     margin: 0;
     font-size: 1.5rem;
   }
-
 
   .project-tags {
     display: flex;
@@ -686,5 +683,4 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       margin-top: 8px;
     }
   }
-
 </style>

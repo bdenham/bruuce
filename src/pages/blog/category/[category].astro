@@ -7,22 +7,22 @@ import SEO from '../../../components/SEO.astro';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
-  const publishedPosts = blogPosts.filter(post => !post.data.draft);
-  
+  const publishedPosts = blogPosts.filter((post) => !post.data.draft);
+
   // Get all unique categories
-  const categories = [...new Set(publishedPosts.map(post => post.data.category).filter(Boolean))];
-  
-  return categories.map(category => {
+  const categories = [...new Set(publishedPosts.map((post) => post.data.category).filter(Boolean))];
+
+  return categories.map((category) => {
     const categoryPosts = publishedPosts
-      .filter(post => post.data.category === category)
+      .filter((post) => post.data.category === category)
       .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-    
+
     return {
       params: { category: category.toLowerCase().replace(/\s+/g, '-') },
-      props: { 
-        category, 
+      props: {
+        category,
         posts: categoryPosts,
-        categorySlug: category.toLowerCase().replace(/\s+/g, '-')
+        categorySlug: category.toLowerCase().replace(/\s+/g, '-'),
       },
     };
   });
@@ -53,31 +53,20 @@ const pageDescription = `${postCount} blog post${postCount !== 1 ? 's' : ''} abo
     canonical={`https://bruuce.com/blog/category/${categorySlug}/`}
   />
 
-  <div class="category-page">
-    <!-- Category header -->
-    <div class="category-header">
-      <PageHeader primary={category} accent="Posts" />
-      <p class="text-large lead category-description">
-        {postCount} post{postCount !== 1 ? 's' : ''} about {category.toLowerCase()}
-      </p>
-    </div>
+  <PageHeader primary={category} accent="Posts" class="page-title" />
+  <p class="text-large lead animate-in animate-delay-100">
+    {postCount} post{postCount !== 1 ? 's' : ''} about {category.toLowerCase()}
+  </p>
 
-    <!-- Category posts -->
-    <div class="category-posts">
-      {posts.map((post) => (
-        <BlogPostCard post={post} showCategory={false} />
-      ))}
-    </div>
+  <!-- Category posts -->
+  <div class="category-posts animate-in animate-delay-150">
+    {posts.map((post) => <BlogPostCard post={post} showCategory={false} />)}
+  </div>
 
-    <!-- Category navigation -->
-    <div class="category-navigation">
-      <a href="/blog/" class="nav-link">
-        ← All Posts
-      </a>
-      <a href="/blog/tags/" class="nav-link">
-        Browse by Tags →
-      </a>
-    </div>
+  <!-- Category navigation -->
+  <div class="category-navigation animate-in animate-delay-200">
+    <a href="/blog/" class="nav-link"> ← All Posts </a>
+    <a href="/blog/tags/" class="nav-link"> Browse by Tags → </a>
   </div>
 </BaseLayout>
 

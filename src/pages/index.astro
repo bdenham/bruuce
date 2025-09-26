@@ -17,7 +17,7 @@ const latestPosts = blogPosts
   description="🏆 Adobe award nominee with 30+ years transforming complex technical concepts into clear developer experiences. Expert in API docs, SDK documentation, and developer tools at Adobe."
   footerText="Thanks for visiting! Let's build better developer experiences together."
 >
-  <h1 id="main-title">Bruce <span>Denham</span></h1>
+  <h1 class="page-title">Bruce <span>Denham</span></h1>
   <p class="subtitle homepage animate-in animate-delay-100">Senior Tech Writer / DX Engineer</p>
   <p class="text-large lead animate-in animate-delay-150">
     🏆 <strong>Adobe award nominee</strong> with 30+ years turning complex concepts into clear, human
@@ -41,7 +41,7 @@ const latestPosts = blogPosts
       <LighthouseGauge score={100} label="Best Practices" />
       <LighthouseGauge score={100} label="SEO" />
     </div>
-    
+
     <!-- Performance Metrics Grid -->
     <div class="performance-metrics">
       <div class="metric-item"><span class="metric-value">~0.3s</span><br />Desktop Load</div>
@@ -121,14 +121,15 @@ const latestPosts = blogPosts
     <div class="blog-posts-container">
       {
         latestPosts.map((post, index) => (
-          <div class={`blog-post-wrapper ${index > 0 ? 'lazy-load' : ''} scroll-animate animate-in ${index === 0 ? 'animate-delay-400' : 'animate-delay-450'}`}>
+          <div
+            class={`blog-post-wrapper ${index > 0 ? 'lazy-load' : ''} scroll-animate animate-in ${index === 0 ? 'animate-delay-400' : 'animate-delay-450'}`}
+          >
             <BlogPostCard post={post} />
           </div>
         ))
       }
     </div>
   </div>
-
 </BaseLayout>
 
 <!-- Minimal scroll position optimization -->
@@ -335,7 +336,7 @@ const latestPosts = blogPosts
     .performance-cta .percentile-text {
       font-size: 0.875rem;
     }
-    
+
     .metrics-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 8px;
@@ -357,13 +358,15 @@ const latestPosts = blogPosts
       grid-template-columns: 1fr; /* Single column for better mobile performance */
       gap: 8px;
     }
-    
-    .metric-item, .lighthouse-score {
+
+    .metric-item,
+    .lighthouse-score {
       padding: 8px 4px;
       font-size: 0.5625rem;
     }
-    
-    .lighthouse-value, .metric-value {
+
+    .lighthouse-value,
+    .metric-value {
       font-size: 1rem;
     }
   }
@@ -377,7 +380,6 @@ const latestPosts = blogPosts
   }
 
   /* Homepage-specific styles only - LinkedIn styles moved to blog page */
-
 </style>
 
 <!-- Performance-optimized lazy loading with cleanup -->

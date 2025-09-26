@@ -13,304 +13,298 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   footerLinkText="Let's connect on LinkedIn"
   footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
-  <PageHeader primary="My" accent="Resume" id="resume-title" />
+  <PageHeader primary="My" accent="Resume" class="page-title" />
 
-  <div class="resume-content">
-    <div class="section-container animate-in animate-delay-100">
-      <p>
-        I'm a Senior Developer Experience (DX) writer and developer advocate specializing in transforming
-        enterprise frameworks into adoption-driving documentation. 30+ years of experience
-        building developer tools, interactive tutorials, and comprehensive documentation ecosystems
-        that reduce time-to-first-success and increase API adoption rates. Expert at the
-        intersection of technical writing, frontend development, visual design, and UX—helping dev
-        teams ship faster with docs, tools, and visuals that drive measurable engagement.
-      </p>
+  <p class="text-large lead animate-in animate-delay-100">
+    I'm a Senior Developer Experience (DX) writer and developer advocate specializing in
+    transforming enterprise frameworks into adoption-driving documentation. 30+ years of experience
+    building developer tools, interactive tutorials, and comprehensive documentation ecosystems that
+    reduce time-to-first-success and increase API adoption rates. Expert at the intersection of
+    technical writing, frontend development, visual design, and UX—helping dev teams ship faster
+    with docs, tools, and visuals that drive measurable engagement.
+  </p>
+
+  <div class="section-container featured-section animate-in animate-delay-150">
+    <h2 class="section-heading">🏆 Awards & Recognition</h2>
+    <ul class="awards-list">
+      <li>
+        <strong>Adobe Founders Award</strong> – Nominee for excellence in technical writing and developer
+        experience innovation
+      </li>
+      <li>
+        <strong>Adobe Extreme Ownership Award</strong> – Nominee for outstanding leadership and accountability
+      </li>
+      <li>
+        <strong>International Speaking</strong> – Presented PageBuilder best practices at Meet Magento
+        Indonesia 2019
+      </li>
+      <li>
+        <strong>Community Impact</strong> – PageBuilder Examples repository: 106 GitHub stars, 78 forks
+        (highest engagement in ecosystem)
+      </li>
+    </ul>
+  </div>
+
+  <div class="section-container animate-in animate-delay-200">
+    <h2 class="section-heading">Core Skills</h2>
+
+    <div class="grid-single">
+      <div class="skill-category">
+        <h3>Technical Skills</h3>
+        <ul>
+          <li>Git, GitHub, GitHub Actions for version control and workflow automation</li>
+          <li>HTML, CSS, JavaScript for building responsive, interactive UIs</li>
+          <li>Markdown and MDX for clean, structured, interactive technical documentation</li>
+          <li>Frontend development with modern frameworks and best practices</li>
+          <li>Jest testing for reliable unit and integration test coverage</li>
+          <li>Command line tool development to streamline developer tasks and boost efficiency</li>
+          <li>
+            React 18+, Node.js, Storybook, Astro/Starlight for dynamic web apps and documentation
+            sites
+          </li>
+          <li>Package management with npm, pnpm, yarn, and bun for optimized builds</li>
+          <li>Algolia search integration for fast, accurate content discovery</li>
+          <li>Site monitoring and analytics tools to capture metrics on site usage</li>
+        </ul>
+      </div>
+
+      <div class="skill-category">
+        <h3>Documentation & Education</h3>
+        <ul>
+          <li>
+            Enterprise commerce solutions for scalable B2C and B2B commercial and open source
+            markets
+          </li>
+          <li>
+            Diátaxis documentation framework for building intuitive documentation architecture
+          </li>
+          <li>Developer tutorials and how-to guides that simplify complex workflows</li>
+          <li>API documentation that drives adoption and reduces support needs</li>
+          <li>Interactive playgrounds for hands-on developer learning</li>
+          <li>Infographics that visually clarify technical concepts</li>
+          <li>Animations to explain processes and engage users</li>
+          <li>Video tutorials for product demos and training</li>
+          <li>Sample applications to showcase real-world API use cases</li>
+          <li>Cloud systems documentation for SaaS and PaaS platforms</li>
+        </ul>
+      </div>
+
+      <div class="skill-category">
+        <h3>Design & UX</h3>
+        <ul>
+          <li>UI design that balances beauty and usability for modern web apps</li>
+          <li>UX research and strategy to align product features with user needs</li>
+          <li>Visual design that communicates ideas with clarity and impact</li>
+          <li>Web app prototyping for rapid iteration and user feedback</li>
+          <li>User-centric design focused on intuitive, seamless experiences</li>
+        </ul>
+      </div>
+
+      <div class="skill-category">
+        <h3>Leadership & Communication</h3>
+        <ul>
+          <li>
+            Thrive in remote teams, delivering clear, engaging content that empowers developers
+          </li>
+          <li>
+            Natural leader with a passion for mentoring, problem-solving, and making hard concepts
+            easy
+          </li>
+          <li>Self-driven and highly productive, with 5+ years of remote success</li>
+          <li>Constantly innovating better ways to explain complex ideas</li>
+          <li>Expert visual communicator who brings clarity through design and storytelling</li>
+          <li>Creative problem-solver, turning roadblocks into opportunities</li>
+          <li>Energized by teaching and lifting others through shared knowledge</li>
+          <li>Deep open-source community involvement with Magento</li>
+        </ul>
+      </div>
     </div>
+  </div>
 
-    <div class="section-container featured-section animate-in animate-delay-150">
-      <h2 class="section-heading">🏆 Awards & Recognition</h2>
-      <ul class="awards-list">
+  <div class="section-container animate-in animate-delay-250">
+    <h2 class="section-heading">Professional Experience</h2>
+
+    <div class="job">
+      <div class="job-header">
+        <h3>Adobe, Inc.</h3>
+        <div class="job-meta">
+          <span class="job-title">Senior Technical Writer & Developer Experience Specialist</span>
+          <span class="job-period">2018–Present</span>
+        </div>
+      </div>
+      <ul class="achievements">
         <li>
-          <strong>Adobe Founders Award</strong> – Nominee for excellence in technical writing and developer
-          experience innovation
+          Lead documentation products across multiple teams, ensuring alignment with business goals
+          and user needs
         </li>
         <li>
-          <strong>Adobe Extreme Ownership Award</strong> – Nominee for outstanding leadership and accountability
+          Manage and maintain Adobe Storefront Commerce documentation site and GitHub repository
+        </li>
+        <li>Develop SDK documentation using advanced customizations of Storybook 8</li>
+        <li>
+          Build interactive React apps (Commerce API Playground) to demo Adobe API integrations
         </li>
         <li>
-          <strong>International Speaking</strong> – Presented PageBuilder best practices at Meet Magento
-          Indonesia 2019
+          Develop CLI tools (jitnotes, pbmodules) to streamline workflows, cut repetitive tasks, and
+          boost dev productivity
         </li>
         <li>
-          <strong>Community Impact</strong> – PageBuilder Examples repository: 106 GitHub stars, 78 forks
-          (highest engagement in ecosystem)
+          Deliver and maintain full-featured PageBuilder development examples in a public GitHub
+          repo
+        </li>
+        <li>
+          Translate complex services into clear, actionable guides, accelerating onboarding and
+          reducing ramp-up time
+        </li>
+        <li>
+          Recognized for creativity, UX expertise, and technical writing excellence by peers and
+          leadership
+        </li>
+        <li>
+          Presented PageBuilder best practices at the open source 2019 Meet Magento event in
+          Indonesia
+        </li>
+        <li>
+          Improved search relevance with custom Algolia integration, enabling faster access to key
+          resources
+        </li>
+        <li>
+          Collaborate with cross-functional teams (UX Designers, Product Managers, Engineering) to
+          keep documentation in sync with evolving features
         </li>
       </ul>
     </div>
 
-    <div class="section-container animate-in animate-delay-200">
-      <h2 class="section-heading">Core Skills</h2>
-
-      <div class="grid-single">
-        <div class="skill-category">
-          <h3>Technical Skills</h3>
-          <ul>
-            <li>Git, GitHub, GitHub Actions for version control and workflow automation</li>
-            <li>HTML, CSS, JavaScript for building responsive, interactive UIs</li>
-            <li>Markdown and MDX for clean, structured, interactive technical documentation</li>
-            <li>Frontend development with modern frameworks and best practices</li>
-            <li>Jest testing for reliable unit and integration test coverage</li>
-            <li>
-              Command line tool development to streamline developer tasks and boost efficiency
-            </li>
-            <li>
-              React 18+, Node.js, Storybook, Astro/Starlight for dynamic web apps and documentation
-              sites
-            </li>
-            <li>Package management with npm, pnpm, yarn, and bun for optimized builds</li>
-            <li>Algolia search integration for fast, accurate content discovery</li>
-            <li>Site monitoring and analytics tools to capture metrics on site usage</li>
-          </ul>
-        </div>
-
-        <div class="skill-category">
-          <h3>Documentation & Education</h3>
-          <ul>
-            <li>
-              Enterprise commerce solutions for scalable B2C and B2B commercial and open source
-              markets
-            </li>
-            <li>
-              Diátaxis documentation framework for building intuitive documentation architecture
-            </li>
-            <li>Developer tutorials and how-to guides that simplify complex workflows</li>
-            <li>API documentation that drives adoption and reduces support needs</li>
-            <li>Interactive playgrounds for hands-on developer learning</li>
-            <li>Infographics that visually clarify technical concepts</li>
-            <li>Animations to explain processes and engage users</li>
-            <li>Video tutorials for product demos and training</li>
-            <li>Sample applications to showcase real-world API use cases</li>
-            <li>Cloud systems documentation for SaaS and PaaS platforms</li>
-          </ul>
-        </div>
-
-        <div class="skill-category">
-          <h3>Design & UX</h3>
-          <ul>
-            <li>UI design that balances beauty and usability for modern web apps</li>
-            <li>UX research and strategy to align product features with user needs</li>
-            <li>Visual design that communicates ideas with clarity and impact</li>
-            <li>Web app prototyping for rapid iteration and user feedback</li>
-            <li>User-centric design focused on intuitive, seamless experiences</li>
-          </ul>
-        </div>
-
-        <div class="skill-category">
-          <h3>Leadership & Communication</h3>
-          <ul>
-            <li>
-              Thrive in remote teams, delivering clear, engaging content that empowers developers
-            </li>
-            <li>
-              Natural leader with a passion for mentoring, problem-solving, and making hard concepts
-              easy
-            </li>
-            <li>Self-driven and highly productive, with 5+ years of remote success</li>
-            <li>Constantly innovating better ways to explain complex ideas</li>
-            <li>Expert visual communicator who brings clarity through design and storytelling</li>
-            <li>Creative problem-solver, turning roadblocks into opportunities</li>
-            <li>Energized by teaching and lifting others through shared knowledge</li>
-            <li>Deep open-source community involvement with Magento</li>
-          </ul>
+    <div class="job">
+      <div class="job-header">
+        <h3>TOPAZ Technologies</h3>
+        <div class="job-meta">
+          <span class="job-title">Senior Product Designer / Developer Support</span>
+          <span class="job-period">2006–2018</span>
         </div>
       </div>
+      <ul class="achievements">
+        <li>
+          Boosted customer satisfaction by simplifying workflows based on user feedback and testing
+          insights
+        </li>
+        <li>
+          Built and prototyped web apps with HTML, CSS, JavaScript, AngularJS, Bootstrap, and
+          Angular Material
+        </li>
+        <li>
+          Led a UI overhaul of legacy AngularJS apps, driving major gains in usability and developer
+          speed
+        </li>
+        <li>
+          Trained dev teams on Angular Material best practices through hands-on code reviews and
+          live presentations
+        </li>
+        <li>
+          Partnered with product owners and developers to ensure seamless integration of design and
+          functionality
+        </li>
+        <li>
+          Delivered intuitive UX designs praised by users and stakeholders for clarity and ease of
+          use
+        </li>
+        <li>
+          Created and prototyped early-stage software using Flex/ActionScript and Silverlight/C#
+        </li>
+        <li>
+          Managed end-to-end marketing, advertising, and branding strategies for product visibility
+          and growth
+        </li>
+        <li>
+          Simplified user interfaces, reducing complexity and enhancing overall product experience
+        </li>
+        <li>
+          Supported developers with technical guidance, ensuring smooth design integration and
+          better app performance
+        </li>
+      </ul>
     </div>
 
-    <div class="section-container animate-in animate-delay-250">
-      <h2 class="section-heading">Professional Experience</h2>
-
-      <div class="job">
-        <div class="job-header">
-          <h3>Adobe, Inc.</h3>
-          <div class="job-meta">
-            <span class="job-title">Senior Technical Writer & Developer Experience Specialist</span>
-            <span class="job-period">2018–Present</span>
-          </div>
+    <div class="job">
+      <div class="job-header">
+        <h3>Schlumberger</h3>
+        <div class="job-meta">
+          <span class="job-title">Senior Technical Writer / API Documentation Specialist</span>
+          <span class="job-period">2000-2005</span>
         </div>
-        <ul class="achievements">
-          <li>
-            Lead documentation products across multiple teams, ensuring alignment with business
-            goals and user needs
-          </li>
-          <li>
-            Manage and maintain Adobe Storefront Commerce documentation site and GitHub repository
-          </li>
-          <li>Develop SDK documentation using advanced customizations of Storybook 8</li>
-          <li>
-            Build interactive React apps (Commerce API Playground) to demo Adobe API integrations
-          </li>
-          <li>
-            Develop CLI tools (jitnotes, pbmodules) to streamline workflows, cut repetitive tasks,
-            and boost dev productivity
-          </li>
-          <li>
-            Deliver and maintain full-featured PageBuilder development examples in a public GitHub
-            repo
-          </li>
-          <li>
-            Translate complex services into clear, actionable guides, accelerating onboarding and
-            reducing ramp-up time
-          </li>
-          <li>
-            Recognized for creativity, UX expertise, and technical writing excellence by peers and
-            leadership
-          </li>
-          <li>
-            Presented PageBuilder best practices at the open source 2019 Meet Magento event in
-            Indonesia
-          </li>
-          <li>
-            Improved search relevance with custom Algolia integration, enabling faster access to key
-            resources
-          </li>
-          <li>
-            Collaborate with cross-functional teams (UX Designers, Product Managers, Engineering) to
-            keep documentation in sync with evolving features
-          </li>
-        </ul>
       </div>
+      <ul class="achievements">
+        <li>
+          Wrote API docs and training guides that enabled 100+ global developers to adopt complex
+          systems quickly
+        </li>
+        <li>
+          Built UI prototypes in C#/WinForms for oil data tools, securing early stakeholder approval
+          for product direction
+        </li>
+        <li>
+          Integrated documentation into Microsoft Dev Studio, boosting developer efficiency and
+          reducing search time
+        </li>
+        <li>
+          Produced clear, actionable content that simplified engineering workflows and shortened
+          onboarding time
+        </li>
+      </ul>
+    </div>
+  </div>
 
-      <div class="job">
-        <div class="job-header">
-          <h3>TOPAZ Technologies</h3>
-          <div class="job-meta">
-            <span class="job-title">Senior Product Designer / Developer Support</span>
-            <span class="job-period">2006–2018</span>
-          </div>
-        </div>
-        <ul class="achievements">
-          <li>
-            Boosted customer satisfaction by simplifying workflows based on user feedback and
-            testing insights
-          </li>
-          <li>
-            Built and prototyped web apps with HTML, CSS, JavaScript, AngularJS, Bootstrap, and
-            Angular Material
-          </li>
-          <li>
-            Led a UI overhaul of legacy AngularJS apps, driving major gains in usability and
-            developer speed
-          </li>
-          <li>
-            Trained dev teams on Angular Material best practices through hands-on code reviews and
-            live presentations
-          </li>
-          <li>
-            Partnered with product owners and developers to ensure seamless integration of design
-            and functionality
-          </li>
-          <li>
-            Delivered intuitive UX designs praised by users and stakeholders for clarity and ease of
-            use
-          </li>
-          <li>
-            Created and prototyped early-stage software using Flex/ActionScript and Silverlight/C#
-          </li>
-          <li>
-            Managed end-to-end marketing, advertising, and branding strategies for product
-            visibility and growth
-          </li>
-          <li>
-            Simplified user interfaces, reducing complexity and enhancing overall product experience
-          </li>
-          <li>
-            Supported developers with technical guidance, ensuring smooth design integration and
-            better app performance
-          </li>
-        </ul>
+  <div class="section-container animate-in animate-delay-300">
+    <h2 class="section-heading">Education</h2>
+    <div class="grid">
+      <div class="degree">
+        <strong>B.A. in English</strong><br />
+        University of Texas at Austin
       </div>
-
-      <div class="job">
-        <div class="job-header">
-          <h3>Schlumberger</h3>
-          <div class="job-meta">
-            <span class="job-title">Senior Technical Writer / API Documentation Specialist</span>
-            <span class="job-period">2000-2005</span>
-          </div>
-        </div>
-        <ul class="achievements">
-          <li>
-            Wrote API docs and training guides that enabled 100+ global developers to adopt complex
-            systems quickly
-          </li>
-          <li>
-            Built UI prototypes in C#/WinForms for oil data tools, securing early stakeholder
-            approval for product direction
-          </li>
-          <li>
-            Integrated documentation into Microsoft Dev Studio, boosting developer efficiency and
-            reducing search time
-          </li>
-          <li>
-            Produced clear, actionable content that simplified engineering workflows and shortened
-            onboarding time
-          </li>
-        </ul>
+      <div class="degree">
+        <strong>B.A. in Sociology</strong><br />
+        Southwestern University
       </div>
     </div>
+  </div>
 
-    <div class="section-container animate-in animate-delay-300">
-      <h2 class="section-heading">Education</h2>
+  <div class="section-container">
+    <div class="contact-info animate-in animate-delay-350">
+      <h2 class="section-heading">Contact Information</h2>
       <div class="grid">
-        <div class="degree">
-          <strong>B.A. in English</strong><br />
-          University of Texas at Austin
+        <div class="contact-item">
+          <strong>Email:</strong>
+          <a href="mailto:brucedenham@mac.com">brucedenham@mac.com</a>
         </div>
-        <div class="degree">
-          <strong>B.A. in Sociology</strong><br />
-          Southwestern University
+        <div class="contact-item">
+          <strong>Phone:</strong>
+          <a href="tel:+15129660265">(512) 966-0265</a>
         </div>
-      </div>
-    </div>
-
-    <div class="section-container">
-      <div class="contact-info animate-in animate-delay-350">
-        <h2 class="section-heading">Contact Information</h2>
-        <div class="grid">
-          <div class="contact-item">
-            <strong>Email:</strong>
-            <a href="mailto:brucedenham@mac.com">brucedenham@mac.com</a>
-          </div>
-          <div class="contact-item">
-            <strong>Phone:</strong>
-            <a href="tel:+15129660265">(512) 966-0265</a>
-          </div>
-          <div class="contact-item">
-            <strong>Location:</strong> Austin, Texas Metropolitan Area
-          </div>
-          <div class="contact-item">
-            <strong>LinkedIn:</strong>
-            <a href="https://linkedin.com/in/brucedenham/" target="_blank" rel="noopener noreferrer"
-              >linkedin.com/in/brucedenham/</a
-            >
-          </div>
+        <div class="contact-item">
+          <strong>Location:</strong> Austin, Texas Metropolitan Area
+        </div>
+        <div class="contact-item">
+          <strong>LinkedIn:</strong>
+          <a href="https://linkedin.com/in/brucedenham/" target="_blank" rel="noopener noreferrer"
+            >linkedin.com/in/brucedenham/</a
+          >
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="section-container animate-in animate-delay-400">
-      <h2 class="section-heading">Professional Endorsements</h2>
-      <p>
-        See detailed LinkedIn recommendations from colleagues and leadership:
-        <a
-          href="https://www.linkedin.com/in/brucedenham/details/recommendations/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          LinkedIn Recommendations
-        </a>
-      </p>
-    </div>
+  <div class="section-container animate-in animate-delay-400">
+    <h2 class="section-heading">Professional Endorsements</h2>
+    <p>
+      See detailed LinkedIn recommendations from colleagues and leadership:
+      <a
+        href="https://www.linkedin.com/in/brucedenham/details/recommendations/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        LinkedIn Recommendations
+      </a>
+    </p>
   </div>
 </BaseLayout>
 
@@ -603,5 +597,4 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       align-items: flex-start;
     }
   }
-
 </style>

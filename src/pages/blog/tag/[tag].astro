@@ -7,23 +7,23 @@ import SEO from '../../../components/SEO.astro';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
-  const publishedPosts = blogPosts.filter(post => !post.data.draft);
-  
+  const publishedPosts = blogPosts.filter((post) => !post.data.draft);
+
   // Get all unique tags
-  const allTags = publishedPosts.flatMap(post => post.data.tags || []);
+  const allTags = publishedPosts.flatMap((post) => post.data.tags || []);
   const uniqueTags = [...new Set(allTags)];
-  
-  return uniqueTags.map(tag => {
+
+  return uniqueTags.map((tag) => {
     const tagPosts = publishedPosts
-      .filter(post => post.data.tags?.includes(tag))
+      .filter((post) => post.data.tags?.includes(tag))
       .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-    
+
     return {
       params: { tag: tag.toLowerCase().replace(/\s+/g, '-') },
-      props: { 
-        tag, 
+      props: {
+        tag,
         posts: tagPosts,
-        tagSlug: tag.toLowerCase().replace(/\s+/g, '-')
+        tagSlug: tag.toLowerCase().replace(/\s+/g, '-'),
       },
     };
   });
@@ -54,48 +54,41 @@ const pageDescription = `${postCount} blog post${postCount !== 1 ? 's' : ''} abo
     canonical={`https://bruuce.com/blog/tag/${tagSlug}/`}
   />
 
-  <div class="tag-page">
-    <!-- Tag header -->
-    <div class="tag-header">
-      <PageHeader primary={tag} accent="Posts" />
-      <p class="text-large lead tag-description">
-        {postCount} post{postCount !== 1 ? 's' : ''} about <strong>{tag}</strong>
-      </p>
-    </div>
+  <PageHeader primary={tag} accent="Posts" class="page-title" />
+  <p class="text-large lead animate-in animate-delay-100">
+    {postCount} post{postCount !== 1 ? 's' : ''} about <strong>{tag}</strong>
+  </p>
 
-    <!-- Tag posts -->
-    <div class="tag-posts">
-      {posts.map((post) => (
-        <BlogPostCard post={post} showTags={false} />
-      ))}
-    </div>
+  <!-- Tag posts -->
+  <div class="tag-posts animate-in animate-delay-150">
+    {posts.map((post) => <BlogPostCard post={post} showTags={false} />)}
+  </div>
 
-    <!-- Related tags -->
-    {posts.length > 0 && (
-      <div class="related-tags">
+  <!-- Related tags -->
+  {
+    posts.length > 0 && (
+      <div class="related-tags animate-in animate-delay-200">
         <h3>Related Tags</h3>
         <div class="tags-cloud">
-          {[...new Set(posts.flatMap(post => post.data.tags || []).filter(t => t !== tag))].slice(0, 10).map(relatedTag => (
-            <a 
-              href={`/blog/tag/${relatedTag.toLowerCase().replace(/\s+/g, '-')}/`}
-              class="related-tag"
-            >
-              {relatedTag}
-            </a>
-          ))}
+          {[...new Set(posts.flatMap((post) => post.data.tags || []).filter((t) => t !== tag))]
+            .slice(0, 10)
+            .map((relatedTag) => (
+              <a
+                href={`/blog/tag/${relatedTag.toLowerCase().replace(/\s+/g, '-')}/`}
+                class="related-tag"
+              >
+                {relatedTag}
+              </a>
+            ))}
         </div>
       </div>
-    )}
+    )
+  }
 
-    <!-- Tag navigation -->
-    <div class="tag-navigation">
-      <a href="/blog/" class="nav-link">
-        ← All Posts
-      </a>
-      <a href="/blog/categories/" class="nav-link">
-        Browse by Categories →
-      </a>
-    </div>
+  <!-- Tag navigation -->
+  <div class="tag-navigation animate-in animate-delay-200">
+    <a href="/blog/" class="nav-link"> ← All Posts </a>
+    <a href="/blog/categories/" class="nav-link"> Browse by Categories → </a>
   </div>
 </BaseLayout>
 

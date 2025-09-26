@@ -1,33 +1,224 @@
-/* Consolidated CSS for better performance - eliminates import chain */
+/* =============================================================================
+   CSS VARIABLES & THEME SYSTEM
+   Core design tokens and theme variables
+   ============================================================================= */
 
-/* CSS Reset */
-html,
-body {
-  scrollbar-gutter: stable;
+:root {
+    --sidebar-background: rgba(59, 130, 246, 0.15);
+    --bg-primary: #1d1d1d; /* Dark gray background */
+    --bg-secondary: #1a1a1a; /* Rich charcoal */
+    --bg-tertiary: rgba(26, 26, 26, 0.95); /* Sophisticated overlay */
+    --bg-card: rgba(38, 38, 38, 0.6); /* Modern card surface */
+    --bg-card-hover: rgba(45, 45, 45, 0.8); /* Elevated hover state */
+    --text-primary: #fafafa; /* Modern high-contrast white */
+    --text-secondary: #e4e4e7; /* Clean secondary text */
+    --text-tertiary: #c4c4c7; /* Improved contrast - WCAG AA compliant */
+    --text-lead: #dddddd; /* Enhanced lead text for visual impact */
+    /* Improved contrast for WCAG AA compliance */
+    --text-muted: #e4e4e7;
+    /* Improved contrast for dates and secondary text */
+    --text-dim: #e4e4e7;
+    /* Tag colors for WCAG AA compliance */
+    --tag-bg: rgba(161, 161, 170, 0.2); /* Visible tag background */
+    --tag-text: #fafafa; /* High contrast tag text */
+    /* Modern border colors for 2024 dark mode */
+    --border-primary: rgba(161, 161, 170, 0.3); /* Modern zinc borders */
+    --border-secondary: rgba(161, 161, 170, 0.15); /* Subtle secondary borders */
+    --accent-hover: #0080ff; /* Lighter blue for hover in dark mode */
+    --accent-content: #1a365d;
+    --accent-content-text: #ffffff;
+    --accent-primary: #00aaff;
+    /* Bright blue for dark mode */
+    --gradient-1: rgba(0, 170, 255, 0.25);
+    --gradient-2: rgba(0, 204, 255, 0.2);
+    --shadow-primary: rgba(0, 0, 0, 0.5); /* Modern deep shadows */
+    --shadow-secondary: rgba(0, 0, 0, 0.3); /* Rich secondary shadows */
+
+    /* Button variables for WCAG AA compliance */
+    --button-bg: #334155;
+    --button-text: #ffffff;
+    --button-primary-bg: #0066cc;
+    --button-primary-hover-bg: #0080ff;
+    --button-primary-text: #ffffff;
+    --button-primary-border: rgba(0, 102, 204, 0.3);
+    --button-secondary-bg: #1e293b;
+    --button-secondary-hover-bg: #334155;
+    --button-secondary-text: #ffffff;
+    --button-secondary-border: rgba(148, 163, 184, 0.25);
+    --button-secondary-hover-border: rgba(148, 163, 184, 0.4);
+
+    /* =================================================================
+       DESIGN SYSTEM TOKENS - Spacing, Sizing, and Animation
+       ================================================================= */
+    
+    /* Spacing Scale - Consistent spacing throughout the site */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+
+    /* Border Radius Scale */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+
+    /* Typography Scale */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+    --text-3xl: 2rem;      /* 32px */
+    --text-4xl: 2.5rem;    /* 40px */
+
+    /* Line Heights */
+    --leading-tight: 1.15;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+    --leading-loose: 1.7;
+
+    /* Animation & Transitions */
+    --transition-fast: 120ms ease;
+    --transition-normal: 200ms ease;
+    --transition-slow: 300ms ease;
+    --transition-bounce: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --animation-duration-fast: 0.15s;
+    --animation-duration-normal: 0.3s;
+    --animation-duration-slow: 0.5s;
+
+    /* Z-Index Scale */
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-popover: 600;
+    --z-tooltip: 700;
+    --z-toast: 800;
+}
+
+/* Simplified light mode background */
+:root.light html {
+    background-color: var(--bg-primary);
+    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    background-attachment: fixed;
+}
+
+/* Light theme - Modern 2024 neutral palette */
+:root.light {
+    --bg-primary: #f1f1f1;
+    --bg-secondary: #f1f1f1;
+    --bg-tertiary: rgba(255, 255, 255, 0.95);
+    --bg-card: rgba(255, 255, 255, 1);
+    --bg-card-hover: rgba(255, 255, 255, 1);
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --text-tertiary: #4a5568; /* Darker gray for better contrast - WCAG AA compliant */
+    --text-lead: #374151; /* Enhanced lead text for visual impact in light mode */
+    --text-muted: #374151;
+    --text-dim: #374151;
+    /* Tag colors for WCAG AA compliance */
+    --tag-bg: rgba(161, 161, 170, 0.15); /* Subtle but visible tag background */
+    --tag-text: #374151; /* High contrast tag text */
+    /* Modern border colors for 2024 design trends */
+    --border-primary: rgba(161, 161, 170, 0.4);
+    --border-secondary: rgba(161, 161, 170, 0.2);
+    --accent-hover: #0080ff; /* Lighter blue for hover in light mode */
+    --accent-content: rgba(0, 102, 204, 0.1);
+    --accent-content-text: #0052A3;
+    --accent-primary: #0052A3;
+    /* Darker blue for better contrast in light mode */
+    --gradient-1: rgba(0, 102, 204, 0.08);
+    --gradient-2: rgba(0, 128, 255, 0.06);
+    --shadow-primary: rgba(0, 0, 0, 0.08);
+    --shadow-secondary: rgba(0, 0, 0, 0.04);
+
+    /* Button variables for WCAG AA compliance in softer light mode */
+    --button-bg: #d1d5db;
+    --button-text: #1f2937;
+    --button-primary-bg: #0066cc;
+    --button-primary-hover-bg: #0052a3;
+    --button-primary-text: #ffffff;
+    --button-primary-border: rgba(0, 102, 204, 0.2);
+    --button-secondary-bg: rgba(255, 255, 255, 0.9);
+    --button-secondary-hover-bg: rgba(248, 244, 241, 0.9);
+    --button-secondary-text: #374151;
+    --button-secondary-border: rgba(160, 174, 192, 0.3);
+    --button-secondary-hover-border: rgba(160, 174, 192, 0.5);
 }
 
 /* =============================================================================
-   UNIVERSAL TEXT BALANCING
-   Applied to all text content for consistent, professional typography
+   GLOBAL BASE STYLES
+   Universal styles applied to all elements
    ============================================================================= */
 
-/* Apply text balancing to text content - optimized selectors instead of universal */
-p, li, blockquote, .lead, .subtitle, .section-intro, .posts-intro {
-    /* Modern text balancing - prevents awkward line breaks */
-    text-wrap: pretty;
-    
-    /* Prevent orphans and widows in print/long content */
-    orphans: 2;
-    widows: 2;
-    
-    /* Avoid breaking inside elements when possible */
-    break-inside: avoid-orphans;
+/* Global base styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-/* Enhanced balancing for headings - distributes text evenly across lines */
-h1, h2, h3, h4, h5, h6 {
-    text-wrap: balance;
+html {
+    height: 100%;
+    background-color: var(--bg-primary);
+    /* Simplified solid background for maximum performance */
+    scrollbar-gutter: stable;
 }
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    font-family:
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        'Segoe UI',
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    background-color: var(--bg-primary); /* Use theme variable */
+    /* Removed transition for faster rendering */
+}
+
+/* Skip link for accessibility */
+.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    background: var(--accent-primary);
+    color: #ffffff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    z-index: 10001;
+}
+
+.skip-link:focus {
+    position: fixed;
+    left: 16px;
+    top: 16px;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* =============================================================================
+   TEXT SELECTION & TYPOGRAPHY ENHANCEMENTS
+   ============================================================================= */
 
 /* Custom Text Selection Colors */
 ::selection {
@@ -48,6 +239,102 @@ h1, h2, h3, h4, h5, h6 {
 :root.light ::-moz-selection {
     background-color: rgba(0, 170, 255, 0.15);
 }
+
+/* Apply text balancing to text content - optimized selectors instead of universal */
+p, li, blockquote, .lead, .subtitle, .section-intro, .posts-intro {
+    /* Modern text balancing - prevents awkward line breaks */
+    text-wrap: pretty;
+    
+    /* Prevent orphans and widows in print/long content */
+    orphans: 2;
+    widows: 2;
+    
+    /* Avoid breaking inside elements when possible */
+    break-inside: avoid-orphans;
+}
+
+/* Enhanced balancing for headings - distributes text evenly across lines */
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+
+/* =============================================================================
+   TYPOGRAPHY SYSTEM
+   Headings, buttons, and text elements
+   ============================================================================= */
+
+/* Typography */
+h1 {
+    margin: 0 0 6px 0;
+    font-size: 2.5rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+h1 span {
+    color: var(--accent-primary);
+}
+
+h2 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    margin: 32px 0 0 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
+}
+
+h3,
+h4,
+h5,
+h6 {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin: 0 0 0 0;
+}
+
+p {
+    color: var(--text-secondary);
+    margin: 0 0 16px 0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Button base styles */
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 12px var(--space-lg);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-md);
+    background: var(--button-bg);
+    color: var(--button-text);
+    text-decoration: none;
+    font-weight: 600;
+    transition:
+        transform var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast);
+    cursor: pointer;
+}
+
+.button:hover {
+    transform: translateY(-1px);
+}
+
+.button:focus-visible {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* =============================================================================
+   COMPONENT STYLES START HERE
+   ============================================================================= */
 
 /* AstroWind-style Responsive Typography - scales with screen size */
 @media (min-width: 1536px) {
@@ -101,39 +388,35 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 32px;
 }
 
-/* CONSOLIDATED TYPOGRAPHY - replaces .lead, .section-intro, .posts-intro, .content-intro */
-.text-large {
+/* CONSOLIDATED TYPOGRAPHY - Single source of truth for all intro text styles */
+.text-large,
+.lead,
+.section-intro,
+.posts-intro,
+.content-intro,
+.intro-text p {
     font-size: 1.125rem; /* 18px base */
     color: var(--text-primary);
     font-weight: 400;
     margin-bottom: 24px;
     line-height: 1.6;
+    max-width: 65ch; /* Optimal reading length */
+    text-align: left;
 }
 
-.text-large.lead {
+/* Lead text variant - larger and different color */
+.text-large.lead,
+.lead {
     font-size: 1.25rem; /* 20px for lead text */
     color: var(--text-lead);
 }
 
-.text-large.intro {
-    margin-bottom: 32px; /* More space for intro sections */
-}
-
-/* Legacy support - all point to .text-large */
-.lead,
+/* Intro sections get more space */
+.text-large.intro,
 .section-intro,
 .posts-intro,
 .content-intro {
-    font-size: 1.125rem;
-    color: var(--text-primary);
-    font-weight: 400;
-    margin-bottom: 24px;
-    line-height: 1.6;
-}
-
-.lead {
-    font-size: 1.25rem;
-    color: var(--text-lead);
+    margin-bottom: 32px;
 }
 
 /* Layout Components */
@@ -685,158 +968,6 @@ a:active {
 }
 
 /* CSS Variables for theming - Modern 2024 dark mode */
-:root {
-    --sidebar-background: rgba(59, 130, 246, 0.15);
-    --bg-primary: #1d1d1d; /* Dark gray background */
-    --bg-secondary: #1a1a1a; /* Rich charcoal */
-    --bg-tertiary: rgba(26, 26, 26, 0.95); /* Sophisticated overlay */
-    --bg-card: rgba(38, 38, 38, 0.6); /* Modern card surface */
-    --bg-card-hover: rgba(45, 45, 45, 0.8); /* Elevated hover state */
-    --text-primary: #fafafa; /* Modern high-contrast white */
-    --text-secondary: #e4e4e7; /* Clean secondary text */
-    --text-tertiary: #c4c4c7; /* Improved contrast - WCAG AA compliant */
-    --text-lead: #dddddd; /* Enhanced lead text for visual impact */
-    /* Improved contrast for WCAG AA compliance */
-    --text-muted: #e4e4e7;
-    /* Improved contrast for dates and secondary text */
-    --text-dim: #e4e4e7;
-    /* Tag colors for WCAG AA compliance */
-    --tag-bg: rgba(161, 161, 170, 0.2); /* Visible tag background */
-    --tag-text: #fafafa; /* High contrast tag text */
-    /* Modern border colors for 2024 dark mode */
-    --border-primary: rgba(161, 161, 170, 0.3); /* Modern zinc borders */
-    --border-secondary: rgba(161, 161, 170, 0.15); /* Subtle secondary borders */
-    --accent-hover: #0080ff; /* Lighter blue for hover in dark mode */
-    --accent-content: #1a365d;
-    --accent-content-text: #ffffff;
-    --accent-primary: #00aaff;
-    /* Bright blue for dark mode */
-    --gradient-1: rgba(0, 170, 255, 0.25);
-    --gradient-2: rgba(0, 204, 255, 0.2);
-    --shadow-primary: rgba(0, 0, 0, 0.5); /* Modern deep shadows */
-    --shadow-secondary: rgba(0, 0, 0, 0.3); /* Rich secondary shadows */
-
-    /* Button variables for WCAG AA compliance */
-    --button-bg: #334155;
-    --button-text: #ffffff;
-    --button-primary-bg: #0066cc;
-    --button-primary-hover-bg: #0080ff;
-    --button-primary-text: #ffffff;
-    --button-primary-border: rgba(0, 102, 204, 0.3);
-    --button-secondary-bg: #1e293b;
-    --button-secondary-hover-bg: #334155;
-    --button-secondary-text: #ffffff;
-    --button-secondary-border: rgba(148, 163, 184, 0.25);
-    --button-secondary-hover-border: rgba(148, 163, 184, 0.4);
-}
-
-/* Simplified light mode background */
-:root.light html {
-    background-color: var(--bg-primary);
-    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-    background-attachment: fixed;
-}
-
-/* Light theme - Modern 2024 neutral palette */
-:root.light {
-    --bg-primary: #f1f1f1;
-    --bg-secondary: #f1f1f1;
-    --bg-tertiary: rgba(255, 255, 255, 0.95);
-    --bg-card: rgba(255, 255, 255, 1);
-    --bg-card-hover: rgba(255, 255, 255, 1);
-    --text-primary: #2d3748;
-    --text-secondary: #4a5568;
-    --text-tertiary: #4a5568; /* Darker gray for better contrast - WCAG AA compliant */
-    --text-lead: #374151; /* Enhanced lead text for visual impact in light mode */
-    --text-muted: #374151;
-    --text-dim: #374151;
-    /* Tag colors for WCAG AA compliance */
-    --tag-bg: rgba(161, 161, 170, 0.15); /* Subtle but visible tag background */
-    --tag-text: #374151; /* High contrast tag text */
-    /* Modern border colors for 2024 design trends */
-    --border-primary: rgba(161, 161, 170, 0.4);
-    --border-secondary: rgba(161, 161, 170, 0.2);
-    --accent-hover: #0080ff; /* Lighter blue for hover in light mode */
-    --accent-content: rgba(0, 102, 204, 0.1);
-    --accent-content-text: #0052A3;
-    --accent-primary: #0052A3;
-    /* Darker blue for better contrast in light mode */
-    --gradient-1: rgba(0, 102, 204, 0.08);
-    --gradient-2: rgba(0, 128, 255, 0.06);
-    --shadow-primary: rgba(0, 0, 0, 0.08);
-    --shadow-secondary: rgba(0, 0, 0, 0.04);
-
-    /* Button variables for WCAG AA compliance in softer light mode */
-    --button-bg: #d1d5db;
-    --button-text: #1f2937;
-    --button-primary-bg: #0066cc;
-    --button-primary-hover-bg: #0052a3;
-    --button-primary-text: #ffffff;
-    --button-primary-border: rgba(0, 102, 204, 0.2);
-    --button-secondary-bg: rgba(255, 255, 255, 0.9);
-    --button-secondary-hover-bg: rgba(248, 244, 241, 0.9);
-    --button-secondary-text: #374151;
-    --button-secondary-border: rgba(160, 174, 192, 0.3);
-    --button-secondary-hover-border: rgba(160, 174, 192, 0.5);
-}
-
-/* Global base styles */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-html {
-    height: 100%;
-    background-color: var(--bg-primary);
-    /* Simplified solid background for maximum performance */
-}
-
-body {
-    min-height: 100vh;
-    margin: 0;
-    font-family:
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        'Segoe UI',
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-    line-height: 1.6;
-    color: var(--text-secondary);
-    background-color: var(--bg-primary); /* Use theme variable */
-    /* Removed transition for faster rendering */
-}
-
-/* Skip link for accessibility */
-.skip-link {
-    position: absolute;
-    left: -10000px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    background: var(--accent-primary);
-    color: #ffffff;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 600;
-    z-index: 10001;
-}
-
-.skip-link:focus {
-    position: fixed;
-    left: 16px;
-    top: 16px;
-    width: auto;
-    height: auto;
-    overflow: visible;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
 
 /* Screen reader only content */
 
@@ -977,9 +1108,9 @@ p {
 .card-base {
     background: var(--bg-card);
     border: none;
-    border-radius: 1rem;
+    border-radius: var(--radius-xl);
     box-shadow: 0 2px 8px var(--shadow-secondary);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all var(--transition-bounce);
     text-decoration: none;
     color: inherit;
     display: flex;
@@ -993,20 +1124,26 @@ p {
 }
 
 /* CONSOLIDATED SPACING SYSTEM */
-.pad-small { padding: 16px; }
-.pad-medium { padding: 24px; }
-.pad-large { padding: 32px; }
+.pad-small { padding: var(--space-md); }
+.pad-medium { padding: var(--space-lg); }
+.pad-large { padding: var(--space-xl); }
 
 /* Section Container */
 .section-container {
     margin: 2rem 0;
 }
 
+/* Reduce top margin when section-container follows a page title (direct or nested) */
+.page-title + .section-container,
+.page-title + * .section-container:first-child {
+    margin-top: 1rem; /* Reduced from 2rem to match other pages */
+}
+
 /* CONSOLIDATED CARD SYSTEM - removed duplicate, enhanced original */
 
 /* Legacy support */
 .card-padding-medium { 
-    padding: 24px;
+    padding: var(--space-lg);
 }
 
 /* Removed duplicate 640px rule - consolidated above */
@@ -1017,8 +1154,8 @@ p {
     text-decoration: none;
     color: inherit;
     transition:
-        transform 120ms ease,
-        box-shadow 120ms ease;
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
 }
 
 .blog-post {
@@ -1028,7 +1165,7 @@ p {
     padding: 0.75rem 0;
     margin: 0;
     cursor: pointer;
-    transition: all 120ms ease;
+    transition: all var(--transition-fast);
     display: flex;
     align-items: flex-start;
     gap: 1rem;
@@ -1167,9 +1304,11 @@ footer a:hover {
 /* Custom fonts removed temporarily for optimal performance */
 /* Adobe Clean font declarations disabled - using system fonts for critical path optimization */
 
-/* Reduced motion accessibility */
-@media (prefers-reduced-motion: reduce) {
+/* =============================================================================
+   REDUCED MOTION ACCESSIBILITY - Consolidated
+   ============================================================================= */
 
+@media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
@@ -1181,21 +1320,37 @@ footer a:hover {
 
     .button:hover,
     .theme-toggle:hover,
-    .blog-post-link:hover {
+    .blog-post-link:hover,
+    .button {
         transform: none;
+        transition: none;
     }
 
     /* Exception: Allow ActionCard animations for better UX */
     .action-card {
-        transition-duration: 0.2s !important;
+        transition-duration: var(--transition-normal) !important;
     }
 
     .action-card::before {
-        transition-duration: 0.2s !important;
+        transition-duration: var(--transition-normal) !important;
     }
 
     .action-card .card-arrow {
-        transition-duration: 0.2s !important;
+        transition-duration: var(--transition-normal) !important;
+    }
+
+    /* Disable View Transitions for reduced motion */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+    }
+
+    @keyframes highlightFade {
+        0%,
+        100% {
+            background-color: var(--accent-primary);
+            transform: scale(1);
+        }
     }
 }
 
@@ -1216,37 +1371,7 @@ footer a:hover {
 
 
 
-/* Responsive design */
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    ::before,
-    ::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-
-    .button {
-        transition: none;
-    }
-
-    /* Disable View Transitions for reduced motion */
-    ::view-transition-old(root),
-    ::view-transition-new(root) {
-        animation: none;
-    }
-
-    @keyframes highlightFade {
-
-        0%,
-        100% {
-            background-color: var(--accent-primary);
-            transform: scale(1);
-        }
-    }
-}
+/* Duplicate reduced motion block removed - consolidated above */
 
 
 /* Consolidated into @media (max-width: 640px) breakpoint for consistency */
@@ -1331,17 +1456,21 @@ footer a:hover {
 
 /* Unused incognito-tip removed for performance */
 
-/* Page headers */
-#main-title {
+/* =============================================================================
+   UNIVERSAL PAGE TITLE SYSTEM
+   Replaces all page-specific title IDs with a single, reusable class
+   ============================================================================= */
+
+/* Universal page title class - replaces #main-title, #work-title, #projects-title, #blog-title */
+.page-title {
     opacity: 0;
     transform: translateY(20px);
-    animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: 50ms;
+    animation: slideInUp var(--animation-duration-slow) var(--transition-bounce) forwards;
+    animation-delay: calc(var(--animation-duration-fast) / 3);
+    margin: 1.25rem 0 6px 0; /* Reset h1 margin and apply consistent spacing */
 }
 
-#main-title {
-  margin-top: 1.25rem;
-}/* =============================================================================
+/* All page titles now use universal .page-title class for consistency *//* =============================================================================
    OPTIMAL LINE LENGTH SYSTEM
    Ensures all text content has proper character count per line (45-75ch optimal)
    ============================================================================= */
@@ -1351,13 +1480,9 @@ footer a:hover {
    ============================================================================= */
 
 /* Standard content - paragraphs, articles, main text */
+/* Typography styles consolidated above - keeping content-specific rules */
 .content,
 .content p,
-.lead,
-.section-intro,
-.posts-intro,
-.content-intro,
-.intro-text p,
 p:not([class]) {
     max-width: 65ch; /* Optimal: 65 characters per line */
     line-height: 1.6;
@@ -1390,13 +1515,9 @@ p:not([class]) {
 
 /* Large screens - maximum comfortable reading width */
 @media (min-width: 1200px) {
+    /* Typography classes now inherit from consolidated rule */
     .content,
     .content p,
-    .lead,
-    .section-intro,
-    .posts-intro,
-    .content-intro,
-    .intro-text p,
     p:not([class]) {
         max-width: 75ch; /* Maximum: 75 characters per line */
     }
@@ -1412,13 +1533,9 @@ p:not([class]) {
 
 /* Tablet screens - balanced reading experience */
 @media (max-width: 768px) and (min-width: 641px) {
+    /* Typography classes now inherit from consolidated rule */
     .content,
     .content p,
-    .lead,
-    .section-intro,
-    .posts-intro,
-    .content-intro,
-    .intro-text p,
     p:not([class]) {
         max-width: 60ch; /* Tablet: 60 characters per line */
     }
@@ -1434,13 +1551,9 @@ p:not([class]) {
 
 /* Mobile screens - optimal for small devices */
 @media (max-width: 640px) {
+    /* Typography classes now inherit from consolidated rule */
     .content,
     .content p,
-    .lead,
-    .section-intro,
-    .posts-intro,
-    .content-intro,
-    .intro-text p,
     p:not([class]) {
         max-width: 50ch; /* Mobile: 50 characters per line */
         margin-left: 0; /* Keep left-aligned for readability */
@@ -1572,32 +1685,32 @@ p:not([class]) {
   opacity: 0;
   transform: translate3d(0, 20px, 0); /* Hardware acceleration */
   will-change: transform, opacity; /* Optimize for animations */
-  animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: slideInUp var(--animation-duration-slow) var(--transition-bounce) forwards;
 }
 
 /* Staggered animation delay utility classes */
 .animate-delay-50 {
-  animation-delay: 50ms;
+  animation-delay: calc(var(--animation-duration-fast) / 3);
 }
 
 .animate-delay-100 {
-  animation-delay: 100ms;
+  animation-delay: calc(var(--animation-duration-fast) * 0.67);
 }
 
 .animate-delay-150 {
-  animation-delay: 150ms;
+  animation-delay: var(--animation-duration-fast);
 }
 
 .animate-delay-200 {
-  animation-delay: 200ms;
+  animation-delay: var(--transition-normal);
 }
 
 .animate-delay-250 {
-  animation-delay: 250ms;
+  animation-delay: calc(var(--animation-duration-fast) + var(--transition-normal) / 2);
 }
 
 .animate-delay-300 {
-  animation-delay: 300ms;
+  animation-delay: var(--animation-duration-normal);
 }
 
 .animate-delay-350 {
@@ -1732,7 +1845,7 @@ p:not([class]) {
     
     /* Consolidate other 640px rules */
     .card-padding-medium { 
-        padding: 16px; 
+        padding: var(--space-md); 
     }
     
     .lead,

@@ -7,15 +7,15 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 // Get all blog posts and sort by date (newest first)
 const blogPosts = await getCollection('blog');
 // Filter out draft posts in production
-const publishedPosts = blogPosts.filter(post => !post.data.draft);
+const publishedPosts = blogPosts.filter((post) => !post.data.draft);
 const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 // Get featured posts
-const featuredPosts = sortedPosts.filter(post => post.data.featured);
+const featuredPosts = sortedPosts.filter((post) => post.data.featured);
 
 // Get all categories and tags for filtering
-const allCategories = [...new Set(sortedPosts.map(post => post.data.category).filter(Boolean))];
-const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
+const allCategories = [...new Set(sortedPosts.map((post) => post.data.category).filter(Boolean))];
+const allTags = [...new Set(sortedPosts.flatMap((post) => post.data.tags || []))];
 ---
 
 <BaseLayout
@@ -28,7 +28,7 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
   footerLinkText="Connect with me on LinkedIn"
   footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
-  <PageHeader primary="My" accent="Blog" id="blog-title" />
+  <PageHeader primary="My" accent="Blog" class="page-title" />
   <p class="text-large lead animate-in animate-delay-100">
     Reflections on technology, writing, personal growth, life's existential challenges, and
     navigating the complexities of our modern world.
@@ -236,7 +236,7 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
     flex: 1;
     min-width: 0;
   }
-  
+
   .linkedin-post .post-content h3 {
     margin: 0 0 0.25rem 0;
     font-size: 1.125rem;
@@ -244,14 +244,14 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
     font-weight: 600;
     line-height: 1.4;
   }
-  
+
   .linkedin-post .post-content p {
     margin: 0 0 0.5rem 0;
     color: var(--text-tertiary);
     line-height: 1.5;
     font-size: 1.125rem;
   }
-  
+
   /* Hide the old post-header since we're using icons as bullets */
   .linkedin-post .post-header {
     display: none;
@@ -263,5 +263,4 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
       gap: 4px;
     }
   }
-
 </style>
