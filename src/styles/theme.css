@@ -101,21 +101,39 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 32px;
 }
 
-.lead {
-    font-size: 1.25rem; /* 20px converted to rem */
-    color: var(--text-lead); /* Use dedicated lead text color for impact */
+/* CONSOLIDATED TYPOGRAPHY - replaces .lead, .section-intro, .posts-intro, .content-intro */
+.text-large {
+    font-size: 1.125rem; /* 18px base */
+    color: var(--text-primary);
     font-weight: 400;
     margin-bottom: 24px;
     line-height: 1.6;
 }
 
+.text-large.lead {
+    font-size: 1.25rem; /* 20px for lead text */
+    color: var(--text-lead);
+}
+
+.text-large.intro {
+    margin-bottom: 32px; /* More space for intro sections */
+}
+
+/* Legacy support - all point to .text-large */
+.lead,
 .section-intro,
-.posts-intro {
+.posts-intro,
+.content-intro {
+    font-size: 1.125rem;
     color: var(--text-primary);
-    font-size: 1.125rem; /* 18px converted to rem */
-    margin-bottom: 32px;
     font-weight: 400;
+    margin-bottom: 24px;
     line-height: 1.6;
+}
+
+.lead {
+    font-size: 1.25rem;
+    color: var(--text-lead);
 }
 
 /* Layout Components */
@@ -284,14 +302,26 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/* Component Styles */
+/* UNIVERSAL CARD SYSTEM - replaces all card-like classes */
 .card {
     background: var(--bg-card);
-    border: none;
+    border: 1px solid var(--border-secondary);
     border-radius: 16px;
     padding: 24px;
     box-shadow: 0 2px 8px var(--shadow-secondary);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card.center {
+    text-align: center;
+}
+
+.card.large {
+    padding: 32px;
+}
+
+.card.no-border {
+    border: none;
 }
 
 /* WCAG Focus Indicators */
@@ -905,6 +935,14 @@ p {
     box-shadow: 0 12px 24px var(--shadow-primary);
 }
 
+/* CONSOLIDATED SPACING SYSTEM */
+.pad-small { padding: 16px; }
+.pad-medium { padding: 24px; }
+.pad-large { padding: 32px; }
+
+/* CONSOLIDATED CARD SYSTEM - removed duplicate, enhanced original */
+
+/* Legacy support */
 .card-padding-medium { 
     padding: 24px;
 }

@@ -15,7 +15,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 >
   <PageHeader primary="My" accent="Projects" id="projects-title" />
 
-  <div class="lead animate-in animate-delay-100">
+  <div class="text-large lead animate-in animate-delay-100">
     <p>
       Over my 30+ year career, I've led initiatives that transform how developers learn, integrate,
       and build with complex systems. From comprehensive documentation sites to interactive learning
@@ -411,8 +411,16 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     padding-bottom: 8px;
   }
 
-  /* Project-specific card modifications */
+  /* Project cards inherit from universal card system */
   .project-card {
+    /* Base card properties from universal .card class */
+    background: var(--bg-card);
+    border: 1px solid var(--border-secondary);
+    border-radius: 16px;
+    box-shadow: 0 2px 8px var(--shadow-secondary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Project-specific modifications */
     padding: 32px; /* Larger padding for projects */
     margin-bottom: 32px; /* Spacing between project cards */
   }

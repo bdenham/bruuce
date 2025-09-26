@@ -14,7 +14,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   footerLinkHref="https://linkedin.com/in/brucedenham/"
 >
   <PageHeader primary="My" accent="Work" id="work-title" />
-  <p class="lead animate-in animate-delay-100">
+  <p class="text-large lead animate-in animate-delay-100">
     My professional work: Technical leadership, developer experience design, interactive
     documentation, and community engagement at Adobe and beyond.
   </p>
@@ -22,7 +22,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
   <div class="work-content">
     <div class="section-container animate-in animate-delay-150">
       <h2 class="section-heading">Case Studies</h2>
-      <p class="section-intro">
+      <p class="text-large intro">
         Detailed looks at successful projects that demonstrate measurable impact on developer
         experience and adoption.
       </p>
@@ -200,8 +200,8 @@ import PageHeader from '../../components/ui/PageHeader.astro';
         services.
       </p>
 
-      <div class="projects-grid grid-projects">
-        <div class="project-card">
+      <div class="grid-single">
+        <div class="card">
           <div class="project-header">
             <h3>Adobe Commerce Documentation</h3>
             <div class="project-tags">
@@ -244,7 +244,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           </div>
         </div>
 
-        <div class="project-card">
+        <div class="card">
           <div class="project-header">
             <h3>Storybook 8 SDK Documentation</h3>
             <div class="project-tags">
@@ -264,7 +264,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           </div>
         </div>
 
-        <div class="project-card">
+        <div class="card">
           <div class="project-header">
             <h3>Custom Algolia Search Integration</h3>
             <div class="project-tags">
@@ -303,16 +303,15 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
     <div class="featured-documentation animate-in animate-delay-250">
       <h2 class="section-heading">Featured Live Documentation</h2>
-      <p class="section-intro">
+      <p class="text-large intro">
         Direct links to live documentation and interactive tools I've created and maintain at Adobe
         Commerce. These represent real-world examples of developer experience innovation in action.
       </p>
 
-      <div class="documentation-grid grid-extra-large">
-        <div class="doc-card">
+      <div class="grid-single">
+        <div class="card">
           <div class="doc-header">
             <h3>API Playground</h3>
-            <div class="doc-status">🚀 Live</div>
           </div>
           <div class="doc-description">
             <p>
@@ -341,10 +340,9 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           </div>
         </div>
 
-        <div class="doc-card">
+        <div class="card">
           <div class="doc-header">
             <h3>PageBuilder Integration</h3>
-            <div class="doc-status">📚 Reference</div>
           </div>
           <div class="doc-description">
             <p>
@@ -373,10 +371,9 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           </div>
         </div>
 
-        <div class="doc-card">
+        <div class="card">
           <div class="doc-header">
             <h3>PageBuilder Styling</h3>
-            <div class="doc-status">🛠️ Guide</div>
           </div>
           <div class="doc-description">
             <p>
@@ -427,7 +424,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
 
     <div class="section-container animate-in animate-delay-350">
       <h2 class="section-heading">Tools & Technologies</h2>
-      <p class="section-intro">
+      <p class="text-large intro">
         The modern tech stack I use to create exceptional developer experiences and documentation.
       </p>
 
@@ -769,12 +766,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     padding-bottom: 8px;
   }
 
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr) !important; /* Two columns for better space utilization */
-    gap: 24px;
-    align-items: stretch;
-  }
+  /* .tools-grid removed - now using universal .grid class */
 
   .tool-category {
     background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
@@ -1138,10 +1130,7 @@ import PageHeader from '../../components/ui/PageHeader.astro';
       gap: 8px;
     }
 
-    /* Tools grid mobile responsive */
-    .tools-grid {
-      grid-template-columns: 1fr !important;
-    }
+    /* Tools grid mobile responsive - now handled by universal .grid */
   }
 
 </style>
