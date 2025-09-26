@@ -15,9 +15,7 @@ export default defineConfig({
     site: process.env.GITHUB_PAGES
         ? 'https://bdenham.github.io'
         : 'https://bruuce.com',
-    base: process.env.GITHUB_PAGES
-        ? '/bruuce/'
-        : undefined,
+    base: undefined, // Always use root path for bruuce.com
     trailingSlash: 'always',
     outDir: './dist',
 
