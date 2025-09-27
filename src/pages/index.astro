@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPostCard from '../components/ui/BlogPostCard.astro';
-import UnifiedCard from '../components/ui/UnifiedCard.astro';
+import Card from '../components/ui/Card.astro';
 import LighthouseGauge from '../components/ui/LighthouseGauge.astro';
 
 // Get the latest 2 blog posts for the homepage
@@ -28,10 +28,9 @@ const latestPosts = blogPosts
     custom search systems — all built to reduce friction and spark "aha" moments.
   </p> -->
 
-  <!-- Performance Achievement Highlight -->
-  <div class="performance-highlight">
+  <aside class="performance-highlight" aria-labelledby="performance-metrics">
     <div class="performance-header">
-      <h2 class="section-heading">⚡ Performance Excellence</h2>
+      <h2 id="performance-metrics" class="section-heading">⚡ Performance Excellence</h2>
       <p>Sub-second performance with exceptional user experience across all devices.</p>
     </div>
     <!-- Lighthouse Scores Grid -->
@@ -59,77 +58,74 @@ const latestPosts = blogPosts
         <div class="percentile-text">Verify on PageSpeed Insights ↗</div>
       </small>
     </a>
-  </div>
+  </aside>
 
-  <div class="grid-single lazy-cards animate-in animate-delay-200">
-    <UnifiedCard
+  <section class="grid-single animate-in animate-delay-200" aria-labelledby="quick-navigation">
+    <h2 id="quick-navigation" class="sr-only">Quick Navigation</h2>
+    <Card
+      class="card-animate scroll-animate animate-in animate-delay-400"
       variant="content"
       icon="📋"
       title="My Resume"
       description="Explore my 30+ years of experience in technical writing and developer experience"
       href="/resume/"
       ariaLabel="View my complete resume"
-      animateIn={true}
-      animationDelay="50"
     />
 
-    <UnifiedCard
+    <Card
+      class="card-animate scroll-animate animate-in animate-delay-450"
       variant="content"
       icon="🛠️"
       title="My Work"
       description="SDK docs, CLI tools, React apps, and developer experience projects at Adobe and beyond"
       href="/work/"
       ariaLabel="View my professional work and projects"
-      animateIn={true}
-      animationDelay="100"
     />
 
-    <UnifiedCard
+    <Card
+      class="card-animate scroll-animate animate-in animate-delay-450"
       variant="content"
       icon="📝"
       title="My Blog"
       description="Insights on developer experience, API documentation, and making complex concepts clear"
       href="/blog/"
       ariaLabel="Read my blog"
-      animateIn={true}
-      animationDelay="150"
     />
 
-    <UnifiedCard
+    <Card
+      class="card-animate scroll-animate animate-in animate-delay-450"
       variant="content"
       icon="👨‍💻"
       title="About Me"
       description="Learn about my journey from Schlumberger to TOPAZ to Adobe as a developer experience strategist"
       href="/about/"
       ariaLabel="Learn more about my background"
-      animateIn={true}
-      animationDelay="200"
     />
-  </div>
+  </section>
 
-  <div class="section-container animate-in animate-delay-250">
-    <h2 class="section-heading">My Philosophy</h2>
+  <section class="section-container animate-in animate-delay-250" aria-labelledby="philosophy">
+    <h2 id="philosophy" class="section-heading">My Philosophy</h2>
     <p>
       I don't just write the docs. I build tools, craft interfaces, and create explanations that
       click. I code. I design. I connect. My mission is helping developers have those "aha" moments
       that turn complexity into clarity and frustration into flow.
     </p>
-  </div>
+  </section>
 
-  <div class="section-container animate-in animate-delay-300">
-    <h2 class="section-heading">Recent Posts</h2>
+  <section class="section-container animate-in animate-delay-300" aria-labelledby="recent-posts">
+    <h2 id="recent-posts" class="section-heading">Recent Posts</h2>
     <div class="grid-single">
       {
         latestPosts.map((post, index) => (
-          <div
-            class={`blog-post-wrapper ${index > 0 ? 'lazy-load' : ''} scroll-animate animate-in ${index === 0 ? 'animate-delay-400' : 'animate-delay-450'}`}
+          <article
+            class={`blog-post-wrapper scroll-animate animate-in ${index === 0 ? 'animate-delay-400' : 'animate-delay-450'}`}
           >
             <BlogPostCard post={post} />
-          </div>
+          </article>
         ))
       }
     </div>
-  </div>
+  </section>
 </BaseLayout>
 
 <!-- Minimal scroll position optimization -->
@@ -382,31 +378,4 @@ const latestPosts = blogPosts
   /* Homepage-specific styles only - LinkedIn styles moved to blog page */
 </style>
 
-<!-- Performance-optimized lazy loading with cleanup -->
-<script>
-  let lazyLoadExecuted = false;
-
-  function initLazyLoad() {
-    // Prevent multiple executions that could cause TBT spikes
-    if (lazyLoadExecuted) return;
-    lazyLoadExecuted = true;
-
-    // Use requestAnimationFrame instead of setTimeout for better performance
-    requestAnimationFrame(() => {
-      const cards = document.querySelector('.lazy-cards');
-      if (cards) (cards as HTMLElement).style.opacity = '1';
-
-      document
-        .querySelectorAll('.blog-post-wrapper.lazy-load')
-        .forEach((el) => el.classList.add('loaded'));
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', initLazyLoad);
-
-  // Reset flag on view transitions to allow re-execution on new pages
-  document.addEventListener('astro:after-swap', () => {
-    lazyLoadExecuted = false;
-    initLazyLoad();
-  });
-</script>
+<!-- Pure CSS animations - no JavaScript needed -->

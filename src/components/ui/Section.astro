@@ -1,0 +1,64 @@
+---
+export interface Props {
+  title?: string;
+  titleId?: string;
+  variant?: 'default' | 'compact' | 'spacious';
+  as?: 'section' | 'article' | 'aside' | 'div';
+  class?: string;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
+}
+
+const {
+  title,
+  titleId,
+  variant = 'default',
+  as: Element = 'section',
+  class: className = '',
+  ariaLabel,
+  ariaLabelledBy,
+} = Astro.props;
+
+const sectionClasses = [
+  'section',
+  variant === 'compact' && 'section--compact',
+  variant === 'spacious' && 'section--spacious',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+const generatedId = titleId || (title ? title.toLowerCase().replace(/\s+/g, '-') : undefined);
+---
+
+<Element
+  class={sectionClasses}
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabelledBy || (title ? generatedId : undefined)}
+>
+  {
+    title && (
+      <h2 id={generatedId} class="section-heading">
+        {title}
+      </h2>
+    )
+  }
+
+  <div class="section-content">
+    <slot />
+  </div>
+</Element>
+
+<style>
+  .section--compact {
+    margin-bottom: 1rem;
+  }
+
+  .section--spacious {
+    margin-bottom: 2rem;
+  }
+
+  .section-content {
+    margin-top: 1rem;
+  }
+</style>

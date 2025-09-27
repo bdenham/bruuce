@@ -1,0 +1,238 @@
+---
+export interface Props {
+  // Layout & visual
+  variant?: 'default' | 'featured' | 'large' | 'content';
+  featured?: boolean;
+  class?: string;
+  id?: string;
+
+  // Content
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  icon?: string; // supports large emoji/icon for content variant
+  tags?: string[];
+
+  // Links/actions
+  links?: Array<{
+    href: string;
+    text: string;
+    primary?: boolean;
+    external?: boolean;
+  }>;
+  href?: string; // make entire card clickable
+  target?: string;
+  rel?: string;
+  ariaLabel?: string;
+
+  // Animation helpers
+  animateIn?: boolean;
+  animationDelay?: string; // e.g., "50", "100", "150"
+}
+
+const {
+  variant = 'default',
+  featured = false,
+  class: className = '',
+  id,
+
+  title,
+  subtitle,
+  description,
+  icon,
+  tags = [],
+
+  links = [],
+  href,
+  target,
+  rel,
+  ariaLabel,
+
+  animateIn = false,
+  animationDelay,
+} = Astro.props;
+
+// Separate animation classes from card styling classes
+const animationClasses = [
+  animateIn && 'animate-in',
+  animationDelay && `animate-delay-${animationDelay}`,
+  className, // This preserves all classes passed via class prop, including animation classes
+]
+  .filter(Boolean)
+  .join(' ');
+
+const cardClasses = [
+  'card-base',
+  (variant === 'featured' || featured) && 'featured',
+  variant === 'large' && 'large',
+  variant === 'content' && 'variant-content',
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+{
+  href ? (
+    <div class={animationClasses}>
+      <a
+        class={cardClasses}
+        id={id}
+        aria-label={ariaLabel}
+        href={href}
+        target={target}
+        rel={rel}
+        data-keyboard-hint="Press Enter to open"
+      >
+        <div class="card-content">
+          {variant === 'content' && icon && (
+            <div class="card-icon-large" aria-hidden="true">
+              {icon}
+            </div>
+          )}
+
+          <div class="card-main">
+            {(title || subtitle || tags.length > 0) && (
+              <div class="item-header">
+                <div>
+                  {title && <h3>{title}</h3>}
+                  {subtitle && <div class="card-subtitle">{subtitle}</div>}
+                </div>
+                {tags.length > 0 && (
+                  <div class="tags">
+                    {tags.map((tag) => (
+                      <span class="tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div class="item-content">
+              {description && <p class="card-description">{description}</p>}
+              <slot />
+            </div>
+
+            {!href && links.length > 0 && (
+              <div class="item-links">
+                {links.map((link) => (
+                  <a
+                    href={link.href}
+                    class={`item-link ${link.primary ? 'primary' : ''}`}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                    data-keyboard-hint="Press Enter to follow link"
+                  >
+                    {link.text}
+                    {link.external && ' ↗'}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </a>
+    </div>
+  ) : (
+    <div class={animationClasses}>
+      <div
+        class={cardClasses}
+        id={id}
+        aria-label={ariaLabel}
+        tabindex="0"
+        data-keyboard-hint="Press Enter to interact"
+      >
+        <div class="card-content">
+          {variant === 'content' && icon && (
+            <div class="card-icon-large" aria-hidden="true">
+              {icon}
+            </div>
+          )}
+
+          <div class="card-main">
+            {(title || subtitle || tags.length > 0) && (
+              <div class="item-header">
+                <div>
+                  {title && <h3>{title}</h3>}
+                  {subtitle && <div class="card-subtitle">{subtitle}</div>}
+                </div>
+                {tags.length > 0 && (
+                  <div class="tags">
+                    {tags.map((tag) => (
+                      <span class="tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div class="item-content">
+              {description && <p class="card-description">{description}</p>}
+              <slot />
+            </div>
+
+            {!href && links.length > 0 && (
+              <div class="item-links">
+                {links.map((link) => (
+                  <a
+                    href={link.href}
+                    class={`item-link ${link.primary ? 'primary' : ''}`}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                    data-keyboard-hint="Press Enter to follow link"
+                  >
+                    {link.text}
+                    {link.external && ' ↗'}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+<style>
+  /* Content variant layout to match legacy UnifiedCard content style */
+  .variant-content .card-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .variant-content .card-icon-large {
+    font-size: 2.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .variant-content .card-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .card-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  .card-description {
+    color: var(--text-tertiary);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 0.5rem 0;
+  }
+
+  /* Remove global underline from full-card anchor wrapper */
+  a.card-base {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Match legacy padding for content variant */
+  .variant-content.card-base {
+    padding: 24px;
+  }
+</style>

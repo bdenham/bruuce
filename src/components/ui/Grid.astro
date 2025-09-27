@@ -1,0 +1,58 @@
+---
+export interface Props {
+  variant?: 'default' | 'single' | 'auto-fit';
+  gap?: 'small' | 'medium' | 'large';
+  class?: string;
+  minItemWidth?: string;
+  maxColumns?: number;
+}
+
+const {
+  variant = 'default',
+  gap = 'medium',
+  class: className = '',
+  minItemWidth = '280px',
+  maxColumns = 2,
+} = Astro.props;
+
+const gridClasses = [variant === 'single' ? 'grid-single' : 'grid', `gap-${gap}`, className]
+  .filter(Boolean)
+  .join(' ');
+
+const gridStyle =
+  variant === 'auto-fit'
+    ? {
+        '--min-item-width': minItemWidth,
+        '--max-columns': maxColumns.toString(),
+      }
+    : {};
+---
+
+<div class={gridClasses} style={gridStyle}>
+  <slot />
+</div>
+
+<style>
+  .gap-small {
+    gap: 1rem;
+  }
+  .gap-medium {
+    gap: 1.5rem;
+  }
+  .gap-large {
+    gap: 2rem;
+  }
+
+  .grid.auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(var(--min-item-width, 280px), 1fr));
+  }
+
+  @media (min-width: 768px) {
+    .grid.auto-fit {
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(var(--min-item-width, 280px), calc(100% / var(--max-columns, 2)))
+      );
+    }
+  }
+</style>

@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
-import UnifiedCard from '../../components/ui/UnifiedCard.astro';
+import Section from '../../components/ui/Section.astro';
+import Grid from '../../components/ui/Grid.astro';
+import Card from '../../components/ui/Card.astro';
 ---
 
 <BaseLayout
@@ -40,41 +42,35 @@ import UnifiedCard from '../../components/ui/UnifiedCard.astro';
   <div class="section-container animate-in animate-delay-200">
     <h2 class="section-heading">Recognition & Community Impact</h2>
     <div class="grid">
-      <UnifiedCard
-        variant="content"
-        icon="🏆"
-        title="Adobe Awards"
-        description="Nominated for both the Adobe Founders Award and Extreme Ownership Award for excellence in technical writing and developer experience innovation."
-        animateIn={true}
-        animationDelay="50"
-      />
+      <Card title="🏆 Adobe Awards" animateIn={true} animationDelay="50">
+        <p>
+          Nominated for both the Adobe Founders Award and Extreme Ownership Award for excellence in
+          technical writing and developer experience innovation.
+        </p>
+      </Card>
 
-      <UnifiedCard
-        variant="content"
-        icon="🎤"
-        title="International Speaking"
-        description="Presented PageBuilder best practices at Meet Magento Indonesia 2019, sharing insights with the international open-source community."
-        animateIn={true}
-        animationDelay="100"
-      />
+      <Card title="🎤 International Speaking" animateIn={true} animationDelay="100">
+        <p>
+          Presented PageBuilder best practices at Meet Magento Indonesia 2019, sharing insights with
+          the international open-source community.
+        </p>
+      </Card>
 
-      <UnifiedCard
-        variant="content"
-        icon="⭐"
-        title="Community Leadership"
-        description="Created the PageBuilder Examples repository: 106 GitHub stars, 78 forks—highest engagement in the PageBuilder ecosystem. I encouraged community involvement through an open Slack channel to help developers worldwide."
-        animateIn={true}
-        animationDelay="150"
-      />
+      <Card title="⭐ Community Leadership" animateIn={true} animationDelay="150">
+        <p>
+          Created the PageBuilder Examples repository: 106 GitHub stars, 78 forks—highest engagement
+          in the PageBuilder ecosystem. I encouraged community involvement through an open Slack
+          channel to help developers worldwide.
+        </p>
+      </Card>
 
-      <UnifiedCard
-        variant="content"
-        icon="📚"
-        title="Mentoring & Education"
-        description="Passionate about lifting others through shared knowledge, actively mentoring aspiring technical writers and students at Southwestern University. I also love to help teams establish effective documentation practices."
-        animateIn={true}
-        animationDelay="200"
-      />
+      <Card title="📚 Mentoring & Education" animateIn={true} animationDelay="200">
+        <p>
+          Passionate about lifting others through shared knowledge, actively mentoring aspiring
+          technical writers and students at Southwestern University. I also love to help teams
+          establish effective documentation practices.
+        </p>
+      </Card>
     </div>
   </div>
 
@@ -141,29 +137,25 @@ import UnifiedCard from '../../components/ui/UnifiedCard.astro';
     </div>
   </div>
 
-  <div class="section-container animate-in animate-delay-250">
-    <h2 class="section-heading">What I Bring to the Table</h2>
-
-    <div class="grid">
-      <div class="item">
-        <h3>Technical Writing</h3>
+  <Section title="What I Bring to the Table" class="animate-in animate-delay-250">
+    <Grid variant="default" gap="medium">
+      <Card title="Technical Writing" ariaLabel="Technical Writing Skills">
         <ul>
           <li>API documentation that drives adoption</li>
           <li>Developer tutorials that simplify complex workflows</li>
           <li>Interactive playgrounds for hands-on learning</li>
           <li>Diátaxis documentation framework expertise</li>
         </ul>
-      </div>
+      </Card>
 
-      <div class="item">
-        <h3>Development & Tools</h3>
+      <Card title="Development & Tools" ariaLabel="Development and Tools Skills">
         <ul>
           <li>React 18+, Node.js, and modern JavaScript frameworks</li>
           <li>CLI tool development for productivity enhancement</li>
           <li>Git/GitHub workflows and automation</li>
           <li>Frontend development with responsive design</li>
         </ul>
-      </div>
+      </Card>
 
       <div class="item">
         <h3>Visual Communication</h3>
@@ -184,8 +176,8 @@ import UnifiedCard from '../../components/ui/UnifiedCard.astro';
           <li>Product strategy aligned with user needs</li>
         </ul>
       </div>
-    </div>
-  </div>
+    </Grid>
+  </Section>
 
   <div class="section-container animate-in animate-delay-200">
     <h2 class="section-heading">My Philosophy</h2>

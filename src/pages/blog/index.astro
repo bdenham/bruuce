@@ -31,9 +31,9 @@ const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data
   </div>
 
   <!-- LinkedIn Posts & Insights Section -->
-  <div class="section-container animate-in animate-delay-200">
+  <section class="section-container animate-in animate-delay-200" aria-labelledby="linkedin-posts">
     <div class="section-divider"></div>
-    <h2 class="section-heading">LinkedIn Posts</h2>
+    <h2 id="linkedin-posts" class="section-heading">LinkedIn Posts</h2>
     <p class="text-large intro">
       Thoughtful reflections I share on LinkedIn about kindness, personal growth, and authentic
       human connection — exploring how we grow, how we connect, and how our vulnerabilities can
@@ -138,7 +138,7 @@ const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data
     >
       Follow me on LinkedIn →
     </a>
-  </div>
+  </section>
 </BaseLayout>
 
 <style>

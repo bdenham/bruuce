@@ -5,21 +5,29 @@ import ThemeToggle from './ThemeToggle.astro';
 <header class="header">
   <!-- Left section with menu toggle, site name, and navigation -->
   <div class="header-left">
-    <!-- Mobile menu toggle - only for very small screens -->
-    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Menu">☰</button>
+    <!-- CSS-only mobile menu toggle that controls sidebar -->
+    <label
+      for="sidebar-toggle"
+      class="mobile-menu-toggle"
+      data-keyboard-hint="Press Enter to toggle menu">☰</label
+    >
 
     <!-- LCP element optimized for immediate rendering -->
-    <a href="/" class="site-name">Bruce Denham</a>
+    <a href="/" class="site-name" data-keyboard-hint="Press Enter to go home">Bruce Denham</a>
 
     <!-- Visual separator between site name and navigation -->
     <div class="nav-separator"></div>
 
     <!-- Navigation - visible until 640px, aligned with site name -->
-    <nav class="main-nav" aria-label="Main navigation">
-      <a href="/about/" class="nav-link">About</a>
-      <a href="/work/" class="nav-link">Work</a>
-      <a href="/projects/" class="nav-link">Projects</a>
-      <a href="/blog/" class="nav-link">Blog</a>
+    <nav class="main-nav" aria-label="Main navigation" id="main-navigation">
+      <a href="/about/" class="nav-link" data-keyboard-hint="Press Enter to view About page"
+        >About</a
+      >
+      <a href="/work/" class="nav-link" data-keyboard-hint="Press Enter to view Work page">Work</a>
+      <a href="/projects/" class="nav-link" data-keyboard-hint="Press Enter to view Projects page"
+        >Projects</a
+      >
+      <a href="/blog/" class="nav-link" data-keyboard-hint="Press Enter to view Blog page">Blog</a>
     </nav>
   </div>
 
@@ -103,9 +111,8 @@ import ThemeToggle from './ThemeToggle.astro';
   /* Create a flex layout that keeps site name and nav left-aligned */
   .header-left {
     display: flex;
-    align-items: center;
-    gap: 8px; /* Base gap for menu toggle */
-    flex: 1; /* Take up available space */
+    gap: 8px;
+    flex: 1;
   }
 
   /* Site name styling */
@@ -122,7 +129,7 @@ import ThemeToggle from './ThemeToggle.astro';
     margin: 0 16px; /* Equal spacing on both sides */
   }
 
-  /* Mobile menu toggle */
+  /* CSS-only mobile menu toggle that controls sidebar */
   .mobile-menu-toggle {
     display: none; /* Hidden on desktop */
     background: none;
@@ -130,9 +137,9 @@ import ThemeToggle from './ThemeToggle.astro';
     font-size: 1.5rem;
     color: var(--text-primary);
     cursor: pointer;
-    padding: 8px;
     border-radius: 4px;
     transition: background-color 0.2s ease;
+    margin-top: -0.2rem;
   }
 
   .mobile-menu-toggle:hover {
@@ -229,11 +236,6 @@ import ThemeToggle from './ThemeToggle.astro';
   }
 
   @media (max-width: 768px) {
-    .header {
-      padding: 12px 16px; /* Reduce padding on mobile */
-      gap: 8px; /* Tighter gap for tablet */
-    }
-
     .site-name {
       font-size: 1.375rem; /* Slightly smaller on tablet */
     }
@@ -256,11 +258,6 @@ import ThemeToggle from './ThemeToggle.astro';
   }
 
   @media (max-width: 640px) {
-    .header {
-      padding: 10px 12px; /* Even tighter on small mobile */
-      gap: 8px; /* Minimal gap */
-    }
-
     .site-name {
       font-size: 1.25rem; /* Smaller site name on mobile */
     }
@@ -281,15 +278,6 @@ import ThemeToggle from './ThemeToggle.astro';
 
   /* Extra small screens - hide some elements to prevent wrapping */
   @media (max-width: 440px) {
-    .header {
-      padding: 8px 10px; /* Minimal padding */
-      gap: 6px;
-    }
-
-    .header-left {
-      gap: 6px; /* Tighter menu-title gap */
-    }
-
     .site-name {
       font-size: 1.125rem; /* Even smaller site name */
     }
@@ -311,11 +299,42 @@ import ThemeToggle from './ThemeToggle.astro';
       width: 18px; /* Smaller icons */
       height: 18px;
     }
-
-    /* Make theme toggle more compact */
-    .mobile-menu-toggle {
-      padding: 6px; /* Reduce padding */
-      font-size: 1.25rem; /* Smaller hamburger */
-    }
   }
 </style>
+
+<script>
+  // CSS-only mobile menu - no JavaScript needed for toggle functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    // Enhanced keyboard navigation for nav links
+    const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link');
+    navLinks.forEach((link, index) => {
+      link.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          const nextIndex = (index + 1) % navLinks.length;
+          navLinks[nextIndex].focus();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          const prevIndex = (index - 1 + navLinks.length) % navLinks.length;
+          navLinks[prevIndex].focus();
+        }
+      });
+    });
+
+    // Skip link functionality
+    const skipLink = document.querySelector<HTMLAnchorElement>('.skip-link');
+    if (skipLink) {
+      skipLink.addEventListener('click', (e: Event) => {
+        e.preventDefault();
+        const href = skipLink.getAttribute('href');
+        if (href) {
+          const target = document.querySelector<HTMLElement>(href);
+          if (target) {
+            target.focus();
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    }
+  });
+</script>

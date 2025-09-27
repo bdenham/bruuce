@@ -1,0 +1,156 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost' | 'link';
+  size?: 'small' | 'medium' | 'large';
+  href?: string;
+  external?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  class?: string;
+  ariaLabel?: string;
+  keyboardHint?: string;
+}
+
+const {
+  variant = 'secondary',
+  size = 'medium',
+  href,
+  external = false,
+  type = 'button',
+  disabled = false,
+  class: className = '',
+  ariaLabel,
+  keyboardHint = 'Press Enter to activate',
+} = Astro.props;
+
+const buttonClasses = [
+  'button',
+  `button--${variant}`,
+  `button--${size}`,
+  disabled && 'button--disabled',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+const Element = href ? 'a' : 'button';
+const elementProps = href
+  ? {
+      href,
+      target: external ? '_blank' : undefined,
+      rel: external ? 'noopener noreferrer' : undefined,
+      role: 'button',
+    }
+  : {
+      type,
+      disabled,
+    };
+---
+
+<Element
+  class={buttonClasses}
+  aria-label={ariaLabel}
+  data-keyboard-hint={keyboardHint}
+  {...elementProps}
+>
+  <slot />
+  {href && external && ' ↗'}
+</Element>
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      transform var(--transition-fast),
+      background var(--transition-fast),
+      border-color var(--transition-fast),
+      color var(--transition-fast);
+  }
+
+  /* Variants */
+  .button--primary {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    border-color: var(--accent-primary);
+  }
+
+  .button--primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+
+  .button--secondary {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--border-secondary);
+  }
+
+  .button--secondary:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-primary);
+  }
+
+  .button--ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border-color: transparent;
+  }
+
+  .button--ghost:hover {
+    background: var(--bg-card);
+    border-color: var(--border-secondary);
+  }
+
+  .button--link {
+    background: transparent;
+    color: var(--accent-primary);
+    border: none;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .button--link:hover {
+    color: var(--accent-hover);
+    text-decoration-color: var(--accent-hover);
+  }
+
+  /* Sizes */
+  .button--small {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+  }
+
+  .button--medium {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  .button--large {
+    padding: 16px 32px;
+    font-size: 1.125rem;
+  }
+
+  /* States */
+  .button:hover {
+    transform: translateY(-1px);
+  }
+
+  .button--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .button:focus-visible {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+  }
+</style>
