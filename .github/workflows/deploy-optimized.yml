@@ -62,3 +62,22 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: 🎉 Deployment Complete
+        run: |
+          echo "🚀 Site deployed successfully!"
+          echo "🌐 Live site: https://bruuce.com"
+          echo "📊 GitHub Pages URL: ${{ steps.deployment.outputs.page_url }}"
+          echo ""
+          echo "✅ Deployment completed at $(date)"
+
+          # Add to GitHub Actions summary with clickable links
+          echo "## 🎉 Deployment Successful!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Your site has been deployed and is live!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🌐 **[Visit your site: bruuce.com](https://bruuce.com)**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📊 **[GitHub Pages URL](${{ steps.deployment.outputs.page_url }})**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "⏰ Deployed at: \`$(date)\`" >> $GITHUB_STEP_SUMMARY
