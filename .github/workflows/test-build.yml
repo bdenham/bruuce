@@ -21,21 +21,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.12.1
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Test ${{ matrix.environment.name }} Build
         env:
           GITHUB_PAGES: ${{ matrix.environment.github_pages }}
         run: |
           echo "🧪 Testing ${{ matrix.environment.name }} environment"
-          npm run build
+          pnpm run build
 
           # Check for problematic paths
           if grep -r "/bruuce/_astro" dist/ > /dev/null; then
