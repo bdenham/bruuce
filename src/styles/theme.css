@@ -1383,23 +1383,7 @@ footer a:hover {
     }
 }
 
-/* Card animations for homepage cards */
-
-.card-animate.lazy-load {
-    opacity: 0.3;
-    transform: translate3d(0, 10px, 0);
-    transition: all var(--transition-bounce);
-}
-
-.card-animate.lazy-load.loaded {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-}
-
-
-.card-animate.scroll-animate {
-    will-change: transform, opacity;
-}
+/* Card animations - now handled by pure CSS .animate-in class */
 
 .blog-post-link:first-of-type {
     animation-delay: 100ms;

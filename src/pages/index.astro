@@ -63,7 +63,7 @@ const latestPosts = blogPosts
   <section class="grid-single animate-in animate-delay-200" aria-labelledby="quick-navigation">
     <h2 id="quick-navigation" class="sr-only">Quick Navigation</h2>
     <Card
-      class="card-animate scroll-animate animate-in animate-delay-400"
+      class="animate-in animate-delay-400"
       variant="content"
       icon="📋"
       title="My Resume"
@@ -73,7 +73,7 @@ const latestPosts = blogPosts
     />
 
     <Card
-      class="card-animate scroll-animate animate-in animate-delay-450"
+      class="animate-in animate-delay-450"
       variant="content"
       icon="🛠️"
       title="My Work"
@@ -83,7 +83,7 @@ const latestPosts = blogPosts
     />
 
     <Card
-      class="card-animate scroll-animate animate-in animate-delay-450"
+      class="animate-in animate-delay-450"
       variant="content"
       icon="📝"
       title="My Blog"
@@ -93,7 +93,7 @@ const latestPosts = blogPosts
     />
 
     <Card
-      class="card-animate scroll-animate animate-in animate-delay-450"
+      class="animate-in animate-delay-450"
       variant="content"
       icon="👨‍💻"
       title="About Me"
@@ -118,7 +118,7 @@ const latestPosts = blogPosts
       {
         latestPosts.map((post, index) => (
           <article
-            class={`blog-post-wrapper scroll-animate animate-in ${index === 0 ? 'animate-delay-400' : 'animate-delay-450'}`}
+            class={`blog-post-wrapper animate-in ${index === 0 ? 'animate-delay-400' : 'animate-delay-450'}`}
           >
             <BlogPostCard post={post} />
           </article>
@@ -153,45 +153,7 @@ const latestPosts = blogPosts
     margin-bottom: 1rem;
   }
 
-  .blog-post-wrapper.lazy-load {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0); /* Hardware acceleration */
-    will-change: transform, opacity; /* Optimize for animations */
-    transition:
-      opacity 0.3s ease,
-      transform 0.3s ease;
-  }
-
-  .blog-post-wrapper.lazy-load.loaded {
-    opacity: 1;
-    transform: translate3d(0, 0, 0); /* Hardware acceleration */
-  }
-
-  /* Simple CSS-only delayed animations for blog post cards */
-  .scroll-animate {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0); /* Hardware acceleration */
-    will-change: transform, opacity; /* Optimize for animations */
-    animation: slideInUp 600ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  /* Stagger the blog post animations after other content */
-  .scroll-animate:nth-child(1) {
-    animation-delay: 400ms;
-  }
-
-  .scroll-animate:nth-child(2) {
-    animation-delay: 450ms;
-  }
-
-  /* Respect user motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    .scroll-animate {
-      opacity: 1;
-      transform: none;
-      animation: none;
-    }
-  }
+  /* Blog post animations now handled by universal .animate-in class */
 
   /* Mobile override */
   /* Mobile responsive handled by BaseLayout */
