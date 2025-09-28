@@ -5,8 +5,8 @@
 
 :root {
     --sidebar-background: rgba(59, 130, 246, 0.15);
-    --bg-primary: #1d1d1d; /* Dark gray background */
-    --bg-secondary: #1a1a1a; /* Rich charcoal */
+    --bg-primary: #1f1f1f; /* Dark gray background */
+    --bg-secondary: #1f1f1f; /* Rich charcoal */
     --bg-tertiary: rgba(26, 26, 26, 0.95); /* Sophisticated overlay */
     --bg-card: rgba(38, 38, 38, 0.6); /* Modern card surface */
     --bg-card-hover: rgba(45, 45, 45, 0.8); /* Elevated hover state */
@@ -166,7 +166,7 @@ body {
         sans-serif;
     line-height: 1.6;
     color: var(--text-secondary);
-    background-color: var(--bg-primary); /* Use theme variable */
+    background-color: var(--bg-secondary); /* Use theme variable */
 }
 
 .skip-link {

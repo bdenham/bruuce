@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
+import Section from '../../components/ui/Section.astro';
+import Grid from '../../components/ui/Grid.astro';
+import Card from '../../components/ui/Card.astro';
 ---
 
 <BaseLayout
@@ -19,19 +22,18 @@ import PageHeader from '../../components/ui/PageHeader.astro';
     documentation, and community engagement at Adobe and beyond.
   </p>
 
-  <div class="section-container animate-in animate-delay-150">
-    <h2 class="section-heading">Case Studies</h2>
+  <Section title="Case Studies" class="animate-in animate-delay-150">
     <p class="text-large intro">
       Detailed looks at successful projects that demonstrate measurable impact on developer
       experience and adoption.
     </p>
 
-    <div class="grid-single">
-      <div class="card">
+    <Grid variant="single" gap="medium">
+      <Card title="PageBuilder Examples Repo" featured={true} class="case-study-card">
         <div class="item-header large">
-          <h3>PageBuilder Examples Repo</h3>
           <span class="tag">2019-2024</span>
         </div>
+
         <div class="item-content">
           <h4>Challenge</h4>
           <p>
@@ -66,11 +68,10 @@ import PageHeader from '../../components/ui/PageHeader.astro';
             </a>
           </div>
         </div>
-      </div>
+      </Card>
 
-      <div class="card">
+      <Card title="CLI Tools for Developers" class="case-study-card">
         <div class="item-header large">
-          <h3>CLI Tools for Developers</h3>
           <span class="tag">2022-2024</span>
         </div>
         <div class="item-content">
@@ -120,11 +121,10 @@ import PageHeader from '../../components/ui/PageHeader.astro';
             </a>
           </div>
         </div>
-      </div>
+      </Card>
 
-      <div class="card">
+      <Card title="Commerce API Playgrounds" class="case-study-card">
         <div class="item-header large">
-          <h3>Commerce API Playgrounds</h3>
           <span class="tag">2023-2024</span>
         </div>
         <div class="item-content">
@@ -169,19 +169,17 @@ import PageHeader from '../../components/ui/PageHeader.astro';
             </a>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+      </Card>
+    </Grid>
+  </Section>
 
-  <div class="section-container animate-in animate-delay-200">
-    <h2 class="section-heading">Current Work, Adobe (2018-Now)</h2>
+  <Section title="Current Work, Adobe (2018-Now)" class="animate-in animate-delay-200">
     <p class="text-large intro">
       Leading developer experience initiatives across multiple teams, building tools and
       documentation that help thousands of developers integrate with Adobe Commerce and related
       services.
     </p>
-
-    <div class="grid-single">
+    <Grid variant="single" gap="medium">
       <div class="card">
         <div class="item-header">
           <h3>Adobe Commerce Documentation</h3>
@@ -283,844 +281,908 @@ import PageHeader from '../../components/ui/PageHeader.astro';
           </div>
         </div>
       </div>
-    </div>
+    </Grid>
+  </Section>
 
-    <div class="section-container animate-in animate-delay-250">
-      <h2 class="section-heading">Featured Live Documentation</h2>
-      <p class="text-large intro">
-        Direct links to live documentation and interactive tools I've created and maintain at Adobe
-        Commerce. These represent real-world examples of developer experience innovation in action.
-      </p>
-
-      <div class="grid-single">
-        <div class="card">
-          <div class="item-header">
-            <h3>API Playground</h3>
-          </div>
-          <div class="item-content">
-            <p>
-              Interactive playground providing hands-on experience with Adobe Commerce services.
-              Features predefined queries that developers can run and customize to explore our APIs
-              in greater detail.
-            </p>
-            <h4>Features</h4>
-            <ul class="no-padding">
-              <li>Real-time API testing environment</li>
-              <li>Predefined query examples</li>
-              <li>Customizable exploration tools</li>
-              <li>Integrated developer learning experience</li>
-            </ul>
-            <div class="item-links">
-              <a
-                href="https://experienceleague.adobe.com/developer/commerce/storefront/playgrounds/commerce-services/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="item-link primary"
-              >
-                Explore Live Playground →
-              </a>
-            </div>
-          </div>
+  <Section title="Featured Live Documentation" class="animate-in animate-delay-250">
+    <p class="text-large intro">
+      Direct links to live documentation and interactive tools I've created and maintain at Adobe
+      Commerce. These represent real-world examples of developer experience innovation in action.
+    </p>
+    <Grid variant="single" gap="medium">
+      <div class="card">
+        <div class="item-header">
+          <h3>API Playground</h3>
         </div>
-
-        <div class="card">
-          <div class="item-header">
-            <h3>PageBuilder Integration</h3>
-          </div>
-          <div class="item-content">
-            <p>
-              Comprehensive technical documentation for integrating Adobe Commerce PageBuilder with
-              PWA Studio applications. Includes framework architecture, custom component creation,
-              and integration patterns.
-            </p>
-            <h4>Features</h4>
-            <ul class="no-padding">
-              <li>Complete integration framework documentation</li>
-              <li>Custom component development guides</li>
-              <li>React component architecture patterns</li>
-              <li>Master format parsing and rendering</li>
-            </ul>
-            <div class="item-links">
-              <a
-                href="https://developer.adobe.com/commerce/pwa-studio/integrations/pagebuilder/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="item-link primary"
-              >
-                View Documentation →
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="item-header">
-            <h3>PageBuilder Styling</h3>
-          </div>
-          <div class="item-content">
-            <p>
-              Developer guide for overriding and customizing PageBuilder styles in Adobe Commerce
-              frontend implementations. Covers best practices for theme development and style
-              inheritance patterns.
-            </p>
-            <h4>Features</h4>
-            <ul class="no-padding">
-              <li>Style override methodologies</li>
-              <li>Theme development best practices</li>
-              <li>CSS inheritance and specificity guidance</li>
-              <li>Frontend customization patterns</li>
-            </ul>
-            <div class="item-links">
-              <a
-                href="https://developer.adobe.com/commerce/frontend-core/page-builder/styles/override-pagebuilder-styles/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="item-link primary"
-              >
-                Read Styling Section →
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="section-container animate-in animate-delay-300">
-          <h2 class="section-heading">Speaking & Community</h2>
-          <div class="card">
-            <div class="item-header">
-              <h3>Meet Magento Indonesia 2019</h3>
-              <span class="tag">Conference Presentation</span>
-            </div>
-            <div class="item-content">
-              <p>
-                Presented PageBuilder best practices to the international Magento open-source
-                community, sharing insights on effective developer experience patterns and
-                implementation strategies.
-              </p>
-              <h4>Community Impact</h4>
-              <p>Helped establish best practices adopted by developers across Southeast Asia</p>
-            </div>
+        <div class="item-content">
+          <p>
+            Interactive playground providing hands-on experience with Adobe Commerce services.
+            Features predefined queries that developers can run and customize to explore our APIs in
+            greater detail.
+          </p>
+          <h4>Features</h4>
+          <ul class="no-padding">
+            <li>Real-time API testing environment</li>
+            <li>Predefined query examples</li>
+            <li>Customizable exploration tools</li>
+            <li>Integrated developer learning experience</li>
+          </ul>
+          <div class="item-links">
+            <a
+              href="https://experienceleague.adobe.com/developer/commerce/storefront/playgrounds/commerce-services/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="item-link primary"
+            >
+              Explore Live Playground →
+            </a>
           </div>
         </div>
       </div>
 
-      <div class="section-container animate-in animate-delay-350">
-        <h2 class="section-heading">Tools & Technologies</h2>
-        <p class="text-large intro">
-          The modern tech stack I use to create exceptional developer experiences and documentation.
-        </p>
-
-        <div class="grid">
-          <div class="item">
-            <div class="item-header">
-              <h3>Documentation & Content</h3>
-            </div>
-            <div class="tags">
-              <span class="tag">Markdown/MDX</span>
-              <span class="tag">Storybook 8</span>
-              <span class="tag">Diátaxis Framework</span>
-              <span class="tag">Algolia Search</span>
-              <span class="tag">Astro/Starlight</span>
-              <span class="tag">GitBook</span>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="item-header">
-              <h3>Documentation & Content</h3>
-            </div>
-            <div class="tags">
-              <span class="tag">React 18+</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">JavaScript/TypeScript</span>
-              <span class="tag">HTML5/CSS3</span>
-              <span class="tag">Git/GitHub</span>
-              <span class="tag">GitHub Actions</span>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="item-header">
-              <h3>Documentation & Content</h3>
-            </div>
-            <div class="tags">
-              <span class="tag">npm</span>
-              <span class="tag">pnpm</span>
-              <span class="tag">yarn</span>
-              <span class="tag">bun</span>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="item-header">
-              <h3>Testing & Quality</h3>
-            </div>
-            <div class="tags">
-              <span class="tag">Jest</span>
-              <span class="tag">ESLint</span>
-              <span class="tag">Prettier</span>
-              <span class="tag">Lighthouse</span>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="item-header">
-              <h3>Design & Visual</h3>
-            </div>
-            <div class="tags">
-              <span class="tag">Figma</span>
-              <span class="tag">Adobe Creative Suite</span>
-              <span class="tag">Responsive Design</span>
-              <span class="tag">UI/UX Prototyping</span>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="item-header">
-              <h3>Analytics & Monitoring</h3>
-            </div>
-            <div class="tags">
-              <span class="tag">Google Analytics</span>
-              <span class="tag">Site Monitoring</span>
-              <span class="tag">Performance Metrics</span>
-              <span class="tag">User Feedback Tools</span>
-            </div>
+      <div class="card">
+        <div class="item-header">
+          <h3>PageBuilder Integration</h3>
+        </div>
+        <div class="item-content">
+          <p>
+            Comprehensive technical documentation for integrating Adobe Commerce PageBuilder with
+            PWA Studio applications. Includes framework architecture, custom component creation, and
+            integration patterns.
+          </p>
+          <h4>Features</h4>
+          <ul class="no-padding">
+            <li>Complete integration framework documentation</li>
+            <li>Custom component development guides</li>
+            <li>React component architecture patterns</li>
+            <li>Master format parsing and rendering</li>
+          </ul>
+          <div class="item-links">
+            <a
+              href="https://developer.adobe.com/commerce/pwa-studio/integrations/pagebuilder/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="item-link primary"
+            >
+              View Documentation →
+            </a>
           </div>
         </div>
       </div>
 
-      <style>
-        .work-content {
-          max-width: 1000px;
-          margin: 0 auto;
-        }
-
-        .work-intro {
-          font-size: 1rem;
-          color: var(--text-tertiary);
-          line-height: 1.7;
-          margin-bottom: 32px;
-          font-weight: 400;
-        }
-
-        .project-header {
-          margin-bottom: 16px;
-        }
-
-        .project-header h3 {
-          color: var(--text-primary);
-          margin: 0 0 12px 0;
-          font-size: 1.25rem;
-        }
-
-        .project-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-        }
-
-        .tag {
-          background: var(--tag-bg);
-          color: var(--tag-text);
-          padding: 4px 12px;
-          border-radius: 16px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          border: 1px solid var(--border-primary);
-        }
-
-        .tag.internal {
-          background: rgba(255, 165, 0, 0.1);
-          color: #ff8c00;
-          border-color: rgba(255, 165, 0, 0.3);
-          font-weight: 700;
-          position: relative;
-        }
-
-        .tag.internal::before {
-          content: '🏢';
-          margin-right: 4px;
-        }
-
-        .project-description {
-          color: var(--text-tertiary);
-          line-height: 1.6;
-          margin-bottom: 16px;
-          font-weight: 400;
-        }
-
-        .project-impact {
-          color: var(--text-secondary);
-          font-size: 1rem;
-          color: var(--accent-yellow);
-          /* padding: 12px; */
-          /* border-radius: 8px; */
-          /* border-left: 3px solid var(--accent-primary); */
-        }
-
-        .project-links {
-          display: flex;
-          gap: 12px;
-          flex-wrap: wrap;
-          margin-bottom: 16px;
-        }
-
-        .project-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          padding: 8px 16px;
-          background: var(--bg-secondary);
-          color: var(--text-secondary);
-          text-decoration: none;
-          border-radius: 8px;
-          font-size: 1rem;
-          font-weight: 600;
-          border: 1px solid var(--border-secondary);
-          transition: all 0.3s ease;
-        }
-
-        .project-link:hover {
-          background: var(--accent-primary);
-          color: var(--bg-primary);
-          border-color: var(--accent-primary);
-          transform: translateY(-1px);
-        }
-
-        .project-link.primary {
-          background: var(--accent-primary);
-          color: var(--bg-primary);
-          border-color: var(--accent-primary);
-        }
-
-        .project-link.primary:hover {
-          background: var(--accent-hover);
-          border-color: var(--accent-hover);
-        }
-
-        .link-icon {
-          width: 16px;
-          height: 16px;
-          opacity: 0.9;
-          transition: opacity 0.2s ease;
-        }
-
-        .project-link:hover .link-icon,
-        .case-study-link:hover .link-icon,
-        .doc-link:hover .link-icon {
-          opacity: 1;
-        }
-
-        .speaking-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 16px;
-          flex-wrap: wrap;
-          gap: 8px;
-        }
-
-        .speaking-header h3 {
-          color: var(--text-primary);
-          margin: 0;
-          font-size: 1.25rem;
-        }
-
-        .speaking-type {
-          color: var(--accent-primary);
-          font-size: 1rem;
-          font-weight: 600;
-          padding: 4px 12px;
-          background: var(--bg-card);
-          border-radius: 12px;
-        }
-
-        .speaking-description {
-          color: var(--text-tertiary);
-          line-height: 1.6;
-          margin-bottom: 16px;
-          font-weight: 400;
-        }
-
-        .speaking-impact {
-          color: var(--accent-yellow);
-          font-size: 1rem;
-          /* padding: 12px; */
-          background: var(--bg-card);
-          /* border-radius: 8px; */
-          /* border-left: 3px solid var(--accent-primary); */
-        }
-
-        .timeline {
-          position: relative;
-          padding-left: 32px;
-        }
-
-        .timeline::before {
-          content: '';
-          position: absolute;
-          left: 16px;
-          top: 0;
-          bottom: 0;
-          width: 2px;
-          background: var(--border-primary);
-        }
-
-        .timeline-item {
-          position: relative;
-          margin-bottom: 48px;
-        }
-
-        .timeline-marker {
-          position: absolute;
-          /* left: -24px; */
-          top: 8px;
-          width: 16px;
-          height: 16px;
-          /* background: var(--accent-primary); */
-          /* border-radius: 50%; */
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .timeline-year {
-          position: absolute;
-          left: -60px;
-          top: 20px;
-          background: var(--bg-card);
-          color: var(--accent-primary);
-          padding: 4px 8px;
-          border-radius: 4px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          white-space: nowrap;
-          border: 1px solid var(--accent-primary);
-        }
-
-        .timeline-content {
-          background: var(--bg-card);
-          border: 1px solid var(--border-secondary);
-          border-radius: 16px;
-          padding: 24px;
-          margin-left: 16px;
-        }
-
-        .timeline-content h3 {
-          color: var(--text-primary);
-          margin: 0;
-          font-size: 1.375rem;
-        }
-
-        .timeline-content h4 {
-          color: var(--accent-primary);
-          margin: 0 0 20px 0;
-          font-size: 1rem;
-          font-weight: 600;
-        }
-
-        .projects-list {
-          display: grid;
-          gap: 20px;
-        }
-
-        .timeline-project {
-          background: var(--bg-card);
-          color: var(--accent-yellow);
-        }
-
-        .timeline-project strong {
-          color: var(--text-primary);
-          display: block;
-          margin-bottom: 2px;
-          font-size: 1rem;
-        }
-
-        .timeline-project p {
-          color: var(--text-tertiary);
-          margin: 0;
-          line-height: 1.6;
-          font-weight: 400;
-        }
-
-        /* Tools & Technologies Section */
-        .tools-section {
-          margin-bottom: 48px;
-        }
-
-        .tools-section h2 {
-          color: var(--text-primary);
-          font-size: 1.75rem;
-          margin-bottom: 16px;
-          border-bottom: 2px solid var(--border-primary);
-          padding-bottom: 8px;
-        }
-
-        /* .tools-grid removed - now using universal .grid class */
-
-        .tool-category {
-          background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
-          border: 2px solid rgba(148, 163, 184, 0.4);
-          border-radius: 16px;
-          padding: 24px;
-          transition: all 0.3s ease;
-          display: flex;
-          flex-direction: column;
-          height: 100%;
-        }
-
-        .tool-category:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px var(--shadow-secondary);
-          border-color: var(--accent-primary);
-        }
-
-        .tool-category h3 {
-          color: var(--text-primary);
-          margin: 0 0 16px 0;
-          font-size: 1.125rem;
-          font-weight: 600;
-        }
-
-        .tool-list {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-        }
-
-        .tool-tag {
-          background: var(--accent-content);
-          color: var(--accent-content-text);
-          padding: 6px 12px;
-          border-radius: 16px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          border: 1px solid transparent;
-          transition: all 0.2s ease;
-        }
-
-        .tool-tag:hover {
-          background: var(--accent-primary);
-          color: var(--bg-primary);
-          transform: translateY(-1px);
-        }
-
-        /* Case Studies Section */
-        .case-studies-section {
-          margin-bottom: 48px;
-        }
-
-        .case-studies-section h2 {
-          color: var(--text-primary);
-          font-size: 1.75rem;
-          margin-bottom: 16px;
-          border-bottom: 2px solid var(--border-primary);
-          padding-bottom: 8px;
-        }
-
-        .case-studies-grid {
-          display: grid;
-          grid-template-columns: 1fr; /* Single column for better readability with larger fonts */
-          gap: 32px;
-        }
-
-        .case-study {
-          background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
-          border: 2px solid rgba(148, 163, 184, 0.4);
-          border-radius: 16px;
-          padding: 32px;
-          transition: all 0.3s ease;
-        }
-
-        /* Animation for first case study (above fold) */
-        .case-study:first-child {
-          opacity: 0;
-          transform: translateY(20px);
-          animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-          animation-delay: 100ms;
-        }
-
-        .case-study:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 12px 48px var(--shadow-secondary);
-          border-color: var(--accent-primary);
-        }
-
-        .case-study-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          margin-bottom: 12px;
-          gap: 16px;
-        }
-
-        .case-study-header h3 {
-          color: var(--text-primary);
-          margin: 0;
-          font-size: 1.5rem;
-          line-height: 1.3;
-        }
-
-        .case-study-year {
-          background: var(--accent-yellow);
-          color: var(--bg-primary);
-          padding: 4px 8px;
-          border-radius: 8px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          white-space: nowrap;
-          flex-shrink: 0;
-        }
-
-        .case-study-content {
-          display: grid;
-          gap: 20px;
-        }
-
-        .solution,
-        .results {
-          background: var(--bg-card);
-          border-radius: 12px;
-        }
-
-        .case-study-content h4 {
-          color: var(--accent-primary);
-          margin: 0 0 8px 0;
-          font-size: 1rem;
-          font-weight: 600;
-        }
-
-        .case-study-content p {
-          color: var(--text-tertiary);
-          margin: 0;
-          line-height: 1.6;
-          font-weight: 400;
-        }
-
-        .results ul {
-          list-style: none;
-          padding: 0;
-          margin: 8px 0 0 0;
-        }
-
-        .results li {
-          color: var(--text-secondary);
-          margin-bottom: 4px;
-          padding-left: 16px;
-          position: relative;
-          font-size: 1rem;
-        }
-
-        .results li::before {
-          content: '✓';
-          position: absolute;
-          left: 0;
-          color: var(--accent-primary);
-          font-weight: bold;
-        }
-
-        .case-study-links {
-          display: flex;
-          gap: 12px;
-          flex-wrap: wrap;
-          margin-top: 20px;
-        }
-
-        .case-study-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          padding: 8px 16px;
-          background: var(--bg-secondary);
-          color: var(--text-secondary);
-          text-decoration: none;
-          border-radius: 8px;
-          font-size: 1rem;
-          font-weight: 600;
-          border: 1px solid var(--border-secondary);
-          transition: all 0.3s ease;
-        }
-
-        .case-study-link:hover {
-          background: var(--accent-primary);
-          color: var(--bg-primary);
-          border-color: var(--accent-primary);
-          transform: translateY(-1px);
-        }
-
-        .case-study-link.primary {
-          background: var(--accent-primary);
-          color: var(--bg-primary);
-          border-color: var(--accent-primary);
-        }
-
-        .case-study-link.primary:hover {
-          background: var(--accent-hover);
-          border-color: var(--accent-hover);
-        }
-
-        /* Featured Documentation Styles */
-        .featured-documentation {
-          margin-bottom: 48px;
-        }
-
-        .featured-documentation h2 {
-          color: var(--text-primary);
-          font-size: 1.5rem;
-          margin-bottom: 16px;
-          border-bottom: 2px solid var(--border-primary);
-          padding-bottom: 8px;
-        }
-
-        .section-intro {
-          color: var(--text-tertiary);
-          margin-bottom: 32px;
-          font-weight: 400;
-          line-height: 1.6;
-        }
-
-        .doc-header {
-          display: flex;
-          align-items: center;
-          justify-content: left;
-          margin-bottom: 16px;
-          flex-wrap: wrap;
-          gap: 12px;
-        }
-
-        .doc-header h3 {
-          color: var(--text-primary);
-          margin: 0;
-          font-size: 1.25rem;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .doc-status {
-          padding: 4px 8px;
-          border-radius: 12px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          background: var(--bg-card);
-          color: var(--accent-primary);
-          border: 1px solid var(--accent-primary);
-        }
-
-        .doc-description p {
-          color: var(--text-tertiary);
-          line-height: 1.6;
-          margin-bottom: 16px;
-          font-weight: 400;
-        }
-
-        .doc-highlights {
-          border-radius: 12px;
-          margin-bottom: 20px;
-        }
-
-        .doc-highlights ul {
-          margin: 0;
-          padding: 0;
-          list-style: none;
-        }
-
-        .doc-highlights li {
-          color: var(--text-primary);
-          margin-bottom: 6px;
-          padding-left: 16px;
-          position: relative;
-          font-size: 1rem;
-          font-weight: 400;
-        }
-
-        .doc-highlights li:last-child {
-          margin-bottom: 0;
-        }
-
-        .doc-highlights li::before {
-          content: '▸';
-          position: absolute;
-          left: 0;
-          color: var(--accent-primary);
-        }
-
-        .doc-links {
-          display: flex;
-          gap: 12px;
-          flex-wrap: wrap;
-        }
-
-        .doc-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          padding: 8px 16px;
-          background: var(--bg-secondary);
-          color: var(--text-secondary);
-          text-decoration: none;
-          border-radius: 8px;
-          font-size: 1rem;
-          font-weight: 600;
-          border: 1px solid var(--border-secondary);
-          transition: all 0.3s ease;
-        }
-
-        .doc-link:hover {
-          background: var(--accent-primary);
-          color: var(--bg-primary);
-          border-color: var(--accent-primary);
-          transform: translateY(-1px);
-        }
-
-        .doc-link.primary {
-          background: var(--accent-primary);
-          color: var(--bg-primary);
-          border-color: var(--accent-primary);
-        }
-
-        .doc-link.primary:hover {
-          background: var(--accent-hover);
-          border-color: var(--accent-hover);
-        }
-
-        @media (max-width: 768px) {
-          .doc-header {
-            justify-content: left;
-            align-items: flex-start;
-          }
-
-          .doc-links {
-            justify-content: flex-start;
-          }
-
-          .speaking-header {
-            flex-direction: column;
-            align-items: flex-start;
-          }
-
-          .timeline {
-            padding-left: 16px;
-          }
-
-          .timeline-content {
-            margin-left: 8px;
-          }
-
-          .timeline-year {
-            left: -80px;
-          }
-
-          /* Grid overrides no longer needed - already single column */
-
-          .case-study-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 8px;
-          }
-
-          /* Tools grid mobile responsive - now handled by universal .grid */
-        }
-      </style>
-    </div>
-  </div>
+      <div class="card">
+        <div class="item-header">
+          <h3>PageBuilder Styling</h3>
+        </div>
+        <div class="item-content">
+          <p>
+            Developer guide for overriding and customizing PageBuilder styles in Adobe Commerce
+            frontend implementations. Covers best practices for theme development and style
+            inheritance patterns.
+          </p>
+          <h4>Features</h4>
+          <ul class="no-padding">
+            <li>Style override methodologies</li>
+            <li>Theme development best practices</li>
+            <li>CSS inheritance and specificity guidance</li>
+            <li>Frontend customization patterns</li>
+          </ul>
+          <div class="item-links">
+            <a
+              href="https://developer.adobe.com/commerce/frontend-core/page-builder/styles/override-pagebuilder-styles/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="item-link primary"
+            >
+              Read Styling Section →
+            </a>
+          </div>
+        </div>
+      </div>
+    </Grid>
+
+    <Section title="Speaking & Community" class="animate-in animate-delay-300">
+      <Grid variant="single" gap="medium">
+        <div class="card">
+          <div class="item-header">
+            <h3>Meet Magento Indonesia 2019</h3>
+            <span class="tag">Conference Presentation</span>
+          </div>
+          <div class="item-content">
+            <p>
+              Presented PageBuilder best practices to the international Magento open-source
+              community, sharing insights on effective developer experience patterns and
+              implementation strategies.
+            </p>
+            <h4>Community Impact</h4>
+            <p>Helped establish best practices adopted by developers across Southeast Asia</p>
+          </div>
+        </div>
+      </Grid>
+    </Section>
+  </Section>
+
+  <Section title="Tools & Technologies" class="animate-in animate-delay-350">
+    <p class="text-large intro">
+      The modern tech stack I use to create exceptional developer experiences and documentation.
+    </p>
+
+    <Grid variant="default" gap="medium">
+      <div class="item">
+        <div class="item-header">
+          <h3>Documentation & Content</h3>
+        </div>
+        <div class="tags">
+          <span class="tag">Markdown/MDX</span>
+          <span class="tag">Storybook 8</span>
+          <span class="tag">Diátaxis Framework</span>
+          <span class="tag">Algolia Search</span>
+          <span class="tag">Astro/Starlight</span>
+          <span class="tag">GitBook</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <h3>Documentation & Content</h3>
+        </div>
+        <div class="tags">
+          <span class="tag">React 18+</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">JavaScript/TypeScript</span>
+          <span class="tag">HTML5/CSS3</span>
+          <span class="tag">Git/GitHub</span>
+          <span class="tag">GitHub Actions</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <h3>Documentation & Content</h3>
+        </div>
+        <div class="tags">
+          <span class="tag">npm</span>
+          <span class="tag">pnpm</span>
+          <span class="tag">yarn</span>
+          <span class="tag">bun</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <h3>Testing & Quality</h3>
+        </div>
+        <div class="tags">
+          <span class="tag">Jest</span>
+          <span class="tag">ESLint</span>
+          <span class="tag">Prettier</span>
+          <span class="tag">Lighthouse</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <h3>Design & Visual</h3>
+        </div>
+        <div class="tags">
+          <span class="tag">Figma</span>
+          <span class="tag">Adobe Creative Suite</span>
+          <span class="tag">Responsive Design</span>
+          <span class="tag">UI/UX Prototyping</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <h3>Analytics & Monitoring</h3>
+        </div>
+        <div class="tags">
+          <span class="tag">Google Analytics</span>
+          <span class="tag">Site Monitoring</span>
+          <span class="tag">Performance Metrics</span>
+          <span class="tag">User Feedback Tools</span>
+        </div>
+      </div>
+    </Grid>
+  </Section>
+
+  <style>
+    /* Case Study Card Styling - Make Card component look like original div cards */
+    .case-study-card {
+      background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+      border: 2px solid rgba(148, 163, 184, 0.4);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .case-study-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px var(--shadow-secondary);
+      border-color: var(--accent-primary);
+    }
+
+    .case-study-card .item-header.large {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 16px;
+    }
+
+    .case-study-card .item-content h4 {
+      color: var(--accent-primary);
+      margin: 0 0 8px 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .case-study-card .item-content p {
+      color: var(--text-tertiary);
+      margin: 0 0 20px 0;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    .case-study-card .item-content ul.no-padding {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 20px 0;
+    }
+
+    .case-study-card .item-content ul.no-padding li {
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+      padding-left: 16px;
+      position: relative;
+      font-size: 1rem;
+    }
+
+    .case-study-card .item-content ul.no-padding li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent-primary);
+      font-weight: bold;
+    }
+
+    .case-study-card .item-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .work-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .work-intro {
+      font-size: 1rem;
+      color: var(--text-tertiary);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    .project-header {
+      margin-bottom: 16px;
+    }
+
+    .project-header h3 {
+      color: var(--text-primary);
+      margin: 0 0 12px 0;
+      font-size: 1.25rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid var(--border-primary);
+    }
+
+    .tag.internal {
+      background: rgba(255, 165, 0, 0.1);
+      color: #ff8c00;
+      border-color: rgba(255, 165, 0, 0.3);
+      font-weight: 700;
+      position: relative;
+    }
+
+    .tag.internal::before {
+      content: '🏢';
+      margin-right: 4px;
+    }
+
+    .project-description {
+      color: var(--text-tertiary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    .project-impact {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      color: var(--accent-yellow);
+      /* padding: 12px; */
+      /* border-radius: 8px; */
+      /* border-left: 3px solid var(--accent-primary); */
+    }
+
+    .project-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 16px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: 1px solid var(--border-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .project-link:hover {
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      border-color: var(--accent-primary);
+      transform: translateY(-1px);
+    }
+
+    .project-link.primary {
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      border-color: var(--accent-primary);
+    }
+
+    .project-link.primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .link-icon {
+      width: 16px;
+      height: 16px;
+      opacity: 0.9;
+      transition: opacity 0.2s ease;
+    }
+
+    .project-link:hover .link-icon,
+    .case-study-link:hover .link-icon,
+    .doc-link:hover .link-icon {
+      opacity: 1;
+    }
+
+    .speaking-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .speaking-header h3 {
+      color: var(--text-primary);
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .speaking-type {
+      color: var(--accent-primary);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      background: var(--bg-card);
+      border-radius: 12px;
+    }
+
+    .speaking-description {
+      color: var(--text-tertiary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    .speaking-impact {
+      color: var(--accent-yellow);
+      font-size: 1rem;
+      /* padding: 12px; */
+      background: var(--bg-card);
+      /* border-radius: 8px; */
+      /* border-left: 3px solid var(--accent-primary); */
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 16px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-primary);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 48px;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      /* left: -24px; */
+      top: 8px;
+      width: 16px;
+      height: 16px;
+      /* background: var(--accent-primary); */
+      /* border-radius: 50%; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timeline-year {
+      position: absolute;
+      left: -60px;
+      top: 20px;
+      background: var(--bg-card);
+      color: var(--accent-primary);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      border: 1px solid var(--accent-primary);
+    }
+
+    .timeline-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-secondary);
+      border-radius: 16px;
+      padding: 24px;
+      margin-left: 16px;
+    }
+
+    .timeline-content h3 {
+      color: var(--text-primary);
+      margin: 0;
+      font-size: 1.375rem;
+    }
+
+    .timeline-content h4 {
+      color: var(--accent-primary);
+      margin: 0 0 20px 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .projects-list {
+      display: grid;
+      gap: 20px;
+    }
+
+    .timeline-project {
+      background: var(--bg-card);
+      color: var(--accent-yellow);
+    }
+
+    .timeline-project strong {
+      color: var(--text-primary);
+      display: block;
+      margin-bottom: 2px;
+      font-size: 1rem;
+    }
+
+    .timeline-project p {
+      color: var(--text-tertiary);
+      margin: 0;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* Tools & Technologies Section */
+    .tools-section {
+      margin-bottom: 48px;
+    }
+
+    .tools-section h2 {
+      color: var(--text-primary);
+      font-size: 1.75rem;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--border-primary);
+      padding-bottom: 8px;
+    }
+
+    /* .tools-grid removed - now using universal .grid class */
+
+    .tool-category {
+      background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+      border: 2px solid rgba(148, 163, 184, 0.4);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .tool-category:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--shadow-secondary);
+      border-color: var(--accent-primary);
+    }
+
+    .tool-category h3 {
+      color: var(--text-primary);
+      margin: 0 0 16px 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    .tool-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tool-tag {
+      background: var(--accent-content);
+      color: var(--accent-content-text);
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .tool-tag:hover {
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      transform: translateY(-1px);
+    }
+
+    /* Case Studies Section */
+    .case-studies-section {
+      margin-bottom: 48px;
+    }
+
+    .case-studies-section h2 {
+      color: var(--text-primary);
+      font-size: 1.75rem;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--border-primary);
+      padding-bottom: 8px;
+    }
+
+    .case-studies-grid {
+      display: grid;
+      grid-template-columns: 1fr; /* Single column for better readability with larger fonts */
+      gap: 32px;
+    }
+
+    .case-study {
+      background: linear-gradient(135deg, var(--bg-card), rgba(167, 139, 250, 0.02));
+      border: 2px solid rgba(148, 163, 184, 0.4);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    /* Animation for first case study (above fold) */
+    .case-study:first-child {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation-delay: 100ms;
+    }
+
+    .case-study:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px var(--shadow-secondary);
+      border-color: var(--accent-primary);
+    }
+
+    .case-study-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 16px;
+    }
+
+    .case-study-header h3 {
+      color: var(--text-primary);
+      margin: 0;
+      font-size: 1.5rem;
+      line-height: 1.3;
+    }
+
+    .case-study-year {
+      background: var(--accent-yellow);
+      color: var(--bg-primary);
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .case-study-content {
+      display: grid;
+      gap: 20px;
+    }
+
+    .solution,
+    .results {
+      background: var(--bg-card);
+      border-radius: 12px;
+    }
+
+    .case-study-content h4 {
+      color: var(--accent-primary);
+      margin: 0 0 8px 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .case-study-content p {
+      color: var(--text-tertiary);
+      margin: 0;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    .results ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0 0;
+    }
+
+    .results li {
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+      padding-left: 16px;
+      position: relative;
+      font-size: 1rem;
+    }
+
+    .results li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent-primary);
+      font-weight: bold;
+    }
+
+    .case-study-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .case-study-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 16px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: 1px solid var(--border-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .case-study-link:hover {
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      border-color: var(--accent-primary);
+      transform: translateY(-1px);
+    }
+
+    .case-study-link.primary {
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      border-color: var(--accent-primary);
+    }
+
+    .case-study-link.primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    /* Featured Documentation Styles */
+    .featured-documentation {
+      margin-bottom: 48px;
+    }
+
+    .featured-documentation h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--border-primary);
+      padding-bottom: 8px;
+    }
+
+    .section-intro {
+      color: var(--text-tertiary);
+      margin-bottom: 32px;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .doc-header {
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .doc-header h3 {
+      color: var(--text-primary);
+      margin: 0;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .doc-status {
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--bg-card);
+      color: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+    }
+
+    .doc-description p {
+      color: var(--text-tertiary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    .doc-highlights {
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .doc-highlights ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .doc-highlights li {
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      padding-left: 16px;
+      position: relative;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .doc-highlights li:last-child {
+      margin-bottom: 0;
+    }
+
+    .doc-highlights li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent-primary);
+    }
+
+    .doc-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .doc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 16px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: 1px solid var(--border-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .doc-link:hover {
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      border-color: var(--accent-primary);
+      transform: translateY(-1px);
+    }
+
+    .doc-link.primary {
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      border-color: var(--accent-primary);
+    }
+
+    .doc-link.primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    @media (max-width: 768px) {
+      .doc-header {
+        justify-content: left;
+        align-items: flex-start;
+      }
+
+      .doc-links {
+        justify-content: flex-start;
+      }
+
+      .speaking-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .timeline {
+        padding-left: 16px;
+      }
+
+      .timeline-content {
+        margin-left: 8px;
+      }
+
+      .timeline-year {
+        left: -80px;
+      }
+
+      /* Grid overrides no longer needed - already single column */
+
+      .case-study-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      /* Tools grid mobile responsive - now handled by universal .grid */
+    }
+  </style>
 </BaseLayout>
