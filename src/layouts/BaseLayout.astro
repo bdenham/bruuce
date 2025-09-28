@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SidebarPerformance from '../components/SidebarPerformance.astro';
 
+// CSS imports optimized for performance
 import '../styles/theme.css';
 import '../styles/semantic-core.css';
 
@@ -230,18 +231,21 @@ const {
 
     <script>
       function updateThemeDisplay(isLight) {
-        const themeIcon = document.getElementById('theme-icon');
-        const themeText = document.getElementById('theme-text');
+        // Use requestAnimationFrame to avoid forced reflows
+        requestAnimationFrame(() => {
+          const themeIcon = document.getElementById('theme-icon');
+          const themeText = document.getElementById('theme-text');
 
-        if (themeIcon && themeText) {
-          if (isLight) {
-            themeIcon.textContent = '☀️';
-            themeText.textContent = 'Light';
-          } else {
-            themeIcon.textContent = '🌙';
-            themeText.textContent = 'Dark';
+          if (themeIcon && themeText) {
+            if (isLight) {
+              themeIcon.textContent = '☀️';
+              themeText.textContent = 'Light';
+            } else {
+              themeIcon.textContent = '🌙';
+              themeText.textContent = 'Dark';
+            }
           }
-        }
+        });
       }
 
       (window as any).toggleTheme = function () {
