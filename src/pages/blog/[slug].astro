@@ -2,12 +2,11 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SEO from '../../components/SEO.astro';
-import Tags from '../../components/Tags.astro';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
   // Filter out draft posts in production
-  const publishedPosts = blogPosts.filter(post => !post.data.draft);
+  const publishedPosts = blogPosts.filter((post) => !post.data.draft);
   return publishedPosts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
@@ -59,16 +58,9 @@ const publishedTime = post.data.date.toISOString();
       })
     }
   </p>
-  
+
   <!-- Post title -->
   <h1 id="post-title" class="animate-in animate-delay-150">{post.data.title}</h1>
-
-  <!-- Tags and category -->
-  <Tags 
-    tags={post.data.tags} 
-    category={post.data.category}
-    class="post-tags animate-in animate-delay-200"
-  />
 
   <!-- Post content -->
   <div class="content animate-in animate-delay-250">
@@ -152,7 +144,7 @@ const publishedTime = post.data.date.toISOString();
     margin: 2.25rem 0 0.35rem;
     color: var(--accent-primary);
     font-weight: 600;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
   }
 
   .content h3 {
@@ -162,7 +154,6 @@ const publishedTime = post.data.date.toISOString();
     color: var(--text-primary);
     font-weight: 600;
   }
-
 
   .content :global(h4) {
     font-size: 1.25rem; /* 20px - 1.05x body text, subtle but clear */
@@ -224,7 +215,9 @@ const publishedTime = post.data.date.toISOString();
     text-decoration: underline;
     text-decoration-color: var(--accent-primary);
     text-underline-offset: 2px;
-    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
   }
 
   .content :global(a:hover) {

@@ -1,9 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import BlogPostCard from '../../../components/ui/BlogPostCard.astro';
 import PageHeader from '../../../components/ui/PageHeader.astro';
 import SEO from '../../../components/SEO.astro';
+import Section from '../../../components/ui/Section.astro';
+import Grid from '../../../components/ui/Grid.astro';
+import Card from '../../../components/ui/Card.astro';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
@@ -13,25 +15,29 @@ export async function getStaticPaths() {
   const categories = [...new Set(publishedPosts.map((post) => post.data.category).filter(Boolean))];
 
   return categories.map((category) => {
+    // Type assertion: category is guaranteed to be a string from filter(Boolean)
+    const categoryName = category as string;
     const categoryPosts = publishedPosts
-      .filter((post) => post.data.category === category)
+      .filter((post) => post.data.category === categoryName)
       .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
     return {
-      params: { category: category.toLowerCase().replace(/\s+/g, '-') },
+      params: { category: categoryName.toLowerCase().replace(/\s+/g, '-') },
       props: {
-        category,
+        category: categoryName,
         posts: categoryPosts,
-        categorySlug: category.toLowerCase().replace(/\s+/g, '-'),
+        categorySlug: categoryName.toLowerCase().replace(/\s+/g, '-'),
       },
     };
   });
 }
 
 const { category, posts, categorySlug } = Astro.props;
+// Type assertion: category is guaranteed to be defined from getStaticPaths
+const categoryName = category as string;
 const postCount = posts.length;
-const pageTitle = `${category} Posts - Bruce Denham`;
-const pageDescription = `${postCount} blog post${postCount !== 1 ? 's' : ''} about ${category.toLowerCase()}. Insights on ${category.toLowerCase()} from Bruce Denham.`;
+const pageTitle = `${categoryName} Posts - Bruce Denham`;
+const pageDescription = `${postCount} blog post${postCount !== 1 ? 's' : ''} about ${categoryName.toLowerCase()}. Insights on ${categoryName.toLowerCase()} from Bruce Denham.`;
 ---
 
 <BaseLayout
@@ -53,15 +59,37 @@ const pageDescription = `${postCount} blog post${postCount !== 1 ? 's' : ''} abo
     canonical={`https://bruuce.com/blog/category/${categorySlug}/`}
   />
 
-  <PageHeader primary={category} accent="Posts" class="page-title" />
+  <PageHeader primary={categoryName} accent="Posts" class="page-title" />
   <p class="text-large lead animate-in animate-delay-100">
-    {postCount} post{postCount !== 1 ? 's' : ''} about {category.toLowerCase()}
+    {postCount} post{postCount !== 1 ? 's' : ''} about {categoryName.toLowerCase()}
   </p>
 
   <!-- Category posts -->
-  <div class="category-posts animate-in animate-delay-150">
-    {posts.map((post) => <BlogPostCard post={post} showCategory={false} />)}
-  </div>
+  <Section class="animate-in animate-delay-150">
+    <Grid variant="single" gap="medium">
+      {
+        posts.map((post) => (
+          <Card
+            title={post.data.title}
+            href={`/blog/${post.slug}/`}
+            ariaLabel={`Read: ${post.data.title}`}
+          >
+            <p class="post-meta">
+              {post.data.date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+              {post.data.author && post.data.author !== 'Bruce Denham'
+                ? ` • by ${post.data.author}`
+                : ''}
+            </p>
+            <p class="post-excerpt">{post.data.excerpt}</p>
+          </Card>
+        ))
+      }
+    </Grid>
+  </Section>
 
   <!-- Category navigation -->
   <div class="category-navigation animate-in animate-delay-200">
@@ -71,6 +99,20 @@ const pageDescription = `${postCount} blog post${postCount !== 1 ? 's' : ''} abo
 </BaseLayout>
 
 <style>
+  /* Simple styling for blog post content */
+  .post-meta {
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 400;
+  }
+
+  .post-excerpt {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
   .category-page {
     max-width: 100%;
   }

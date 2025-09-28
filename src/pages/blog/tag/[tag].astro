@@ -1,9 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import BlogPostCard from '../../../components/ui/BlogPostCard.astro';
 import PageHeader from '../../../components/ui/PageHeader.astro';
 import SEO from '../../../components/SEO.astro';
+import Section from '../../../components/ui/Section.astro';
+import Grid from '../../../components/ui/Grid.astro';
+import Card from '../../../components/ui/Card.astro';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
@@ -60,9 +62,31 @@ const pageDescription = `${postCount} blog post${postCount !== 1 ? 's' : ''} abo
   </p>
 
   <!-- Tag posts -->
-  <div class="tag-posts animate-in animate-delay-150">
-    {posts.map((post) => <BlogPostCard post={post} showTags={false} />)}
-  </div>
+  <Section class="animate-in animate-delay-150">
+    <Grid variant="single" gap="medium">
+      {
+        posts.map((post) => (
+          <Card
+            title={post.data.title}
+            href={`/blog/${post.slug}/`}
+            ariaLabel={`Read: ${post.data.title}`}
+          >
+            <p class="post-meta">
+              {post.data.date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+              {post.data.author && post.data.author !== 'Bruce Denham'
+                ? ` • by ${post.data.author}`
+                : ''}
+            </p>
+            <p class="post-excerpt">{post.data.excerpt}</p>
+          </Card>
+        ))
+      }
+    </Grid>
+  </Section>
 
   <!-- Related tags -->
   {
@@ -93,6 +117,20 @@ const pageDescription = `${postCount} blog post${postCount !== 1 ? 's' : ''} abo
 </BaseLayout>
 
 <style>
+  /* Simple styling for blog post content */
+  .post-meta {
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 400;
+  }
+
+  .post-excerpt {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
   .tag-page {
     max-width: 100%;
   }

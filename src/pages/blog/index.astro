@@ -1,8 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogPostCard from '../../components/ui/BlogPostCard.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
+import Section from '../../components/ui/Section.astro';
+import Grid from '../../components/ui/Grid.astro';
+import Card from '../../components/ui/Card.astro';
 
 const blogPosts = await getCollection('blog');
 // Filter out draft posts in production
@@ -26,110 +28,89 @@ const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data
     navigating the complexities of our modern world.
   </p>
 
-  <div class="grid-single animate-in animate-delay-150">
-    {sortedPosts.map((post) => <BlogPostCard post={post} />)}
-  </div>
+  <Section class="animate-in animate-delay-150">
+    <Grid variant="single" gap="medium">
+      {
+        sortedPosts.map((post) => (
+          <Card
+            title={post.data.title}
+            href={`/blog/${post.slug}/`}
+            ariaLabel={`Read: ${post.data.title}`}
+          >
+            <p class="post-meta">
+              {post.data.date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+              {post.data.author && post.data.author !== 'Bruce Denham'
+                ? ` • by ${post.data.author}`
+                : ''}
+            </p>
+            <p class="post-excerpt">{post.data.excerpt}</p>
+          </Card>
+        ))
+      }
+    </Grid>
+  </Section>
 
   <!-- LinkedIn Posts & Insights Section -->
-  <section class="section-container animate-in animate-delay-200" aria-labelledby="linkedin-posts">
-    <div class="section-divider"></div>
-    <h2 id="linkedin-posts" class="section-heading">LinkedIn Posts</h2>
+  <Section
+    title="LinkedIn Posts"
+    class="animate-in animate-delay-200"
+    aria-labelledby="linkedin-posts"
+  >
     <p class="text-large intro">
       Thoughtful reflections I share on LinkedIn about kindness, personal growth, and authentic
       human connection — exploring how we grow, how we connect, and how our vulnerabilities can
       become our greatest strengths.
     </p>
 
-    <div class="grid-single">
-      <a
+    <Grid variant="single" gap="medium">
+      <Card
+        title="The Science of Kindness"
         href="https://www.linkedin.com/feed/update/urn:li:activity:7329128517764337665/"
         target="_blank"
         rel="noopener noreferrer"
-        class="linkedin-post featured"
+        ariaLabel="Read LinkedIn post: The Science of Kindness"
       >
-        <div class="header-layout">
-          <div class="platform-info">
-            <div class="platform-text">
-              <span class="platform-name">LinkedIn</span>
-              <span class="post-type">Creative Post</span>
-            </div>
-          </div>
-          <div class="post-date">Recent</div>
-        </div>
-        <div class="item-content">
-          <h3>The Science of Kindness</h3>
-          <p>
-            What if kindness moved like diffusion—not with force, but with grace, filling absence
-            with abundance, and longing with love? Let what's full in you flow where it's needed.
-            That's how the world softens.
-          </p>
-          <div class="tags">
-            <span class="tag">Animation</span>
-            <span class="tag">Kindness</span>
-            <span class="tag">Visual Communication</span>
-          </div>
-        </div>
-      </a>
+        <p class="platform-meta">LinkedIn • Creative Post • Recent</p>
+        <p class="post-excerpt">
+          What if kindness moved like diffusion—not with force, but with grace, filling absence with
+          abundance, and longing with love? Let what's full in you flow where it's needed. That's
+          how the world softens.
+        </p>
+      </Card>
 
-      <a
+      <Card
+        title="What is Personal Growth?"
         href="https://www.linkedin.com/feed/update/urn:li:activity:7326230647159619585/"
         target="_blank"
         rel="noopener noreferrer"
-        class="linkedin-post"
+        ariaLabel="Read LinkedIn post: What is Personal Growth?"
       >
-        <div class="header-layout">
-          <div class="platform-info">
-            <div class="platform-text">
-              <span class="platform-name">LinkedIn</span>
-              <span class="post-type">Professional Update</span>
-            </div>
-          </div>
-          <div class="post-date">Recent</div>
-        </div>
-        <div class="item-content">
-          <h3>What is Personal Growth?</h3>
-          <p>
-            Why does personal growth often feel so elusive? One step forward, two steps back. Ten
-            steps forward, wrong direction. Am I missing something? Maybe...Probably.
-          </p>
-          <div class="tags">
-            <span class="tag">Growth</span>
-            <span class="tag">Animation</span>
-            <span class="tag">Visual Communication</span>
-          </div>
-        </div>
-      </a>
+        <p class="platform-meta">LinkedIn • Professional Update • Recent</p>
+        <p class="post-excerpt">
+          Why does personal growth often feel so elusive? One step forward, two steps back. Ten
+          steps forward, wrong direction. Am I missing something? Maybe...Probably.
+        </p>
+      </Card>
 
-      <a
+      <Card
+        title="Cracks Let the Light In"
         href="https://www.linkedin.com/feed/update/urn:li:activity:7326968144617492480/"
         target="_blank"
         rel="noopener noreferrer"
-        class="linkedin-post"
+        ariaLabel="Read LinkedIn post: Cracks Let the Light In"
       >
-        <div class="header-layout">
-          <div class="platform-info">
-            <div class="platform-text">
-              <span class="platform-name">LinkedIn</span>
-              <span class="post-type">Community Engagement</span>
-            </div>
-          </div>
-          <div class="post-date">Recent</div>
-        </div>
-        <div class="item-content">
-          <h3>Cracks Let the Light In</h3>
-          <p>
-            We grow up thinking polish makes us lovable. So we shine the surface, hoping to be seen.
-            But it's our presence, not perfection, that opens hearts. And it's our cracks that let
-            the light in.
-          </p>
-          <div class="tags">
-            <span class="tag">Growth</span>
-            <span class="tag">Animation</span>
-            <span class="tag">Visual Communication</span>
-          </div>
-        </div>
-      </a>
-    </div>
+        <p class="platform-meta">LinkedIn • Community Engagement • Recent</p>
+        <p class="post-excerpt">
+          We grow up thinking polish makes us lovable. So we shine the surface, hoping to be seen.
+          But it's our presence, not perfection, that opens hearts. And it's our cracks that let the
+          light in.
+        </p>
+      </Card>
+    </Grid>
     <a
       href="https://linkedin.com/in/brucedenham/"
       target="_blank"
@@ -138,16 +119,11 @@ const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data
     >
       Follow me on LinkedIn →
     </a>
-  </section>
+  </Section>
 </BaseLayout>
 
 <style>
-  /* LinkedIn Insights section specific styles */
-  .linkedin-insights-section {
-    margin-top: 0;
-    padding-top: 32px;
-  }
-
+  /* Section divider for LinkedIn Posts section */
   .section-divider {
     height: 2px;
     background: linear-gradient(90deg, var(--accent-primary), transparent);
@@ -156,97 +132,46 @@ const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data
     max-width: 200px;
   }
 
-  .posts-intro {
-    color: var(--text-primary);
-    margin-bottom: 32px;
-    font-weight: 400;
-    line-height: 1.6;
-  }
-
-  /* Platform info styles - from homepage */
-  .platform-info {
-    display: flex;
+  /* LinkedIn Follow Button */
+  .linkedin-follow-btn {
+    display: inline-flex;
     align-items: center;
     gap: 8px;
-  }
-
-  .platform-icon {
-    font-size: 1.2rem;
-  }
-
-  .platform-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .platform-name {
-    color: var(--text-primary);
-    font-size: 1rem;
+    padding: 12px 24px;
+    background: var(--accent-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
     font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-top: 24px;
   }
 
-  .post-type {
-    color: var(--text-muted);
-    font-size: 12px;
+  .linkedin-follow-btn:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px var(--shadow-primary);
   }
 
-  .post-date {
-    color: var(--text-muted);
-    font-size: 12px;
-    font-weight: 500;
-  }
-
-  .post-content h3 {
-    color: var(--text-primary);
-    font-size: 18px;
-    margin: 0 0 12px 0;
-  }
-
-  .post-content p {
+  /* Simple styling for blog post content */
+  .post-meta {
     color: var(--text-tertiary);
-    line-height: 1.6;
-    margin: 0 0 16px 0;
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem 0;
     font-weight: 400;
   }
 
-  .post-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 16px;
-  }
-
-  /* LinkedIn post content styling */
-  .linkedin-post .post-content {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .linkedin-post .post-content h3 {
-    margin: 0 0 0.25rem 0;
-    font-size: 1.125rem;
-    color: var(--text-primary);
-    font-weight: 600;
-    line-height: 1.4;
-  }
-
-  .linkedin-post .post-content p {
-    margin: 0 0 0.5rem 0;
+  .platform-meta {
     color: var(--text-tertiary);
-    line-height: 1.5;
-    font-size: 1.125rem;
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 400;
   }
 
-  /* Hide the old post-header since we're using icons as bullets */
-  .linkedin-post .header-layout {
-    display: none;
-  }
-
-  /* Mobile responsive for LinkedIn posts */
-  @media (max-width: 640px) {
-    .post-details {
-      gap: 4px;
-    }
+  .post-excerpt {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
   }
 </style>
