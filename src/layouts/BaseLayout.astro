@@ -3,7 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SidebarPerformance from '../components/SidebarPerformance.astro';
 
-// CSS imports optimized for performance
+// CSS imports - deferred for performance (critical CSS inlined above)
 import '../styles/theme.css';
 import '../styles/semantic-core.css';
 
@@ -114,10 +114,47 @@ const {
     </script>
     <style>
       /* CRITICAL CSS - Inlined for immediate rendering performance */
-      /* Variables are loaded via CSS files, this is just for critical path */
+      /* CSS Variables - Essential for immediate rendering */
+      :root {
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --bg-card: #1e1e1e;
+        --text-primary: #ffffff;
+        --text-secondary: #e0e0e0;
+        --text-tertiary: #a0a0a0;
+        --accent-primary: #00aaff;
+        --accent-hover: #0099ee;
+        --border-primary: #333333;
+        --transition-bounce: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
 
+      /* Light theme variables */
+      html.light {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8f9fa;
+        --bg-card: #ffffff;
+        --text-primary: #1a1a1a;
+        --text-secondary: #4a4a4a;
+        --text-tertiary: #6a6a6a;
+        --accent-primary: #0066cc;
+        --accent-hover: #0055bb;
+        --border-primary: #e0e0e0;
+      }
+
+      /* Critical layout and typography */
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
       body {
         margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        max-width: 100%;
+      }
+
+      body {
         background: var(--bg-primary);
         color: var(--text-primary);
         font-family:
@@ -127,7 +164,7 @@ const {
           BlinkMacSystemFont,
           sans-serif;
         line-height: 1.6;
-        font-size: 1.125rem; /* 18px converted to rem */
+        font-size: 1.125rem;
       }
 
       /* Critical grid for above-fold content */
@@ -139,15 +176,37 @@ const {
       }
 
       /* Essential card styles for hero content */
-      .card {
+      .card,
+      .card-base {
         background: var(--bg-card);
         border: 1px solid var(--border-primary);
         border-radius: 16px;
         padding: 24px;
+        transition: var(--transition-bounce);
+      }
+
+      /* Critical header styles for LCP element */
+      .site-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: var(--transition-bounce);
+      }
+
+      .header {
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border-primary);
+        padding: 1rem 1.5rem;
+        position: fixed;
+        top: 0;
+        left: 280px;
+        right: 0;
+        z-index: 300;
       }
 
       h1 {
-        font-size: clamp(3rem, 8vw, 4.5rem); /* Increased from 2.5rem-3.5rem to 3rem-4.5rem */
+        font-size: clamp(3rem, 8vw, 4.5rem);
         font-weight: 900;
         margin: 0 0 16px 0;
         line-height: 1.1;
@@ -186,6 +245,12 @@ const {
       }
 
       /* Essential responsive behavior */
+      @media (max-width: 1024px) {
+        .header {
+          left: 0;
+        }
+      }
+
       @media (max-width: 640px) {
         .grid {
           grid-template-columns: 1fr;
@@ -197,13 +262,14 @@ const {
           text-align: center;
         }
 
-        .card {
+        .card,
+        .card-base {
           padding: 16px;
         }
       }
     </style>
 
-    <!-- CSS will be inlined by Astro for zero render-blocking -->
+    <!-- Critical CSS inlined above, full CSS loaded by Astro -->
   </head>
   <body>
     <!-- Skip link for keyboard navigation -->
@@ -231,21 +297,21 @@ const {
 
     <script>
       function updateThemeDisplay(isLight) {
-        // Use requestAnimationFrame to avoid forced reflows
-        requestAnimationFrame(() => {
-          const themeIcon = document.getElementById('theme-icon');
-          const themeText = document.getElementById('theme-text');
+        // Batch DOM updates to prevent forced reflows
+        const themeIcon = document.getElementById('theme-icon');
+        const themeText = document.getElementById('theme-text');
 
-          if (themeIcon && themeText) {
-            if (isLight) {
-              themeIcon.textContent = '☀️';
-              themeText.textContent = 'Light';
-            } else {
-              themeIcon.textContent = '🌙';
-              themeText.textContent = 'Dark';
-            }
-          }
-        });
+        if (themeIcon && themeText) {
+          // Use DocumentFragment to batch changes
+          const iconText = isLight ? '☀️' : '🌙';
+          const textContent = isLight ? 'Light' : 'Dark';
+
+          // Batch updates in a single requestAnimationFrame
+          requestAnimationFrame(() => {
+            themeIcon.textContent = iconText;
+            themeText.textContent = textContent;
+          });
+        }
       }
 
       (window as any).toggleTheme = function () {
@@ -283,15 +349,18 @@ const {
         const colorScheme = document.querySelector('meta[name="color-scheme"]');
         const isLight = savedTheme === 'light';
 
-        if (isLight) {
-          root.classList.add('light');
-          if (colorScheme) colorScheme.setAttribute('content', 'light dark');
-        } else {
-          root.classList.remove('light');
-          if (colorScheme) colorScheme.setAttribute('content', 'dark light');
-        }
+        // Batch all DOM changes to prevent forced reflows
+        requestAnimationFrame(() => {
+          if (isLight) {
+            root.classList.add('light');
+            if (colorScheme) colorScheme.setAttribute('content', 'light dark');
+          } else {
+            root.classList.remove('light');
+            if (colorScheme) colorScheme.setAttribute('content', 'dark light');
+          }
 
-        updateThemeDisplay(isLight);
+          updateThemeDisplay(isLight);
+        });
       }
 
       // Initialize theme when page loads

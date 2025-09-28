@@ -29,10 +29,9 @@ const latestPosts = blogPosts
   </p> -->
 
   <aside class="performance-highlight" aria-labelledby="performance-metrics">
-    <div class="performance-header">
-      <h2 id="performance-metrics" class="section-heading">⚡ Performance Excellence</h2>
-      <p>Sub-second performance with exceptional user experience across all devices.</p>
-    </div>
+    <h2 id="performance-metrics" class="section-heading">⚡ Performance Excellence</h2>
+    <p>Sub-second performance with exceptional user experience across all devices.</p>
+
     <!-- Lighthouse Scores Grid -->
     <div class="lighthouse-grid">
       <LighthouseGauge score={100} label="Performance" />
@@ -48,15 +47,14 @@ const latestPosts = blogPosts
       <div class="metric-item"><span class="metric-value">0ms</span><br />Blocking Time</div>
       <div class="metric-item"><span class="metric-value">0</span><br />Layout Shift</div>
     </div>
+
     <a
       href="https://pagespeed.web.dev/analysis?url=https://bruuce.com"
       target="_blank"
       rel="noopener noreferrer"
       class="performance-cta"
     >
-      <small>
-        <div class="percentile-text">Verify on PageSpeed Insights ↗</div>
-      </small>
+      <small class="percentile-text">Verify on PageSpeed Insights ↗</small>
     </a>
   </aside>
 
