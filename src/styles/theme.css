@@ -145,6 +145,26 @@
     box-sizing: border-box;
 }
 
+/* Performance optimization: Prevent universal transitions that hurt Speed Index */
+* {
+    transition: none !important;
+}
+
+/* Only allow transitions on specific interactive elements */
+.button,
+.card,
+.item,
+.nav-link,
+.theme-toggle,
+.mobile-menu-toggle,
+.performance-cta,
+a,
+input,
+textarea,
+select {
+    transition: revert !important;
+}
+
 html {
     height: 100%;
     background-color: var(--bg-primary);
