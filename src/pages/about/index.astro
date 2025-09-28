@@ -18,16 +18,19 @@ import Card from '../../components/ui/Card.astro';
 >
   <PageHeader primary="About" accent="Me" class="page-title" />
 
-  <p class="text-large lead animate-in animate-delay-100">
-    👋 Hey there! I'm Bruce and over the past 30+ years I've learned that great writing is about
-    becoming your audience. When you become them, you experience all their pains and struggles. Then
-    you can write your way out of it and help them avoid the same pain. Turns out most developers
-    would rather maintain jQuery than read the docs. I get it. So I try to keep it simple. But
-    simple is hard. It takes time that's not easy to find. Ultimately, if a sleep-deprived developer
-    can't understand my docs at 2 am, my docs aren't good enough. I fail a lot. But I keep trying.
-  </p>
-
-  <div class="section-container animate-in animate-delay-150">
+  <!-- Intro section with text and photo side-by-side -->
+  <div class="intro-section animate-in animate-delay-100">
+    <div class="intro-content">
+      <p class="text-large lead">
+        👋 Hey there! I'm Bruce and over the past 30+ years I've learned that great writing is about
+        becoming your audience. When you become them, you experience all their pains and struggles.
+        Then you can write your way out of it and help them avoid the same pain. Turns out most
+        developers would rather maintain jQuery than read the docs. I get it. So I try to keep it
+        simple. But simple is hard. It takes time that's not easy to find. Ultimately, if a
+        sleep-deprived developer can't understand my docs at 2 am, my docs aren't good enough. I
+        fail a lot. But I keep trying.
+      </p>
+    </div>
     <div class="intro-image">
       <img
         src="/images/bruce-denham-headshot.jpg"
@@ -248,16 +251,26 @@ import Card from '../../components/ui/Card.astro';
 <style>
   /* About page styles */
   .intro-section {
-    margin-bottom: 40px;
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    margin: 2rem 0;
   }
 
   .intro-content {
-    display: flex;
-    gap: 32px;
-    align-items: flex-start;
+    flex: 2;
+    min-width: 0; /* Allows text to wrap properly */
+  }
+
+  .intro-content .lead {
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.7;
   }
 
   .intro-image {
+    flex: 1;
+    max-width: 280px;
     flex-shrink: 0;
   }
 
@@ -520,8 +533,24 @@ import Card from '../../components/ui/Card.astro';
   }
 
   @media (max-width: 768px) {
-    /* Mobile timeline - no left padding/margins needed */
+    /* Mobile intro section - stack vertically */
+    .intro-section {
+      flex-direction: column;
+      gap: 2rem;
+      text-align: center;
+    }
 
+    .intro-image {
+      max-width: 240px;
+      margin: 0 auto;
+    }
+
+    .intro-content .lead {
+      font-size: 1rem;
+      text-align: left;
+    }
+
+    /* Mobile timeline - no left padding/margins needed */
     .timeline-period {
       font-size: 0.75rem;
       padding: 6px 10px;
