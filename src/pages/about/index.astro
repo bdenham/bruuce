@@ -42,9 +42,8 @@ import Card from '../../components/ui/Card.astro';
     </div>
   </div>
 
-  <div class="section-container animate-in animate-delay-200">
-    <h2 class="section-heading">Recognition & Community Impact</h2>
-    <div class="grid">
+  <Section title="Recognition & Community Impact" class="animate-in animate-delay-200">
+    <Grid variant="default" gap="medium">
       <Card title="🏆 Adobe Awards" animateIn={true} animationDelay="50">
         <p>
           Nominated for both the Adobe Founders Award and Extreme Ownership Award for excellence in
@@ -74,8 +73,8 @@ import Card from '../../components/ui/Card.astro';
           establish effective documentation practices.
         </p>
       </Card>
-    </div>
-  </div>
+    </Grid>
+  </Section>
 
   <div class="section-container animate-in animate-delay-300">
     <h2 class="section-heading">My Journey</h2>
@@ -160,71 +159,59 @@ import Card from '../../components/ui/Card.astro';
         </ul>
       </Card>
 
-      <div class="item">
-        <h3>Visual Communication</h3>
+      <Card title="Visual Communication" ariaLabel="Visual Communication Skills">
         <ul>
           <li>UI/UX design for developer tools</li>
           <li>Infographics that clarify technical concepts</li>
           <li>Animation and video for process explanation</li>
           <li>Visual design that balances beauty and usability</li>
         </ul>
-      </div>
+      </Card>
 
-      <div class="item">
-        <h3>Leadership & Strategy</h3>
+      <Card title="Leadership & Strategy" ariaLabel="Leadership & Strategy Skills">
         <ul>
           <li>Cross-functional collaboration with UX, PM, and Engineering</li>
           <li>Developer advocacy and community building</li>
           <li>Remote team leadership and mentoring</li>
           <li>Product strategy aligned with user needs</li>
         </ul>
-      </div>
+      </Card>
     </Grid>
   </Section>
 
-  <div class="section-container animate-in animate-delay-200">
-    <h2 class="section-heading">My Philosophy</h2>
-    <div class="grid">
-      <div class="philosophy-item">
-        <div class="philosophy-icon">🎯</div>
-        <h3>I don't just write the docs</h3>
-        <p>
-          I build tools, craft interfaces, and create explanations that click. Understanding how
-          things work from the inside makes all the difference in explaining them clearly.
-        </p>
-      </div>
+  <Section title="My Philosophy" class="animate-in animate-delay-200">
+    <Grid variant="default" gap="medium">
+      <Card
+        icon="🎯"
+        title="I don't just write the docs"
+        description="I build tools, craft interfaces, and create explanations that click. Understanding how things work from the inside makes all the difference in explaining them clearly."
+        ariaLabel="I don't just write the docs"
+      />
 
-      <div class="philosophy-item">
-        <div class="philosophy-icon">💡</div>
-        <h3>Spark "aha" moments</h3>
-        <p>
-          The best documentation doesn't just inform—it transforms confusion into confidence,
-          complexity into clarity, and hesitation into action.
-        </p>
-      </div>
+      <Card
+        icon="💡"
+        title="Spark 'aha' moments"
+        description="The best documentation doesn't just inform—it transforms confusion into confidence, complexity into clarity, and hesitation into action."
+        ariaLabel="Spark 'aha' moments"
+      />
 
-      <div class="philosophy-item">
-        <div class="philosophy-icon">🤝</div>
-        <h3>I code. I design. I connect.</h3>
-        <p>
-          Great developer experience happens at the intersection of technical accuracy, visual
-          design, and human psychology. I work in all three spaces.
-        </p>
-      </div>
+      <Card
+        icon="🤝"
+        title="I code. I design. I connect."
+        description="Great developer experience happens at the intersection of technical accuracy, visual design, and human psychology. I work in all three spaces."
+        ariaLabel="I code. I design. I connect."
+      />
 
-      <div class="philosophy-item">
-        <div class="philosophy-icon">🚀</div>
-        <h3>Reduce friction, increase flow</h3>
-        <p>
-          Every tool I build and every guide I write has one goal: help developers get from question
-          to solution as smoothly as possible.
-        </p>
-      </div>
-    </div>
-  </div>
+      <Card
+        icon="🚀"
+        title="Reduce friction, increase flow"
+        description="Every tool I build and every guide I write has one goal: help developers get from question to solution as smoothly as possible."
+        ariaLabel="Reduce friction, increase flow"
+      />
+    </Grid>
+  </Section>
 
-  <div class="section-container">
-    <h2 class="section-heading">Beyond the Code</h2>
+  <Section title="Beyond the Code">
     <p>
       When I'm not crafting documentation or building developer tools, you'll find me exploring the
       latest in web technology, contributing to open-source projects, or mentoring aspiring
@@ -236,16 +223,15 @@ import Card from '../../components/ui/Card.astro';
       built through diverse, distributed teams that bring different perspectives to solving complex
       problems.
     </p>
-  </div>
+  </Section>
 
-  <div class="section-container">
-    <h2 class="section-heading">Let's Build Better Developer Experiences Together</h2>
+  <Section title="Let's Build Better Developer Experiences Together">
     <p>
       Whether you're looking to improve your documentation, build better developer tools, or create
       clearer technical communication, I'd love to hear about your challenges and explore how we
       might work together.
     </p>
-  </div>
+  </Section>
 </BaseLayout>
 
 <style>
@@ -396,12 +382,6 @@ import Card from '../../components/ui/Card.astro';
     display: flex;
     flex-direction: column;
     height: 100%;
-  }
-
-  .philosophy-icon {
-    font-size: 2.5rem;
-    margin-bottom: 16px;
-    display: block;
   }
 
   .philosophy-item h3 {

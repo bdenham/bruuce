@@ -58,7 +58,7 @@ const latestPosts = blogPosts
     </a>
   </aside>
 
-  <section class="grid-single animate-in animate-delay-200" aria-labelledby="quick-navigation">
+  <section class="grid-navigation animate-in animate-delay-200" aria-labelledby="quick-navigation">
     <h2 id="quick-navigation" class="sr-only">Quick Navigation</h2>
     <Card
       class="animate-in animate-delay-400"
@@ -139,6 +139,22 @@ const latestPosts = blogPosts
 
 <style>
   /* Homepage-specific layout adjustments only */
+
+  /* Mobile-first responsive navigation grid */
+  .grid-navigation {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  /* Two columns on tablet and up - mobile-first approach */
+  @media (min-width: 640px) {
+    .grid-navigation {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+  }
 
   /* Performance optimizations for blog posts */
   .blog-posts-container {
