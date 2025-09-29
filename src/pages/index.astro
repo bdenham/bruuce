@@ -119,14 +119,12 @@ const latestPosts = blogPosts
             title={post.data.title}
             href={`/blog/${post.slug}/`}
             ariaLabel={`Read: ${post.data.title}`}
+            period={post.data.date.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
           >
-            <p class="meta">
-              {post.data.date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </p>
             <p class="post-excerpt">{post.data.excerpt}</p>
           </Card>
         ))
