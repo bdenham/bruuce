@@ -96,7 +96,7 @@
 
 /* Item Content */
 .item-content {
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     font-size: 1rem;
     line-height: 1.6;
     margin: 0;
@@ -190,7 +190,7 @@ h1, h2, h3, h4, h5, h6,
 .recent-posts-section {
     /* Inherit all content-section styles */
     padding: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .section:last-child,

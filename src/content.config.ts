@@ -1,7 +1,7 @@
 import { z as zod } from 'astro/zod';
 import { defineCollection } from 'astro:content';
 
-// Enhanced blog collection with categories, tags, and SEO support
+// Enhanced blog collection with SEO support
 const blog = defineCollection({
   type: 'content',
   // Include both .md and .mdx files
@@ -11,9 +11,6 @@ const blog = defineCollection({
     date: zod.coerce.date(), // More flexible date parsing
     excerpt: zod.string(),
     
-    // Content organization
-    category: zod.string().optional(),
-    tags: zod.array(zod.string()).optional(),
     
     // SEO and metadata
     image: zod.string().optional(),

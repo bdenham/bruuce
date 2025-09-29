@@ -37,7 +37,7 @@ const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data
             href={`/blog/${post.slug}/`}
             ariaLabel={`Read: ${post.data.title}`}
           >
-            <p class="post-meta">
+            <p class="meta">
               {post.data.date.toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
@@ -74,7 +74,7 @@ const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data
         rel="noopener noreferrer"
         ariaLabel="Read LinkedIn post: The Science of Kindness"
       >
-        <p class="platform-meta">LinkedIn • Creative Post • Recent</p>
+        <p class="meta">LinkedIn • Creative Post • Recent</p>
         <p class="post-excerpt">
           What if kindness moved like diffusion—not with force, but with grace, filling absence with
           abundance, and longing with love? Let what's full in you flow where it's needed. That's
@@ -89,7 +89,7 @@ const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data
         rel="noopener noreferrer"
         ariaLabel="Read LinkedIn post: What is Personal Growth?"
       >
-        <p class="platform-meta">LinkedIn • Professional Update • Recent</p>
+        <p class="meta">LinkedIn • Professional Update • Recent</p>
         <p class="post-excerpt">
           Why does personal growth often feel so elusive? One step forward, two steps back. Ten
           steps forward, wrong direction. Am I missing something? Maybe...Probably.
@@ -103,7 +103,7 @@ const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data
         rel="noopener noreferrer"
         ariaLabel="Read LinkedIn post: Cracks Let the Light In"
       >
-        <p class="platform-meta">LinkedIn • Community Engagement • Recent</p>
+        <p class="meta">LinkedIn • Community Engagement • Recent</p>
         <p class="post-excerpt">
           We grow up thinking polish makes us lovable. So we shine the surface, hoping to be seen.
           But it's our presence, not perfection, that opens hearts. And it's our cracks that let the
@@ -154,20 +154,7 @@ const sortedPosts = publishedPosts.sort((a, b) => b.data.date.valueOf() - a.data
     box-shadow: 0 8px 16px var(--shadow-primary);
   }
 
-  /* Simple styling for blog post content */
-  .post-meta {
-    color: var(--text-tertiary);
-    font-size: 0.9rem;
-    margin: 0 0 0.5rem 0;
-    font-weight: 400;
-  }
-
-  .platform-meta {
-    color: var(--text-tertiary);
-    font-size: 0.9rem;
-    margin: 0 0 0.5rem 0;
-    font-weight: 400;
-  }
+  /* Simple styling for blog post content - now using unified .meta class */
 
   .post-excerpt {
     color: var(--text-secondary);

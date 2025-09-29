@@ -185,6 +185,31 @@ const {
         transition: var(--transition-bounce);
       }
 
+      /* Essential grid styles for layout */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .grid-single {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        align-items: stretch;
+      }
+
+      .gap-small {
+        gap: 1rem;
+      }
+      .gap-medium {
+        gap: 1.5rem;
+      }
+      .gap-large {
+        gap: 2rem;
+      }
+
       /* Critical header styles for LCP element */
       .site-name {
         font-size: 1.5rem;
@@ -265,6 +290,61 @@ const {
         .card,
         .card-base {
           padding: 16px;
+        }
+      }
+
+      /* CRITICAL ANIMATIONS - Essential for Speed Index */
+      .animate-in {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+        will-change: transform, opacity;
+        animation: slideInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      .animate-delay-50 {
+        animation-delay: 0ms;
+      }
+      .animate-delay-100 {
+        animation-delay: 50ms;
+      }
+      .animate-delay-150 {
+        animation-delay: 100ms;
+      }
+      .animate-delay-200 {
+        animation-delay: 150ms;
+      }
+      .animate-delay-250 {
+        animation-delay: 200ms;
+      }
+      .animate-delay-300 {
+        animation-delay: 250ms;
+      }
+      .animate-delay-350 {
+        animation-delay: 300ms;
+      }
+      .animate-delay-400 {
+        animation-delay: 350ms;
+      }
+      .animate-delay-450 {
+        animation-delay: 400ms;
+      }
+
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 20px, 0);
+        }
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .animate-in {
+          opacity: 1;
+          transform: none;
+          animation: none;
         }
       }
     </style>

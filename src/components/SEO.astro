@@ -10,8 +10,6 @@ export interface Props {
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;
-  tags?: string[];
-  category?: string;
 }
 
 const {
@@ -25,13 +23,12 @@ const {
   publishedTime,
   modifiedTime,
   author,
-  tags,
-  category,
 } = Astro.props;
 
 // Site defaults
 const siteTitle = 'Bruce Denham - Senior Technical Writer & DX Engineer';
-const siteDescription = 'Adobe award nominee with 30+ years turning complex concepts into clear, human experiences. Developer documentation, CLI tools, and technical writing excellence.';
+const siteDescription =
+  'Adobe award nominee with 30+ years turning complex concepts into clear, human experiences. Developer documentation, CLI tools, and technical writing excellence.';
 const siteUrl = 'https://bruuce.com';
 const defaultImage = `${siteUrl}/images/bruce-denham-og-card.jpg`;
 
@@ -63,8 +60,6 @@ const jsonLd = {
     },
     ...(publishedTime && { datePublished: publishedTime }),
     ...(modifiedTime && { dateModified: modifiedTime }),
-    ...(category && { articleSection: category }),
-    ...(tags && { keywords: tags.join(', ') }),
   }),
 };
 ---
@@ -97,21 +92,17 @@ const jsonLd = {
 <meta property="twitter:creator" content="@brucedenham" />
 
 <!-- Article specific meta tags -->
-{type === 'article' && publishedTime && (
-  <meta property="article:published_time" content={publishedTime} />
-)}
-{type === 'article' && modifiedTime && (
-  <meta property="article:modified_time" content={modifiedTime} />
-)}
-{type === 'article' && author && (
-  <meta property="article:author" content={author} />
-)}
-{type === 'article' && category && (
-  <meta property="article:section" content={category} />
-)}
-{type === 'article' && tags && tags.map(tag => (
-  <meta property="article:tag" content={tag} />
-))}
+{
+  type === 'article' && publishedTime && (
+    <meta property="article:published_time" content={publishedTime} />
+  )
+}
+{
+  type === 'article' && modifiedTime && (
+    <meta property="article:modified_time" content={modifiedTime} />
+  )
+}
+{type === 'article' && author && <meta property="article:author" content={author} />}
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

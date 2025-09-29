@@ -1,8 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BlogPostCard from '../components/ui/BlogPostCard.astro';
 import Card from '../components/ui/Card.astro';
+import Section from '../components/ui/Section.astro';
+import Grid from '../components/ui/Grid.astro';
 import LighthouseGauge from '../components/ui/LighthouseGauge.astro';
 
 // Get the latest 2 blog posts for the homepage
@@ -58,72 +59,80 @@ const latestPosts = blogPosts
     </a>
   </aside>
 
-  <section class="grid-navigation animate-in animate-delay-200" aria-labelledby="quick-navigation">
-    <h2 id="quick-navigation" class="sr-only">Quick Navigation</h2>
-    <Card
-      class="animate-in animate-delay-400"
-      variant="content"
-      icon="📋"
-      title="My Resume"
-      description="Explore my 30+ years of experience in technical writing and developer experience"
-      href="/resume/"
-      ariaLabel="View my complete resume"
-    />
+  <Section
+    title="Quick Navigation"
+    class="animate-in animate-delay-200"
+    style="--section-title-display: none;"
+  >
+    <Grid variant="default" gap="medium">
+      <Card
+        variant="content"
+        icon="📋"
+        title="My Resume"
+        description="Explore my 30+ years of experience in technical writing and developer experience"
+        href="/resume/"
+        ariaLabel="View my complete resume"
+      />
 
-    <Card
-      class="animate-in animate-delay-450"
-      variant="content"
-      icon="🛠️"
-      title="My Work"
-      description="SDK docs, CLI tools, React apps, and developer experience projects at Adobe and beyond"
-      href="/work/"
-      ariaLabel="View my professional work and projects"
-    />
+      <Card
+        variant="content"
+        icon="🛠️"
+        title="My Work"
+        description="SDK docs, CLI tools, React apps, and developer experience projects at Adobe and beyond"
+        href="/work/"
+        ariaLabel="View my professional work and projects"
+      />
 
-    <Card
-      class="animate-in animate-delay-450"
-      variant="content"
-      icon="📝"
-      title="My Blog"
-      description="Insights on developer experience, API documentation, and making complex concepts clear"
-      href="/blog/"
-      ariaLabel="Read my blog"
-    />
+      <Card
+        variant="content"
+        icon="📝"
+        title="My Blog"
+        description="Insights on developer experience, API documentation, and making complex concepts clear"
+        href="/blog/"
+        ariaLabel="Read my blog"
+      />
 
-    <Card
-      class="animate-in animate-delay-450"
-      variant="content"
-      icon="👨‍💻"
-      title="About Me"
-      description="Learn about my journey from Schlumberger to TOPAZ to Adobe as a developer experience strategist"
-      href="/about/"
-      ariaLabel="Learn more about my background"
-    />
-  </section>
+      <Card
+        variant="content"
+        icon="👨‍💻"
+        title="About Me"
+        description="Learn about my journey from Schlumberger to TOPAZ to Adobe as a developer experience strategist"
+        href="/about/"
+        ariaLabel="Learn more about my background"
+      />
+    </Grid>
+  </Section>
 
-  <section class="section-container animate-in animate-delay-250" aria-labelledby="philosophy">
-    <h2 id="philosophy" class="section-heading">My Philosophy</h2>
+  <Section title="My Philosophy" class="animate-in animate-delay-250">
     <p>
       I don't just write the docs. I build tools, craft interfaces, and create explanations that
       click. I code. I design. I connect. My mission is helping developers have those "aha" moments
       that turn complexity into clarity and frustration into flow.
     </p>
-  </section>
+  </Section>
 
-  <section class="section-container animate-in animate-delay-300" aria-labelledby="recent-posts">
-    <h2 id="recent-posts" class="section-heading">Recent Posts</h2>
-    <div class="grid-single">
+  <Section title="Recent Posts" class="animate-in animate-delay-300">
+    <Grid variant="single" gap="medium">
       {
-        latestPosts.map((post, index) => (
-          <article
-            class={`blog-post-wrapper animate-in ${index === 0 ? 'animate-delay-400' : 'animate-delay-450'}`}
+        latestPosts.map((post) => (
+          <Card
+            title={post.data.title}
+            href={`/blog/${post.slug}/`}
+            ariaLabel={`Read: ${post.data.title}`}
           >
-            <BlogPostCard post={post} />
-          </article>
+            <p class="meta">
+              {post.data.date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </p>
+            <p class="post-excerpt">{post.data.excerpt}</p>
+          </Card>
         ))
       }
-    </div>
-  </section>
+    </Grid>
+  </Section>
 </BaseLayout>
 
 <!-- Minimal scroll position optimization -->
@@ -163,8 +172,12 @@ const latestPosts = blogPosts
     gap: 0;
   }
 
-  .blog-post-wrapper {
-    margin-bottom: 1rem;
+  /* Simple styling for blog post content - now using unified .meta class */
+
+  .post-excerpt {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
   }
 
   /* Blog post animations now handled by universal .animate-in class */

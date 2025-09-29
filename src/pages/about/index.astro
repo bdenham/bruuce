@@ -44,21 +44,21 @@ import Card from '../../components/ui/Card.astro';
 
   <Section title="Recognition & Community Impact" class="animate-in animate-delay-200">
     <Grid variant="default" gap="medium">
-      <Card title="🏆 Adobe Awards" animateIn={true} animationDelay="50">
+      <Card title="🏆 Adobe Awards">
         <p>
           Nominated for both the Adobe Founders Award and Extreme Ownership Award for excellence in
           technical writing and developer experience innovation.
         </p>
       </Card>
 
-      <Card title="🎤 International Speaking" animateIn={true} animationDelay="100">
+      <Card title="🎤 International Speaking">
         <p>
           Presented PageBuilder best practices at Meet Magento Indonesia 2019, sharing insights with
           the international open-source community.
         </p>
       </Card>
 
-      <Card title="⭐ Community Leadership" animateIn={true} animationDelay="150">
+      <Card title="⭐ Community Leadership">
         <p>
           Created the PageBuilder Examples repository: 106 GitHub stars, 78 forks—highest engagement
           in the PageBuilder ecosystem. I encouraged community involvement through an open Slack
@@ -66,7 +66,7 @@ import Card from '../../components/ui/Card.astro';
         </p>
       </Card>
 
-      <Card title="📚 Mentoring & Education" animateIn={true} animationDelay="200">
+      <Card title="📚 Mentoring & Education">
         <p>
           Passionate about lifting others through shared knowledge, actively mentoring aspiring
           technical writers and students at Southwestern University. I also love to help teams
@@ -76,68 +76,64 @@ import Card from '../../components/ui/Card.astro';
     </Grid>
   </Section>
 
-  <div class="section-container animate-in animate-delay-300">
-    <h2 class="section-heading">My Journey</h2>
+  <Section title="My Journey" class="animate-in animate-delay-300">
+    <Grid variant="single" gap="medium">
+      <Card
+        title="Adobe, Inc."
+        featured={true}
+        period="2018-now"
+        role="Senior Technical Writer & Developer Experience Specialist"
+      >
+        <p>
+          Leading documentation products across multiple teams at one of the world's premier
+          creative software companies. I manage the Adobe Storefront Commerce documentation site,
+          build interactive React apps for API demonstrations, and develop CLI tools that streamline
+          developer workflows.
+        </p>
+        <p>
+          My work includes everything from SDK documentation using Storybook 8 to custom Algolia
+          search integrations that help developers find answers fast. I've been recognized by peers
+          and leadership for creativity, UX expertise, and technical writing excellence.
+        </p>
+      </Card>
 
-    <div class="grid-single">
-      <div class="item featured">
-        <div class="tag">2018-now</div>
-        <div class="item-content">
-          <h3>Adobe, Inc.</h3>
-          <h4>Senior Technical Writer & Developer Experience Specialist</h4>
-          <p>
-            Leading documentation products across multiple teams at one of the world's premier
-            creative software companies. I manage the Adobe Storefront Commerce documentation site,
-            build interactive React apps for API demonstrations, and develop CLI tools that
-            streamline developer workflows.
-          </p>
-          <p>
-            My work includes everything from SDK documentation using Storybook 8 to custom Algolia
-            search integrations that help developers find answers fast. I've been recognized by
-            peers and leadership for creativity, UX expertise, and technical writing excellence.
-          </p>
-        </div>
-      </div>
+      <Card
+        title="TOPAZ Technologies"
+        period="2006-2018"
+        role="Senior Product Designer / Developer Support"
+      >
+        <p>
+          During my 12 years at TOPAZ, I evolved from visual designer to full-stack product
+          strategist. I led comprehensive UI overhauls of legacy AngularJS applications, trained
+          development teams on Angular Material best practices, and managed end-to-end product
+          marketing strategies.
+        </p>
+        <p>
+          This role taught me the importance of bridging the gap between technical capability and
+          user needs— a philosophy that continues to drive my approach to developer experience
+          today.
+        </p>
+      </Card>
 
-      <div class="item">
-        <div class="tag">2006-2018</div>
-        <div class="item-content">
-          <h3>TOPAZ Technologies</h3>
-          <h4>Senior Product Designer / Developer Support</h4>
-          <p>
-            During my 12 years at TOPAZ, I evolved from visual designer to full-stack product
-            strategist. I led comprehensive UI overhauls of legacy AngularJS applications, trained
-            development teams on Angular Material best practices, and managed end-to-end product
-            marketing strategies.
-          </p>
-          <p>
-            This role taught me the importance of bridging the gap between technical capability and
-            user needs— a philosophy that continues to drive my approach to developer experience
-            today.
-          </p>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="tag">2000-2005</div>
-        <div class="item-content">
-          <h3>Schlumberger</h3>
-          <h4>Senior Technical Writer / API Documentation Specialist</h4>
-          <p>
-            My foundation in technical writing was built in the oil & gas industry, where I wrote
-            API documentation and training guides that enabled 100+ global developers to adopt
-            complex systems quickly. I also built UI prototypes in C#/WinForms and integrated
-            documentation directly into Microsoft Dev Studio.
-          </p>
-          <p>
-            Working with engineers across different countries and cultures taught me that truly
-            effective documentation transcends language barriers—it communicates through clarity,
-            structure, and empathy.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+      <Card
+        title="Schlumberger"
+        period="2000-2005"
+        role="Senior Technical Writer / API Documentation Specialist"
+      >
+        <p>
+          My foundation in technical writing was built in the oil & gas industry, where I wrote API
+          documentation and training guides that enabled 100+ global developers to adopt complex
+          systems quickly. I also built UI prototypes in C#/WinForms and integrated systems with SQL
+          Server databases.
+        </p>
+        <p>
+          This experience taught me that great documentation isn't just about explaining what
+          something does—it's about understanding why someone would want to use it and removing
+          every possible barrier to their success.
+        </p>
+      </Card>
+    </Grid>
+  </Section>
 
   <Section title="What I Bring to the Table" class="animate-in animate-delay-250">
     <Grid variant="default" gap="medium">
@@ -540,4 +536,6 @@ import Card from '../../components/ui/Card.astro';
 
     /* Grid responsiveness now handled globally in theme.css */
   }
+
+  /* Job meta styling for journey cards - now using unified .meta class */
 </style>

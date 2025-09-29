@@ -26,13 +26,11 @@ import Card from '../../components/ui/Card.astro';
 
   <Section title="Current Adobe Projects" class="animate-in animate-delay-150">
     <Grid variant="single" gap="medium">
-      <Card title="Adobe Commerce Documentation Ecosystem" featured={true}>
-        <div class="tags">
-          <span class="tag primary">Technical Writing</span>
-          <span class="tag">Information Architecture</span>
-          <span class="tag">Developer Experience</span>
-        </div>
-
+      <Card
+        title="Adobe Commerce Documentation Ecosystem"
+        featured={true}
+        period="Technical Writing • Information Architecture • Developer Experience"
+      >
         <p>
           Leading the comprehensive documentation strategy for Adobe Storefront Commerce, serving
           thousands of developers worldwide. This involves managing content architecture,
@@ -40,324 +38,238 @@ import Card from '../../components/ui/Card.astro';
           evolving features.
         </p>
 
-        <div class="project-details">
-          <div class="detail-section">
-            <h4>Impact Metrics</h4>
-            <ul>
-              <li>Reduced developer onboarding time significantly</li>
-              <li>Decreased support ticket volume through clearer guides</li>
-              <li>Improved developer satisfaction scores</li>
-            </ul>
-          </div>
+        <h4>Impact Metrics</h4>
+        <ul>
+          <li>Reduced developer onboarding time significantly</li>
+          <li>Decreased support ticket volume through clearer guides</li>
+          <li>Improved developer satisfaction scores</li>
+        </ul>
 
-          <div class="detail-section">
-            <h4>Technologies</h4>
-            <ul>
-              <li>Markdown/MDX documentation systems</li>
-              <li>GitHub Actions for automation</li>
-              <li>Custom Algolia search integration</li>
-              <li>Multi-team collaboration workflows</li>
-            </ul>
-          </div>
-        </div>
+        <h4>Technologies</h4>
+        <ul>
+          <li>Markdown/MDX documentation systems</li>
+          <li>GitHub Actions for automation</li>
+          <li>Custom Algolia search integration</li>
+          <li>Multi-team collaboration workflows</li>
+        </ul>
 
-        <div class="project-links">
+        <p>
           <a
             href="https://experienceleague.adobe.com/developer/commerce/storefront/"
             target="_blank"
             rel="noopener noreferrer"
-            class="project-link primary"
+            class="item-link primary"
           >
             View Documentation ↗
           </a>
-        </div>
+        </p>
       </Card>
 
-      <Card title="Commerce API Interactive Playground">
-        <div class="tags">
-          <span class="tag">React</span>
-          <span class="tag">API Integration</span>
-          <span class="tag">Interactive Learning</span>
-        </div>
-
+      <Card
+        title="Commerce API Interactive Playground"
+        period="React • API Integration • Interactive Learning"
+      >
         <p>
           Built React applications that allow developers to test Adobe Commerce APIs in real-time
           directly within the documentation. This hands-on approach dramatically improves API
           adoption by letting developers see immediate results from their integration attempts.
         </p>
 
-        <div class="project-details">
-          <div class="detail-section">
-            <h4>Key Features</h4>
-            <ul>
-              <li>Live API testing environment</li>
-              <li>Real-time response visualization</li>
-              <li>Code generation for multiple languages</li>
-              <li>Integrated with main documentation flow</li>
-            </ul>
-          </div>
-        </div>
+        <h4>Key Features</h4>
+        <ul>
+          <li>Live API testing environment</li>
+          <li>Real-time response visualization</li>
+          <li>Code generation for multiple languages</li>
+          <li>Integrated with main documentation flow</li>
+        </ul>
 
-        <div class="project-links">
+        <p>
           <a
             href="https://experienceleague.adobe.com/developer/commerce/storefront/playgrounds/commerce-services/"
             target="_blank"
             rel="noopener noreferrer"
-            class="project-link primary"
+            class="item-link primary"
           >
             Try the Playground ↗
           </a>
-        </div>
+        </p>
       </Card>
 
-      <Card title="SDK Documentation with Storybook 8">
-        <div class="tags">
-          <span class="tag internal">Adobe Internal</span>
-          <span class="tag">Storybook</span>
-          <span class="tag">Component Documentation</span>
-          <span class="tag">SDK</span>
-        </div>
-
+      <Card
+        title="SDK Documentation with Storybook 8"
+        period="Adobe Internal • Storybook • Component Documentation • SDK"
+      >
         <p>
           Developed advanced Storybook 8 customizations to create interactive SDK documentation that
           lets developers explore components, see live examples, and understand integration patterns
           through visual, hands-on exploration.
         </p>
 
-        <div class="project-details">
-          <div class="detail-section">
-            <h4>Achievements</h4>
-            <ul>
-              <li>Streamlined SDK adoption process</li>
-              <li>Reduced developer confusion through visual examples</li>
-              <li>Created reusable documentation patterns for other teams</li>
-            </ul>
-          </div>
-        </div>
+        <h4>Achievements</h4>
+        <ul>
+          <li>Streamlined SDK adoption process</li>
+          <li>Reduced developer confusion through visual examples</li>
+          <li>Created reusable documentation patterns for other teams</li>
+        </ul>
 
-        <div class="project-links">
+        <p>
           <a
             href="https://storybook.js.org/"
             target="_blank"
             rel="noopener noreferrer"
-            class="project-link"
+            class="item-link primary"
           >
             Learn About Storybook ↗
           </a>
-        </div>
+        </p>
       </Card>
 
-      <div class="item">
-        <div class="item-header large">
-          <h3>Developer Productivity CLI Tools</h3>
-        </div>
-        <div class="tags">
-          <span class="tag">Node.js</span>
-          <span class="tag">CLI Development</span>
-          <span class="tag">Automation</span>
-        </div>
+      <Card
+        title="Developer Productivity CLI Tools"
+        period="Node.js • CLI Development • Automation"
+      >
+        <p>
+          Created custom CLI tools (jitnotes, pbmodules) that automate repetitive development tasks
+          and streamline workflows. These tools help teams focus on creative problem-solving instead
+          of manual processes.
+        </p>
 
-        <div class="item-content">
-          <p>
-            Created custom CLI tools (jitnotes, pbmodules) that automate repetitive development
-            tasks and streamline workflows. These tools help teams focus on creative problem-solving
-            instead of manual processes.
-          </p>
+        <h4>Tools</h4>
+        <ul>
+          <li><strong>pbmodules:</strong> PageBuilder module scaffolding and management system</li>
+          <li><strong>jitnotes:</strong> Rapid note-taking and documentation generation tool</li>
+        </ul>
 
-          <div class="section">
-            <div class="tool">
-              <strong>pbmodules:</strong> PageBuilder module scaffolding and management system
-            </div>
-            <div class="tool">
-              <strong>jitnotes:</strong> Rapid note-taking and documentation generation tool
-            </div>
-          </div>
-
-          <div class="item-links">
-            <a
-              href="https://github.com/commerce-docs/pbmodules"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="item-link primary"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                style="display: inline; vertical-align: middle; margin-right: 4px;"
-                fill="currentColor"
-              >
-                <path
-                  d="M12 1a11 11 0 0 0-3.5 21.5c.6 0 .8-.3.8-.5v-2.1c-3.1.7-3.7-1.3-3.7-1.3C5 17.3 4.3 17 4.3 17c-1-.7.1-.7.1-.7 1.1 0 1.7 1.1 1.7 1.1 1 1.7 2.6 1.2 3.2 1 0-.8.4-1.2.7-1.5-2.5-.3-5-1.2-5-5.5 0-1.2.4-2.2 1.1-3a4 4 0 0 1 .1-2.8s1-.3 3 1c1.8-.4 3.8-.4 5.5 0 2.1-1.3 3-1 3-1 .7 1.5.3 2.6.2 2.9.7.8 1.1 1.7 1.1 3 0 4.2-2.6 5.1-5 5.4.4.3.7 1 .7 2v3c0 .3.2.7.8.6A11 11 0 0 0 12 1Z"
-                ></path>
-              </svg>pbmodules project ↗
-            </a>
-            <a
-              href="https://github.com/commerce-docs/jitnotes"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="item-link primary"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                style="display: inline; vertical-align: middle; margin-right: 4px;"
-                fill="currentColor"
-              >
-                <path
-                  d="M12 1a11 11 0 0 0-3.5 21.5c.6 0 .8-.3.8-.5v-2.1c-3.1.7-3.7-1.3-3.7-1.3C5 17.3 4.3 17 4.3 17c-1-.7.1-.7.1-.7 1.1 0 1.7 1.1 1.7 1.1 1 1.7 2.6 1.2 3.2 1 0-.8.4-1.2.7-1.5-2.5-.3-5-1.2-5-5.5 0-1.2.4-2.2 1.1-3a4 4 0 0 1 .1-2.8s1-.3 3 1c1.8-.4 3.8-.4 5.5 0 2.1-1.3 3-1 3-1 .7 1.5.3 2.6.2 2.9.7.8 1.1 1.7 1.1 3 0 4.2-2.6 5.1-5 5.4.4.3.7 1 .7 2v3c0 .3.2.7.8.6A11 11 0 0 0 12 1Z"
-                ></path>
-              </svg>jitnotes project ↗
-            </a>
-          </div>
-        </div>
-      </div>
+        <p>
+          <a
+            href="https://github.com/commerce-docs/pbmodules"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="item-link primary"
+          >
+            pbmodules project ↗
+          </a>
+          <a
+            href="https://github.com/commerce-docs/jitnotes"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="item-link"
+          >
+            jitnotes project ↗
+          </a>
+        </p>
+      </Card>
     </Grid>
   </Section>
 
   <Section title="Open Source & Community" class="animate-in animate-delay-200">
     <Grid variant="single" gap="medium">
-      <div class="item">
-        <div class="item-header large">
-          <h3>PageBuilder Development Examples</h3>
-        </div>
-        <div class="tags">
-          <span class="tag">Open Source</span>
-          <span class="tag">Example Code</span>
-          <span class="tag">Community</span>
-        </div>
+      <Card
+        title="PageBuilder Development Examples"
+        period="Open Source • Example Code • Community"
+      >
+        <p>
+          Maintain a comprehensive public GitHub repository featuring full-featured PageBuilder
+          development examples. This resource provides the developer community with real-world
+          implementation patterns and best practices.
+        </p>
 
-        <div class="item-content">
-          <p>
-            Maintain a comprehensive public GitHub repository featuring full-featured PageBuilder
-            development examples. This resource provides the developer community with real-world
-            implementation patterns and best practices.
-          </p>
+        <h4>Community Impact</h4>
+        <ul>
+          <li>Accelerated community adoption of PageBuilder</li>
+          <li>Reduced development learning curve</li>
+          <li>Established best practices across the ecosystem</li>
+        </ul>
 
-          <div class="section">
-            <h4>Community Impact</h4>
-            <ul>
-              <li>Accelerated community adoption of PageBuilder</li>
-              <li>Reduced development learning curve</li>
-              <li>Established best practices across the ecosystem</li>
-            </ul>
-          </div>
+        <p>
+          <a
+            href="https://developer.adobe.com/commerce/frontend-core/page-builder/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="item-link primary"
+          >
+            View PageBuilder Docs ↗
+          </a>
+          <a
+            href="https://developer.adobe.com/commerce/frontend-core/page-builder/styles/override-pagebuilder-styles/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="item-link"
+          >
+            Style Customization ↗
+          </a>
+        </p>
+      </Card>
 
-          <div class="item-links">
-            <a
-              href="https://developer.adobe.com/commerce/frontend-core/page-builder/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="item-link primary"
-            >
-              View PageBuilder Docs ↗
-            </a>
-            <a
-              href="https://developer.adobe.com/commerce/frontend-core/page-builder/styles/override-pagebuilder-styles/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="item-link primary"
-            >
-              Style Customization ↗
-            </a>
-          </div>
-        </div>
-      </div>
+      <Card
+        title="Meet Magento Indonesia Presentation"
+        period="Speaking • Education • Best Practices"
+      >
+        <p>
+          Presented PageBuilder best practices to the international Magento community in Indonesia,
+          sharing insights on effective developer experience patterns and implementation strategies
+          that benefit the global open-source community.
+        </p>
 
-      <div class="item">
-        <div class="item-header large">
-          <h3>Meet Magento Indonesia Presentation</h3>
-        </div>
-        <div class="tags">
-          <span class="tag">Speaking</span>
-          <span class="tag">Education</span>
-          <span class="tag">Best Practices</span>
-        </div>
-
-        <div class="item-content">
-          <p>
-            Presented PageBuilder best practices to the international Magento community in
-            Indonesia, sharing insights on effective developer experience patterns and
-            implementation strategies that benefit the global open-source community.
-          </p>
-
-          <div class="item-links">
-            <a
-              href="https://linkedin.com/in/brucedenham/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="item-link"
-            >
-              Connect on LinkedIn ↗
-            </a>
-          </div>
-        </div>
-      </div>
+        <p>
+          <a
+            href="https://linkedin.com/in/brucedenham/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="item-link primary"
+          >
+            Connect on LinkedIn ↗
+          </a>
+        </p>
+      </Card>
     </Grid>
   </Section>
 
   <Section title="Legacy Innovations" class="animate-in animate-delay-250">
     <Grid variant="single" gap="medium">
-      <Card title="TOPAZ Technologies">
-        <div class="tags">
-          <span class="tag">2006-2018</span>
-        </div>
-
-        <div class="project-details">
-          <div class="detail-section">
-            <h4>Key Projects</h4>
-            <ul>
-              <li>
-                <strong>AngularJS Application Modernization:</strong> Led comprehensive UI overhaul resulting
-                in major usability improvements
-              </li>
-              <li>
-                <strong>Developer Training Systems:</strong> Created Angular Material training programs
-                with hands-on code reviews
-              </li>
-              <li>
-                <strong>Prototype Development:</strong> Built cutting-edge prototypes using Flex/ActionScript
-                and Silverlight/C#
-              </li>
-              <li>
-                <strong>Product Strategy:</strong> Managed end-to-end marketing and branding strategies
-                for product growth
-              </li>
-            </ul>
-          </div>
-        </div>
+      <Card title="TOPAZ Technologies" period="2006-2018">
+        <h4>Key Projects</h4>
+        <ul>
+          <li>
+            <strong>AngularJS Application Modernization:</strong> Led comprehensive UI overhaul resulting
+            in major usability improvements
+          </li>
+          <li>
+            <strong>Developer Training Systems:</strong> Created Angular Material training programs with
+            hands-on code reviews
+          </li>
+          <li>
+            <strong>Prototype Development:</strong> Built cutting-edge prototypes using Flex/ActionScript
+            and Silverlight/C#
+          </li>
+          <li>
+            <strong>Product Strategy:</strong> Managed end-to-end marketing and branding strategies for
+            product growth
+          </li>
+        </ul>
       </Card>
 
-      <Card title="Schlumberger">
-        <div class="tags">
-          <span class="tag">2000-2005</span>
-        </div>
-
-        <div class="project-details">
-          <div class="detail-section">
-            <h4>Foundational Projects</h4>
-            <ul>
-              <li>
-                <strong>Global API Documentation:</strong> Created systems enabling 100+ developers across
-                multiple countries to adopt complex oil & gas systems
-              </li>
-              <li>
-                <strong>C# UI Prototyping:</strong> Built prototypes for specialized oil data analysis
-                tools using C#/WinForms
-              </li>
-              <li>
-                <strong>Dev Studio Integration:</strong> Successfully integrated documentation into Microsoft
-                Development Studio for improved workflow
-              </li>
-            </ul>
-          </div>
-        </div>
+      <Card title="Schlumberger" period="2000-2005">
+        <h4>Foundational Projects</h4>
+        <ul>
+          <li>
+            <strong>Global API Documentation:</strong> Created systems enabling 100+ developers across
+            multiple countries to adopt complex oil & gas systems
+          </li>
+          <li>
+            <strong>C# UI Prototyping:</strong> Built prototypes for specialized oil data analysis tools
+            using C#/WinForms
+          </li>
+          <li>
+            <strong>Dev Studio Integration:</strong> Successfully integrated documentation into Microsoft
+            Development Studio for improved workflow
+          </li>
+        </ul>
       </Card>
     </Grid>
   </Section>
 
-  <Section title="Let's Collaborate" class="animate-in animate-delay-300">
+  <Section title="Let's Collaborate">
     <p>
       Interested in working together on developer experience, technical writing, or documentation
       strategy? I'm always excited to tackle new challenges and help teams create better developer
@@ -462,12 +374,6 @@ import Card from '../../components/ui/Card.astro';
 
   /* Project details now use universal .grid class */
 
-  .section {
-    /* border-radius: 12px; */
-    /* padding: 20px; */
-    /* border-left: 3px solid var(--accent-primary); */
-  }
-
   .project-impact h4,
   .project-tech h4,
   .project-features h4,
@@ -517,64 +423,6 @@ import Card from '../../components/ui/Card.astro';
     /* padding: 20px; */
     /* border-left: 3px solid var(--accent-primary); */
     line-height: 1.3;
-  }
-
-  .tool {
-    color: var(--text-primary);
-    margin-bottom: 12px;
-    font-weight: 400;
-  }
-
-  .tool:last-child {
-    margin-bottom: 0;
-  }
-
-  .tool strong {
-    color: var(--accent-yellow);
-    font-weight: 600;
-  }
-
-  .project-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 24px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border-secondary);
-  }
-
-  .project-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 1px solid var(--border-secondary);
-    background: var(--bg-secondary);
-    color: var(--text-secondary);
-  }
-
-  .project-link:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px var(--shadow-secondary);
-    border-color: var(--border-primary);
-    color: var(--text-primary);
-  }
-
-  .project-link.primary {
-    background: var(--accent-primary);
-    color: var(--bg-primary);
-    border-color: var(--accent-primary);
-  }
-
-  .project-link.primary:hover {
-    background: var(--accent-hover);
-    color: var(--bg-primary);
-    border-color: var(--accent-hover);
   }
 
   /* Timeline projects now use universal .grid class */
@@ -653,20 +501,5 @@ import Card from '../../components/ui/Card.astro';
     margin: 0;
     line-height: 1.7;
     font-weight: 400;
-  }
-
-  @media (max-width: 768px) {
-    .project-details {
-      grid-template-columns: 1fr;
-    }
-
-    .project-title-section {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .project-tags {
-      margin-top: 8px;
-    }
   }
 </style>
