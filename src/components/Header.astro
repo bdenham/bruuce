@@ -39,16 +39,25 @@ import ThemeToggle from './ThemeToggle.astro';
         target="_blank"
         rel="noopener"
         class="social-link"
-        aria-label="GitHub">GitHub</a
+        aria-label="GitHub"
       >
+        <span class="social-text-full">GitHub</span>
+        <span class="social-text-short">GH</span>
+      </a>
       <a
         href="https://linkedin.com/in/brucedenham"
         target="_blank"
         rel="noopener"
         class="social-link"
-        aria-label="LinkedIn">LinkedIn</a
+        aria-label="LinkedIn"
       >
-      <a href="mailto:brucedenham@mac.com" class="social-link" aria-label="Email">Email</a>
+        <span class="social-text-full">LinkedIn</span>
+        <span class="social-text-short">LI</span>
+      </a>
+      <a href="mailto:brucedenham@mac.com" class="social-link social-link-email" aria-label="Email">
+        <span class="social-text-full">Email</span>
+        <span class="social-text-short">@</span>
+      </a>
     </div>
 
     <ThemeToggle />
@@ -75,6 +84,7 @@ import ThemeToggle from './ThemeToggle.astro';
   .site-name {
     flex-shrink: 0; /* Prevent site name from shrinking */
     font-size: 1.5rem; /* Smaller than default 1.75rem */
+    white-space: nowrap; /* Prevent site name from wrapping */
   }
 
   /* Visual separator between site name and navigation */
@@ -145,25 +155,20 @@ import ThemeToggle from './ThemeToggle.astro';
     display: flex;
     align-items: center;
     gap: 4px;
+    white-space: nowrap; /* Prevent text wrapping */
   }
 
   .social-link:hover {
     color: var(--accent-primary);
   }
 
-  .social-icon {
-    width: 22px;
-    height: 22px;
-    opacity: 0.8;
-    /* Removed transition to prevent CLS */
+  /* Responsive text switching */
+  .social-text-full {
+    display: inline;
   }
 
-  .social-link:hover .social-icon {
-    opacity: 1;
-  }
-
-  .social-text {
-    display: none; /* Icons only - no text labels */
+  .social-text-short {
+    display: none;
   }
 
   /* Mobile responsive - smart navigation strategy */
@@ -211,6 +216,15 @@ import ThemeToggle from './ThemeToggle.astro';
     .social-links {
       gap: 6px; /* Tighter social link spacing */
     }
+
+    /* Switch to abbreviated text on tablets */
+    .social-text-full {
+      display: none;
+    }
+
+    .social-text-short {
+      display: inline;
+    }
   }
 
   @media (max-width: 640px) {
@@ -226,7 +240,14 @@ import ThemeToggle from './ThemeToggle.astro';
       gap: 6px; /* Very tight social link spacing */
     }
 
-    /* SVG icons removed for LCP optimization */
+    /* Keep abbreviated text on mobile */
+    .social-text-full {
+      display: none;
+    }
+
+    .social-text-short {
+      display: inline;
+    }
   }
 
   /* Extra small screens - hide some elements to prevent wrapping */
@@ -240,7 +261,7 @@ import ThemeToggle from './ThemeToggle.astro';
     }
 
     /* Hide email link on very small screens */
-    .social-links a[href^='mailto'] {
+    .social-link-email {
       display: none;
     }
 
@@ -248,9 +269,9 @@ import ThemeToggle from './ThemeToggle.astro';
       gap: 4px; /* Minimal social spacing */
     }
 
-    .social-icon {
-      width: 18px; /* Smaller icons */
-      height: 18px;
+    .social-link {
+      font-size: 0.8rem; /* Smaller text */
+      padding: 2px 6px; /* Tighter padding */
     }
   }
 </style>
