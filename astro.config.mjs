@@ -19,9 +19,9 @@ export default defineConfig({
     trailingSlash: 'always',
     outDir: './dist',
 
-    // Development: Enable source maps for CSS debugging
+    // Performance: Inline all stylesheets to eliminate render blocking
     build: {
-        inlineStylesheets: 'never', // Keep CSS files separate for source maps
+        inlineStylesheets: 'always', // Force inline all CSS to eliminate render blocking
     },
     vite: {
         css: {
