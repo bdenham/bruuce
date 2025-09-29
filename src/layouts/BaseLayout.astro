@@ -129,6 +129,8 @@ const {
         --accent-hover: #0099ee;
         --border-primary: #333333;
         --transition-bounce: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        --animation-duration-fast: 0.1s;
+        --animation-duration-slow: 0.3s;
       }
 
       /* Light theme variables */
@@ -233,18 +235,7 @@ const {
         z-index: 300;
       }
 
-      h1 {
-        font-size: clamp(3rem, 8vw, 4.5rem);
-        font-weight: 900;
-        margin: 1rem 0 1rem 0; /* Default top margin for homepage */
-        line-height: 1.1;
-        color: var(--text-primary);
-      }
-
-      /* Reduced top margin when h1 follows a back link */
-      .nav-back + h1 {
-        margin-top: 0.25rem;
-      }
+      /* h1 styles moved to theme.css - only .page-title styles remain in critical CSS */
       h1 span {
         color: var(--accent-primary);
       }
@@ -308,7 +299,18 @@ const {
         margin: 1rem 0 1rem 0; /* Default top margin for homepage */
         line-height: 1.1;
         color: var(--text-primary);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: slideInUp var(--animation-duration-slow) var(--transition-bounce) forwards;
+        animation-delay: calc(var(--animation-duration-fast) / 3);
       }
+
+      /* Reduced top margin when page title follows a back link */
+      .nav-back + .page-title,
+      .nav-back + h1.page-title {
+        margin-top: 0;
+      }
+
       .page-title span {
         color: var(--accent-primary);
       }

@@ -24,6 +24,8 @@
     --accent-content: #1a365d;
     --accent-content-text: #ffffff;
     --accent-primary: #00aaff;
+    --accent-button: #0066cc; /* Darker blue for WCAG AA compliance on buttons */
+    --accent-button-hover: #0052a3; /* Even darker for hover state */
     --gradient-1: rgba(0, 170, 255, 0.25);
     --gradient-2: rgba(0, 204, 255, 0.2);
     --shadow-primary: rgba(0, 0, 0, 0.5); /* Modern deep shadows */
@@ -116,6 +118,8 @@
     --accent-content: rgba(0, 102, 204, 0.1);
     --accent-content-text: #0052A3;
     --accent-primary: #0052A3;
+    --accent-button: #0052a3; /* WCAG AA compliant button color for light mode */
+    --accent-button-hover: #003d7a; /* Darker hover for light mode */
     --gradient-1: rgba(0, 102, 204, 0.08);
     --gradient-2: rgba(0, 128, 255, 0.06);
     --shadow-primary: rgba(0, 0, 0, 0.08);
@@ -249,7 +253,7 @@ h1, h2, h3, h4, h5, h6 {
    ============================================================================= */
 
 h1 {
-    margin: 0 0 6px 0;
+    margin: 1rem 0 0 0;
     font-size: 2.5rem;
     line-height: 1.15;
     letter-spacing: -0.02em;
@@ -262,10 +266,10 @@ h1 span {
     color: var(--accent-primary);
 }
 
-/* Reduced top margin when page title follows a back link */
-.nav-back + .page-title,
-.nav-back + h1.page-title {
-    margin-top: 0;
+/* Reduced top margin when regular h1 follows a back link */
+.nav-back + h1 {
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
 }
 
 h2 {
@@ -636,14 +640,14 @@ p {
 }
 
 .item-link.primary {
-    background: var(--accent-primary);
-    color: var(--bg-primary);
-    border-color: var(--accent-primary);
+    background: var(--accent-button);
+    color: var(--text-primary);
+    border-color: var(--accent-button);
 }
 
 .item-link.primary:hover {
-    background: var(--accent-hover);
-    border-color: var(--accent-hover);
+    background: var(--accent-button-hover);
+    border-color: var(--accent-button-hover);
 }
 
 /* =============================================================================
@@ -804,7 +808,6 @@ a:active {
 .footer-links a,
 .sidebar a,
 .section a,
-.nav-back a,
 .doc-link,
 .post-cta,
 .performance-cta {
@@ -935,28 +938,28 @@ a:active {
 }
 
 .doc-link:hover {
-    background: var(--accent-primary);
+    background: var(--accent-button);
     color: var(--bg-primary);
-    border-color: var(--accent-primary);
+    border-color: var(--accent-button);
     transform: translateY(-1px);
 }
 
 .doc-link.primary {
-    background: var(--accent-primary);
+    background: var(--accent-button);
     color: var(--bg-primary);
-    border-color: var(--accent-primary);
+    border-color: var(--accent-button);
 }
 
 .doc-link.primary:hover {
-    background: var(--accent-hover);
-    border-color: var(--accent-hover);
+    background: var(--accent-button-hover);
+    border-color: var(--accent-button-hover);
 }
 
 .linkedin-follow-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #004471;
+    background: var(--accent-button);
     color: #ffffff;
     text-decoration: none;
     padding: 12px 24px;
@@ -968,7 +971,7 @@ a:active {
 }
 
 .linkedin-follow-btn:hover {
-    background: #003659;
+    background: var(--accent-button-hover);
     transform: translateY(-1px);
 }
 
@@ -1293,15 +1296,7 @@ footer a:hover {
    Replaces all page-specific title IDs with a single, reusable class
    ============================================================================= */
 
-.page-title {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideInUp var(--animation-duration-slow) var(--transition-bounce) forwards;
-    animation-delay: calc(var(--animation-duration-fast) / 3);
-    margin: 1rem 0 0 0;
-}
-
-/* All page titles now use universal .page-title class for consistency *//* =============================================================================
+/* .page-title animation and margin styles moved to BaseLayout.astro critical CSS for better performance *//* =============================================================================
    OPTIMAL LINE LENGTH SYSTEM
    Ensures all text content has proper character count per line (45-75ch optimal)
    ============================================================================= */
