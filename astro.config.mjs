@@ -19,9 +19,10 @@ export default defineConfig({
     trailingSlash: 'always',
     outDir: './dist',
 
-    // Performance: Auto-inline only critical CSS, external styles are cached
+    // Performance: Inline all CSS to eliminate render-blocking resources
+    // Trade-off: Larger HTML but faster initial render (no CSS network requests)
     build: {
-        inlineStylesheets: 'auto', // Optimal: inline critical CSS, external for the rest
+        inlineStylesheets: 'always',
     },
     vite: {
         css: {
