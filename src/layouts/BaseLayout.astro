@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SidebarPerformance from '../components/SidebarPerformance.astro';
+import Analytics from '@vercel/analytics/astro';
 
 // CSS imports - deferred for performance (critical CSS inlined above)
 import '../styles/theme.css';
@@ -635,6 +636,7 @@ const {
         ]
       }
     </script>
+    <Analytics />
   </body>
 </html>
 
