@@ -74,6 +74,11 @@ self.addEventListener('fetch', event => {
         return;
     }
 
+    // Skip HEAD requests - they can't be cached
+    if (request.method !== 'GET') {
+        return;
+    }
+
     // Handle navigation requests (HTML pages)
     if (request.mode === 'navigate') {
         event.respondWith(
@@ -148,8 +153,8 @@ self.addEventListener('fetch', event => {
     event.respondWith(
         fetch(request)
             .then(response => {
-                // Don't cache non-successful responses
-                if (!response || response.status !== 200 || response.type !== 'basic') {
+                // Don't cache non-successful responses or non-GET requests
+                if (!response || response.status !== 200 || response.type !== 'basic' || request.method !== 'GET') {
                     return response;
                 }
 
