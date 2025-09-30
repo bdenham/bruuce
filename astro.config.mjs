@@ -1,40 +1,17 @@
-import dotenv from 'dotenv';
-dotenv.config();
+// @ts-nocheck
 import { defineConfig, passthroughImageService } from 'astro/config';
-// import type { AstroUserConfig } from 'astro/config';
-// import vercel from '@astrojs/vercel';  // Removed - using pure static deployment
 import mdx from '@astrojs/mdx';
 import { remarkBasePathLinks } from './src/plugins/remarkBasePathLinks';
 
-const siteUrl = process.env.GITHUB_PAGES ? 'https://bdenham.github.io' : 'https://bruuce.com';
-
 export default defineConfig({
-    // Pure static site deployment (no adapter needed)
     output: 'static',
-    // adapter removed - using pure static files for Vercel
-
-    // Site configuration - GitHub Pages compatible
-    site: siteUrl,
-    base: undefined, // Always use root path for bruuce.com
+    site: 'https://bruuce.com',
     trailingSlash: 'always',
-    outDir: './dist',
 
-    // Performance: Inline all CSS to eliminate render-blocking resources
-    // Trade-off: Larger HTML but faster initial render (no CSS network requests)
     build: {
         inlineStylesheets: 'always',
     },
-    vite: {
-        css: {
-            devSourcemap: true, // Enable CSS source maps in development
-        },
-        build: {
-            cssCodeSplit: false, // Single CSS bundle
-            sourcemap: true, // Enable source maps for production
-        },
-    },
 
-    // Image optimization
     image: {
         service: passthroughImageService(),
     },
