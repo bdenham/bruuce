@@ -173,7 +173,7 @@ const {
         font-size: 1.125rem;
       }
 
-      /* Critical grid for above-fold content */
+      /* Essential layout only */
       .grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -181,59 +181,22 @@ const {
         align-items: stretch;
       }
 
-      /* Essential card styles for hero content */
-      .card,
       .card-base {
         background: var(--bg-card);
         border: 1px solid var(--border-primary);
         border-radius: 16px;
         padding: 24px;
-        transition: var(--transition-bounce);
       }
 
-      /* Essential grid styles for layout */
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
-        align-items: stretch;
-      }
-
-      .grid-single {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-        align-items: stretch;
-      }
-
-      .gap-small {
-        gap: 1rem;
-      }
-      .gap-medium {
-        gap: 1.5rem;
-      }
-      .gap-large {
-        gap: 2rem;
-      }
-
-      /* Critical header styles for LCP element */
-      .site-name {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        text-decoration: none;
-        transition: var(--transition-bounce);
-      }
-
+      /* Minimal header for LCP */
       .header {
         background: var(--bg-primary);
-        border-bottom: 1px solid var(--border-primary);
-        padding: 1rem 1.5rem;
         position: fixed;
         top: 0;
         left: 280px;
         right: 0;
         z-index: 300;
+        padding: 1rem 1.5rem;
       }
 
       /* h1 styles moved to theme.css - only .page-title styles remain in critical CSS */
@@ -293,98 +256,20 @@ const {
         }
       }
 
-      /* CRITICAL HOMEPAGE CONTENT - Above the fold */
+      /* Minimal page title for LCP */
       .page-title {
         font-size: clamp(3rem, 8vw, 4.5rem);
         font-weight: 900;
-        margin: 1rem 0 1rem 0; /* Default top margin for homepage */
+        margin: 1rem 0;
         line-height: 1.1;
         color: var(--text-primary);
-        opacity: 0;
-        transform: translateY(20px);
-        animation: slideInUp var(--animation-duration-slow) var(--transition-bounce) forwards;
-        animation-delay: calc(var(--animation-duration-fast) / 3);
-      }
-
-      /* Reduced top margin when page title follows a back link */
-      .nav-back + .page-title,
-      .nav-back + h1.page-title {
-        margin-top: 0;
       }
 
       .page-title span {
         color: var(--accent-primary);
       }
 
-      .subtitle {
-        font-size: 1.25rem;
-        color: var(--text-secondary);
-        margin: 0 0 24px 0;
-        font-weight: 500;
-      }
-
-      .text-large {
-        font-size: 1.25rem;
-        line-height: 1.6;
-        color: var(--text-primary);
-        margin: 0 0 32px 0;
-      }
-
-      .performance-highlight {
-        background: linear-gradient(135deg, var(--bg-card), rgba(0, 170, 255, 0.02));
-        border: 2px solid rgba(0, 170, 255, 0.2);
-        border-radius: 16px;
-        padding: 24px;
-        margin: 32px 0;
-        opacity: 0;
-        transform: translateY(10px); /* Reduced from 20px */
-        animation: slideInUp 200ms cubic-bezier(0.4, 0, 0.2, 1) forwards; /* Faster */
-        animation-delay: 50ms; /* Reduced delay */
-      }
-
-      /* Critical section styles */
-      .section {
-        margin: 3rem 0;
-      }
-
-      .section-heading {
-        font-size: 1.875rem;
-        font-weight: 600;
-        color: var(--text-primary);
-        line-height: 1.3;
-        margin: 0 0 1.5rem 0;
-        border-bottom: 2px solid var(--border-primary);
-        padding-bottom: 0.5rem;
-      }
-
-      /* Critical content variant card styles */
-      .variant-content .card-content {
-        display: flex;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-
-      .variant-content .card-icon-large {
-        font-size: 2.5rem;
-        line-height: 1;
-        flex-shrink: 0;
-      }
-
-      .variant-content .card-main {
-        flex: 1;
-        min-width: 0;
-      }
-
-      .variant-content.card-base {
-        padding: 24px;
-      }
-
-      /* CRITICAL HOVER ANIMATIONS - Essential for Speed Index */
-      .card-base:hover {
-        background: var(--bg-card-hover);
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
-      }
+      /* Only essential above-fold styles */
 
       /* Minimal animations for critical path */
       .animate-in {
