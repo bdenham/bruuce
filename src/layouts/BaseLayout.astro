@@ -244,6 +244,13 @@ const {
         top: 6px;
       }
 
+      /* Disable animations on page-title to reduce LCP render delay */
+      .page-title {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
+
       /* Essential responsive behavior */
       @media (max-width: 1024px) {
         .header {
