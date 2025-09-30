@@ -91,8 +91,8 @@ self.addEventListener('fetch', event => {
 
                     return fetch(request)
                         .then(response => {
-                            // Don't cache non-successful responses
-                            if (!response || response.status !== 200 || response.type !== 'basic') {
+                            // Don't cache non-successful responses or non-GET requests
+                            if (!response || response.status !== 200 || response.type !== 'basic' || request.method !== 'GET') {
                                 return response;
                             }
 
@@ -130,8 +130,8 @@ self.addEventListener('fetch', event => {
 
                     return fetch(request)
                         .then(response => {
-                            // Don't cache non-successful responses
-                            if (!response || response.status !== 200) {
+                            // Don't cache non-successful responses or non-GET requests
+                            if (!response || response.status !== 200 || request.method !== 'GET') {
                                 return response;
                             }
 
