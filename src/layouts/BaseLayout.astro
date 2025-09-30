@@ -244,8 +244,11 @@ const {
         top: 6px;
       }
 
-      /* Disable animations on page-title to reduce LCP render delay */
-      .page-title {
+      /* Disable animations on above-the-fold elements to reduce Speed Index */
+      .page-title,
+      .subtitle,
+      .text-large,
+      .animate-in {
         opacity: 1 !important;
         transform: none !important;
         animation: none !important;
