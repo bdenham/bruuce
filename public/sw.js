@@ -34,7 +34,16 @@ self.addEventListener('install', event => {
         caches.open(CACHE_NAME)
             .then(cache => {
                 console.log('Precaching critical assets');
-                return cache.addAll(PRECACHE_URLS);
+                // Cache each URL individually to identify which one fails
+                return Promise.all(
+                    PRECACHE_URLS.map(url => {
+                        return cache.add(url).catch(error => {
+                            console.error('Failed to cache:', url, error);
+                            // Don't fail the entire installation for one bad URL
+                            return Promise.resolve();
+                        });
+                    })
+                );
             })
             .then(() => {
                 // Force the waiting service worker to become the active service worker
