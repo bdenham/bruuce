@@ -1206,7 +1206,7 @@ footer a:hover {
     font-size: 1.1875rem;
     line-height: 1.7;
     margin-bottom: 0.75rem;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     font-weight: 400;
 }
 
