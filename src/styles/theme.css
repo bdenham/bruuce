@@ -297,30 +297,7 @@ p {
     line-height: 1.6;
 }
 
-.button {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: 12px var(--space-lg);
-    border: 1px solid var(--border-secondary);
-    border-radius: var(--radius-md);
-    background: var(--button-bg);
-    color: var(--button-text);
-    text-decoration: none;
-    font-weight: 600;
-    transition:
-        transform var(--transition-fast),
-        background var(--transition-fast),
-        border-color var(--transition-fast),
-        color var(--transition-fast);
-    cursor: pointer;
-}
-
-
-.button:focus-visible {
-    outline: 3px solid var(--accent-primary);
-    outline-offset: 2px;
-}
+/* .button styles moved to Button.astro component for better encapsulation */
 
 /* =============================================================================
    COMPONENT STYLES START HERE
@@ -458,7 +435,6 @@ p {
 }
 
 .hover-button:hover,
-.button:hover,
 .item-link:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px var(--shadow-secondary);
