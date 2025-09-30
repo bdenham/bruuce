@@ -34,16 +34,7 @@ self.addEventListener('install', event => {
         caches.open(CACHE_NAME)
             .then(cache => {
                 console.log('Precaching critical assets');
-                // Cache each URL individually to identify which one fails
-                return Promise.all(
-                    PRECACHE_URLS.map(url => {
-                        return cache.add(url).catch(error => {
-                            console.error('Failed to cache:', url, error);
-                            // Don't fail the entire installation for one bad URL
-                            return Promise.resolve();
-                        });
-                    })
-                );
+                return cache.addAll(PRECACHE_URLS);
             })
             .then(() => {
                 // Force the waiting service worker to become the active service worker
@@ -100,8 +91,8 @@ self.addEventListener('fetch', event => {
 
                     return fetch(request)
                         .then(response => {
-                            // Don't cache non-successful responses or non-GET requests
-                            if (!response || response.status !== 200 || response.type !== 'basic' || request.method !== 'GET') {
+                            // Don't cache non-successful responses
+                            if (!response || response.status !== 200 || response.type !== 'basic') {
                                 return response;
                             }
 
@@ -139,8 +130,8 @@ self.addEventListener('fetch', event => {
 
                     return fetch(request)
                         .then(response => {
-                            // Don't cache non-successful responses or non-GET requests
-                            if (!response || response.status !== 200 || request.method !== 'GET') {
+                            // Don't cache non-successful responses
+                            if (!response || response.status !== 200) {
                                 return response;
                             }
 
@@ -162,8 +153,8 @@ self.addEventListener('fetch', event => {
     event.respondWith(
         fetch(request)
             .then(response => {
-                // Don't cache non-successful responses or non-GET requests
-                if (!response || response.status !== 200 || response.type !== 'basic' || request.method !== 'GET') {
+                // Don't cache non-successful responses
+                if (!response || response.status !== 200 || response.type !== 'basic') {
                     return response;
                 }
 
