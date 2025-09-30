@@ -437,6 +437,30 @@ const {
       </div>
     </div>
 
+    <!-- Vercel monitoring - loaded last for zero impact on LCP -->
+    <SpeedInsights />
+    <Analytics />
+
+    <!-- Theme toggle function (initialization already in head) -->
+    <script is:inline>
+      function toggleTheme() {
+        const html = document.documentElement;
+        const isLight = html.classList.contains('light');
+
+        if (isLight) {
+          html.classList.remove('light');
+          localStorage.setItem('theme', 'dark');
+          document.getElementById('theme-icon').textContent = '🌙';
+          document.getElementById('theme-text').textContent = 'Dark';
+        } else {
+          html.classList.add('light');
+          localStorage.setItem('theme', 'light');
+          document.getElementById('theme-icon').textContent = '☀️';
+          document.getElementById('theme-text').textContent = 'Light';
+        }
+      }
+    </script>
+
     <!-- JSON-LD Structured Data (non-blocking at bottom) -->
     <script type="application/ld+json">
       {
@@ -509,27 +533,5 @@ const {
         ]
       }
     </script>
-
-    <!-- Theme toggle function (initialization already in head) -->
-    <script is:inline>
-      function toggleTheme() {
-        const html = document.documentElement;
-        const isLight = html.classList.contains('light');
-
-        if (isLight) {
-          html.classList.remove('light');
-          localStorage.setItem('theme', 'dark');
-          document.getElementById('theme-icon').textContent = '🌙';
-          document.getElementById('theme-text').textContent = 'Dark';
-        } else {
-          html.classList.add('light');
-          localStorage.setItem('theme', 'light');
-          document.getElementById('theme-icon').textContent = '☀️';
-          document.getElementById('theme-text').textContent = 'Light';
-        }
-      }
-    </script>
-    <SpeedInsights />
-    <Analytics />
   </body>
 </html>
