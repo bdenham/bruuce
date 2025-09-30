@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import { defineConfig, passthroughImageService } from 'astro/config';
-// import type { AstroUserConfig } from 'astro/config';
+import type { AstroUserConfig } from 'astro/config';
 // import vercel from '@astrojs/vercel';  // Removed - using pure static deployment
 import mdx from '@astrojs/mdx';
 import { remarkBasePathLinks } from './src/plugins/remarkBasePathLinks';
