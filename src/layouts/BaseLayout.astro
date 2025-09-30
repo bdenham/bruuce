@@ -107,12 +107,14 @@ const {
 
     <!-- No font preloads - let CSS handle fonts for optimal performance -->
 
-    <!-- Theme initialization only - fonts handled by static CSS -->
-    <script is:inline>
+    <!-- Theme initialization moved to avoid Astro parsing issues -->
+    <script>
       // Immediate theme application for fastest rendering
-      const theme = localStorage.getItem('theme');
-      if (theme === 'light') {
-        document.documentElement.classList.add('light');
+      if (typeof localStorage !== 'undefined') {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'light') {
+          document.documentElement.classList.add('light');
+        }
       }
     </script>
     <style>
