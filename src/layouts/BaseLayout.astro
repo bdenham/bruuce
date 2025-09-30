@@ -725,3 +725,9 @@ const {
     margin-left: 0;
   }
 </style>
+
+<script>
+  // Ultra-minimal SW registration - 60 bytes
+  'serviceWorker' in navigator &&
+    addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+</script>
