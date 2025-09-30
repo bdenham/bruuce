@@ -509,7 +509,7 @@ const {
       }
     </script>
 
-    <!-- Theme toggle function -->
+    <!-- Theme toggle function (initialization already in head) -->
     <script is:inline>
       function toggleTheme() {
         const html = document.documentElement;
@@ -525,18 +525,6 @@ const {
           localStorage.setItem('theme', 'light');
           document.getElementById('theme-icon').textContent = '☀️';
           document.getElementById('theme-text').textContent = 'Light';
-        }
-      }
-
-      // Initialize theme on page load
-      if (typeof localStorage !== 'undefined') {
-        const theme = localStorage.getItem('theme');
-        if (theme === 'light') {
-          document.documentElement.classList.add('light');
-          if (document.getElementById('theme-icon')) {
-            document.getElementById('theme-icon').textContent = '☀️';
-            document.getElementById('theme-text').textContent = 'Light';
-          }
         }
       }
     </script>
