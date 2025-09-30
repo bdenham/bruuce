@@ -386,51 +386,15 @@ const {
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
       }
 
-      /* CRITICAL ANIMATIONS - Essential for Speed Index */
+      /* Minimal animations for critical path */
       .animate-in {
         opacity: 0;
-        transform: translate3d(0, 10px, 0); /* Reduced from 20px for faster feel */
-        will-change: transform, opacity;
-        animation: slideInUp 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* Faster animation */
-      }
-
-      /* Reduced delays for faster perceived performance */
-      .animate-delay-50 {
-        animation-delay: 0ms;
-      }
-      .animate-delay-100 {
-        animation-delay: 25ms;
-      }
-      .animate-delay-150 {
-        animation-delay: 50ms;
-      }
-      .animate-delay-200 {
-        animation-delay: 75ms;
-      }
-      .animate-delay-250 {
-        animation-delay: 100ms;
-      }
-      .animate-delay-300 {
-        animation-delay: 125ms;
-      }
-      .animate-delay-350 {
-        animation-delay: 150ms;
-      }
-      .animate-delay-400 {
-        animation-delay: 175ms;
-      }
-      .animate-delay-450 {
-        animation-delay: 200ms;
+        animation: slideInUp 0.2s ease forwards;
       }
 
       @keyframes slideInUp {
-        from {
-          opacity: 0;
-          transform: translate3d(0, 10px, 0); /* Match reduced distance */
-        }
         to {
           opacity: 1;
-          transform: translate3d(0, 0, 0);
         }
       }
 
@@ -470,98 +434,11 @@ const {
     </div>
 
     <script>
-      function updateThemeDisplay(isLight) {
-        // Batch DOM updates to prevent forced reflows
-        const themeIcon = document.getElementById('theme-icon');
-        const themeText = document.getElementById('theme-text');
-
-        if (themeIcon && themeText) {
-          // Use DocumentFragment to batch changes
-          const iconText = isLight ? '☀️' : '🌙';
-          const textContent = isLight ? 'Light' : 'Dark';
-
-          // Batch updates in a single requestAnimationFrame
-          requestAnimationFrame(() => {
-            themeIcon.textContent = iconText;
-            themeText.textContent = textContent;
-          });
-        }
+      // Minimal theme initialization
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.documentElement.classList.add('light');
       }
-
-      (window as any).toggleTheme = function () {
-        const root = document.documentElement;
-        const isCurrentlyLight = root.classList.contains('light');
-        const colorScheme = document.querySelector('meta[name="color-scheme"]');
-
-        // Add a brief transition class for smoother theme switching
-        root.style.setProperty('--transition-duration', '300ms');
-
-        if (isCurrentlyLight) {
-          // Switch to dark
-          root.classList.remove('light');
-          localStorage.setItem('theme', 'dark');
-          updateThemeDisplay(false);
-          if (colorScheme) colorScheme.setAttribute('content', 'dark light');
-        } else {
-          // Switch to light
-          root.classList.add('light');
-          localStorage.setItem('theme', 'light');
-          updateThemeDisplay(true);
-          if (colorScheme) colorScheme.setAttribute('content', 'light dark');
-        }
-
-        // Remove the transition after it completes
-        setTimeout(() => {
-          root.style.removeProperty('--transition-duration');
-        }, 300);
-      };
-
-      // Initialize theme on page load and after View Transitions
-      function initTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        const root = document.documentElement;
-        const colorScheme = document.querySelector('meta[name="color-scheme"]');
-        const isLight = savedTheme === 'light';
-
-        // Batch all DOM changes to prevent forced reflows
-        requestAnimationFrame(() => {
-          if (isLight) {
-            root.classList.add('light');
-            if (colorScheme) colorScheme.setAttribute('content', 'light dark');
-          } else {
-            root.classList.remove('light');
-            if (colorScheme) colorScheme.setAttribute('content', 'dark light');
-          }
-
-          updateThemeDisplay(isLight);
-        });
-      }
-
-      // Initialize theme when page loads
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initTheme);
-      } else {
-        initTheme();
-      }
-
-      // Re-initialize theme after View Transitions (with cleanup)
-      let themeCleanup: (() => void) | null = null;
-
-      function initThemeWithCleanup() {
-        initTheme();
-
-        // Store cleanup for theme listeners if needed
-        if (themeCleanup) {
-          themeCleanup();
-        }
-
-        // No additional cleanup needed for theme toggle as it's global
-        themeCleanup = () => {
-          // Theme toggle cleanup if needed in future
-        };
-      }
-
-      document.addEventListener('astro:after-swap', initThemeWithCleanup);
     </script>
 
     <!-- JSON-LD Structured Data (non-blocking at bottom) -->
