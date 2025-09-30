@@ -5,6 +5,13 @@
             "destination": "/fonts/$1"
         }
     ],
+    "redirects": [
+        {
+            "source": "/favicon.ico",
+            "destination": "/favicon.svg",
+            "permanent": false
+        }
+    ],
     "headers": [
         {
             "source": "/fonts/(.*)",
