@@ -327,6 +327,86 @@ const {
           animation: none;
         }
       }
+
+      /* Layout adjustments for sidebar */
+      #root {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .app-content {
+        flex: 1;
+        margin-left: 280px;
+        transition: margin-left 0.3s ease;
+      }
+
+      .main-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        margin-left: 3rem;
+        padding: 80px 1rem 2rem 1rem;
+      }
+
+      @media (min-width: 768px) {
+        .main-container {
+          padding: 80px 1.5rem 2rem 1.5rem;
+        }
+      }
+
+      .content-panel {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        margin-bottom: 32px;
+        box-shadow: none;
+        margin-left: 0;
+        margin-right: auto;
+      }
+
+      .nav-back {
+        margin-bottom: 0;
+        margin-top: 1.5rem;
+      }
+
+      .nav-back a {
+        color: var(--accent-primary);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 400;
+      }
+
+      .nav-back a:hover {
+        color: var(--accent-hover);
+        text-decoration: underline;
+      }
+
+      @media (max-width: 1023px) {
+        .app-content {
+          margin-left: 0;
+        }
+
+        .main-container {
+          margin-left: 0 !important;
+          padding: 80px 1rem 1.25rem 1rem;
+        }
+
+        .content-panel {
+          padding: 0 20px 0 20px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .content-panel {
+          padding: 0 10px 0 10px;
+        }
+      }
+
+      .sidebar.collapsed ~ .app-content {
+        margin-left: 0;
+      }
     </style>
 
     <!-- Critical CSS inlined above, full CSS loaded by Astro -->
@@ -428,93 +508,5 @@ const {
       }
     </script>
     <!-- <Analytics /> -->
-
-    <style>
-      /* Layout adjustments for sidebar */
-      #root {
-        display: flex;
-        min-height: 100vh;
-      }
-
-      .app-content {
-        flex: 1;
-        margin-left: 280px;
-        transition: margin-left 0.3s ease;
-      }
-
-      .main-container {
-        max-width: 1280px; /* AstroWind's max-w-7xl equivalent */
-        margin: 0 auto;
-        margin-left: 3rem; /* Better separation from sidebar */
-        padding: 80px 1rem 2rem 1rem; /* Responsive padding like AstroWind */
-      }
-
-      /* AstroWind-style responsive padding */
-      @media (min-width: 768px) {
-        .main-container {
-          padding: 80px 1.5rem 2rem 1.5rem; /* md:px-6 equivalent */
-        }
-      }
-
-      .content-panel {
-        /* Clean, borderless design - content flows naturally */
-        background: transparent; /* No background - use page background */
-        border: none; /* Remove border */
-        border-radius: 0; /* Remove rounded corners */
-        padding: 0; /* Remove padding - let content breathe naturally */
-        margin-bottom: 32px;
-        box-shadow: none; /* Remove shadow */
-        /* Line length handled by typography-optimized.css */
-        margin-left: 0; /* Left-aligned, closer to sidebar */
-        margin-right: auto;
-      }
-
-      .nav-back {
-        margin-bottom: 0;
-        margin-top: 1.5rem;
-      }
-
-      .nav-back a {
-        color: var(--accent-primary);
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        font-weight: 400;
-      }
-
-      .nav-back a:hover {
-        color: var(--accent-hover);
-        text-decoration: underline;
-      }
-
-      /* Mobile and tablet responsive - align with sidebar breakpoint */
-      @media (max-width: 1023px) {
-        .app-content {
-          margin-left: 0;
-        }
-
-        .main-container {
-          margin-left: 0 !important; /* Remove left margin on mobile */
-          padding: 80px 1rem 1.25rem 1rem; /* Responsive padding like AstroWind */
-        }
-
-        .content-panel {
-          padding: 0 20px 0 20px; /* Add horizontal padding on mobile when sidebar is hidden */
-        }
-      }
-
-      /* Smaller mobile screens - reduce padding for more content space */
-      @media (max-width: 640px) {
-        .content-panel {
-          padding: 0 10px 0 10px; /* Half padding on small mobile screens */
-        }
-      }
-
-      /* Sidebar collapsed state on mobile */
-      .sidebar.collapsed ~ .app-content {
-        margin-left: 0;
-      }
-    </style>
   </body>
 </html>
