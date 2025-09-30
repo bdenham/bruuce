@@ -107,15 +107,10 @@ const {
 
     <!-- No font preloads - let CSS handle fonts for optimal performance -->
 
-    <!-- Theme initialization moved to avoid Astro parsing issues -->
+    <!-- Ultra-minimal theme initialization -->
     <script>
-      // Immediate theme application for fastest rendering
-      if (typeof localStorage !== 'undefined') {
-        const theme = localStorage.getItem('theme');
-        if (theme === 'light') {
-          document.documentElement.classList.add('light');
-        }
-      }
+      const t = localStorage.getItem('theme');
+      if (t === 'light') document.documentElement.classList.add('light');
     </script>
     <style>
       /* CRITICAL CSS - Inlined for immediate rendering performance */
@@ -510,5 +505,13 @@ const {
       }
     </script>
     <!-- <Analytics /> -->
+
+    <!-- Service worker temporarily disabled for performance testing -->
+    <!--
+    <script>
+      'serviceWorker' in navigator &&
+        addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    </script>
+    -->
   </body>
 </html>
