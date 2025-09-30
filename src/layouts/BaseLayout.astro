@@ -107,10 +107,14 @@ const {
 
     <!-- No font preloads - let CSS handle fonts for optimal performance -->
 
-    <!-- Ultra-minimal theme initialization -->
+    <!-- Theme initialization with proper error handling -->
     <script>
-      const t = localStorage.getItem('theme');
-      if (t === 'light') document.documentElement.classList.add('light');
+      if (typeof localStorage !== 'undefined') {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'light') {
+          document.documentElement.classList.add('light');
+        }
+      }
     </script>
     <style>
       /* CRITICAL CSS - Inlined for immediate rendering performance */
@@ -506,12 +510,10 @@ const {
     </script>
     <!-- <Analytics /> -->
 
-    <!-- Service worker temporarily disabled for performance testing -->
-    <!--
+    <!-- Service worker for caching -->
     <script>
       'serviceWorker' in navigator &&
         addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
     </script>
-    -->
   </body>
 </html>
