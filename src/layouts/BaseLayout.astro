@@ -508,12 +508,37 @@ const {
         ]
       }
     </script>
-    <!-- <Analytics /> -->
 
-    <!-- Service worker for caching -->
-    <script>
-      'serviceWorker' in navigator &&
-        addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    <!-- Theme toggle function -->
+    <script is:inline>
+      function toggleTheme() {
+        const html = document.documentElement;
+        const isLight = html.classList.contains('light');
+
+        if (isLight) {
+          html.classList.remove('light');
+          localStorage.setItem('theme', 'dark');
+          document.getElementById('theme-icon').textContent = '🌙';
+          document.getElementById('theme-text').textContent = 'Dark';
+        } else {
+          html.classList.add('light');
+          localStorage.setItem('theme', 'light');
+          document.getElementById('theme-icon').textContent = '☀️';
+          document.getElementById('theme-text').textContent = 'Light';
+        }
+      }
+
+      // Initialize theme on page load
+      if (typeof localStorage !== 'undefined') {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'light') {
+          document.documentElement.classList.add('light');
+          if (document.getElementById('theme-icon')) {
+            document.getElementById('theme-icon').textContent = '☀️';
+            document.getElementById('theme-text').textContent = 'Light';
+          }
+        }
+      }
     </script>
   </body>
 </html>
