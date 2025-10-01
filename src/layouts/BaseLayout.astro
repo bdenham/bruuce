@@ -441,27 +441,24 @@ const {
     <SpeedInsights />
     <Analytics />
 
-    <!-- Theme toggle function (initialization already in head) -->
+    <!-- Theme toggle function - minified for performance -->
     <script is:inline>
       function toggleTheme() {
-        const html = document.documentElement;
-        const isLight = html.classList.contains('light');
-
-        if (isLight) {
-          html.classList.remove('light');
-          localStorage.setItem('theme', 'dark');
-          document.getElementById('theme-icon').textContent = '🌙';
-          document.getElementById('theme-text').textContent = 'Dark';
-        } else {
-          html.classList.add('light');
-          localStorage.setItem('theme', 'light');
-          document.getElementById('theme-icon').textContent = '☀️';
-          document.getElementById('theme-text').textContent = 'Light';
-        }
+        const e = document.documentElement,
+          t = e.classList.contains('light');
+        t
+          ? (e.classList.remove('light'),
+            localStorage.setItem('theme', 'dark'),
+            (document.getElementById('theme-icon').textContent = '🌙'),
+            (document.getElementById('theme-text').textContent = 'Dark'))
+          : (e.classList.add('light'),
+            localStorage.setItem('theme', 'light'),
+            (document.getElementById('theme-icon').textContent = '☀️'),
+            (document.getElementById('theme-text').textContent = 'Light'));
       }
     </script>
 
-    <!-- JSON-LD Structured Data (non-blocking at bottom) -->
+    <!-- JSON-LD Structured Data - minified for performance -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -499,22 +496,12 @@ const {
         "hasOccupation": {
           "@type": "Occupation",
           "name": "Technical Writer",
-          "occupationLocation": {
-            "@type": "Place",
-            "name": "Remote"
-          },
+          "occupationLocation": { "@type": "Place", "name": "Remote" },
           "skills": ["Technical Writing", "Developer Experience", "API Documentation", "JavaScript"]
         },
         "alumniOf": [
-          {
-            "@type": "Organization",
-            "name": "Schlumberger",
-            "url": "https://www.slb.com"
-          },
-          {
-            "@type": "Organization",
-            "name": "TOPAZ"
-          }
+          { "@type": "Organization", "name": "Schlumberger", "url": "https://www.slb.com" },
+          { "@type": "Organization", "name": "TOPAZ" }
         ],
         "image": {
           "@type": "ImageObject",
