@@ -1,8 +1,8 @@
 // Service Worker for bruuce.com
 // Precaches critical assets for optimal performance
 
-const CACHE_NAME = 'bruuce-v1.2';
-const STATIC_CACHE_NAME = 'bruuce-static-v1.2';
+const CACHE_NAME = 'bruuce-v1.3';
+const STATIC_CACHE_NAME = 'bruuce-static-v1.3';
 
 // Critical assets to precache
 const PRECACHE_URLS = [
@@ -12,19 +12,11 @@ const PRECACHE_URLS = [
     '/blog/',
     '/work/',
     '/resume/',
-    '/fonts/adobe-clean-400.woff2',
-    '/fonts/adobe-clean-700.woff2',
-    '/fonts/adobe-clean-300.woff2',
     '/images/bruce-denham-headshot.jpg',
     '/favicon.svg'
 ];
 
-// Assets that should be cached on first request
-const RUNTIME_CACHE_URLS = [
-    '/fonts/adobe-clean-300-italic.woff2',
-    '/fonts/adobe-clean-400-italic.woff2',
-    '/fonts/adobe-clean-900.woff2'
-];
+// Note: No web fonts to precache - using system fonts only
 
 // Install event - precache critical assets
 self.addEventListener('install', event => {
